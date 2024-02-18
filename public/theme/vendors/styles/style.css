@@ -37,7 +37,7 @@ body {
   background: #fff
 }
 .home-page{
-    
+
 }
 a {
   text-decoration: none;
@@ -1519,7 +1519,7 @@ table.dataTable.dtr-inline.collapsed
 }
 .brand-logo a .svg,
 .brand-logo a img {
-  max-width: 180px;
+  max-width: 310px;
   display: block;
   height: auto;
 }
