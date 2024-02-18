@@ -7,12 +7,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Prix Citoyen Tchad') }}</title>
+    <title>{{ config('app.name', 'CNSS') }}</title>
 
     <!-- Site favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/main_logo.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/main_logo.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/main_logo.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('logos/main-logo.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('logos/main-logo.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('logos/main-logo.png') }}">
 
     <script src="{{ asset('js/app.js') }}" defer></script>
 
