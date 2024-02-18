@@ -264,7 +264,18 @@
                     <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                    <div class="sidebar-small-cap">Extra</div>
+                    <div class="sidebar-small-cap">ESPACE ADMIN</div>
+                </li>
+                <li>
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon dw dw-edit-2"></span><span class="mtext">Parametrage</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="introduction.html">Introduction</a></li>
+                        <li><a href="getting-started.html">Getting Started</a></li>
+                        <li><a href="color-settings.html">Color Settings</a></li>
+                        <li><a href="third-party-plugins.html">Third Party Plugins</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="javascript:;" class="dropdown-toggle">
