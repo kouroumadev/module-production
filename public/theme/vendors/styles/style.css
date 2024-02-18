@@ -1519,7 +1519,7 @@ table.dataTable.dtr-inline.collapsed
 }
 .brand-logo a .svg,
 .brand-logo a img {
-  max-width: 310px;
+  max-width: 250px;
   display: block;
   height: auto;
 }
