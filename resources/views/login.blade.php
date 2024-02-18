@@ -23,7 +23,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 col-lg-7">
-                    <img src="vendors/images/login-page-img.png" alt="">
+                    <img src="{{ asset('theme/vendors/images/login-page-img.png') }}" alt="">
                 </div>
                 <div class="col-md-6 col-lg-5">
                     <div class="login-box bg-white box-shadow border-radius-10">
@@ -35,13 +35,13 @@
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     <label class="btn active">
 										<input type="radio" name="options" id="admin">
-										<div class="icon"><img src="vendors/images/briefcase.svg" class="svg" alt=""></div>
+										<div class="icon"><img src="{{ asset('theme/vendors/images/briefcase.svg') }}" class="svg" alt=""></div>
 										<span>I'm</span>
 										Manager
 									</label>
                                     <label class="btn">
 										<input type="radio" name="options" id="user">
-										<div class="icon"><img src="vendors/images/person.svg" class="svg" alt=""></div>
+										<div class="icon"><img src="{{ asset('theme/vendors/images/person.svg') }}" class="svg" alt=""></div>
 										<span>I'm</span>
 										Employee
 									</label>
