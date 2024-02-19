@@ -14,10 +14,13 @@ class HomeController extends Controller
         return view('login');
     }
     public function PensionIndex() {
-        return view('pensionnaire.index');
+        $data = "index";
+        // dd($data);
+        return view('pensionnaire.index',compact('data'));
     }
     public function PensionnaireInfo(Request $request){
         $no_immat = $request->no_immatriculation;
+        // dd($no_immat);
         $employe = DB::connection('metier')->table('employe')->where('no_employe','=',$no_immat)->get();
         $conjoints = DB::connection('metier')->table('conjoint')->where('no_employe','=',$no_immat)->get();
         $no_employeur = $employe[0]->no_employeur;
@@ -25,7 +28,7 @@ class HomeController extends Controller
         $employeDeails = [];
         $data = [];
         // dd($employeur);
-        if (sizeof($employe) != 0) {
+
             foreach ($conjoints as $value) {
                 // dd($value->no_conjoint);
                 $enfants = DB::connection('metier')->table('enfant')->where('no_conjoint',$value->no_conjoint)->get();
@@ -44,13 +47,14 @@ class HomeController extends Controller
             $data['employeDetails']= $employeDeails;
             $data['employe'] = $employe;
             $data['employeur'] = $employeur;
-            return response()->json($data);
+
             // dd($no_immat);
-        } else {
-            return response()->json("not exist");
-        }
 
-
+        // $data['employeDetails']= $employeDeails;
+        //  $data['employe'] = $employe;
+        //  $data['employeur'] = $employeur;
+        // dd($data);
+        return view('pensionnaire.index',compact('data'));
     }
 
 }
