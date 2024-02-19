@@ -36,7 +36,7 @@
 
 
 {{-- Ajax --}}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script> --}}
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
@@ -80,7 +80,7 @@
 
 
     <script src="{{ asset('theme/vendors/scripts/datatable-setting.js') }}"></script>
-    <script>
+     <script>
         // setting CSRF token in head section //
         $.ajaxSetup({
             headers: ({

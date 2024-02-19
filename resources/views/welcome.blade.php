@@ -243,7 +243,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
+                    <a href="#" class="dropdown-toggle">
                         <span class="micon dw dw-list3"></span><span class="mtext">DECLARATION</span>
                     </a>
                     <ul class="submenu">
@@ -291,7 +291,7 @@
                     <div class="sidebar-small-cap">ESPACE ADMIN</div>
                 </li>
                 <li>
-                    <a href="javascript:;" class="dropdown-toggle">
+                    <a href="#" class="dropdown-toggle">
                         <span class="micon dw dw-edit-2"></span><span class="mtext">Parametrage</span>
                     </a>
                     <ul class="submenu">
@@ -302,7 +302,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:;" class="dropdown-toggle">
+                    <a href="#" class="dropdown-toggle">
                         <span class="micon dw dw-edit-2"></span><span class="mtext">Documentation</span>
                     </a>
                     <ul class="submenu">

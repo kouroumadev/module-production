@@ -283,6 +283,7 @@
                     data:{no_immatriculation:no_immatriculation},
 
                     success: function(data) {
+                        console.log(data);
                         $("#no_immat_disp").val(data.employe[0].no_employe)
                         $("#prenom_employe").val(data.employe[0].prenoms)
                         $("#nom_employe").val(data.employe[0].nom)
