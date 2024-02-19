@@ -4,14 +4,15 @@
 
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <form>
+        <form id="form-get-pension">
+            @csrf
             <div class="form-row align-items-center">
                 <div class="col-8">
-                    <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Entrer le N° d'Immatriculation" />
+                    <input type="text" class="form-control mb-2" name="no_immatriculation" id="no_immatriculation" placeholder="Entrer le N° d'Immatriculation" />
                 </div>
 
                 <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-2">Rechercher</button>
+                <button type="button" onclick="getInfoPension()"  class="btn btn-primary mb-2">Rechercher</button>
                 </div>
             </div>
         </form>
@@ -28,30 +29,42 @@
                     <h5>Infos Personnelles</h5>
                     <section>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label >Nom :</label>
-                                    <input type="text" class="form-control" value="DIANE" readonly>
+                                    <label >No Immatriculation :</label>
+                                    <input type="text" class="form-control"  id="no_immat_disp" readonly>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label >Nom :</label>
+                                    <input type="text" class="form-control"  id="nom_employe" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label >Prenom :</label>
-                                    <input type="text" class="form-control" value="IBRAHIMA" readonly>
+                                    <input type="text" class="form-control"  id="prenom_employe" readonly>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Adresse Email:</label>
-                                    <input type="email" class="form-control" value="diane123@gmail.com" readonly>
+                                    <label>Date de naissance:</label>
+                                    <input type="email" class="form-control"  id="date_naissance" readonly>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Telephone :</label>
-                                    <input type="text" class="form-control" value="611 55 76 23" readonly>
+                                    <label>Lieu de naissance</label>
+                                    <input type="text" class="form-control" id="lieu_naissance" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Prefecture</label>
+                                    <input type="text" class="form-control" id="prefecture" readonly>
                                 </div>
                             </div>
                         </div>
@@ -257,6 +270,29 @@
     </div>
 </div>
 
+<script>
+    function getInfoPension() {
+        //// ROUTE FOR GETTING EMPLOYES INFO TO METIER DATABASE
 
+            var no_immatriculation = $("#no_immatriculation").val()
+        //  alert(no_immatriculation)
+        $.ajax({
+                    type: 'GET',
+                    url: "{{route('pensionnaire.info')}}",
+                    dataType: 'json',
+                    data:{no_immatriculation:no_immatriculation},
+
+                    success: function(data) {
+                        $("#no_immat_disp").val(data.employe[0].no_employe)
+                        $("#prenom_employe").val(data.employe[0].prenoms)
+                        $("#nom_employe").val(data.employe[0].nom)
+                        $("#date_naissance").val(data.employe[0].date_naissance)
+                        $("#lieu_naissance").val(data.employe[0].lieu_naissance)
+                        $("#prefecture").val(data.employe[0].prefecture)
+                        // console.log(data.employe[0].prenoms)
+                    }
+                })
+    }
+</script>
 
 @endsection

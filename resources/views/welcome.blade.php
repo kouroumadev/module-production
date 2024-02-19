@@ -224,17 +224,17 @@
                     </a>
                     <ul class="submenu">
                         <li><a href="{{ route('pension.index') }}">Pension de Retraite</a></li>
-                        <li><a href="form-basic.html">Quittance</a></li>
+                        {{-- <li><a href="form-basic.html">Quittance</a></li> --}}
                         <li><a href="advanced-components.html">Remboursement Frais Medicaux et IJ</a></li>
                         <li><a href="form-wizard.html">Changement d'Assignation</a></li>
-                        <li><a href="html5-editor.html">Reclamation</a></li>
+                        {{-- <li><a href="html5-editor.html">Reclamation</a></li> --}}
                         <li><a href="form-pickers.html">Virement OM/MM</a></li>
                         <li><a href="image-cropper.html">Reversion</a></li>
                         <li><a href="image-cropper.html">Accident de travail mortel</a></li>
                         <li><a href="image-cropper.html">Avance sur Pension</a></li>
-                        <li><a href="image-cropper.html">Declaration d'Accident de Travail</a></li>
-                        <li><a href="image-cropper.html">Declaration d'Accident de Trajet</a></li>
-                        <li><a href="image-cropper.html">Assistance</a></li>
+                        {{-- <li><a href="image-cropper.html">Declaration d'Accident de Travail</a></li>
+                        <li><a href="image-cropper.html">Declaration d'Accident de Trajet</a></li> --}}
+                        {{-- <li><a href="image-cropper.html">Assistance</a></li> --}}
                         <li><a href="image-cropper.html">Remboursement IJ Conge de Maternite</a></li>
                         <li><a href="image-cropper.html">Invalidite</a></li>
                         <li><a href="image-cropper.html">Allocation de Vieillesse</a></li>
@@ -242,7 +242,15 @@
                         <li><a href="image-cropper.html">Paiement de Lunette Pharmaceutique</a></li>
                     </ul>
                 </li>
-
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon dw dw-list3"></span><span class="mtext">DECLARATION</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="image-cropper.html">Declaration d'Accident de Travail</a></li>
+                        <li><a href="image-cropper.html">Declaration d'Accident de Trajet</a></li>
+                    </ul>
+                </li>
                 <li>
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">PROCURATION</span>
@@ -254,6 +262,22 @@
                         <span class="micon dw dw-diagram"></span><span class="mtext">DEMAT</span>
                     </a>
                 </li>
+                <li>
+                    <a href="#" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-edit2"></span><span class="mtext">QUITTANCE</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-edit2"></span><span class="mtext">RECLAMATION</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-edit2"></span><span class="mtext">ASSISTANCE</span>
+                    </a>
+                </li>
+
                 <li>
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-library"></span><span class="mtext">DOSSIERS DOUTEUX</span>

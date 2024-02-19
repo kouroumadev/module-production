@@ -35,8 +35,8 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.11.4/b-2.2.2/r-2.2.9/sc-2.0.5/sp-1.4.0/datatables.min.js"></script>
 
 
-
-
+{{-- Ajax --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
@@ -52,7 +52,7 @@
 
 
 
-
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <!-- js -->
     <script src="{{ asset('theme/vendors/scripts/core.js') }}"></script>
     <script src="{{ asset('theme/vendors/scripts/script.min.js') }}"></script>
@@ -80,6 +80,18 @@
 
 
     <script src="{{ asset('theme/vendors/scripts/datatable-setting.js') }}"></script>
+    <script>
+        // setting CSRF token in head section //
+        $.ajaxSetup({
+            headers: ({
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            })
+        })
+
+
+
+
+    </script>
 </body>
 
 </html>
