@@ -87,7 +87,7 @@
                     <h5>Conjoints et Enfants</h5>
                     <section>
                         <div class="row mt-2">
-							<div class="col-lg-6 col-md-6 col-sm-12">
+							<div class="col-lg-4 col-md-4 col-sm-12">
 								<div class="sitemap">
 									<h5 class="h5">Conjoint</h5>
 									<ul>
@@ -103,7 +103,7 @@
 									</ul>
 								</div>
 							</div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="sitemap">
 									<h5 class="h5">Conjoint</h5>
 									<ul>
@@ -113,6 +113,24 @@
 											<h5 class="h5">Enfant(s)</h5>
 											<ul>
 												<li><a href="#">Moussa Camara</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="sitemap">
+									<h5 class="h5">Conjoint</h5>
+									<ul>
+										<li><a href="#">Delphine Lamah</a></li>
+										{{-- <li><a href="#">Level 1</a></li> --}}
+										<li class="child">
+											<h5 class="h5">Enfant(s)</h5>
+											<ul>
+												<li><a href="#">Djibril Camara</a></li>
+												<li><a href="#">Binta Camara</a></li>
+												<li><a href="#">Jean Camara</a></li>
+												<li><a href="#">Paul Camara</a></li>
 											</ul>
 										</li>
 									</ul>
