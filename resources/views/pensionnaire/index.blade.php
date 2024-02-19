@@ -86,65 +86,39 @@
                     <!-- Step 2 -->
                     <h5>Conjoints et Enfants</h5>
                     <section>
-                        <div class="clearfix">
-                            <div class="pull-left">
-                                <h4 class="text-blue h4">Conjoint 1</h4>
+                        <div class="row mt-2">
+							<div class="col-lg-6 col-md-6 col-sm-12">
+								<div class="sitemap">
+									<h5 class="h5">Conjoint</h5>
+									<ul>
+										<li><a href="#">Mahawa Sylla</a></li>
+										{{-- <li><a href="#">Level 1</a></li> --}}
+										<li class="child">
+											<h5 class="h5">Enfant(s)</h5>
+											<ul>
+												<li><a href="#">Junior Camara</a></li>
+												<li><a href="#">Alpha Camara</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="sitemap">
+									<h5 class="h5">Conjoint</h5>
+									<ul>
+										<li><a href="#">Djenab Sow</a></li>
+										{{-- <li><a href="#">Level 1</a></li> --}}
+										<li class="child">
+											<h5 class="h5">Enfant(s)</h5>
+											<ul>
+												<li><a href="#">Moussa Camara</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Nom</label>
-                                    <input type="text" class="form-control" value="CAMARA" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label >Prenom:</label>
-                                    <input type="text" class="form-control" value="BINTA" readonly>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="clearfix">
-                            <div class="pull-left">
-                                <h4 class="text-blue h4">Conjoint 2</h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Nom</label>
-                                    <input type="text" class="form-control" value="SOW" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label >Prenom:</label>
-                                    <input type="text" class="form-control" value="FATIM" readonly>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="clearfix">
-                            <div class="pull-left">
-                                <h4 class="text-blue h4">Enfant 1</h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Nom</label>
-                                    <input type="text" class="form-control" value="DIANE" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label >Prenom:</label>
-                                    <input type="text" class="form-control" value="ALPHA" readonly>
-                                </div>
-                            </div>
-                        </div>
+						</div>
                     </section>
                     <!-- Step 3 -->
                     <h5>Infos Employeur</h5>
