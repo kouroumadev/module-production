@@ -14,9 +14,9 @@ class HomeController extends Controller
         return view('login');
     }
     public function PensionIndex() {
-        $data = "index";
+        // $data = "index";
         // dd($data);
-        return view('pensionnaire.index',compact('data'));
+        return view('pensionnaire.index');
     }
     public function PensionnaireInfo(Request $request){
         $no_immat = $request->no_immatriculation;
@@ -54,7 +54,7 @@ class HomeController extends Controller
         //  $data['employe'] = $employe;
         //  $data['employeur'] = $employeur;
         // dd($data);
-        return view('pensionnaire.index',compact('data'));
+        return view('pensionnaire.pensionnaire-info',compact('data'));
     }
 
 }
