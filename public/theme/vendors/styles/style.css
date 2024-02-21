@@ -1978,7 +1978,7 @@ body.IE .register-page-wrap .container {
   background-color: transparent;
 }
 .register-page-wrap .wizard-content .wizard > .steps > ul > li.current .step {
-  border-color: #1b00ff;
+  border-color: #00fb3f;
   color: #181f48;
   background-color: #fff;
 }
@@ -3679,17 +3679,17 @@ body.IE .register-page-wrap .container {
   padding: 20px;
 }
 .wizard-content .wizard > .actions > ul > li > a {
-  background-color: #1b00ff;
+  background-color: #00fb3f;
   font-weight: 600;
 }
 .wizard-content .wizard > .actions > ul > li > a[href="#previous"] {
-  border-color: #1b00ff;
+  border-color: #00fb3f;
   border-width: 2px;
-  color: #1b00ff;
+  color: #00fb3f;
 }
 .wizard-content .wizard > .actions > ul > li.disabled > a[href="#previous"] {
   display: none;
-  border-color: #1b00ff;
+  border-color: #00fb3f;
 }
 .widget-style1 {
   padding: 10px;
