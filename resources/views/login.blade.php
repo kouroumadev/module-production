@@ -26,9 +26,10 @@
                     <img src="{{ asset('theme/vendors/images/login-page-img.png') }}" alt="">
                 </div>
                 <div class="col-md-6 col-lg-5">
-                    <div class="login-box bg-white box-shadow border-radius-10">
-                        <div class="login-title">
-                            <h2 class="text-center text-success">Se Connecter</h2>
+                    <div class="login-box bg-success box-shadow border-radius-10">
+                        <div class="login-title text-center">
+                            {{-- <img src="{{ asset('logos/main-logo.png') }}" alt="" style="height: 200px"> --}}
+                            <h2 class="text-center text-white">Se Connecter</h2>
                         </div>
                         @error('message')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -73,11 +74,11 @@
                                 <div class="col-6">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                        <label class="custom-control-label" for="customCheck1">Se Rappeler</label>
+                                        <label class="custom-control-label text-white" for="customCheck1">Se Rappeler</label>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="forgot-password"><a href="forgot-password.html">Mot de Passe Oublié?</a></div>
+                                    <div class="forgot-password"><a href="forgot-password.html"> <span class="text-white">Mot de Passe Oublié?</span></a></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -85,7 +86,7 @@
                                     <div class="input-group mb-0">
 
 
-											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Connexion">
+											<input class="btn btn-warning btn-lg btn-block" type="submit" value="Connexion">
 
                                         {{-- <a class="btn btn-success btn-lg btn-block" href="{{ route('dashboard') }}">Connexion</a> --}}
                                     </div>
