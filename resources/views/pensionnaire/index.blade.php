@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="col-auto">
-                <button type="submit" onclick=""  class="btn btn-primary mb-2">Rechercher</button>
+                <button type="submit" class="btn btn-success mb-2">Rechercher</button>
                 </div>
             </div>
         </form>
@@ -20,10 +20,10 @@
 </div>
 <hr>
 
-@if (isset($flag))
+@if ($errors->any())
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Oops...!</strong> Ce N° d'Immatriculation n'existe pas dans la base de données de la CNSS
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

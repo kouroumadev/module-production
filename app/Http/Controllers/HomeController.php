@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -19,13 +20,14 @@ class HomeController extends Controller
         return view('pensionnaire.index');
     }
     public function PensionnaireInfo(Request $request){
-        $flag = '1';
+
         $no_immat = $request->no_immatriculation;
         // dd($no_immat);
         $employe = DB::connection('metier')->table('employe')->where('no_employe','=',$no_immat)->get();
         // dd($employe);
         if($employe->isEmpty()){
-            return view('pensionnaire.index', compact('flag'));
+            // return view('pensionnaire.index', compact('flag'));
+            return Redirect::back()->withErrors(['flag' => '1']);
         }
 
         $conjoints = DB::connection('metier')->table('conjoint')->where('no_employe','=',$no_immat)->get();
