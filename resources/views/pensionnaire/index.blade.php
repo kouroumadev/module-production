@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="col-auto">
-                <button type="button" onclick="getInfoPension()"  class="btn btn-primary mb-2">Rechercher</button>
+                <button type="button" onclick="getInfoPension()"  class="btn btn-success mb-2">Rechercher</button>
                 </div>
             </div>
         </form>
