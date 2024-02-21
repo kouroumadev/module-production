@@ -2880,19 +2880,19 @@ body.IE .register-page-wrap .container {
   padding: 16px 40px 16px 16px;
   position: relative;
   white-space: normal;
-  color: #f6f5fb;
+  color: #ffffff;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 .faq-wrap .card-header .btn.collapsed {
-  color: #222;
+  color: #ffffff;
 }
 .faq-wrap .card-header .btn:after {
   content: "\f209";
   font-family: "Ionicons";
   position: absolute;
   right: 10px;
-  color: #1b00ff;
+  color: #ffffff;
   top: 16px;
 }
 .faq-wrap .card-header .btn.collapsed:after {
@@ -2975,7 +2975,7 @@ body.IE .register-page-wrap .container {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   padding-bottom: 15px;
-  border-bottom: 2px solid #f0f2f7;
+  border-bottom: 2px solid #ffffff;
 }
 .pricing-card-style2 .pricing-card-header .left {
   width: 60%;
