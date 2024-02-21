@@ -2866,7 +2866,7 @@ body.IE .register-page-wrap .container {
   box-shadow: 0 0 28px rgba(0, 0, 0, 0.08);
 }
 .faq-wrap .card-header {
-  background: #fff;
+  background: #28a745;
   text-align: left;
   border: 0;
   padding: 0;
@@ -2880,7 +2880,7 @@ body.IE .register-page-wrap .container {
   padding: 16px 40px 16px 16px;
   position: relative;
   white-space: normal;
-  color: #1b00ff;
+  color: #f6f5fb;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
@@ -3679,17 +3679,17 @@ body.IE .register-page-wrap .container {
   padding: 20px;
 }
 .wizard-content .wizard > .actions > ul > li > a {
-  background-color: #00fb3f;
+  background-color: #28a745;
   font-weight: 600;
 }
 .wizard-content .wizard > .actions > ul > li > a[href="#previous"] {
-  border-color: #00fb3f;
+  border-color: #28a745;
   border-width: 2px;
-  color: #00fb3f;
+  color: #28a745;
 }
 .wizard-content .wizard > .actions > ul > li.disabled > a[href="#previous"] {
   display: none;
-  border-color: #00fb3f;
+  border-color: #28a745;
 }
 .widget-style1 {
   padding: 10px;

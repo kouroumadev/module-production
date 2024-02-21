@@ -142,65 +142,14 @@
                         <h5>Conjoints et Enfants</h5>
                         <section>
 
-                            {{-- <div class="accordion accordion-flush" id="accordionExample">
-                                @foreach ($data['employeDetails'] as $key => $value)
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="heading{{ $key }}">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapse{{ $key }}" aria-expanded="true"
-                                                aria-controls="collapse{{ $key }}">
-                                                {{ $value['conjoint_name'] }} {{ $value['conjoint_prenom'] }}
-                                            </button>
-                                        </h2>
-                                        <div id="collapse{{ $key }}" class="accordion-collapse collapse show"
-                                            aria-labelledby="heading{{ $key }}"
-                                            data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">Nom</th>
-                                                            <th scope="col">Prenom</th>
-                                                            <th scope="col">date de Naissance</th>
-                                                            <th scope="col">Lieu de Naissance</th>
-                                                            <th scope="col">Ordre de Naissance</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach ($value['enfants'] as $key => $enfant)
-                                                            @if ($enfant == null)
-                                                                <div class="alert alert-secondary" role="alert">
-                                                                    Pas d'enfants
-                                                                </div>
-                                                            @else
-                                                                <tr>
-                                                                    <th scope="row">{{ $key + 1 }}</th>
-                                                                    <td>{{ $enfant->nom }}</td>
-                                                                    <td>{{ $enfant->prenoms }}</td>
-                                                                    <td>{{ $enfant->date_naissance }}</td>
-                                                                    <td>{{ $enfant->lieu_naissance }}</td>
-                                                                    <td>{{ $enfant->ordre }}</td>
 
-                                                                </tr>
-                                                            @endif
-                                                        @endforeach
-
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div> --}}
                             <div class="faq-wrap">
                                 @foreach ($data['employeDetails'] as $key => $value)
                                 <div id="accordion">
                                     <div class="card">
                                         <div class="card-header">
                                             <div class="btn btn-block" data-toggle="collapse" data-target="#faq1">
-                                                {{ $value['conjoint_name'] }} {{ $value['conjoint_prenom'] }}
+                                              Conjoint(e) {{ $key +1}} - {{ $value['conjoint_name'] }} {{ $value['conjoint_prenom'] }}
                                             </div>
                                         </div>
                                         <div id="faq1" class="collapse show" data-parent="#accordion">
@@ -403,88 +352,77 @@
                         <!-- Step 6 -->
                         <h5>Recap</h5>
                         <section>
-                            <div class="accordion accordion-flush" id="accordionFlushExample">
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="flush-headingOne">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                      <strong>INFOS PERSONNELLES</strong>
-                                    </button>
-                                  </h2>
-                                  <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <th>No Employe</th>
-                                                    <td>{{ $data['employe'][0]->no_employe }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Prenom</th>
-                                                    <td>{{ $data['employe'][0]->prenoms }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Nom</th>
-                                                    <td>{{ $data['employe'][0]->nom }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Date de Naissance</th>
-                                                    <td>{{ $data['employe'][0]->date_naissance }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Lieu de Naissance</th>
-                                                    <td>{{ $data['employe'][0]->lieu_naissance }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+
+                              <div class="faq-wrap">
+
+                                <div id="accordion">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="btn btn-block" data-toggle="collapse" data-target="#faq1">
+                                                <strong>INFOS PERSONNELLES</strong>
+                                            </div>
+                                        </div>
+                                        <div id="faq1" class="collapse show" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>No Employe</th>
+                                                            <td>{{ $data['employe'][0]->no_employe }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Prenom</th>
+                                                            <td>{{ $data['employe'][0]->prenoms }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Nom</th>
+                                                            <td>{{ $data['employe'][0]->nom }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Date de Naissance</th>
+                                                            <td>{{ $data['employe'][0]->date_naissance }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Lieu de Naissance</th>
+                                                            <td>{{ $data['employe'][0]->lieu_naissance }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
-                                  </div>
-                                </div>
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="flush-headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                      <strong>INFOS EMPLOYEUR</strong>
-                                    </button>
-                                  </h2>
-                                  <div id="flush-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <th>No Employeur</th>
-                                                    <td>{{ $data['employeur'][0]->no_employeur }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Raison Sociale</th>
-                                                    <td>{{ $data['employeur'][0]->raison_sociale }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Categorie</th>
-                                                    <td>{{ $data['employeur'][0]->categorie }}</td>
-                                                </tr>
-                                                {{-- <tr>
-                                                    <th>Date de Naissance</th>
-                                                    <td>{{ $data['employe'][0]->date_naissance }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Lieu de Naissance</th>
-                                                    <td>{{ $data['employe'][0]->lieu_naissance }}</td>
-                                                </tr> --}}
-                                            </tbody>
-                                        </table>
+
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="btn btn-block" data-toggle="collapse" data-target="#faq1">
+                                                <strong>INFOS EMPLOYEUR</strong>
+                                            </div>
+                                        </div>
+                                        <div id="faq1" class="collapse show" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>No Employeur</th>
+                                                            <td>{{ $data['employeur'][0]->no_employeur }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Raison Sociale</th>
+                                                            <td>{{ $data['employeur'][0]->raison_sociale }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Categorie</th>
+                                                            <td>{{ $data['employeur'][0]->categorie }}</td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
-                                  </div>
                                 </div>
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="flush-headingThree">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                      Accordion Item #3
-                                    </button>
-                                  </h2>
-                                  <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                                  </div>
-                                </div>
-                              </div>
+
+                            </div>
                         </section>
                     </form>
                 </div>
