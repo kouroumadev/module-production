@@ -15,9 +15,10 @@ class HomeController extends Controller
         return view('login');
     }
     public function PensionIndex() {
-        // $data = "index";
-        // dd($data);
         return view('pensionnaire.index');
+    }
+    public function prestationIndex() {
+        return view('prestation.index');
     }
     public function PensionnaireInfo(Request $request){
 
