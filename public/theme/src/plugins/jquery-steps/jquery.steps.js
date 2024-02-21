@@ -2013,20 +2013,20 @@ var defaults = $.fn.steps.defaults = {
          *
          * @property next
          * @type String
-         * @default "Next"
+         * @default "Suivant"
          * @for defaults
          **/
-        next: "Next",
+        next: "Suivant",
 
         /**
          * Label for the previous button.
          *
          * @property previous
          * @type String
-         * @default "Previous"
+         * @default "Precedent"
          * @for defaults
          **/
-        previous: "Previous",
+        previous: "Precedent",
 
         /**
          * Label for the loading animation.
