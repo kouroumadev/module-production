@@ -8,8 +8,8 @@
     @php
         //dd($data['employeur'][0]->no_employeur);
     @endphp
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
 
 
     <div class="page-header">
@@ -142,7 +142,7 @@
                         <h5>Conjoints et Enfants</h5>
                         <section>
 
-                            <div class="accordion accordion-flush" id="accordionExample">
+                            {{-- <div class="accordion accordion-flush" id="accordionExample">
                                 @foreach ($data['employeDetails'] as $key => $value)
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="heading{{ $key }}">
@@ -181,7 +181,7 @@
                                                                     <td>{{ $enfant->date_naissance }}</td>
                                                                     <td>{{ $enfant->lieu_naissance }}</td>
                                                                     <td>{{ $enfant->ordre }}</td>
-                                                                    {{-- <td>{{ $enfant->date_naissance }}</td> --}}
+
                                                                 </tr>
                                                             @endif
                                                         @endforeach
@@ -193,8 +193,58 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            </div>
+                            </div> --}}
+                            <div class="faq-wrap">
+                                @foreach ($data['employeDetails'] as $key => $value)
+                                <div id="accordion">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="btn btn-block" data-toggle="collapse" data-target="#faq1">
+                                                {{ $value['conjoint_name'] }} {{ $value['conjoint_prenom'] }}
+                                            </div>
+                                        </div>
+                                        <div id="faq1" class="collapse show" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Nom</th>
+                                                            <th scope="col">Prenom</th>
+                                                            <th scope="col">date de Naissance</th>
+                                                            <th scope="col">Lieu de Naissance</th>
+                                                            <th scope="col">Ordre de Naissance</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($value['enfants'] as $key => $enfant)
+                                                            @if ($enfant == null)
+                                                                <div class="alert alert-secondary" role="alert">
+                                                                    Pas d'enfants
+                                                                </div>
+                                                            @else
+                                                                <tr>
+                                                                    <th scope="row">{{ $key + 1 }}</th>
+                                                                    <td>{{ $enfant->nom }}</td>
+                                                                    <td>{{ $enfant->prenoms }}</td>
+                                                                    <td>{{ $enfant->date_naissance }}</td>
+                                                                    <td>{{ $enfant->lieu_naissance }}</td>
+                                                                    <td>{{ $enfant->ordre }}</td>
 
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                @endforeach
+                            </div>
 
                         </section>
                         <!-- Step 4 -->
