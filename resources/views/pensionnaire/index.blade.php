@@ -2,6 +2,23 @@
 
 @section('body')
 
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="title">
+                <h4>PRESTATIONS</h4>
+            </div>
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Prestations</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Pension de retraite</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<hr>
 <div class="row justify-content-center">
     <div class="col-md-8">
         <form id="form-get-pension" action="{{ route('pensionnaire.info') }}" method="POST">

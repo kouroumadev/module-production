@@ -11,7 +11,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <div class="row " id="employe-wrapper">
+
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="title">
+                    <h4>PRESTATIONS</h4>
+                </div>
+                <nav aria-label="breadcrumb" role="navigation">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href={{ route('pension.index') }}>Prestations</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Infos Pensionnaire</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="employe-wrapper">
         <div class="col-md-12">
             <div class="pd-20 card-box mb-30">
                 <div class="wizard-content">
