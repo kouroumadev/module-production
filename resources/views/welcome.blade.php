@@ -28,21 +28,21 @@
                         <ul>
                             <li>
                                 <a href="#">
-                                    <img src="vendors/images/img.jpg" alt="">
+                                    <img src="{{ asset('theme/vendors/images/img.jpg') }}" alt="">
                                     <h3>John Doe</h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="vendors/images/photo1.jpg" alt="">
+                                    <img src="{{ asset('theme/vendors/images/photo1.jpg') }}" alt="">
                                     <h3>Lea R. Frith</h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="vendors/images/photo2.jpg" alt="">
+                                    <img src="{{ asset('theme/vendors/images/photo2.jpg') }}" alt="">
                                     <h3>Erik L. Richards</h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                 </a>
@@ -54,20 +54,7 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <img src="vendors/images/photo4.jpg" alt="">
-                                    <h3>Renee I. Hansen</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="vendors/images/img.jpg" alt="">
-                                    <h3>Vicki M. Coleman</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-                                </a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -99,7 +86,7 @@
     </div>
 </div>
 
-<div class="right-sidebar">
+{{-- <div class="right-sidebar">
     <div class="sidebar-title">
         <h3 class="weight-600 font-16 text-blue">
             Layout Settings
@@ -172,10 +159,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
-<div class="left-side-bar">
-    <div class="brand-logo">
+<div class="left-side-bar bg-success">
+    <div class="brand-logo bg-white">
         <a href="{{ route('dashboard') }}">
             <img src="{{ asset('logos/top-logo.png') }}" alt="" class="dark-logo">
             <img src="{{ asset('logos/top-logo.png') }}" alt="" class="light-logo">
