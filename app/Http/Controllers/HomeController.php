@@ -19,9 +19,15 @@ class HomeController extends Controller
         return view('pensionnaire.index');
     }
     public function PensionnaireInfo(Request $request){
+        $flag = '1';
         $no_immat = $request->no_immatriculation;
         // dd($no_immat);
         $employe = DB::connection('metier')->table('employe')->where('no_employe','=',$no_immat)->get();
+        // dd($employe);
+        if($employe->isEmpty()){
+            return view('pensionnaire.index', compact('flag'));
+        }
+
         $conjoints = DB::connection('metier')->table('conjoint')->where('no_employe','=',$no_immat)->get();
         $no_employeur = $employe[0]->no_employeur;
         $employeur = DB::connection('metier')->table('employeur')->where('no_employeur','=',$no_employeur)->get();

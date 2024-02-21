@@ -29,6 +29,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/jquery-steps/jquery.steps.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/vendors/styles/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/styles/flaticon.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/sweetalert2/sweetalert2.css') }}">
+
 
     {{-- sweetAlert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
@@ -79,6 +81,10 @@
 	<script src="{{ asset('theme/src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
 	<script src="{{ asset('theme/src/plugins/datatables/js/pdfmake.min.js') }}"></script>
 	<script src="{{ asset('theme/src/plugins/datatables/js/vfs_fonts.js') }}"></script>
+
+    <!-- add sweet alert js & css in footer -->
+	<script src="{{ asset('theme/src/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
+	<script src="{{ asset('theme/src/plugins/sweetalert2/sweet-alert.init.js') }}"></script>
 
     {{-- Ajax --}}
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script> --}}
