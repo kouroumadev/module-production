@@ -264,85 +264,85 @@
                                             <th scope="row">1</th>
                                             <th scope="row">Lettre de transmission faite par l'employeur ou le beneficiaire adressee au DG</th>
                                             <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
-                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                            <th scope="row"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                         </tr>
                                         <tr>
                                             <th scope="row">2</th>
                                             <th scope="row">Le carnet d'assurr social ou la carte d'assurer social</th>
                                             <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
-                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                            <th scope="row"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                         </tr>
                                         <tr>
                                             <th scope="row">3</th>
                                             <th scope="row">Le certificat de travail avec la date d'embauche</th>
                                             <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
-                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                            <th scope="row"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                         </tr>
                                         <tr>
                                             <th scope="row">4</th>
                                             <th scope="row">Le certificat de cessation de paiement avec le dernier salaire (CCP)</th>
                                             <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
-                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                            <th scope="row"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                         </tr>
                                         <tr>
                                             <th scope="row">5</th>
                                             <th scope="row">Le releve des 120 derniers mois (10 dernieres annees)</th>
                                             <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
-                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                            <th scope="row"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                         </tr>
                                         <tr>
                                             <th scope="row">6</th>
                                             <th scope="row">Porces-verbale du conseil de famille</th>
                                             <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
-                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span> <i class="icon-copy fa fa-warning text-white" aria-hidden="true"></i></th>
+                                            <th scope="row"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                         </tr>
                                         <tr>
                                             <th scope="row">7</th>
                                             <th scope="row">Le jugement d'heredite</th>
                                             <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
-                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                            <th scope="row"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                         </tr>
                                         <tr>
                                             <th scope="row">8</th>
                                             <th scope="row">Le certificat de residence du veuf, de la veuve ou des veuves</th>
                                             <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
-                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                            <th scope="row"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                         </tr>
                                         <tr>
                                             <th scope="row">9</th>
                                             <th scope="row">Quatre(4) photos d'identite du veuf, de la veuve ou des veuves</th>
                                             <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
-                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                            <th scope="row"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                         </tr>
                                         <tr>
                                             <th scope="row">10</th>
                                             <th scope="row">La photocopie recto-verso de la carte d'identite nationale</th>
                                             <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
-                                            <th scope="row"><span class="bg-success p-2 rounded text-white">Chargé</span></th>
+                                            <th scope="row"><span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span></th>
                                         </tr>
                                         <tr>
                                             <th scope="row">11</th>
                                             <th scope="row">La copie legalisee de l'extrait de mariage de chaque veuve</th>
                                             <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
-                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                            <th scope="row"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                         </tr>
                                         <tr>
                                             <th scope="row">12</th>
                                             <th scope="row">La copie legalisee de l'extrait de naissance de chaque enfant de moins de 17 ans</th>
                                             <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
-                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                            <th scope="row"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                         </tr>
                                         <tr>
                                             <th scope="row">13</th>
                                             <th scope="row">Certificat de vie collective individuelle des enfants de moins de 17 ans</th>
                                             <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
-                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                            <th scope="row"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                         </tr>
                                         <tr>
                                             <th scope="row">14</th>
-                                            <th scope="row">Numero de telephone de l'assur</th>
+                                            <th scope="row">Numero de telephone de l'assure</th>
                                             <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
-                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                            <th scope="row"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                         </tr>
                                         </tbody>
                                     </table>
