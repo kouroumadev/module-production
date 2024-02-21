@@ -4,7 +4,7 @@
 
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <form id="form-get-pension">
+        <form id="form-get-pension" action="{{ route('pensionnaire.info') }}" method="POST">
             @csrf
             <div class="form-row align-items-center">
                 <div class="col-8">
@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="col-auto">
-                <button type="button" onclick="getInfoPension()"  class="btn btn-success mb-2">Rechercher</button>
+                <button type="submit" onclick=""  class="btn btn-primary mb-2">Rechercher</button>
                 </div>
             </div>
         </form>
@@ -21,248 +21,9 @@
 
 <hr>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="pd-20 card-box mb-30">
-            <div class="wizard-content">
-                <form class="tab-wizard wizard-circle wizard">
-                    <h5>Infos Personnelles</h5>
-                    <section>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label >No Immatriculation :</label>
-                                    <input type="text" class="form-control"  id="no_immat_disp" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label >Nom :</label>
-                                    <input type="text" class="form-control"  id="nom_employe" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label >Prenom :</label>
-                                    <input type="text" class="form-control"  id="prenom_employe" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Date de naissance:</label>
-                                    <input type="email" class="form-control"  id="date_naissance" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Lieu de naissance</label>
-                                    <input type="text" class="form-control" id="lieu_naissance" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Prefecture</label>
-                                    <input type="text" class="form-control" id="prefecture" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Telephone :</label>
-                                    <input type="text" class="form-control" value="611 55 76 23" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label >Adresse:</label>
-                                    <input type="text" class="form-control date-picker" value="Labe" readonly>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- Step 2 -->
-                    <h5>Conjoints et Enfants</h5>
-                    <section>
-                        <div class="row mt-2">
-							<div class="col-lg-4 col-md-4 col-sm-12">
-								<div class="sitemap">
-									<h5 class="h5">Conjoint</h5>
-									<ul>
-										<li><a href="#">Mahawa Sylla</a></li>
-										{{-- <li><a href="#">Level 1</a></li> --}}
-										<li class="child">
-											<h5 class="h5">Enfant(s)</h5>
-											<ul>
-												<li><a href="#">Junior Camara</a></li>
-												<li><a href="#">Alpha Camara</a></li>
-											</ul>
-										</li>
-									</ul>
-								</div>
-							</div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="sitemap">
-									<h5 class="h5">Conjoint</h5>
-									<ul>
-										<li><a href="#">Djenab Sow</a></li>
-										{{-- <li><a href="#">Level 1</a></li> --}}
-										<li class="child">
-											<h5 class="h5">Enfant(s)</h5>
-											<ul>
-												<li><a href="#">Moussa Camara</a></li>
-											</ul>
-										</li>
-									</ul>
-								</div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="sitemap">
-									<h5 class="h5">Conjoint</h5>
-									<ul>
-										<li><a href="#">Delphine Lamah</a></li>
-										{{-- <li><a href="#">Level 1</a></li> --}}
-										<li class="child">
-											<h5 class="h5">Enfant(s)</h5>
-											<ul>
-												<li><a href="#">Djibril Camara</a></li>
-												<li><a href="#">Binta Camara</a></li>
-												<li><a href="#">Jean Camara</a></li>
-												<li><a href="#">Paul Camara</a></li>
-											</ul>
-										</li>
-									</ul>
-								</div>
-                            </div>
-						</div>
-                    </section>
-                    <!-- Step 3 -->
-                    <h5>Infos Employeur</h5>
-                    <section>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Sigle</label>
-                                    <input type="text" class="form-control" value="RIO TINTO" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label>Type</label>
-                                    <input type="text" class="form-control" value="Entreprise Prive" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Secteur D'activite</label>
-                                    <input type="text" class="form-control" value="Secteur Minier" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label>Autre infos</label>
-                                    <input type="text" class="form-control" value="Autre infos" readonly>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- Step 4 -->
-                    <h5>Infos Deposant</h5>
-                    <section>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Nom</label>
-                                    <input type="text" class="form-control" placeholder="Entrer le nom" >
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Prenom</label>
-                                    <input type="text" class="form-control" placeholder="Entrer le premom">
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- Step 5 -->
-                    <h5>Documents</h5>
-                    <section>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Contrat de travail</label>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input">
-                                        <label class="custom-file-label">Choisir le fichier</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Carnet</label>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input">
-                                        <label class="custom-file-label">Choisir le fichier</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Certificat de residance</label>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input">
-                                        <label class="custom-file-label">Choisir le fichier</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Extrait de naissance</label>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input">
-                                        <label class="custom-file-label">Choisir le fichier</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- Step 6 -->
-                    <h5>Recap</h5>
-                    <section>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Behaviour :</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Confidance</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Result</label>
-                                    <select class="form-control">
-                                        <option>Select Result</option>
-                                        <option>Selected</option>
-                                        <option>Rejected</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Comments</label>
-                                    <textarea class="form-control"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
-<script>
+
+{{-- <script>
     function getInfoPension() {
         //// ROUTE FOR GETTING EMPLOYES INFO TO METIER DATABASE
 
@@ -273,19 +34,75 @@
                     url: "{{route('pensionnaire.info')}}",
                     dataType: 'json',
                     data:{no_immatriculation:no_immatriculation},
-
+                    beforeSend: function(){
+                        $("#loader").show();
+                        // alert("sending.....")
+                    },
+                    complete: function(){
+                        $("#loader").hide();
+                        // alert("sent..")
+                    },
                     success: function(data) {
-                        console.log(data);
-                        $("#no_immat_disp").val(data.employe[0].no_employe)
-                        $("#prenom_employe").val(data.employe[0].prenoms)
-                        $("#nom_employe").val(data.employe[0].nom)
-                        $("#date_naissance").val(data.employe[0].date_naissance)
-                        $("#lieu_naissance").val(data.employe[0].lieu_naissance)
-                        $("#prefecture").val(data.employe[0].prefecture)
-                        // console.log(data.employe[0].prenoms)
+
+                        if (data == "not exist") {
+                                    Swal.fire({
+                            title: 'Error!',
+                            text: 'Ce Numero d\'immatriculation n\'existe pas',
+                            icon: 'error',
+
+                            })
+
+
+                        }
+                        else{
+                            $("#employe-wrapper").removeClass('d-none')
+                            $("#no_immat_disp").val(data.employe[0].no_employe)
+                            $("#prenom_employe").val(data.employe[0].prenoms)
+                            $("#nom_employe").val(data.employe[0].nom)
+                            $("#date_naissance").val(data.employe[0].date_naissance)
+                            $("#lieu_naissance").val(data.employe[0].lieu_naissance)
+                            $("#prefecture").val(data.employe[0].code_prefecture)
+                            $("#statut").val(data.employe[0].statut)
+
+                            $("#no_employeur").val(data.employeur[0].no_employeur)
+                            $("#raison_sociale").val(data.employeur[0].raison_sociale)
+                            $("#categorie").val(data.employeur[0].categorie)
+                            var html =""
+                            $("#conj-enf").empty();
+                            $.each(data.employeDetails,function(index,value){
+
+                                $("#conj-enf").append(`<div class="accordion-item">
+                                <h2 class="accordion-header" id="heading">
+                                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="true" aria-controls="collapseOne">`
+                                    +value.conjoint_name+
+                                 ` </button>
+                                </h2>
+                                <div id="collapse" class="accordion-collapse collapse show" aria-labelledby="heading" data-bs-parent="#accordionExample">
+                                  <div class="accordion-body">
+                                    <table class="table">
+                                            <thead>
+                                                <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">First</th>
+                                                <th scope="col">Last</th>
+                                                <th scope="col">Handle</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>`
+
+                                           ` </tbody>
+                                    </table>
+
+                                  </div>
+                                </div>
+                            </div>`);
+                            });
+                             console.log(data.employeDetails)
+                        }
+
                     }
                 })
     }
-</script>
+</script> --}}
 
 @endsection

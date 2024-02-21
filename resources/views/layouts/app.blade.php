@@ -28,15 +28,22 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/jquery-steps/jquery.steps.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/vendors/styles/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/styles/flaticon.css') }}">
 
+    {{-- sweetAlert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.11.4/b-2.2.2/r-2.2.9/sc-2.0.5/sp-1.4.0/datatables.min.css"/>
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.11.4/b-2.2.2/r-2.2.9/sc-2.0.5/sp-1.4.0/datatables.min.js"></script>
 
 
+
 {{-- Ajax --}}
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script> --}}
+
+
+
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
@@ -46,9 +53,6 @@
 <body>
 
     @yield('content')
-
-
-
 
 
 
@@ -76,6 +80,8 @@
 	<script src="{{ asset('theme/src/plugins/datatables/js/pdfmake.min.js') }}"></script>
 	<script src="{{ asset('theme/src/plugins/datatables/js/vfs_fonts.js') }}"></script>
 
+    {{-- Ajax --}}
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script> --}}
 
 
 

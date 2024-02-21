@@ -3,7 +3,7 @@
 @section('RSide')
 
 <div class="left-side-bar">
-    <div class="brand-logo">
+    <div class="brand-logo" style="background-color: white">
         <a href="index.html">
             <img src="vendors/images/deskapp-logo.svg" alt="" class="dark-logo">
             <img src="vendors/images/deskapp-logo-white.svg" alt="" class="light-logo">

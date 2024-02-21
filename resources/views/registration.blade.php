@@ -28,29 +28,19 @@
                 <div class="col-md-6 col-lg-5">
                     <div class="login-box bg-white box-shadow border-radius-10">
                         <div class="login-title">
-                            <h2 class="text-center text-success">Se Connecter</h2>
+                            <h2 class="text-center text-success">Enregistrement</h2>
                         </div>
-                        @error('message')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                        <form method="POST" action="{{ route('user.signin') }}">
+                        <form method="POST" action="{{ route('user.signup') }}">
                             @csrf
-                            {{-- <div class="select-role">
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn active">
-										<input type="radio" name="options" id="admin">
-										<div class="icon"><img src="{{ asset('theme/vendors/images/briefcase.svg') }}" class="svg" alt=""></div>
-										<span>I'm</span>
-										Manager
-									</label>
-                                    <label class="btn">
-										<input type="radio" name="options" id="user">
-										<div class="icon"><img src="{{ asset('theme/vendors/images/person.svg') }}" class="svg" alt=""></div>
-										<span>I'm</span>
-										Employee
-									</label>
+                            <div class="input-group custom">
+                                <input type="text" class="form-control form-control-lg" name="name" placeholder=" Nom complet">
+                                <div class="input-group-append custom">
+                                    <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                                 </div>
-                            </div> --}}
+                            </div>
+                            @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                             <div class="input-group custom">
                                 <input type="email" class="form-control form-control-lg" name="email" placeholder=" Adresse Email">
                                 <div class="input-group-append custom">
@@ -69,6 +59,15 @@
                             @error('password')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
+                            <div class="input-group custom">
+                                <input type="text" class="form-control form-control-lg" name="type_user" placeholder=" Type utilisateur">
+                                <div class="input-group-append custom">
+                                    <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
+                                </div>
+                            </div>
+                            @error('type_user')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                             <div class="row pb-30">
                                 <div class="col-6">
                                     <div class="custom-control custom-checkbox">
@@ -85,14 +84,11 @@
                                     <div class="input-group mb-0">
 
 
-											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Connexion">
+											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sauvegarder">
 
                                         {{-- <a class="btn btn-success btn-lg btn-block" href="{{ route('dashboard') }}">Connexion</a> --}}
                                     </div>
-                                    {{-- <div class="font-16 weight-600 pt-10 pb-10 text-center" data-color="#707373">OR</div>
-                                    <div class="input-group mb-0">
-                                        <a class="btn btn-outline-primary btn-lg btn-block" href="register.html">Register To Create Account</a>
-                                    </div> --}}
+
                                 </div>
                             </div>
                         </form>
