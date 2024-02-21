@@ -181,22 +181,22 @@
                     </a>
                 </li>
 
-                <li>
+                <li onclick="makeActive(this)" class="my-menu my-active">
                     <a href="{{ route('prestation.index') }}" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-home"></span><span class="mtext">PRESTATIONS</span>
                     </a>
                 </li>
-                <li>
+                <li class="my-menu" onclick="makeActive(this)">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">RECLAMATION</span>
                     </a>
                 </li>
-                <li>
+                <li class="my-menu" onclick="makeActive(this)">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">DEMANDE</span>
                     </a>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown" onclick="makeActive(this)">
                     <a href="#" class="dropdown-toggle">
                         <span class="micon dw dw-list3"></span><span class="mtext">DECLARATION</span>
                     </a>
@@ -205,42 +205,42 @@
                         <li><a href="image-cropper.html">Declaration d'Accident de Trajet</a></li>
                     </ul>
                 </li>
-                <li>
+                <li class="my-menu" onclick="makeActive(this)">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">PROCURATION</span>
                     </a>
                 </li>
 
-                <li>
+                <li class="my-menu" onclick="makeActive(this)">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-diagram"></span><span class="mtext">DEMAT</span>
                     </a>
                 </li>
-                <li>
+                <li class="my-menu" onclick="makeActive(this)">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">QUITTANCE</span>
                     </a>
                 </li>
 
-                <li>
+                <li class="my-menu" onclick="makeActive(this)">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">ASSISTANCE</span>
                     </a>
                 </li>
 
-                <li>
+                <li class="my-menu" onclick="makeActive(this)">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-library"></span><span class="mtext">DOSSIERS DOUTEUX</span>
                     </a>
                 </li>
 
-                <li>
+                <li class="my-menu" onclick="makeActive(this)">
                     <div class="dropdown-divider"></div>
                 </li>
                 <li>
                     <div class="sidebar-small-cap">ESPACE ADMIN</div>
                 </li>
-                <li>
+                <li class="my-menu" onclick="makeActive(this)">
                     <a href="#" class="dropdown-toggle">
                         <span class="micon dw dw-edit-2"></span><span class="mtext">Parametrage</span>
                     </a>
@@ -251,7 +251,7 @@
                         <li><a href="third-party-plugins.html">Third Party Plugins</a></li>
                     </ul>
                 </li>
-                <li>
+                <li class="my-menu" onclick="makeActive(this)">
                     <a href="#" class="dropdown-toggle">
                         <span class="micon dw dw-edit-2"></span><span class="mtext">Documentation</span>
                     </a>
@@ -262,7 +262,7 @@
                         <li><a href="third-party-plugins.html">Third Party Plugins</a></li>
                     </ul>
                 </li>
-                <li>
+                <li class="my-menu" onclick="makeActive(this)">
                     <a href="https://dropways.github.io/deskapp-free-single-page-website-template/" target="_blank" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-paper-plane1"></span>
                         <span class="mtext">Landing Page <img src="vendors/images/coming-soon.png" alt="" width="25"></span>
@@ -280,6 +280,23 @@
         @yield('body')
     </div>
 </div>
+
+
+<script>
+
+    function makeActive(elem) {
+        // get all 'a' elements
+        var a = document.getElementsByClassName('my-menu');
+        // loop through all 'a' elements
+        for (i = 0; i < a.length; i++) {
+            // Remove the class 'active' if it exists
+            a[i].classList.remove('my-active')
+        }
+        // add 'active' classs to the element that was clicked
+        elem.classList.add('my-active');
+    }
+
+</script>
 
 
 @endsection
