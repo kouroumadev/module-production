@@ -23,12 +23,13 @@
         <a href="{{ route('pension.index') }}" class="btn btn-block">
             <div class="card-box height-100-p widget-style1 bg-success">
                 <div class="d-flex flex-wrap align-items-center">
-                    <div class="widget-data text-white text-uppercase font-weight-bold">
+                    <div class="widget-data text-white text-uppercase font-weight-bold text-left">
                         Pension
                     </div>
                     <div class="progress-data">
                         <i class="icon-copy fa fa-users fa-3x text-white" aria-hidden="true"></i>
                     </div>
+                    <small class="pl-1 text-white">heloooo babyyyyy</small>
                 </div>
             </div>
         </a>
@@ -37,7 +38,7 @@
         <a href="#" class="btn btn-block">
             <div class="card-box height-100-p widget-style1 bg-success">
                 <div class="d-flex flex-wrap align-items-center">
-                    <div class="widget-data text-white text-uppercase font-weight-bold">
+                    <div class="widget-data text-white text-uppercase font-weight-bold text-left">
                         Assurance Maladie
                     </div>
                     <div class="progress-data">
@@ -51,7 +52,7 @@
         <a href="#" class="btn btn-block">
             <div class="card-box height-100-p widget-style1 bg-success">
                 <div class="d-flex flex-wrap align-items-center">
-                    <div class="widget-data text-white text-uppercase font-weight-bold">
+                    <div class="widget-data text-white text-uppercase font-weight-bold text-left">
                         Assurance Viellesse
                     </div>
                     <div class="progress-data">
@@ -65,7 +66,7 @@
         <a href="#" class="btn btn-block">
             <div class="card-box height-100-p widget-style1 bg-success">
                 <div class="d-flex flex-wrap align-items-center">
-                    <div class="widget-data text-white text-uppercase font-weight-bold">
+                    <div class="widget-data text-white text-uppercase font-weight-bold text-left">
                         Risques Professionnels
                     </div>
                     <div class="progress-data">
