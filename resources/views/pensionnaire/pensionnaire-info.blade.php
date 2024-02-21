@@ -300,43 +300,103 @@
                         <h5>Documents</h5>
                         <section>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Contrat de travail</label>
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input">
-                                            <label class="custom-file-label">Choisir le fichier</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Carnet</label>
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input">
-                                            <label class="custom-file-label">Choisir le fichier</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Certificat de residance</label>
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input">
-                                            <label class="custom-file-label">Choisir le fichier</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Extrait de naissance</label>
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input">
-                                            <label class="custom-file-label">Choisir le fichier</label>
-                                        </div>
-                                    </div>
+                                <div class="col-md-12">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Pieces a Fournir</th>
+                                            <th scope="col">Charger le fichier</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <th scope="row">Lettre de transmission faite par l'employeur ou le beneficiaire adressee au DG</th>
+                                            <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
+                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <th scope="row">Le carnet d'assurr social ou la carte d'assurer social</th>
+                                            <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
+                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <th scope="row">Le certificat de travail avec la date d'embauche</th>
+                                            <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
+                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">4</th>
+                                            <th scope="row">Le certificat de cessation de paiement avec le dernier salaire (CCP)</th>
+                                            <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
+                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">5</th>
+                                            <th scope="row">Le releve des 120 derniers mois (10 dernieres annees)</th>
+                                            <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
+                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">6</th>
+                                            <th scope="row">Porces-verbale du conseil de famille</th>
+                                            <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
+                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span> <i class="icon-copy fa fa-warning text-white" aria-hidden="true"></i></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">7</th>
+                                            <th scope="row">Le jugement d'heredite</th>
+                                            <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
+                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">8</th>
+                                            <th scope="row">Le certificat de residence du veuf, de la veuve ou des veuves</th>
+                                            <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
+                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">9</th>
+                                            <th scope="row">Quatre(4) photos d'identite du veuf, de la veuve ou des veuves</th>
+                                            <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
+                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">10</th>
+                                            <th scope="row">La photocopie recto-verso de la carte d'identite nationale</th>
+                                            <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
+                                            <th scope="row"><span class="bg-success p-2 rounded text-white">Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">11</th>
+                                            <th scope="row">La copie legalisee de l'extrait de mariage de chaque veuve</th>
+                                            <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
+                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">12</th>
+                                            <th scope="row">La copie legalisee de l'extrait de naissance de chaque enfant de moins de 17 ans</th>
+                                            <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
+                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">13</th>
+                                            <th scope="row">Certificat de vie collective individuelle des enfants de moins de 17 ans</th>
+                                            <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
+                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">14</th>
+                                            <th scope="row">Numero de telephone de l'assur</th>
+                                            <th scope="row"><input type="file" class="form-control-file form-control height-auto"></th>
+                                            <th scope="row"><span class="badge badge-danger">Non Chargé</span></th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </section>

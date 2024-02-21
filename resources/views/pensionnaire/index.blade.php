@@ -20,12 +20,26 @@
 
 <hr>
 <div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="form-group">
+            <select class=" form-control" data-style="btn-outline-success" data-size="5">
+                <option selected>Selectionner le type de pension</option>
+                <option value="Retraite">Retraite</option>
+                <option value="reversion">Reversion</option>
+                <option value="Invalidite">Invalidite</option>
+                <option value="allocation de vieillesse">allocation de vieillesse</option>
+                <option value="Deces en Activite">Deces en Activite</option>
+                <option value="Pensions Temporaires d'Orphelin">Pensions Temporaires d'Orphelin</option>
+
+            </select>
+        </div>
+    </div>
     <div class="col-md-8">
         <form id="form-get-pension" action="{{ route('pensionnaire.info') }}" method="POST">
             @csrf
             <div class="form-row align-items-center">
                 <div class="col-8">
-                    <input type="text" class="form-control mb-2" name="no_immatriculation" id="no_immatriculation" placeholder="Entrer le N° d'Immatriculation" />
+                    <input type="text" class="form-control mb-2" name="no_immatriculation" id="no_immatriculation" placeholder="Entrer le N° d'Immatriculation ou de Pension" />
                 </div>
 
                 <div class="col-auto">
