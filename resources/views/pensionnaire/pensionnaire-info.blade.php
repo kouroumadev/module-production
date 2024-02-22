@@ -149,7 +149,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <div class="btn btn-block" data-toggle="collapse" data-target="#faq1">
-                                              Conjoint(e) {{ $key +1}} - {{ $value['conjoint_name'] }} {{ $value['conjoint_prenom'] }}
+                                              Conjoint(e) {{ $key+1}} - {{ $value['conjoint_name'] }} {{ $value['conjoint_prenom'] }}
                                             </div>
                                         </div>
                                         <div id="faq1" class="collapse show" data-parent="#accordion">
@@ -235,6 +235,13 @@
                                         <label>CIN</label>
                                         <input type="text" class="form-control" name="cin"
                                             placeholder="Entrer CIN">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" class="form-control" name="email"
+                                            placeholder="Entrer email">
                                     </div>
                                 </div>
                                 {{-- <div class="col-md-4">
