@@ -27,8 +27,11 @@ class HomeController extends Controller
         $employe = DB::connection('metier')->table('employe')->where('no_employe','=',$no_immat)->get();
         // dd($employe);
         if($employe->isEmpty()){
+            $flag = '1';
             // return view('pensionnaire.index', compact('flag'));
-            return Redirect::back()->withErrors(['flag' => '1']);
+            // return Redirect::back()->withErrors(['flag' => '1']);
+            return view('pensionnaire.index',compact('flag'));
+
         }
 
         $conjoints = DB::connection('metier')->table('conjoint')->where('no_employe','=',$no_immat)->get();

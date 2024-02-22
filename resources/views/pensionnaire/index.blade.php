@@ -57,7 +57,7 @@
 </div>
 <hr>
 
-@if ($errors->any())
+@if (isset($flag))
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -330,86 +330,86 @@
                                     <tr>
                                         <th scope="row">1</th>
                                         <th scope="row">Lettre de transmission faite par l'employeur ou le beneficiaire adressée au DG</th>
-                                        <th scope="row"><input type="file" id="file1" class="form-control-file form-control height-auto"  onchange="myFunction()" id="file1" /></th>
+                                        <th scope="row"><input type="file" id="file1" class="form-control-file form-control height-auto"  onchange="myFunction('#file1','file1_statut')" id="file1" /></th>
                                         <th scope="row" id="file1_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">2</th>
                                         <th scope="row">Le carnet d'assuré social ou la carte d'assuré social</th>
-                                        <th scope="row"><input type="file"  id="file2" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row"><input type="file"  id="file2" class="form-control-file form-control height-auto" onchange="myFunction('#file2','file2_statut')"></th>
                                         <th scope="row" id="file2_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">3</th>
                                         <th scope="row">Le certificat de travail avec la date d'embauche</th>
-                                        <th scope="row"><input type="file"  id="file3" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row"><input type="file"  id="file3" class="form-control-file form-control height-auto" onchange="myFunction('#file3','file3_statut')"></th>
                                         <th scope="row" id="file3_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">4</th>
                                         <th scope="row">Le certificat de cessation de paiement avec le dernier salaire (CCP)</th>
-                                        <th scope="row"><input type="file"  id="file4" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row"><input type="file"  id="file4" class="form-control-file form-control height-auto" onchange="myFunction('#file4','file4_statut')"></th>
                                         <th scope="row" id="file4_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">5</th>
                                         <th scope="row">Le releve des 120 derniers mois (10 dernieres annees)</th>
-                                        <th scope="row"><input type="file"  id="file5" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row"><input type="file"  id="file5" class="form-control-file form-control height-auto" onchange="myFunction('#file5','file5_statut')"></th>
                                         <th scope="row" id="file5_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">6</th>
                                         <th scope="row">Porces-verbale du conseil de famille</th>
-                                        <th scope="row"><input type="file"  id="file6" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row"><input type="file"  id="file6" class="form-control-file form-control height-auto" onchange="myFunction('#file6','file6_statut')"></th>
                                         <th scope="row" id="file6_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">7</th>
                                         <th scope="row">Le jugement d'heredite</th>
-                                        <th scope="row"><input type="file"  id="file7" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row"><input type="file"  id="file7" class="form-control-file form-control height-auto" onchange="myFunction('#file7','file7_statut')"></th>
                                         <th scope="row" id="file7_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">8</th>
                                         <th scope="row">Le certificat de residence du veuf, de la veuve ou des veuves</th>
-                                        <th scope="row"><input type="file"  id="file8" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row"><input type="file"  id="file8" class="form-control-file form-control height-auto" onchange="myFunction('#file8','file8_statut')"></th>
                                         <th scope="row" id="file8_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">9</th>
                                         <th scope="row">Quatre(4) photos d'identite du veuf, de la veuve ou des veuves</th>
-                                        <th scope="row"><input type="file"  id="file9" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row"><input type="file"  id="file9" class="form-control-file form-control height-auto" onchange="myFunction('#file9','file9_statut')"></th>
                                         <th scope="row" id="file9_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">10</th>
                                         <th scope="row">La photocopie recto-verso de la carte d'identite nationale</th>
-                                        <th scope="row"><input type="file"  id="file10" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row"><input type="file"  id="file10" class="form-control-file form-control height-auto" onchange="myFunction('#file10','file10_statut')"></th>
                                         {{-- <th scope="row" id="file10_statut"><span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span></th> --}}
                                         <th scope="row" id="file10_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">11</th>
                                         <th scope="row">La copie legalisee de l'extrait de mariage de chaque veuve</th>
-                                        <th scope="row"><input type="file" id="file11" id="file11" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row"><input type="file" id="file11" id="file11" class="form-control-file form-control height-auto" onchange="myFunction('#file11','file11_statut')"></th>
                                         <th scope="row" id="file11_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">12</th>
                                         <th scope="row">La copie legalisee de l'extrait de naissance de chaque enfant de moins de 17 ans</th>
-                                        <th scope="row"><input type="file" id="file12" id="file12" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row"><input type="file" id="file12" id="file12" class="form-control-file form-control height-auto" onchange="myFunction('#file12','file12_statut')"></th>
                                         <th scope="row" id="file12_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">13</th>
                                         <th scope="row">Certificat de vie collective individuelle des enfants de moins de 17 ans</th>
-                                        <th scope="row"><input type="file" id="file13" id="file13" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row"><input type="file" id="file13" id="file13" class="form-control-file form-control height-auto" onchange="myFunction('#file13','file13_statut')"></th>
                                         <th scope="row" id="file13_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">14</th>
                                         <th scope="row">Numero de telephone de l'assure</th>
-                                        <th scope="row"><input type="file" id="file14" id="file14" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row"><input type="file" id="file14" id="file14" class="form-control-file form-control height-auto" onchange="myFunction('#file14','file14_statut')"></th>
                                         <th scope="row" id="file14_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     </tbody>
@@ -513,56 +513,14 @@
     }
 </script>
 
-
-
 <script>
-
-    function myFunction(){
-        if ($("#file1").val()!= '') {
-            document.getElementById("file1_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+    function myFunction(file,status){
+        if ($(file).val()!= '') {
+            document.getElementById(status).innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
         }
-        if ($("#file2").val()!= '') {
-            document.getElementById("file2_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
-        }
-        if ($("#file3").val()!= '') {
-            document.getElementById("file3_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
-        }
-        if ($("#file4").val()!= '') {
-            document.getElementById("file4_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
-        }
-        if ($("#file5").val()!= '') {
-            document.getElementById("file5_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
-        }
-        if ($("#file6").val()!= '') {
-            document.getElementById("file6_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
-        }
-        if ($("#file7").val()!= '') {
-            document.getElementById("file7_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
-        }
-        if ($("#file8").val()!= '') {
-            document.getElementById("file8_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
-        }
-        if ($("#file9").val()!= '') {
-            document.getElementById("file9_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
-        }
-        if ($("#file10").val()!= '') {
-            document.getElementById("file10_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
-        }
-        if ($("#file11").val()!= '') {
-            document.getElementById("file11_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
-        }
-        if ($("#file12").val()!= '') {
-            document.getElementById("file12_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
-        }
-        if ($("#file13").val()!= '') {
-            document.getElementById("file13_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
-        }
-        if ($("#file14").val()!= '') {
-            document.getElementById("file14_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
-        }
-
     }
 </script>
+
 
 @endif
 
