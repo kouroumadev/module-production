@@ -200,17 +200,29 @@
                         <h5>Infos Deposant</h5>
                         <section>
                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="checkbox checbox-switch switch-primary">
+                                            <label>
+                                                <input type="checkbox" name="sameGuy" id="sameGuy" data-color="#498e54" onclick="loadDeposant()">
+                                                <span></span>
+                                            </label>
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Nom</label>
-                                        <input type="text" class="form-control" name="nom_deposant"
+                                        <input type="text" class="form-control" id="nom_deposant" name="nom_deposant"
                                             placeholder="Entrer le nom">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Prenom</label>
-                                        <input type="text" class="form-control" name="prenom_deposant"
+                                        <input type="text" class="form-control" id="prenom_deposant" name="prenom_deposant"
                                             placeholder="Entrer le premom">
                                     </div>
                                 </div>
@@ -437,65 +449,10 @@
             </div>
         </div>
     </div>
-   <script>
-    var file1 = $("#file1").val();var file1 = $("#file2").val();
-    var file1 = $("#file3").val();var file1 = $("#file4").val(); var file1 = $("#file5").val();var file1 = $("#file6").val();var file1 = $("#file7").val();
-    var file1 = $("#file8").val(); var file1 = $("#file9").val();var file1 = $("#file10").val();var file1 = $("#file11").val();var file1 = $("#file12").val();var file1 = $("#file13").val();
-    var file1 = $("#file14").val();
- var pagination = $(".Pagination")
-     console.log(pagination);
-
-    // console.log(file1)
-    function myFunction(){
-       if ($("#file1").val() != '') {
-            document.getElementById('file1_staut').innerHTML='<span class="bg-success p-2 rounded text-white"> Chargé</span>'
-       }
-       if ($("#file2").val() != '') {
-            document.getElementById('file2_staut').innerHTML='<span class="bg-success p-2 rounded text-white"> Chargé</span>'
-       }
-       if ($("#file3").val() != '') {
-            document.getElementById('file3_staut').innerHTML='<span class="bg-success p-2 rounded text-white"> Chargé</span>'
-       }
-       if ($("#file4").val() != '') {
-            document.getElementById('file4_staut').innerHTML='<span class="bg-success p-2 rounded text-white"> Chargé</span>'
-       }
-       if ($("#file5").val() != '') {
-            document.getElementById('file5_staut').innerHTML='<span class="bg-success p-2 rounded text-white"> Chargé</span>'
-       }
-       if ($("#file6").val() != '') {
-            document.getElementById('file6_staut').innerHTML='<span class="bg-success p-2 rounded text-white"> Chargé</span>'
-       }
-       if ($("#file7").val() != '') {
-            document.getElementById('file7_staut').innerHTML='<span class="bg-success p-2 rounded text-white"> Chargé</span>'
-       }
-       if ($("#file8").val() != '') {
-            document.getElementById('file8_staut').innerHTML='<span class="bg-success p-2 rounded text-white"> Chargé</span>'
-       }
-       if ($("#file9").val() != '') {
-            document.getElementById('file9_staut').innerHTML='<span class="bg-success p-2 rounded text-white"> Chargé</span>'
-       }
-       if ($("#file10").val() != '') {
-            document.getElementById('file10_staut').innerHTML='<span class="bg-success p-2 rounded text-white"> Chargé</span>'
-       }
-       if ($("#file11").val() != '') {
-            document.getElementById('file11_staut').innerHTML='<span class="bg-success p-2 rounded text-white"> Chargé</span>'
-       }
-       if ($("#file12").val() != '') {
-            document.getElementById('file12_staut').innerHTML='<span class="bg-success p-2 rounded text-white"> Chargé</span>'
-       }
-       if ($("#file13").val() != '') {
-            document.getElementById('file13_staut').innerHTML='<span class="bg-success p-2 rounded text-white"> Chargé</span>'
-       }
-       if ($("#file14").val() != '') {
-            document.getElementById('file14_staut').innerHTML='<span class="bg-success p-2 rounded text-white"> Chargé</span>'
-       }
-
-    }
-    // $("#file1").change(function(){
-    //     var file1 = $("#file1").val();
-    //     console.log(file1)
-    // })
-
-
-   </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
 @endsection

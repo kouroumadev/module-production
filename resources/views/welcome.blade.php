@@ -175,28 +175,28 @@
         <div class="sidebar-menu">
             <ul id="accordion-menu">
 
-                <li>
-                    <a href="#" class="dropdown-toggle no-arrow">
+                <li onclick="makeActive(this,'1')" class="my-menu my-active" id="1">
+                    <a href="{{ route('dashboard') }}" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-home"></span><span class="mtext">ACCEUIL</span>
                     </a>
                 </li>
 
-                <li onclick="makeActive(this)" class="my-menu my-active">
+                <li onclick="makeActive(this,'2')" class="my-menu" id="2">
                     <a href="{{ route('prestation.index') }}" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-home"></span><span class="mtext">PRESTATIONS</span>
                     </a>
                 </li>
-                <li class="my-menu" onclick="makeActive(this)">
+                <li class="my-menu" onclick="makeActive(this,'3')" id="3">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">RECLAMATION</span>
                     </a>
                 </li>
-                <li class="my-menu" onclick="makeActive(this)">
+                <li class="my-menu" onclick="makeActive(this,'4')" id="4">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">DEMANDE</span>
                     </a>
                 </li>
-                <li class="dropdown" onclick="makeActive(this)">
+                <li class="dropdown" onclick="makeActive(this,'5')" id="5">
                     <a href="#" class="dropdown-toggle">
                         <span class="micon dw dw-list3"></span><span class="mtext">DECLARATION</span>
                     </a>
@@ -205,42 +205,42 @@
                         <li><a href="image-cropper.html">Declaration d'Accident de Trajet</a></li>
                     </ul>
                 </li>
-                <li class="my-menu" onclick="makeActive(this)">
+                <li class="my-menu" onclick="makeActive(this,'6')" id="6">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">PROCURATION</span>
                     </a>
                 </li>
 
-                <li class="my-menu" onclick="makeActive(this)">
+                <li class="my-menu" onclick="makeActive(this,'7')" id="7">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-diagram"></span><span class="mtext">DEMAT</span>
                     </a>
                 </li>
-                <li class="my-menu" onclick="makeActive(this)">
+                <li class="my-menu" onclick="makeActive(this,'8')" id="8">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">QUITTANCE</span>
                     </a>
                 </li>
 
-                <li class="my-menu" onclick="makeActive(this)">
+                <li class="my-menu" onclick="makeActive(this,'9')" id="9">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">ASSISTANCE</span>
                     </a>
                 </li>
 
-                <li class="my-menu" onclick="makeActive(this)">
+                <li class="my-menu" onclick="makeActive(this,'10')" id="10">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-library"></span><span class="mtext">DOSSIERS DOUTEUX</span>
                     </a>
                 </li>
 
-                <li class="my-menu" onclick="makeActive(this)">
+                <li class="my-menu" onclick="makeActive(this,'11')" id="11">
                     <div class="dropdown-divider"></div>
                 </li>
                 <li>
                     <div class="sidebar-small-cap">ESPACE ADMIN</div>
                 </li>
-                <li class="my-menu" onclick="makeActive(this)">
+                <li class="my-menu" onclick="makeActive(this,'12')" id="12">
                     <a href="#" class="dropdown-toggle">
                         <span class="micon dw dw-edit-2"></span><span class="mtext">Parametrage</span>
                     </a>
@@ -251,7 +251,7 @@
                         <li><a href="third-party-plugins.html">Third Party Plugins</a></li>
                     </ul>
                 </li>
-                <li class="my-menu" onclick="makeActive(this)">
+                <li class="my-menu" onclick="makeActive(this,'13')" id="13">
                     <a href="#" class="dropdown-toggle">
                         <span class="micon dw dw-edit-2"></span><span class="mtext">Documentation</span>
                     </a>
@@ -262,7 +262,7 @@
                         <li><a href="third-party-plugins.html">Third Party Plugins</a></li>
                     </ul>
                 </li>
-                <li class="my-menu" onclick="makeActive(this)">
+                <li class="my-menu" onclick="makeActive(this,'14')" id="14">
                     <a href="https://dropways.github.io/deskapp-free-single-page-website-template/" target="_blank" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-paper-plane1"></span>
                         <span class="mtext">Landing Page <img src="vendors/images/coming-soon.png" alt="" width="25"></span>
@@ -281,19 +281,34 @@
     </div>
 </div>
 
-
+{{-- <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script> --}}
 <script>
 
-    function makeActive(elem) {
-        // get all 'a' elements
-        var a = document.getElementsByClassName('my-menu');
-        // loop through all 'a' elements
-        for (i = 0; i < a.length; i++) {
-            // Remove the class 'active' if it exists
-            a[i].classList.remove('my-active')
+        $(document).ready(function() {
+            var a = document.getElementsByClassName('my-menu');
+             for (i = 0; i < a.length; i++) {
+                 a[i].classList.remove('my-active')
+             }
+
+            setClass();
+        });
+
+         function makeActive(elem, val) {
+             var a = document.getElementsByClassName('my-menu');
+             for (i = 0; i < a.length; i++) {
+                 a[i].classList.remove('my-active')
+             }
+             elem.classList.add('my-active');
+             localStorage.setItem('activeClass', val);
+         }
+
+    function setClass() {
+        var activeClass = localStorage.getItem('activeClass');
+        if (activeClass) {
+            console.log(activeClass);
+            document.getElementById(activeClass).classList.add('my-active')
+            // $("#accordion-menu li").addClass(activeClass);
         }
-        // add 'active' classs to the element that was clicked
-        elem.classList.add('my-active');
     }
 
 </script>

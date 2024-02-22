@@ -40,7 +40,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return redirect('/');
+        return redirect('dashboard');
     }
 
     public function Logout(){

@@ -2,7 +2,7 @@
 
 @section('body')
 
-<div class="page-header">
+<div class="page-header shadow-lg">
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="title">

@@ -24,12 +24,20 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/vendors/styles/core.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/vendors/styles/icon-font.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/switchery/switchery.min.css') }}">
+
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/jquery-steps/jquery.steps.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/vendors/styles/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/styles/flaticon.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/sweetalert2/sweetalert2.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.css') }}">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4- toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+
+
+
 
 
     {{-- sweetAlert --}}
@@ -64,6 +72,7 @@
     <script src="{{ asset('theme/vendors/scripts/script.min.js') }}"></script>
     <script src="{{ asset('theme/vendors/scripts/process.js') }}"></script>
     <script src="{{ asset('theme/vendors/scripts/layout-settings.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/switchery/switchery.min.js') }}"></script>
     <script src="{{ asset('theme/src/plugins/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('theme/src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('theme/src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -72,6 +81,10 @@
     <script src="{{ asset('theme/vendors/scripts/dashboard.js') }}"></script>
     <script src="{{ asset('theme/src/plugins/jquery-steps/jquery.steps.js') }}"></script>
     <script src="{{ asset('theme/vendors/scripts/steps-setting.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
 
     <script src="{{ asset('theme/src/plugins/datatables/js/dataTables.buttons.min.js') }}"></script>
