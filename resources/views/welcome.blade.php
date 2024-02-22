@@ -3,24 +3,24 @@
 @section('content')
 
 
-<div class="header">
+<div class="header bg-success">
     <div class="header-left">
         <div class="menu-icon dw dw-menu"></div>
         <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
 
     </div>
     <div class="header-right">
-        <div class="dashboard-setting user-notification">
+        {{-- <div class="dashboard-setting user-notification">
             <div class="dropdown">
                 <a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
                     <i class="dw dw-settings2"></i>
                 </a>
             </div>
-        </div>
+        </div> --}}
         <div class="user-notification">
             <div class="dropdown">
                 <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
-                    <i class="icon-copy dw dw-notification"></i>
+                    <i class="icon-copy dw dw-notification text-white"></i>
                     <span class="badge notification-active"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
@@ -47,13 +47,7 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <img src="vendors/images/photo3.jpg" alt="">
-                                    <h3>John Doe</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-                                </a>
-                            </li>
+
 
                         </ul>
                     </div>
@@ -62,11 +56,11 @@
         </div>
         <div class="user-info-dropdown">
             <div class="dropdown">
-                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                <a class="dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown">
                     <span class="user-icon">
                         <img src="{{ asset('theme/vendors/images/photo1.jpg') }}" alt="">
                     </span>
-                    <span class="user-name">{{ Auth::user()->name }}</span>
+                    <span class="user-name text-white">{{ Auth::user()->name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                     <a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
@@ -162,10 +156,10 @@
 </div> --}}
 
 <div class="left-side-bar bg-success">
-    <div class="brand-logo bg-white">
+    <div class="brand-logo">
         <a href="{{ route('dashboard') }}">
-            <img src="{{ asset('logos/top-logo.png') }}" alt="" class="dark-logo">
-            <img src="{{ asset('logos/top-logo.png') }}" alt="" class="light-logo">
+            {{-- <img src="{{ asset('logos/top-logo.png') }}" alt="" class="dark-logo bg-danger"> --}}
+            <img src="{{ asset('logos/top-logo.png') }}" alt="" class="light-logo bg-white rounded p-1">
         </a>
         <div class="close-sidebar" data-toggle="left-sidebar-close">
             <i class="ion-close-round"></i>

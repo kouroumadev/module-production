@@ -10,8 +10,8 @@
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Prestations</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Pension de retraite</li>
+                    <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Gestion des Pensions</li>
                 </ol>
             </nav>
         </div>

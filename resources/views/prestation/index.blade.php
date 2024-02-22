@@ -10,7 +10,7 @@
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href={{ route('pension.index') }}>Acceuil</a></li>
+                    <li class="breadcrumb-item"><a href={{ route('dashboard') }}>Acceuil</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Liste des Prestations</li>
                 </ol>
             </nav>
