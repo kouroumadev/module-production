@@ -516,7 +516,7 @@
 <script>
     function myFunction(file,status){
         if ($(file).val()!= '') {
-            document.getElementById(status).innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+            document.getElementById(status).innerHTML='<span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span>';
         }
     }
 </script>
