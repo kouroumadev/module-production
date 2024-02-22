@@ -63,7 +63,8 @@ class HomeController extends Controller
         //  $data['employe'] = $employe;
         //  $data['employeur'] = $employeur;
         // dd($data);
-        return view('pensionnaire.pensionnaire-info',compact('data'));
+        // return view('pensionnaire.pensionnaire-info',compact('data'));
+        return view('pensionnaire.index',compact('data'));
     }
 
 }

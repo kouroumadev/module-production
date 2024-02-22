@@ -352,7 +352,7 @@
                                         <tr>
                                             <th scope="row">12</th>
                                             <th scope="row">La copie legalisee de l'extrait de naissance de chaque enfant de moins de 17 ans</th>
-                                            <th scope="row"><input type="file" id="file21" id="file12" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                            <th scope="row"><input type="file" id="file12" id="file12" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
                                             <th scope="row" id="file12_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                         </tr>
                                         <tr>
@@ -452,6 +452,22 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function loadDeposant(){
+            if (document.getElementById('sameGuy').checked){
+                var nom = {!! json_encode($data['employe'][0]->nom) !!};
+                var prenom = {!! json_encode($data['employe'][0]->prenoms) !!};
+
+                document.getElementById("nom_deposant").value = nom;
+                document.getElementById("prenom_deposant").value = prenom;
+            } else {
+                document.getElementById("nom_deposant").value = "";
+                document.getElementById("prenom_deposant").value = "";
+            }
+        }
+    </script>
+
     {{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
@@ -460,10 +476,6 @@
     </script> --}}
 
     <script>
-        var file1 = $("#file1").val();var file1 = $("#file2").val();var file1 = $("#file3").val();var file1 = $("#file4").val();
-        var file1 = $("#file5").val();var file1 = $("#file8").val();var file1 = $("#file11").val();var file1 = $("#file14").val();
-        var file1 = $("#file6").val();var file1 = $("#file9").val();var file1 = $("#file12").val();
-        var file1 = $("#file7").val();var file1 = $("#file10").val();var file1 = $("#file13").val();
 
         function myFunction(){
             if ($("#file1").val()!= '') {

@@ -1,5 +1,11 @@
 @extends('welcome')
 
+<style>
+    a {
+        text-decoration: none !important;
+    }
+</style>
+
 @section('body')
 
 <div class="page-header shadow-lg">
@@ -65,90 +71,499 @@
 @endif
 
 
+@if(isset($data))
 
-
-
-
-{{-- <script>
-    function getInfoPension() {
-        //// ROUTE FOR GETTING EMPLOYES INFO TO METIER DATABASE
-
-            var no_immatriculation = $("#no_immatriculation").val()
-        //  alert(no_immatriculation)
-        $.ajax({
-                    type: 'GET',
-                    url: "{{route('pensionnaire.info')}}",
-                    dataType: 'json',
-                    data:{no_immatriculation:no_immatriculation},
-                    beforeSend: function(){
-                        $("#loader").show();
-                        // alert("sending.....")
-                    },
-                    complete: function(){
-                        $("#loader").hide();
-                        // alert("sent..")
-                    },
-                    success: function(data) {
-
-                        if (data == "not exist") {
-                                    Swal.fire({
-                            title: 'Error!',
-                            text: 'Ce Numero d\'immatriculation n\'existe pas',
-                            icon: 'error',
-
-                            })
-
-
-                        }
-                        else{
-                            $("#employe-wrapper").removeClass('d-none')
-                            $("#no_immat_disp").val(data.employe[0].no_employe)
-                            $("#prenom_employe").val(data.employe[0].prenoms)
-                            $("#nom_employe").val(data.employe[0].nom)
-                            $("#date_naissance").val(data.employe[0].date_naissance)
-                            $("#lieu_naissance").val(data.employe[0].lieu_naissance)
-                            $("#prefecture").val(data.employe[0].code_prefecture)
-                            $("#statut").val(data.employe[0].statut)
-
-                            $("#no_employeur").val(data.employeur[0].no_employeur)
-                            $("#raison_sociale").val(data.employeur[0].raison_sociale)
-                            $("#categorie").val(data.employeur[0].categorie)
-                            var html =""
-                            $("#conj-enf").empty();
-                            $.each(data.employeDetails,function(index,value){
-
-                                $("#conj-enf").append(`<div class="accordion-item">
-                                <h2 class="accordion-header" id="heading">
-                                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="true" aria-controls="collapseOne">`
-                                    +value.conjoint_name+
-                                 ` </button>
-                                </h2>
-                                <div id="collapse" class="accordion-collapse collapse show" aria-labelledby="heading" data-bs-parent="#accordionExample">
-                                  <div class="accordion-body">
-                                    <table class="table">
-                                            <thead>
-                                                <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">First</th>
-                                                <th scope="col">Last</th>
-                                                <th scope="col">Handle</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>`
-
-                                           ` </tbody>
-                                    </table>
-
-                                  </div>
+<div class="row" id="employe-wrapper">
+    <div class="col-md-12">
+        <div class="pd-20 card-box mb-30 shadow-lg">
+            <div class="wizard-content">
+                <form class="tab-wizard wizard-circle wizard">
+                    <h5>Infos Personnelles</h5>
+                    <section>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>No Immatriculation :</label>
+                                    <input type="text" class="form-control" name="no_immatricule"
+                                        value="{{ $data['employe'][0]->no_employe }}" id="no_immat_disp" readonly>
                                 </div>
-                            </div>`);
-                            });
-                             console.log(data.employeDetails)
-                        }
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nom :</label>
+                                    <input type="text" class="form-control" name="nom"
+                                        value="{{ $data['employe'][0]->nom }}" id="nom_employe" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Prenom :</label>
+                                    <input type="text" class="form-control" name="prenom"
+                                        value="{{ $data['employe'][0]->prenoms }}" id="prenom_employe" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Date de naissance:</label>
+                                    <input type="text" class="form-control" name="date_naissance"
+                                        value="{{ $data['employe'][0]->date_naissance }}" id="date_naissance" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Lieu de naissance</label>
+                                    <input type="text" class="form-control" name="lieu_naissance"
+                                        value="{{ $data['employe'][0]->lieu_naissance }}" id="lieu_naissance" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Prefecture</label>
+                                    <input type="text" class="form-control" name="prefecture"
+                                        value="{{ $data['employe'][0]->prefecture }}" id="prefecture" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Telephone:</label>
+                                    <input type="text" class="form-control" name="telephone_employe"
+                                        id="telephone_employe" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Adresse:</label>
+                                    <input type="text" class="form-control date-picker" name="adresse_employe"
+                                        id="adresse_employe" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Situation Matrimoniale:</label>
+                                    <input type="text" class="form-control" name="statut"
+                                        value="{{ $data['employe'][0]->statut }}" id="statut" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Step 2 -->
+                    <h5>Infos Employeur</h5>
+                    <section>
 
-                    }
-                })
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>No Employeur :</label>
+                                    <input type="text" class="form-control" name="no_employeur"
+                                        value="{{ $data['employeur'][0]->no_employeur }}" id="no_employeur" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Raison Sociale :</label>
+                                    <input class="form-control" cols="2" name="raison_sociale"
+                                        value="{{ $data['employeur'][0]->raison_sociale }}" id="raison_sociale"
+                                        readonly />
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Categorie :</label>
+                                    <input type="text" class="form-control" name="categorie"
+                                        value="{{ $data['employeur'][0]->categorie }}" id="categorie" readonly />
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </section>
+                    <!-- Step 3 -->
+                    <h5>Conjoints et Enfants</h5>
+                    <section>
+
+
+                        <div class="faq-wrap">
+                            @foreach ($data['employeDetails'] as $key => $value)
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="btn btn-block" data-toggle="collapse" data-target="#faq1">
+                                          Conjoint(e) {{ $key+1}} - {{ $value['conjoint_name'] }} {{ $value['conjoint_prenom'] }}
+                                        </div>
+                                    </div>
+                                    <div id="faq1" class="collapse show" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Nom</th>
+                                                        <th scope="col">Prenom</th>
+                                                        <th scope="col">date de Naissance</th>
+                                                        <th scope="col">Lieu de Naissance</th>
+                                                        <th scope="col">Ordre de Naissance</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($value['enfants'] as $key => $enfant)
+                                                        @if ($enfant == null)
+                                                            <div class="alert alert-secondary" role="alert">
+                                                                Pas d'enfants
+                                                            </div>
+                                                        @else
+                                                            <tr>
+                                                                <th scope="row">{{ $key + 1 }}</th>
+                                                                <td>{{ $enfant->nom }}</td>
+                                                                <td>{{ $enfant->prenoms }}</td>
+                                                                <td>{{ $enfant->date_naissance }}</td>
+                                                                <td>{{ $enfant->lieu_naissance }}</td>
+                                                                <td>{{ $enfant->ordre }}</td>
+
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            @endforeach
+                        </div>
+
+                    </section>
+                    <!-- Step 4 -->
+                    <h5>Infos Deposant</h5>
+                    <section class="mb-2">
+                        <div class="row">
+                            <div class="col-md-3 font-weight-bold">
+                                Charger les infos du Pensionnaire
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <div class="checkbox checbox-switch switch-primary">
+                                        <label>
+                                            <input type="checkbox" name="sameGuy" id="sameGuy" data-color="#498e54" onclick="loadDeposant()">
+                                            <span></span>
+                                        </label>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nom</label>
+                                    <input type="text" class="form-control" id="nom_deposant" name="nom_deposant"
+                                        placeholder="Entrer le nom">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Prenom</label>
+                                    <input type="text" class="form-control" id="prenom_deposant" name="prenom_deposant"
+                                        placeholder="Entrer le premom">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Telephone</label>
+                                    <input type="text" class="form-control" name="telephone_deposant"
+                                        placeholder="Entrer le Numero de telephone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Adresse</label>
+                                    <input type="text" class="form-control" name="adresse"
+                                        placeholder="Entrer l'adresse">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>CIN</label>
+                                    <input type="text" class="form-control" name="cin"
+                                        placeholder="Entrer CIN">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="email"
+                                        placeholder="Entrer email">
+                                </div>
+                            </div>
+                            {{-- <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Telephone</label>
+                                <input type="text" class="form-control" name="telephone_deposant" placeholder="Entrer le Numero de telephone">
+                            </div>
+                        </div> --}}
+                        </div>
+                    </section>
+                    <!-- Step 5 -->
+                    <h5>Documents</h5>
+                    <section>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Pièces a Fournir</th>
+                                        <th scope="col">Charger le fichier</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <th scope="row">Lettre de transmission faite par l'employeur ou le beneficiaire adressée au DG</th>
+                                        <th scope="row"><input type="file" id="file1" class="form-control-file form-control height-auto"  onchange="myFunction()" id="file1" /></th>
+                                        <th scope="row" id="file1_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <th scope="row">Le carnet d'assuré social ou la carte d'assuré social</th>
+                                        <th scope="row"><input type="file"  id="file2" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row" id="file2_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <th scope="row">Le certificat de travail avec la date d'embauche</th>
+                                        <th scope="row"><input type="file"  id="file3" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row" id="file3_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <th scope="row">Le certificat de cessation de paiement avec le dernier salaire (CCP)</th>
+                                        <th scope="row"><input type="file"  id="file4" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row" id="file4_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <th scope="row">Le releve des 120 derniers mois (10 dernieres annees)</th>
+                                        <th scope="row"><input type="file"  id="file5" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row" id="file5_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <th scope="row">Porces-verbale du conseil de famille</th>
+                                        <th scope="row"><input type="file"  id="file6" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row" id="file6_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">7</th>
+                                        <th scope="row">Le jugement d'heredite</th>
+                                        <th scope="row"><input type="file"  id="file7" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row" id="file7_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">8</th>
+                                        <th scope="row">Le certificat de residence du veuf, de la veuve ou des veuves</th>
+                                        <th scope="row"><input type="file"  id="file8" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row" id="file8_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">9</th>
+                                        <th scope="row">Quatre(4) photos d'identite du veuf, de la veuve ou des veuves</th>
+                                        <th scope="row"><input type="file"  id="file9" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row" id="file9_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">10</th>
+                                        <th scope="row">La photocopie recto-verso de la carte d'identite nationale</th>
+                                        <th scope="row"><input type="file"  id="file10" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        {{-- <th scope="row" id="file10_statut"><span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span></th> --}}
+                                        <th scope="row" id="file10_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">11</th>
+                                        <th scope="row">La copie legalisee de l'extrait de mariage de chaque veuve</th>
+                                        <th scope="row"><input type="file" id="file11" id="file11" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row" id="file11_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">12</th>
+                                        <th scope="row">La copie legalisee de l'extrait de naissance de chaque enfant de moins de 17 ans</th>
+                                        <th scope="row"><input type="file" id="file12" id="file12" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row" id="file12_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">13</th>
+                                        <th scope="row">Certificat de vie collective individuelle des enfants de moins de 17 ans</th>
+                                        <th scope="row"><input type="file" id="file13" id="file13" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row" id="file13_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">14</th>
+                                        <th scope="row">Numero de telephone de l'assure</th>
+                                        <th scope="row"><input type="file" id="file14" id="file14" class="form-control-file form-control height-auto" onchange="myFunction()"></th>
+                                        <th scope="row" id="file14_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Step 6 -->
+                    <h5>Recap</h5>
+                    <section>
+
+                          <div class="faq-wrap">
+
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="btn btn-block" data-toggle="collapse" data-target="#faq1">
+                                            <strong>INFOS PERSONNELLES</strong>
+                                        </div>
+                                    </div>
+                                    <div id="faq1" class="collapse show" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>No Employe</th>
+                                                        <td>{{ $data['employe'][0]->no_employe }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Prenom</th>
+                                                        <td>{{ $data['employe'][0]->prenoms }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Nom</th>
+                                                        <td>{{ $data['employe'][0]->nom }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Date de Naissance</th>
+                                                        <td>{{ $data['employe'][0]->date_naissance }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Lieu de Naissance</th>
+                                                        <td>{{ $data['employe'][0]->lieu_naissance }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="btn btn-block" data-toggle="collapse" data-target="#faq1">
+                                            <strong>INFOS EMPLOYEUR</strong>
+                                        </div>
+                                    </div>
+                                    <div id="faq1" class="collapse show" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>No Employeur</th>
+                                                        <td>{{ $data['employeur'][0]->no_employeur }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Raison Sociale</th>
+                                                        <td>{{ $data['employeur'][0]->raison_sociale }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Categorie</th>
+                                                        <td>{{ $data['employeur'][0]->categorie }}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function loadDeposant(){
+        if (document.getElementById('sameGuy').checked){
+            var nom = {!! json_encode($data['employe'][0]->nom) !!};
+            var prenom = {!! json_encode($data['employe'][0]->prenoms) !!};
+
+            document.getElementById("nom_deposant").value = nom;
+            document.getElementById("prenom_deposant").value = prenom;
+        } else {
+            document.getElementById("nom_deposant").value = "";
+            document.getElementById("prenom_deposant").value = "";
+        }
     }
-</script> --}}
+</script>
+
+
+
+<script>
+
+    function myFunction(){
+        if ($("#file1").val()!= '') {
+            document.getElementById("file1_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+        }
+        if ($("#file2").val()!= '') {
+            document.getElementById("file2_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+        }
+        if ($("#file3").val()!= '') {
+            document.getElementById("file3_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+        }
+        if ($("#file4").val()!= '') {
+            document.getElementById("file4_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+        }
+        if ($("#file5").val()!= '') {
+            document.getElementById("file5_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+        }
+        if ($("#file6").val()!= '') {
+            document.getElementById("file6_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+        }
+        if ($("#file7").val()!= '') {
+            document.getElementById("file7_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+        }
+        if ($("#file8").val()!= '') {
+            document.getElementById("file8_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+        }
+        if ($("#file9").val()!= '') {
+            document.getElementById("file9_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+        }
+        if ($("#file10").val()!= '') {
+            document.getElementById("file10_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+        }
+        if ($("#file11").val()!= '') {
+            document.getElementById("file11_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+        }
+        if ($("#file12").val()!= '') {
+            document.getElementById("file12_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+        }
+        if ($("#file13").val()!= '') {
+            document.getElementById("file13_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+        }
+        if ($("#file14").val()!= '') {
+            document.getElementById("file14_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+        }
+
+    }
+</script>
+
+@endif
 
 @endsection
