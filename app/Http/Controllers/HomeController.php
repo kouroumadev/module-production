@@ -18,8 +18,14 @@ class HomeController extends Controller
     public function PensionIndex() {
         return view('pensionnaire.index');
     }
+    public function reclamationIndex() {
+        return view('reclamation.index');
+    }
     public function prestationIndex() {
         return view('prestation.index');
+    }
+    public function demandeIndex() {
+        return view('demande.index');
     }
     public function PensionnaireInfo(Request $request){
 
