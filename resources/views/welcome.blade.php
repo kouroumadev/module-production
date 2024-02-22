@@ -181,16 +181,21 @@
                     </a>
                 </li>
                 <li class="my-menu" onclick="makeActive(this,'3')" id="3">
-                    <a href="#" class="dropdown-toggle no-arrow">
+                    <a href="{{ route('reclamation.index') }}" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">RECLAMATION</span>
                     </a>
                 </li>
-                <li class="my-menu" onclick="makeActive(this,'4')" id="4">
+                <li class="my-menu" onclick="makeActive(this,'7')" id="7">
                     <a href="#" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-diagram"></span><span class="mtext">DEMAT</span>
+                    </a>
+                </li>
+                <li class="my-menu" onclick="makeActive(this,'4')" id="4">
+                    <a href="{{ route('demande.index') }}" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">DEMANDE</span>
                     </a>
                 </li>
-                <li class="dropdown" onclick="makeActive(this,'5')" id="5">
+                {{-- <li class="dropdown" onclick="makeActive(this,'5')" id="5">
                     <a href="#" class="dropdown-toggle">
                         <span class="micon dw dw-list3"></span><span class="mtext">DECLARATION</span>
                     </a>
@@ -198,23 +203,19 @@
                         <li><a href="image-cropper.html">Declaration d'Accident de Travail</a></li>
                         <li><a href="image-cropper.html">Declaration d'Accident de Trajet</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="my-menu" onclick="makeActive(this,'6')" id="6">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">PROCURATION</span>
                     </a>
                 </li>
 
-                <li class="my-menu" onclick="makeActive(this,'7')" id="7">
-                    <a href="#" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-diagram"></span><span class="mtext">DEMAT</span>
-                    </a>
-                </li>
-                <li class="my-menu" onclick="makeActive(this,'8')" id="8">
+
+                {{-- <li class="my-menu" onclick="makeActive(this,'8')" id="8">
                     <a href="#" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">QUITTANCE</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="my-menu" onclick="makeActive(this,'9')" id="9">
                     <a href="#" class="dropdown-toggle no-arrow">
