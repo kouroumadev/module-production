@@ -200,17 +200,29 @@
                         <h5>Infos Deposant</h5>
                         <section>
                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="checkbox checbox-switch switch-primary">
+                                            <label>
+                                                <input type="checkbox" name="sameGuy" id="sameGuy" data-color="#498e54" onclick="loadDeposant()">
+                                                <span></span>
+                                            </label>
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Nom</label>
-                                        <input type="text" class="form-control" name="nom_deposant"
+                                        <input type="text" class="form-control" id="nom_deposant" name="nom_deposant"
                                             placeholder="Entrer le nom">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Prenom</label>
-                                        <input type="text" class="form-control" name="prenom_deposant"
+                                        <input type="text" class="form-control" id="prenom_deposant" name="prenom_deposant"
                                             placeholder="Entrer le premom">
                                     </div>
                                 </div>
@@ -441,5 +453,20 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+
+    <script>
+        function loadDeposant(){
+        if (document.getElementById('sameGuy').checked){
+            var nom = {!! json_encode($data['employe'][0]->nom) !!};
+            var prenom = {!! json_encode($data['employe'][0]->prenoms) !!};
+
+            document.getElementById("nom_deposant").value = nom;
+            document.getElementById("prenom_deposant").value = prenom;
+        } else {
+            document.getElementById("nom_deposant").value = "";
+            document.getElementById("prenom_deposant").value = "";
+        }
+    }
     </script>
 @endsection
