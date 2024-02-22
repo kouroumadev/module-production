@@ -2,7 +2,7 @@
 
 @section('body')
 
-<div class="page-header">
+<div class="page-header shadow-lg">
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="title">
@@ -36,7 +36,7 @@
     </div> --}}
     <div class="col-xl-4 mb-30">
         <a href="{{ route('pension.index') }}" class="btn btn-block">
-            <div class="card-box height-100-p widget-style1 bg-success">
+            <div class="card-box height-100-p widget-style1 bg-success shadow">
                 <div class="d-flex flex-wrap align-items-center">
                     <div class="widget-data text-white text-uppercase font-weight-bold text-left">
                         Gestion des Pensions
@@ -52,7 +52,7 @@
 
     <div class="col-xl-4 mb-30">
         <a href="#" class="btn btn-block">
-            <div class="card-box height-100-p widget-style1 bg-success">
+            <div class="card-box height-100-p widget-style1 bg-success shadow-lg">
                 <div class="d-flex flex-wrap align-items-center">
                     <div class="widget-data text-white text-uppercase font-weight-bold text-left">
                         Assurance Maladie
@@ -68,7 +68,7 @@
 
     <div class="col-xl-4 mb-30">
         <a href="#" class="btn btn-block">
-            <div class="card-box height-100-p widget-style1 bg-success">
+            <div class="card-box height-100-p widget-style1 bg-success shadow-lg">
                 <div class="d-flex flex-wrap align-items-center">
                     <div class="widget-data text-white text-uppercase font-weight-bold text-left">
                         Risques Professionnels
