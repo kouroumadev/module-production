@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Alert;
 
 class HomeController extends Controller
 {
@@ -30,6 +31,8 @@ class HomeController extends Controller
             $flag = '1';
             // return view('pensionnaire.index', compact('flag'));
             // return Redirect::back()->withErrors(['flag' => '1']);
+            // Alert::success('Success Title', 'Success Message');
+            toast('Your Post as been submited!','success');
             return view('pensionnaire.index',compact('flag'));
 
         }
