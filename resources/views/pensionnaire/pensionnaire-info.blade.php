@@ -12,7 +12,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
 
 
-    <div class="page-header">
+    <div class="page-header shadow-lg">
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="title">
@@ -30,7 +30,7 @@
 
     <div class="row" id="employe-wrapper">
         <div class="col-md-12">
-            <div class="pd-20 card-box mb-30">
+            <div class="pd-20 card-box mb-30 shadow-lg">
                 <div class="wizard-content">
                     <form class="tab-wizard wizard-circle wizard">
                         <h5>Infos Personnelles</h5>
@@ -198,9 +198,12 @@
                         </section>
                         <!-- Step 4 -->
                         <h5>Infos Deposant</h5>
-                        <section>
+                        <section class="mb-2">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3 font-weight-bold">
+                                    Charger les infos du Pensionnaire
+                                </div>
+                                <div class="col-md-1">
                                     <div class="form-group">
                                         <div class="checkbox checbox-switch switch-primary">
                                             <label>
@@ -239,7 +242,7 @@
                                     <div class="form-group">
                                         <label>Adresse</label>
                                         <input type="text" class="form-control" name="adresse"
-                                            placeholder="Entrer l\'adresse">
+                                            placeholder="Entrer l'adresse">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
