@@ -68,6 +68,15 @@
         </div>
     </div>
 </div>
+<script>
+    swal(
+                {
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                }
+            )
+</script>
 @endif
 
 
