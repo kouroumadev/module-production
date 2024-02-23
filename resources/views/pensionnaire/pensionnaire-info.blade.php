@@ -8,9 +8,6 @@
     @php
         //dd($data['employeur'][0]->no_employeur);
     @endphp
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
-
 
     <div class="page-header shadow-lg">
         <div class="row">
@@ -148,7 +145,7 @@
                                 <div id="accordion">
                                     <div class="card">
                                         <div class="card-header">
-                                            <div class="btn btn-block" data-toggle="collapse" data-target="#faq1">
+                                    <div class="btn btn-block" data-toggle="collapse" data-target="#{{ $key }}">
                                               Conjoint(e) {{ $key+1}} - {{ $value['conjoint_name'] }} {{ $value['conjoint_prenom'] }}
                                             </div>
                                         </div>
@@ -417,11 +414,11 @@
 
                                     <div class="card">
                                         <div class="card-header">
-                                            <div class="btn btn-block" data-toggle="collapse" data-target="#faq1">
+                                            <div class="btn btn-block" data-toggle="collapse" data-target="#faq2">
                                                 <strong>INFOS EMPLOYEUR</strong>
                                             </div>
                                         </div>
-                                        <div id="faq1" class="collapse show" data-parent="#accordion">
+                                        <div id="faq2" class="collapse show" data-parent="#accordion">
                                             <div class="card-body">
                                                 <table class="table">
                                                     <tbody>
