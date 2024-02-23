@@ -63,6 +63,7 @@ class HomeController extends Controller
                     'no_conjoint'=> $value->no_conjoint,
                     'date_mariage'=> $value->date_mariage,
                     'date_naissance'=> $value->date_naissance,
+                    'lieu_naissance'=> $value->lieu_naissance,
                     'sexe'=> $value->sexe,
 
 
