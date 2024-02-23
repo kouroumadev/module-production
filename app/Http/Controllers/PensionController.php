@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PensionController extends Controller
 {
+    public function show(){
+        $emps = Auth::user()->employees;
+        // dd($emps);
+        return view('pensionnaire.show', compact('emps'));
+    }
     public function store(Request $request) {
         // dd(json_decode($request->details));
         $user_id = Auth::user()->id;
@@ -83,7 +88,7 @@ class PensionController extends Controller
 
         }
 
-        dd('done');
+        return redirect(route('pension.show'))->with('yes','Enregistrer avec succes');
 
 
     }

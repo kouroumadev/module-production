@@ -25,6 +25,9 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/vendors/styles/core.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/vendors/styles/icon-font.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
+
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/switchery/switchery.min.css') }}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/src/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">
@@ -75,10 +78,7 @@
     <script src="{{ asset('theme/vendors/scripts/layout-settings.js') }}"></script>
     <script src="{{ asset('theme/src/plugins/switchery/switchery.min.js') }}"></script>
     <script src="{{ asset('theme/src/plugins/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('theme/src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('theme/src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('theme/src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('theme/src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
+
     <script src="{{ asset('theme/vendors/scripts/dashboard.js') }}"></script>
     <script src="{{ asset('theme/src/plugins/jquery-steps/jquery.steps.js') }}"></script>
     <script src="{{ asset('theme/vendors/scripts/steps-setting.js') }}"></script>
@@ -87,6 +87,10 @@
 
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
+    <script src="{{ asset('theme/src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('theme/src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
 
     <script src="{{ asset('theme/src/plugins/datatables/js/dataTables.buttons.min.js') }}"></script>
 	<script src="{{ asset('theme/src/plugins/datatables/js/buttons.bootstrap4.min.js') }}"></script>
@@ -95,6 +99,9 @@
 	<script src="{{ asset('theme/src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
 	<script src="{{ asset('theme/src/plugins/datatables/js/pdfmake.min.js') }}"></script>
 	<script src="{{ asset('theme/src/plugins/datatables/js/vfs_fonts.js') }}"></script>
+
+    <!-- Datatable Setting js -->
+	<script src="{{ asset('theme/vendors/scripts/datatable-setting.js') }}"></script>
 
     <!-- add sweet alert js & css in footer -->
 	<script src="{{ asset('theme/src/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
@@ -105,7 +112,7 @@
 
 
 
-    <script src="{{ asset('theme/vendors/scripts/datatable-setting.js') }}"></script>
+    {{-- <script src="{{ asset('theme/vendors/scripts/datatable-setting.js') }}"></script> --}}
      <script>
         // setting CSRF token in head section //
         $.ajaxSetup({

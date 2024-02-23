@@ -186,7 +186,7 @@
                     </a>
                 </li>
                 <li class="my-menu" onclick="makeActive(this,'7')" id="7">
-                    <a href="#" class="dropdown-toggle no-arrow">
+                    <a href="{{ route('pension.show') }}" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-diagram"></span><span class="mtext">DEMAT</span>
                     </a>
                 </li>
