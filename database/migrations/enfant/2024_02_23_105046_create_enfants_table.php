@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('employee_id')->constrained('employees');
             $table->foreignId('wife_id')->constrained('wives');
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('sexe')->nullable();
-            $table->string('date_naissance')->nullable();
-            $table->string('lieu_naissance')->nullable();
-            $table->string('ordre_naissance')->nullable();
+            $table->string('nom_enfant');
+            $table->string('prenom_enfant');
+            $table->string('sexe_enfant')->nullable();
+            $table->string('date_naissance_enfant')->nullable();
+            $table->string('lieu_naissance_enfant')->nullable();
+            $table->string('ordre_naissance_enfant')->nullable();
             $table->string('created_by')->nullable();
             $table->string('status')->default('1');
             $table->timestamps();

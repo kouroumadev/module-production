@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('deposants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->constrained('employees');
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('tel')->nullable();
-            $table->string('adresse')->nullable();
-            $table->string('cin')->nullable();
-            $table->string('email')->nullable();
+            $table->string('nom_deposant');
+            $table->string('prenom_deposant');
+            $table->string('telephone_deposant')->nullable();
+            $table->string('adresse_deposant')->nullable();
+            $table->string('cin_deposant')->nullable();
+            $table->string('email_deposant')->nullable();
             $table->string('created_by')->nullable();
             $table->string('status')->default('1');
             $table->timestamps();

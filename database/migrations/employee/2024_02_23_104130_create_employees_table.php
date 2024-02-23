@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('no_ima');
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('date_naissance');
-            $table->string('lieu_naissance')->nullable();
-            $table->string('prefecture')->nullable();
-            $table->string('tel')->nullable();
-            $table->string('adresse')->nullable();
-            $table->string('situation_matri');
+            $table->string('no_ima_employee');
+            $table->string('nom_employee');
+            $table->string('prenom_employee');
+            $table->string('date_naissance_employee');
+            $table->string('lieu_naissance_employee')->nullable();
+            $table->string('prefecture_employee')->nullable();
+            $table->string('tel_employee')->nullable();
+            $table->string('adresse_employee')->nullable();
+            $table->string('situation_matri_employee');
             $table->string('created_by')->nullable();
             $table->string('status')->default('1');
             $table->timestamps();

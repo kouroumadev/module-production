@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('wives', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->constrained('employees');
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('sexe')->nullable();
-            $table->string('date_naissance')->nullable();
-            $table->string('lieu_naissance')->nullable();
+            $table->string('nom_wife');
+            $table->string('prenom_wife');
+            $table->string('no_conjoint_wife');
+            $table->string('date_mariage_wife');
+            $table->string('sexe_wife')->nullable();
+            $table->string('date_naissance_wife')->nullable();
+            $table->string('lieu_naissance_wife')->nullable();
             $table->string('created_by')->nullable();
             $table->string('status')->default('1');
             $table->timestamps();

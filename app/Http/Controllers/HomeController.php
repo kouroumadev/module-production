@@ -46,6 +46,7 @@ class HomeController extends Controller
         $no_employeur = $employe[0]->no_employeur;
         $employeur = DB::connection('metier')->table('employeur')->where('no_employeur','=',$no_employeur)->get();
         $employeDeails = [];
+        // $wives = [];
         $data = [];
         // dd($employeur);
 
@@ -61,12 +62,27 @@ class HomeController extends Controller
 
 
                 ];
+                // $items_wife = [
+                //     // 'employe' => $employe,
+                //     // 'enfants' =>$enfants,
+                //     'conjoint_name'=> $value->nom,
+                //     'conjoint_prenom'=> $value->prenoms,
+                //     'no_conjoint'=> $value->no_conjoint,
+                //     'date_mariage'=> $value->date_mariage,
+                //     'date_naissance'=> $value->date_naissance,
+                //     'lieu_naissance'=> $value->lieu_naissance,
+                //     'sexe'=> $value->sexe,
+
+
+                // ];
                 array_push($employeDeails,$items);
+                // array_push($wives,$items_wife);
             };
         //    dd($employeDeails);
             $data['employeDetails']= $employeDeails;
             $data['employe'] = $employe;
             $data['employeur'] = $employeur;
+            // $data['wives'] = $wives;
 
             // dd($no_immat);
 
