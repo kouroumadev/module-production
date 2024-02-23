@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/demande', [App\Http\Controllers\HomeController::class, 'demandeIndex'])->name('demande.index');
     Route::post('/pensionnaire-info', [App\Http\Controllers\HomeController::class, 'PensionnaireInfo'])->name('pensionnaire.info');
     Route::post('/pension/store', [App\Http\Controllers\PensionController::class, 'store'])->name('pension.store');
+    Route::get('/pension/show', [App\Http\Controllers\PensionController::class, 'show'])->name('pension.show');
 
 });
 

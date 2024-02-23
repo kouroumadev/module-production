@@ -21,7 +21,8 @@ class Employee extends Model
         'adresse_employee',
         'situation_matri_employee',
         'created_by',
-        'status'
+        'status',
+        'created_at'
     ];
 
     public function employers() {
