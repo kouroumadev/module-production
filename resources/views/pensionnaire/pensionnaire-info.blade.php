@@ -142,14 +142,14 @@
 
                             <div class="faq-wrap">
                                 @foreach ($data['employeDetails'] as $key => $value)
-                                <div id="accordion">
+                                <div id="accordion{{ $key }}">
                                     <div class="card">
                                         <div class="card-header">
                                     <div class="btn btn-block" data-toggle="collapse" data-target="#{{ $key }}">
                                               Conjoint(e) {{ $key+1}} - {{ $value['conjoint_name'] }} {{ $value['conjoint_prenom'] }}
                                             </div>
                                         </div>
-                                        <div id="faq1" class="collapse show" data-parent="#accordion">
+                                        <div id="{{ $key }}" class="collapse show" data-parent="#accordion{{ $key }}">
                                             <div class="card-body">
                                                 <table class="table">
                                                     <thead>
@@ -472,6 +472,20 @@
         function myFunction(){
             if ($("#file1").val()!= '') {
                 document.getElementById("file1_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';
+                var file = $("#file1").val();
+                alert(file)
+                $.ajax({
+                            type: 'post',
+                            url: "{{route('temp-file')}}",
+                            dataType: 'json',
+                            data:{file:file},
+
+                            success: function(data) {
+
+
+                            }
+                })
+
             }
             if ($("#file2").val()!= '') {
                 document.getElementById("file2_statut").innerHTML='<span class="bg-success p-2 rounded text-white">Chargé</span>';

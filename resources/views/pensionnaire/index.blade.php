@@ -68,6 +68,14 @@
         </div>
     </div>
 </div>
+<script>
+    Swal.fire({
+  title: 'Error!',
+  text: 'Do you want to continue',
+  icon: 'error',
+  confirmButtonText: 'Cool'
+})
+</script>
 @endif
 
 
@@ -337,7 +345,7 @@
                                     <tr>
                                         <th scope="row">1</th>
                                         <th scope="row">Lettre de transmission faite par l'employeur ou le beneficiaire adressée au DG</th>
-                                        <th scope="row"><input type="file" id="file1" class="form-control-file form-control height-auto"  onchange="myFunction('#file1','file1_statut')" id="file1" /></th>
+                                        <th scope="row"><input type="file" id="file1" name="file1" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg"   onchange="myFunction('#file1','file1_statut')" id="file1" /></th>
                                         <th scope="row" id="file1_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                     </tr>
                                     <tr>
@@ -505,6 +513,35 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -524,7 +561,31 @@
 
 <script>
     function myFunction(file,status){
-        if ($(file).val()!= '') {
+        $.ajaxSetup({
+            headers: ({
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            })
+        })
+        var files = $(file).val();
+        var original_file = document.getElementById('file1').files[0];
+        var name = original_file.name;
+        var extension_file = name.split('.').pop().toLowerCase();
+        var form_data = new FormData();
+        form_data.append('file',original_file);
+        if (file != '') {
+            //  alert(form_data);
+            $.ajax({
+                            type: 'post',
+                            url: "{{route('temp-file')}}",
+                            dataType: 'json',
+                            enctype: 'multipart/form-data',
+                            data:{form_data},
+
+                            success: function(data) {
+
+
+                            }
+                })
             document.getElementById(status).innerHTML='<span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span>';
         }
     }
