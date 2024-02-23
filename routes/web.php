@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/reclamation', [App\Http\Controllers\HomeController::class, 'reclamationIndex'])->name('reclamation.index');
     Route::get('/demande', [App\Http\Controllers\HomeController::class, 'demandeIndex'])->name('demande.index');
     Route::post('/pensionnaire-info', [App\Http\Controllers\HomeController::class, 'PensionnaireInfo'])->name('pensionnaire.info');
+    Route::post('/pension/store', [App\Http\Controllers\PensionController::class, 'store'])->name('pension.store');
 
 });
 

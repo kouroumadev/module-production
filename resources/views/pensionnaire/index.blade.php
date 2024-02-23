@@ -68,7 +68,6 @@
         </div>
     </div>
 </div>
-
 @endif
 
 
@@ -78,28 +77,29 @@
     <div class="col-md-12">
         <div class="pd-20 card-box mb-30 shadow-lg">
             <div class="wizard-content">
-                <form class="tab-wizard wizard-circle wizard">
+                <form action="{{ route('pension.store') }}" class="tab-wizard wizard-circle wizard" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <h5>Infos Personnelles</h5>
                     <section>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>No Immatriculation :</label>
-                                    <input type="text" class="form-control" name="no_immatricule"
+                                    <input type="text" class="form-control" name="no_ima_employee"
                                         value="{{ $data['employe'][0]->no_employe }}" id="no_immat_disp" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Nom :</label>
-                                    <input type="text" class="form-control" name="nom"
+                                    <input type="text" class="form-control" name="nom_employee"
                                         value="{{ $data['employe'][0]->nom }}" id="nom_employe" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Prenom :</label>
-                                    <input type="text" class="form-control" name="prenom"
+                                    <input type="text" class="form-control" name="prenom_employee"
                                         value="{{ $data['employe'][0]->prenoms }}" id="prenom_employe" readonly>
                                 </div>
                             </div>
@@ -108,21 +108,21 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Date de naissance:</label>
-                                    <input type="text" class="form-control" name="date_naissance"
+                                    <input type="text" class="form-control" name="date_naissance_employee"
                                         value="{{ $data['employe'][0]->date_naissance }}" id="date_naissance" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Lieu de naissance</label>
-                                    <input type="text" class="form-control" name="lieu_naissance"
+                                    <input type="text" class="form-control" name="lieu_naissance_employee"
                                         value="{{ $data['employe'][0]->lieu_naissance }}" id="lieu_naissance" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Prefecture</label>
-                                    <input type="text" class="form-control" name="prefecture"
+                                    <input type="text" class="form-control" name="prefecture_employee"
                                         value="{{ $data['employe'][0]->prefecture }}" id="prefecture" readonly>
                                 </div>
                             </div>
@@ -131,21 +131,21 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Telephone:</label>
-                                    <input type="text" class="form-control" name="telephone_employe"
-                                        id="telephone_employe" readonly>
+                                    <input type="text" class="form-control" name="tel_employee"
+                                        id="telephone_employe">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Adresse:</label>
-                                    <input type="text" class="form-control date-picker" name="adresse_employe"
-                                        id="adresse_employe" readonly>
+                                    <input type="text" class="form-control" name="adresse_employee"
+                                        id="adresse_employe">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Situation Matrimoniale:</label>
-                                    <input type="text" class="form-control" name="statut"
+                                    <input type="text" class="form-control" name="situation_matri_employee"
                                         value="{{ $data['employe'][0]->statut }}" id="statut" readonly>
                                 </div>
                             </div>
@@ -159,7 +159,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>No Employeur :</label>
-                                    <input type="text" class="form-control" name="no_employeur"
+                                    <input type="text" class="form-control" name="no_employer"
                                         value="{{ $data['employeur'][0]->no_employeur }}" id="no_employeur" readonly />
                                 </div>
                             </div>
@@ -176,7 +176,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Categorie :</label>
-                                    <input type="text" class="form-control" name="categorie"
+                                    <input type="text" class="form-control" name="category"
                                         value="{{ $data['employeur'][0]->categorie }}" id="categorie" readonly />
                                 </div>
                             </div>
@@ -187,6 +187,12 @@
                     <!-- Step 3 -->
                     <h5>Conjoints et Enfants</h5>
                     <section>
+
+                        <?php
+                            $details = json_encode($data['employeDetails']);
+                        ?>
+
+                        <input type="hidden" name="details" value="{{ $details }}">
 
 
                         <div class="faq-wrap">
@@ -287,21 +293,21 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Adresse</label>
-                                    <input type="text" class="form-control" name="adresse"
+                                    <input type="text" class="form-control" name="adresse_deposant"
                                         placeholder="Entrer l'adresse">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>CIN</label>
-                                    <input type="text" class="form-control" name="cin"
+                                    <input type="text" class="form-control" name="cin_deposant"
                                         placeholder="Entrer CIN">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" class="form-control" name="email"
+                                    <input type="text" class="form-control" name="email_deposant"
                                         placeholder="Entrer email">
                                 </div>
                             </div>
@@ -493,6 +499,8 @@
 
                         </div>
                     </section>
+
+                    <button type="submit" class="btn btn-success">Envoyer</button>
                 </form>
             </div>
         </div>
@@ -520,18 +528,6 @@
             document.getElementById(status).innerHTML='<span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span>';
         }
     }
-
-    $('#form-get-pension').submit(function(){
-        console.log("form submitted");
-        swal(
-                {
-                    type: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong!',
-                }
-            )
-    })
-
 </script>
 
 

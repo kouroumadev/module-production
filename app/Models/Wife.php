@@ -14,6 +14,8 @@ class Wife extends Model
         'employee_id',
         'nom',
         'prenom',
+        'no_conjoint',
+        'date_mariage',
         'sexe',
         'date_naissance',
         'lieu_naissance',
