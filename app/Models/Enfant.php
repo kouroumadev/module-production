@@ -13,12 +13,12 @@ class Enfant extends Model
         'id',
         'employee_id',
         'wife_id',
-        'nom',
-        'prenom',
-        'sexe',
-        'date_naissance',
-        'lieu_naissance',
-        'ordre_naissance',
+        'nom_enfant',
+        'prenom_enfant',
+        'sexe_enfant',
+        'date_naissance_enfant',
+        'lieu_naissance_enfant',
+        'ordre_naissance_enfant',
         'created_by',
         'status'
     ];

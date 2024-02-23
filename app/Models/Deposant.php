@@ -12,12 +12,12 @@ class Deposant extends Model
     protected $fillable = [
         'id',
         'employee_id',
-        'nom',
-        'prenom',
-        'tel',
-        'adresse',
-        'cin',
-        'email',
+        'nom_deposant',
+        'prenom_deposant',
+        'telephone_deposant',
+        'adresse_deposant',
+        'cin_deposant',
+        'email_deposant',
         'created_by',
         'status'
     ];

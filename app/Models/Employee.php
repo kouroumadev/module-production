@@ -11,15 +11,15 @@ class Employee extends Model
 
     protected $fillable = [
         'id',
-        'no_ima',
-        'nom',
-        'prenom',
-        'date_naissance',
-        'lieu_naissance',
-        'prefecture',
-        'tel',
-        'adresse',
-        'situation_matri',
+        'no_ima_employee',
+        'nom_employee',
+        'prenom_employee',
+        'date_naissance_employee',
+        'lieu_naissance_employee',
+        'prefecture_employee',
+        'tel_employee',
+        'adresse_employee',
+        'situation_matri_employee',
         'created_by',
         'status'
     ];

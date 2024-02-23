@@ -12,13 +12,13 @@ class Wife extends Model
     protected $fillable = [
         'id',
         'employee_id',
-        'nom',
-        'prenom',
-        'no_conjoint',
-        'date_mariage',
-        'sexe',
-        'date_naissance',
-        'lieu_naissance',
+        'nom_wife',
+        'prenom_wife',
+        'no_conjoint_wife',
+        'date_mariage_wife',
+        'sexe_wife',
+        'date_naissance_wife',
+        'lieu_naissance_wife',
         'created_by',
         'status'
     ];
