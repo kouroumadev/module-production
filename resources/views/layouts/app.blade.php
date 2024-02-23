@@ -40,9 +40,7 @@
 
 
 
-    {{-- sweetAlert --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script> --}}
-    {{-- <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script> --}}
+
 
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.11.4/b-2.2.2/r-2.2.9/sc-2.0.5/sp-1.4.0/datatables.min.css"/>
@@ -51,8 +49,7 @@
 
 
 
-{{-- Ajax --}}
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script> --}}
+
 
 
 
@@ -63,7 +60,7 @@
 </head>
 
 <body>
-    @include('sweetalert::alert')
+    {{-- @include('sweetalert::alert') --}}
 
     @yield('content')
 

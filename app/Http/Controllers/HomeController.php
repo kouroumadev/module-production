@@ -28,6 +28,7 @@ class HomeController extends Controller
     public function demandeIndex() {
         return view('demande.index');
     }
+
     public function PensionnaireInfo(Request $request){
 
         $no_immat = $request->no_immatriculation;
@@ -60,6 +61,9 @@ class HomeController extends Controller
                     'conjoint_name'=> $value->nom,
                     'conjoint_prenom'=> $value->prenoms,
                     'no_conjoint'=> $value->no_conjoint,
+                    'date_mariage'=> $value->date_mariage,
+                    'date_naissance'=> $value->date_naissance,
+                    'sexe'=> $value->sexe,
 
 
                 ];
@@ -75,9 +79,9 @@ class HomeController extends Controller
         // $data['employeDetails']= $employeDeails;
         //  $data['employe'] = $employe;
         //  $data['employeur'] = $employeur;
-        // dd($data);
+        //  dd($data);
         // return view('pensionnaire.pensionnaire-info',compact('data'));
-        Alert::success('Your Post as been submited!','success');
+        //Alert::success('Your Post as been submited!','success');
         return view('pensionnaire.index',compact('data'));
     }
 
