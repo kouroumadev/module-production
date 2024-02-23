@@ -68,7 +68,6 @@
         </div>
     </div>
 </div>
-
 @endif
 
 
@@ -520,18 +519,6 @@
             document.getElementById(status).innerHTML='<span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span>';
         }
     }
-
-    $('#form-get-pension').submit(function(){
-        console.log("form submitted");
-        swal(
-                {
-                    type: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong!',
-                }
-            )
-    })
-
 </script>
 
 

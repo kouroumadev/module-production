@@ -14,7 +14,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('logos/main-logo.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('logos/main-logo.png') }}">
 
-    {{-- <script src="{{ asset('js/app.js') }}" ></script> --}}
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -40,8 +40,8 @@
 
 
 
-
-
+    {{-- sweetAlert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.11.4/b-2.2.2/r-2.2.9/sc-2.0.5/sp-1.4.0/datatables.min.css"/>
 
@@ -49,7 +49,8 @@
 
 
 
-
+{{-- Ajax --}}
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script> --}}
 
 
 
@@ -60,7 +61,6 @@
 </head>
 
 <body>
-    {{-- @include('sweetalert::alert') --}}
 
     @yield('content')
 
