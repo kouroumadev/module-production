@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div class="login-page">
 
     <div class="login-header box-shadow">
