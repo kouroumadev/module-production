@@ -17,6 +17,10 @@ class PensionController extends Controller
         // dd($emps);
         return view('pensionnaire.show', compact('emps'));
     }
+    public function details(int $id){
+        $emp = Employee::find($id);
+        return view('pensionnaire.details', compact('emp'));
+    }
     public function store(Request $request) {
         // dd(json_decode($request->details));
         $user_id = Auth::user()->id;
