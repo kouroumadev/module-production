@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class HomeController extends Controller
@@ -13,9 +14,11 @@ class HomeController extends Controller
         return view('dashboard');
     }
     public function login() {
+        // Alert::error('Invalide Numéro', 'Ce N° d\'Immatriculation n\'existe pas dans la base de données de la CNSS');
         return view('login');
     }
     public function PensionIndex() {
+        Alert::error(' Invalide Numéro', 'Ce N° d\'Immatriculation n\'existe pas dans la base de données de la CNSS');
         return view('pensionnaire.index');
     }
     public function reclamationIndex() {
