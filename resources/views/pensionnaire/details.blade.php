@@ -73,26 +73,7 @@
                             </ul>
                         </div>
 
-                        <div class="profile-info">
-                            <h5 class="mb-20 h5 text-blue text-center">Infos Deposant</h5>
-                            <ul>
-                                <li>
-                                    <span>Nom & Prenom:</span> {{ $emp->deposants['0']->nom_deposant }} {{ $emp->deposants['0']->prenom_deposant }}
-                                </li>
-                                <li>
-                                    <span>N° Telephone:</span> {{ $emp->deposants['0']->telephone_deposant }}
-                                </li>
-                                <li>
-                                    <span>Adresse:</span> {{ $emp->deposants['0']->adresse_deposant }}
-                                </li>
-                                <li>
-                                    <span>CIN:</span> {{ $emp->deposants['0']->adresse_deposant }}
-                                </li>
-                                <li>
-                                    <span>Adresse Email:</span> {{ $emp->deposants['0']->email_deposant }}
-                                </li>
-                            </ul>
-                        </div>
+
 
                     </div>
                 </div>
@@ -105,6 +86,9 @@
                                         <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab">Employeur</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#deposant" role="tab">Deposant</a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#tasks" role="tab">Conjoints et Enfants</a>
                                     </li>
                                     <li class="nav-item">
@@ -112,7 +96,7 @@
                                     </li>
                                 </ul>
                                 <div class="tab-content">
-                                    <!-- Timeline Tab start -->
+                                    <!-- employeur -->
                                     <div class="tab-pane fade show active" id="timeline" role="tabpanel">
                                         <div class="profile-setting">
                                             <form>
@@ -139,254 +123,111 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <!-- Timeline Tab End -->
-                                    <!-- Tasks Tab start -->
-                                    <div class="tab-pane fade" id="tasks" role="tabpanel">
-                                        <div class="pd-20 profile-task-wrap">
-                                            <div class="container pd-0">
-                                                <!-- Open Task start -->
-                                                <div class="task-title row align-items-center">
-                                                    <div class="col-md-8 col-sm-12">
-                                                        <h5>Open Tasks (4 Left)</h5>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-12 text-right">
-                                                        <a href="task-add" data-toggle="modal" data-target="#task-add" class="bg-light-blue btn text-blue weight-500"><i class="ion-plus-round"></i> Add</a>
-                                                    </div>
-                                                </div>
-                                                <div class="profile-task-list pb-30">
-                                                    <ul>
-                                                        <li>
-                                                            <div class="custom-control custom-checkbox mb-5">
-                                                                <input type="checkbox" class="custom-control-input" id="task-1">
-                                                                <label class="custom-control-label" for="task-1"></label>
-                                                            </div>
-                                                            <div class="task-type">Email</div>
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea earum.
-                                                            <div class="task-assign">Assigned to Ferdinand M.
-                                                                <div class="due-date">due date <span>22 February 2019</span></div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="custom-control custom-checkbox mb-5">
-                                                                <input type="checkbox" class="custom-control-input" id="task-2">
-                                                                <label class="custom-control-label" for="task-2"></label>
-                                                            </div>
-                                                            <div class="task-type">Email</div>
-                                                            Lorem ipsum dolor sit amet.
-                                                            <div class="task-assign">Assigned to Ferdinand M.
-                                                                <div class="due-date">due date <span>22 February 2019</span></div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="custom-control custom-checkbox mb-5">
-                                                                <input type="checkbox" class="custom-control-input" id="task-3">
-                                                                <label class="custom-control-label" for="task-3"></label>
-                                                            </div>
-                                                            <div class="task-type">Email</div>
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            <div class="task-assign">Assigned to Ferdinand M.
-                                                                <div class="due-date">due date <span>22 February 2019</span></div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="custom-control custom-checkbox mb-5">
-                                                                <input type="checkbox" class="custom-control-input" id="task-4">
-                                                                <label class="custom-control-label" for="task-4"></label>
-                                                            </div>
-                                                            <div class="task-type">Email</div>
-                                                            Lorem ipsum dolor sit amet. Id ea earum.
-                                                            <div class="task-assign">Assigned to Ferdinand M.
-                                                                <div class="due-date">due date <span>22 February 2019</span></div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <!-- Open Task End -->
-                                                <!-- Close Task start -->
-                                                <div class="task-title row align-items-center">
-                                                    <div class="col-md-12 col-sm-12">
-                                                        <h5>Closed Tasks</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="profile-task-list close-tasks">
-                                                    <ul>
-                                                        <li>
-                                                            <div class="custom-control custom-checkbox mb-5">
-                                                                <input type="checkbox" class="custom-control-input" id="task-close-1" checked="" disabled="">
-                                                                <label class="custom-control-label" for="task-close-1"></label>
-                                                            </div>
-                                                            <div class="task-type">Email</div>
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea earum.
-                                                            <div class="task-assign">Assigned to Ferdinand M.
-                                                                <div class="due-date">due date <span>22 February 2018</span></div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="custom-control custom-checkbox mb-5">
-                                                                <input type="checkbox" class="custom-control-input" id="task-close-2" checked="" disabled="">
-                                                                <label class="custom-control-label" for="task-close-2"></label>
-                                                            </div>
-                                                            <div class="task-type">Email</div>
-                                                            Lorem ipsum dolor sit amet.
-                                                            <div class="task-assign">Assigned to Ferdinand M.
-                                                                <div class="due-date">due date <span>22 February 2018</span></div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="custom-control custom-checkbox mb-5">
-                                                                <input type="checkbox" class="custom-control-input" id="task-close-3" checked="" disabled="">
-                                                                <label class="custom-control-label" for="task-close-3"></label>
-                                                            </div>
-                                                            <div class="task-type">Email</div>
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            <div class="task-assign">Assigned to Ferdinand M.
-                                                                <div class="due-date">due date <span>22 February 2018</span></div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="custom-control custom-checkbox mb-5">
-                                                                <input type="checkbox" class="custom-control-input" id="task-close-4" checked="" disabled="">
-                                                                <label class="custom-control-label" for="task-close-4"></label>
-                                                            </div>
-                                                            <div class="task-type">Email</div>
-                                                            Lorem ipsum dolor sit amet. Id ea earum.
-                                                            <div class="task-assign">Assigned to Ferdinand M.
-                                                                <div class="due-date">due date <span>22 February 2018</span></div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <!-- Close Task start -->
-                                                <!-- add task popup start -->
-                                                <div class="modal fade customscroll" id="task-add" tabindex="-1" role="dialog">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLongTitle">Tasks Add</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Close Modal">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body pd-0">
-                                                                <div class="task-list-form">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <form>
-                                                                                <div class="form-group row">
-                                                                                    <label class="col-md-4">Task Type</label>
-                                                                                    <div class="col-md-8">
-                                                                                        <input type="text" class="form-control">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group row">
-                                                                                    <label class="col-md-4">Task Message</label>
-                                                                                    <div class="col-md-8">
-                                                                                        <textarea class="form-control"></textarea>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group row">
-                                                                                    <label class="col-md-4">Assigned to</label>
-                                                                                    <div class="col-md-8">
-                                                                                        <select class="selectpicker form-control" data-style="btn-outline-primary" title="Not Chosen" multiple="" data-selected-text-format="count" data-count-selected-text="{0} people selected">
-                                                                                            <option>Ferdinand M.</option>
-                                                                                            <option>Don H. Rabon</option>
-                                                                                            <option>Ann P. Harris</option>
-                                                                                            <option>Katie D. Verdin</option>
-                                                                                            <option>Christopher S. Fulghum</option>
-                                                                                            <option>Matthew C. Porter</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group row mb-0">
-                                                                                    <label class="col-md-4">Due Date</label>
-                                                                                    <div class="col-md-8">
-                                                                                        <input type="text" class="form-control date-picker">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </form>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:;" class="remove-task" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Remove Task"><i class="ion-minus-circled"></i></a>
-                                                                            <form>
-                                                                                <div class="form-group row">
-                                                                                    <label class="col-md-4">Task Type</label>
-                                                                                    <div class="col-md-8">
-                                                                                        <input type="text" class="form-control">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group row">
-                                                                                    <label class="col-md-4">Task Message</label>
-                                                                                    <div class="col-md-8">
-                                                                                        <textarea class="form-control"></textarea>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group row">
-                                                                                    <label class="col-md-4">Assigned to</label>
-                                                                                    <div class="col-md-8">
-                                                                                        <select class="selectpicker form-control" data-style="btn-outline-primary" title="Not Chosen" multiple="" data-selected-text-format="count" data-count-selected-text="{0} people selected">
-                                                                                            <option>Ferdinand M.</option>
-                                                                                            <option>Don H. Rabon</option>
-                                                                                            <option>Ann P. Harris</option>
-                                                                                            <option>Katie D. Verdin</option>
-                                                                                            <option>Christopher S. Fulghum</option>
-                                                                                            <option>Matthew C. Porter</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group row mb-0">
-                                                                                    <label class="col-md-4">Due Date</label>
-                                                                                    <div class="col-md-8">
-                                                                                        <input type="text" class="form-control date-picker">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </form>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="add-more-task">
-                                                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Add Task"><i class="ion-plus-circled"></i> Add More Task</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-primary">Add</button>
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- add task popup End -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Tasks Tab End -->
-                                    <!-- Setting Tab start -->
-                                    <div class="tab-pane fade height-100-p" id="setting" role="tabpanel">
+                                    <!-- employeur Tab End -->
+                                    <!-- deposant -->
+                                    <div class="tab-pane fade" id="deposant" role="tabpanel">
                                         <div class="profile-setting">
                                             <form>
                                                 <ul class="profile-edit-list row">
                                                     <li class="weight-500 col-md-6">
-                                                        <h4 class="text-blue h5 mb-20">Edit Your Personal Setting</h4>
+                                                        {{-- <h4 class="text-blue h5 mb-20">Edit Your Personal Setting</h4> --}}
                                                         <div class="form-group">
-                                                            <label>N° Employeur</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->employers['0']->no_employer }}" type="text" readonly>
+                                                            <label>Nom</label>
+                                                            <input class="form-control form-control-lg" value="{{ $emp->deposants['0']->nom_deposant }}" type="text" readonly>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Categorie</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->employers['0']->category }}" type="email" readonly>
+                                                            <label>N° Telephone</label>
+                                                            <input class="form-control form-control-lg" value="{{ $emp->deposants['0']->telephone_deposant }}" type="email" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Adresse</label>
+                                                            <input class="form-control form-control-lg" value="{{ $emp->deposants['0']->adresse_deposant }}" type="email" readonly>
                                                         </div>
                                                     </li>
                                                     <li class="weight-500 col-md-6">
-                                                        <h4 class="text-blue h5 mb-20">Edit Social Media links</h4>
+                                                        {{-- <h4 class="text-blue h5 mb-20">Edit Social Media links</h4> --}}
                                                         <div class="form-group">
-                                                            <label>Raison Sociale</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->employers['0']->raison_sociale }}" type="text" readonly>
+                                                            <label>Prenom</label>
+                                                            <input class="form-control form-control-lg" value="{{ $emp->deposants['0']->prenom_deposant }}" type="text" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>CIN</label>
+                                                            <input class="form-control form-control-lg" value="{{ $emp->deposants['0']->cin_deposant }}" type="text" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Adresse Email</label>
+                                                            <input class="form-control form-control-lg" value="{{ $emp->deposants['0']->email_deposant }}" type="text" readonly>
                                                         </div>
                                                     </li>
                                                 </ul>
                                             </form>
                                         </div>
                                     </div>
-                                    <!-- Setting Tab End -->
+                                    <!-- deposant Tab End -->
+                                    <!-- wife and childs Tab start -->
+                                    <div class="tab-pane fade" id="tasks" role="tabpanel">
+                                        <div class="pd-20 profile-task-wrap">
+                                            <div class="container pd-0">
+                                                <div class="faq-wrap">
+                                                    @foreach ($emp->wifes as $key => $value)
+                                                    <div id="accordion">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <div class="btn btn-block" data-toggle="collapse" data-target="#faq1">
+                                                                  Conjoint(e) {{ $key+1}} - {{ $value['nom_wife'] }} {{ $value['prenom_wife'] }}
+                                                                </div>
+                                                            </div>
+                                                            <div id="faq1" class="collapse show" data-parent="#accordion">
+                                                                <div class="card-body">
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th scope="col">#</th>
+                                                                                <th scope="col">Nom</th>
+                                                                                <th scope="col">Prenom</th>
+                                                                                <th scope="col">date de Naissance</th>
+                                                                                <th scope="col">Lieu de Naissance</th>
+                                                                                <th scope="col">Ordre de Naissance</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach ($value->enfants as $key => $enfant)
+                                                                                @if (empty($enfant))
+                                                                                    <td>Pas d'enfant</td>
+                                                                                @else
+                                                                                    <tr>
+                                                                                        <th scope="row">{{ $key + 1 }}</th>
+                                                                                        <td>{{ $enfant->nom_enfant }}</td>
+                                                                                        <td>{{ $enfant->prenom_enfant }}</td>
+                                                                                        <td>{{ $enfant->date_naissance_enfant }}</td>
+                                                                                        <td>{{ $enfant->lieu_naissance_enfant }}</td>
+                                                                                        <td>{{ $enfant->ordre_naissance_enfant }}</td>
+
+                                                                                    </tr>
+                                                                                @endif
+                                                                            @endforeach
+
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- wife and childs Tab End -->
+                                    <!-- docs Tab start -->
+                                    <div class="tab-pane fade height-100-p" id="setting" role="tabpanel">
+                                        <div class="profile-setting">
+
+                                        </div>
+                                    </div>
+                                    <!-- docs Tab End -->
                                 </div>
                             </div>
                         </div>

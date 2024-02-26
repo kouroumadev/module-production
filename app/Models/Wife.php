@@ -26,4 +26,10 @@ class Wife extends Model
     public function employee() {
         return $this->belongsTo(Employee::class, 'employee_id');
     }
+
+    public function enfants() {
+        return $this->hasMany(Enfant::class, 'wife_id','id');
+    }
+
+
 }

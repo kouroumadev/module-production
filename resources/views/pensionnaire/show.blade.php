@@ -58,16 +58,7 @@
                     <td><span class="badge badge-warning">En Cours...</span></td>
                     <td>DCG</td>
                     <td>
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="{{ route('pension.details',$emp->id) }}"><i class="dw dw-eye"></i>Voir Details</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-message"></i> Edit</a>
-                                {{-- <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a> --}}
-                            </div>
-                        </div>
+                        <a class="btn btn-success" href="{{ route('pension.details',$emp->id) }}">Traitement <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
                     </td>
                 </tr>
                 @endforeach
