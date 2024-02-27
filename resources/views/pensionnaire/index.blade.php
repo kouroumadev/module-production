@@ -14,21 +14,72 @@
             <div class="title">
                 <h4>PRESTATIONS</h4>
             </div>
-            <nav aria-label="breadcrumb" role="navigation">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Gestion des Pensions</li>
-                </ol>
-            </nav>
+            @if (isset($type_pension))
+                @if ($type_pension == "Retraite")
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Retraite</li>
+                        </ol>
+                    </nav>
+                @elseif ($type_pension == "reversion")
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Reversion</li>
+                        </ol>
+                    </nav>
+                @elseif ($type_pension == "Invalidite")
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Invalidité</li>
+                        </ol>
+                    </nav>
+                @elseif ($type_pension == "allocation de vieillesse")
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Allocation de vieillesse</li>
+                        </ol>
+                    </nav>
+                @elseif ($type_pension == "Deces en Activite")
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Décès en Activité</li>
+                        </ol>
+                    </nav>
+                @elseif ($type_pension == "Pensions Temporaires d'Orphelin")
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Pensions Temporaires d'Orphelin</li>
+                        </ol>
+                    </nav>
+                @endif
+
+            @else
+                <nav aria-label="breadcrumb" role="navigation">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Gestion des Pensions</li>
+                    </ol>
+                </nav>
+            @endif
+
         </div>
     </div>
 </div>
 
 <hr>
+<form id="form-get-pension" action="{{ route('pensionnaire.info') }}" method="POST">
 <div class="row justify-content-center">
+
+        @csrf
     <div class="col-md-4">
         <div class="form-group">
-            <select class=" form-control" data-style="btn-outline-success" data-size="5">
+            <select class=" form-control" id="type_pension" name="type_pension" data-style="btn-outline-success" data-size="5">
                 <option selected>Selectionner le type de pension</option>
                 <option value="Retraite">Retraite</option>
                 <option value="reversion">Reversion</option>
@@ -41,8 +92,7 @@
         </div>
     </div>
     <div class="col-md-8">
-        <form id="form-get-pension" action="{{ route('pensionnaire.info') }}" method="POST">
-            @csrf
+
             <div class="form-row align-items-center">
                 <div class="col-8">
                     <input type="text" class="form-control mb-2" name="no_immatriculation" id="no_immatriculation" placeholder="Entrer le N° d'Immatriculation ou de Pension" />
@@ -52,9 +102,11 @@
                 <button type="submit" class="btn btn-success mb-2">Rechercher</button>
                 </div>
             </div>
-        </form>
+
     </div>
+
 </div>
+</form>
 <hr>
 
 @if (isset($flag))
@@ -335,91 +387,162 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <th scope="row">Lettre de transmission faite par l'employeur ou le beneficiaire adressée au DG</th>
-                                        <th scope="row"><input type="file" id="file1" name="file1" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg"   onchange="myFunction('#file1','file1_statut')" id="file1" /></th>
-                                        <th scope="row" id="file1_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <th scope="row">Le carnet d'assuré social ou la carte d'assuré social</th>
-                                        <th scope="row"><input type="file"  id="file2" class="form-control-file form-control height-auto" onchange="myFunction('#file2','file2_statut')"></th>
-                                        <th scope="row" id="file2_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <th scope="row">Le certificat de travail avec la date d'embauche</th>
-                                        <th scope="row"><input type="file"  id="file3" class="form-control-file form-control height-auto" onchange="myFunction('#file3','file3_statut')"></th>
-                                        <th scope="row" id="file3_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">4</th>
-                                        <th scope="row">Le certificat de cessation de paiement avec le dernier salaire (CCP)</th>
-                                        <th scope="row"><input type="file"  id="file4" class="form-control-file form-control height-auto" onchange="myFunction('#file4','file4_statut')"></th>
-                                        <th scope="row" id="file4_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">5</th>
-                                        <th scope="row">Le releve des 120 derniers mois (10 dernieres annees)</th>
-                                        <th scope="row"><input type="file"  id="file5" class="form-control-file form-control height-auto" onchange="myFunction('#file5','file5_statut')"></th>
-                                        <th scope="row" id="file5_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">6</th>
-                                        <th scope="row">Porces-verbale du conseil de famille</th>
-                                        <th scope="row"><input type="file"  id="file6" class="form-control-file form-control height-auto" onchange="myFunction('#file6','file6_statut')"></th>
-                                        <th scope="row" id="file6_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">7</th>
-                                        <th scope="row">Le jugement d'heredite</th>
-                                        <th scope="row"><input type="file"  id="file7" class="form-control-file form-control height-auto" onchange="myFunction('#file7','file7_statut')"></th>
-                                        <th scope="row" id="file7_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">8</th>
-                                        <th scope="row">Le certificat de residence du veuf, de la veuve ou des veuves</th>
-                                        <th scope="row"><input type="file"  id="file8" class="form-control-file form-control height-auto" onchange="myFunction('#file8','file8_statut')"></th>
-                                        <th scope="row" id="file8_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">9</th>
-                                        <th scope="row">Quatre(4) photos d'identite du veuf, de la veuve ou des veuves</th>
-                                        <th scope="row"><input type="file"  id="file9" class="form-control-file form-control height-auto" onchange="myFunction('#file9','file9_statut')"></th>
-                                        <th scope="row" id="file9_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">10</th>
-                                        <th scope="row">La photocopie recto-verso de la carte d'identite nationale</th>
-                                        <th scope="row"><input type="file"  id="file10" class="form-control-file form-control height-auto" onchange="myFunction('#file10','file10_statut')"></th>
-                                        {{-- <th scope="row" id="file10_statut"><span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span></th> --}}
-                                        <th scope="row" id="file10_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">11</th>
-                                        <th scope="row">La copie legalisee de l'extrait de mariage de chaque veuve</th>
-                                        <th scope="row"><input type="file" id="file11" id="file11" class="form-control-file form-control height-auto" onchange="myFunction('#file11','file11_statut')"></th>
-                                        <th scope="row" id="file11_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">12</th>
-                                        <th scope="row">La copie legalisee de l'extrait de naissance de chaque enfant de moins de 17 ans</th>
-                                        <th scope="row"><input type="file" id="file12" id="file12" class="form-control-file form-control height-auto" onchange="myFunction('#file12','file12_statut')"></th>
-                                        <th scope="row" id="file12_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">13</th>
-                                        <th scope="row">Certificat de vie collective individuelle des enfants de moins de 17 ans</th>
-                                        <th scope="row"><input type="file" id="file13" id="file13" class="form-control-file form-control height-auto" onchange="myFunction('#file13','file13_statut')"></th>
-                                        <th scope="row" id="file13_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">14</th>
-                                        <th scope="row">Numero de telephone de l'assure</th>
-                                        <th scope="row"><input type="file" id="file14" id="file14" class="form-control-file form-control height-auto" onchange="myFunction('#file14','file14_statut')"></th>
-                                        <th scope="row" id="file14_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                    </tr>
+                                        @if ($type_pension == "Retraite")
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <th scope="row">Lettre de transmission faite par l'employeur ou le beneficiaire adressée au DG</th>
+                                                <th scope="row"><input type="file" id="file1" name="file1" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg"   onchange="myFunction('file1','file1_statut')" id="file1" /></th>
+                                                <th scope="row" id="file1_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <th scope="row">Le carnet d'assuré social ou la carte d'assuré social</th>
+                                                <th scope="row"><input type="file"  id="file2" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file2','file2_statut')"></th>
+                                                <th scope="row" id="file2_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <th scope="row">Le certificat de travail avec la date d'embauche</th>
+                                                <th scope="row"><input type="file"  id="file3" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file3','file3_statut')"></th>
+                                                <th scope="row" id="file3_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">4</th>
+                                                <th scope="row">Le certificat de cessation de paiement avec le dernier salaire (CCP)</th>
+                                                <th scope="row"><input type="file"  id="file4" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file4','file4_statut')"></th>
+                                                <th scope="row" id="file4_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">5</th>
+                                                <th scope="row">Le releve des 120 derniers mois (10 dernieres annees)</th>
+                                                <th scope="row"><input type="file"  id="file5" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file5','file5_statut')"></th>
+                                                <th scope="row" id="file5_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">6</th>
+                                                <th scope="row">Porces-verbale du conseil de famille</th>
+                                                <th scope="row"><input type="file"  id="file6" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file6','file6_statut')"></th>
+                                                <th scope="row" id="file6_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">7</th>
+                                                <th scope="row">Le jugement d'heredite</th>
+                                                <th scope="row"><input type="file"  id="file7" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file7','file7_statut')"></th>
+                                                <th scope="row" id="file7_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">8</th>
+                                                <th scope="row">Le certificat de residence du veuf, de la veuve ou des veuves</th>
+                                                <th scope="row"><input type="file"  id="file8" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file8','file8_statut')"></th>
+                                                <th scope="row" id="file8_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">9</th>
+                                                <th scope="row">Quatre(4) photos d'identite du veuf, de la veuve ou des veuves</th>
+                                                <th scope="row"><input type="file"  id="file9" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file9','file9_statut')"></th>
+                                                <th scope="row" id="file9_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">10</th>
+                                                <th scope="row">La photocopie recto-verso de la carte d'identite nationale</th>
+                                                <th scope="row"><input type="file"  id="file10" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file10','file10_statut')"></th>
+                                                {{-- <th scope="row" id="file10_statut"><span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span></th> --}}
+                                                <th scope="row" id="file10_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">11</th>
+                                                <th scope="row">La copie legalisee de l'extrait de mariage de chaque veuve</th>
+                                                <th scope="row"><input type="file" id="file11" id="file11" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file11','file11_statut')"></th>
+                                                <th scope="row" id="file11_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">12</th>
+                                                <th scope="row">La copie legalisee de l'extrait de naissance de chaque enfant de moins de 17 ans</th>
+                                                <th scope="row"><input type="file" id="file12" id="file12" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file12','file12_statut')"></th>
+                                                <th scope="row" id="file12_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">13</th>
+                                                <th scope="row">Certificat de vie collective individuelle des enfants de moins de 17 ans</th>
+                                                <th scope="row"><input type="file" id="file13" id="file13" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file13','file13_statut')"></th>
+                                                <th scope="row" id="file13_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">14</th>
+                                                <th scope="row">Numero de telephone de l'assure</th>
+                                                <th scope="row"><input type="file" id="file14" id="file14" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file14','file14_statut')"></th>
+                                                <th scope="row" id="file14_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                            </tr>
+                                        @elseif ($type_pension == "reversion")
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <th scope="row">Demande adressé au DG</th>
+                                            <th scope="row"><input type="file" id="file1" name="file1" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg"   onchange="myFunction('file1','file1_statut')" id="file1" /></th>
+                                            <th scope="row" id="file1_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <th scope="row">Le carnet d'assuré ou le dernier Bulletin</th>
+                                            <th scope="row"><input type="file"  id="file2" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file2','file2_statut')"></th>
+                                            <th scope="row" id="file2_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <th scope="row">Acte ou le Certificat de décès</th>
+                                            <th scope="row"><input type="file"  id="file3" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file3','file3_statut')"></th>
+                                            <th scope="row" id="file3_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">4</th>
+                                            <th scope="row">Le procès verbal de conseil de famille</th>
+                                            <th scope="row"><input type="file"  id="file4" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file4','file4_statut')"></th>
+                                            <th scope="row" id="file4_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">5</th>
+                                            <th scope="row">Le certificat de résidence de chaque veuve</th>
+                                            <th scope="row"><input type="file"  id="file5" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file5','file5_statut')"></th>
+                                            <th scope="row" id="file5_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">6</th>
+                                            <th scope="row">Copie légalisée de l'extrait de mariage de chaque veuve</th>
+                                            <th scope="row"><input type="file"  id="file6" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file6','file6_statut')"></th>
+                                            <th scope="row" id="file6_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">7</th>
+                                            <th scope="row">Quatre(4) photos d'identités de chaque veuve</th>
+                                            <th scope="row"><input type="file"  id="file7" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file7','file7_statut')"></th>
+                                            <th scope="row" id="file7_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">8</th>
+                                            <th scope="row">La copie recto-verso de la carte d'identité de chaque veuve</th>
+                                            <th scope="row"><input type="file"  id="file8" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file8','file8_statut')"></th>
+                                            <th scope="row" id="file8_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">9</th>
+                                            <th scope="row">La copie légalisée de l'extrait de naissance de chaque enfant de moins de 17 ans</th>
+                                            <th scope="row"><input type="file"  id="file9" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file9','file9_statut')"></th>
+                                            <th scope="row" id="file9_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">10</th>
+                                            <th scope="row">Certificat de vie collective individuelle des enfants de moins de 17 ans</th>
+                                            <th scope="row"><input type="file"  id="file10" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file10','file10_statut')"></th>
+                                            {{-- <th scope="row" id="file10_statut"><span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span></th> --}}
+                                            <th scope="row" id="file10_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row">11</th>
+                                            <th scope="row">Numero de telephone de l'assure</th>
+                                            <th scope="row"><input type="file" id="file14" id="file14" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file14','file14_statut')"></th>
+                                            <th scope="row" id="file14_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                        </tr>
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -515,23 +638,12 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <img  alt="" id="file_preview" />
                 </div>
-                <div class="modal-footer">
+                {{-- <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -554,31 +666,30 @@
 
 <script>
     function myFunction(file,status){
-        $.ajaxSetup({
-            headers: ({
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            })
-        })
-        var files = $(file).val();
-        var original_file = document.getElementById('file1').files[0];
-        var name = original_file.name;
-        var extension_file = name.split('.').pop().toLowerCase();
-        var form_data = new FormData();
-        form_data.append('file',original_file);
+        // $.ajaxSetup({
+        //     headers: ({
+        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //     })
+        // })
+        // var files = $(file).val();
+        // var original_file = document.getElementById('file1').files[0];
+        // var name = original_file.name;
+        // var extension_file = name.split('.').pop().toLowerCase();
+        // var form_data = new FormData();
+        // form_data.append('file',original_file);
         if (file != '') {
-            //  alert(form_data);
-            $.ajax({
-                            type: 'post',
-                            url: "{{route('temp-file')}}",
-                            dataType: 'json',
-                            enctype: 'multipart/form-data',
-                            data:{form_data},
+             var fichier = document.getElementById(file);
 
-                            success: function(data) {
+		    if (fichier.files && fichier.files[0]) {
 
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#file_preview').attr('src',e.target.result).width(300).height(400);
 
-                            }
-                })
+                };
+                reader.readAsDataURL(fichier.files[0]);
+            }
+
             document.getElementById(status).innerHTML='<span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span>';
         }
     }

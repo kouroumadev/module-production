@@ -6,6 +6,7 @@ use App\Models\Deposant;
 use App\Models\Employee;
 use App\Models\Employer;
 use App\Models\Enfant;
+use App\Models\user;
 use App\Models\Wife;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

@@ -18,7 +18,7 @@ class HomeController extends Controller
         return view('login');
     }
     public function PensionIndex() {
-        Alert::error(' Invalide Numéro', 'Ce N° d\'Immatriculation n\'existe pas dans la base de données de la CNSS');
+
         return view('pensionnaire.index');
     }
     public function reclamationIndex() {
@@ -33,6 +33,7 @@ class HomeController extends Controller
     public function PensionnaireInfo(Request $request){
 
         $no_immat = $request->no_immatriculation;
+        $type_pension = $request->type_pension;
         // dd($no_immat);
         $employe = DB::connection('metier')->table('employe')->where('no_employe','=',$no_immat)->get();
         // dd($employe);
@@ -41,6 +42,7 @@ class HomeController extends Controller
             // return view('pensionnaire.index', compact('flag'));
             // return Redirect::back()->withErrors(['flag' => '1']);
             // Alert::success('Success Title', 'Success Message');
+            Alert::error(' Invalide Numéro', 'Ce N° d\'Immatriculation n\'existe pas dans la base de données de la CNSS');
             return view('pensionnaire.index',compact('flag'));
 
         }
@@ -94,7 +96,7 @@ class HomeController extends Controller
         //  $data['employeur'] = $employeur;
         // dd($data);
         // return view('pensionnaire.pensionnaire-info',compact('data'));
-        return view('pensionnaire.index',compact('data'));
+        return view('pensionnaire.index',compact('data','type_pension'));
     }
 
 }
