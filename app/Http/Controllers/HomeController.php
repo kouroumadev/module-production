@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
 
 
 class HomeController extends Controller
@@ -18,8 +19,9 @@ class HomeController extends Controller
         return view('login');
     }
     public function PensionIndex() {
+        $emps = Auth::user()->employees;
 
-        return view('pensionnaire.index');
+        return view('pensionnaire.index', compact('emps'));
     }
     public function reclamationIndex() {
         return view('reclamation.index');
