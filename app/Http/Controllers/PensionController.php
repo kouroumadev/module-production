@@ -23,6 +23,7 @@ class PensionController extends Controller
         return view('pensionnaire.details', compact('emp'));
     }
     public function store(Request $request) {
+        dd($request->all());
         // dd(json_decode($request->details));
         $user_id = Auth::user()->id;
 

@@ -18,60 +18,19 @@
             <div class="title">
                 <h4>PRESTATIONS</h4>
             </div>
-            @if (isset($type_pension))
-                @if ($type_pension == "Retraite")
-                    <nav aria-label="breadcrumb" role="navigation">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Retraite</li>
-                        </ol>
-                    </nav>
-                @elseif ($type_pension == "reversion")
-                    <nav aria-label="breadcrumb" role="navigation">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Reversion</li>
-                        </ol>
-                    </nav>
-                @elseif ($type_pension == "Invalidite")
-                    <nav aria-label="breadcrumb" role="navigation">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Invalidité</li>
-                        </ol>
-                    </nav>
-                @elseif ($type_pension == "allocation de vieillesse")
-                    <nav aria-label="breadcrumb" role="navigation">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Allocation de vieillesse</li>
-                        </ol>
-                    </nav>
-                @elseif ($type_pension == "Deces en Activite")
-                    <nav aria-label="breadcrumb" role="navigation">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Décès en Activité</li>
-                        </ol>
-                    </nav>
-                @elseif ($type_pension == "Pensions Temporaires d'Orphelin")
-                    <nav aria-label="breadcrumb" role="navigation">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Pensions Temporaires d'Orphelin</li>
-                        </ol>
-                    </nav>
-                @endif
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        @if (isset($type_pension))
+                            {{ $type_pension }}
+                        @else
+                            Gestion des Pensions
+                        @endif
 
-            @else
-                <nav aria-label="breadcrumb" role="navigation">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Gestion des Pensions</li>
-                    </ol>
-                </nav>
-            @endif
-
+                    </li>
+                </ol>
+            </nav>
         </div>
     </div>
 </div>
@@ -233,6 +192,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Photo du Pensionnaire</label>
+                                        <input type="file" name="photo" class="form-control-file" id="exampleFormControlFile1" onchange="readURL(this)">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="" class="rounded" alt="No Image" id="img" style='height:150px;'> <br>
+                                </div>
+                            </div>
                         </section>
                         <!-- Step 2 -->
                         <h5>Infos Employeur</h5>
@@ -276,6 +246,7 @@
                             ?>
 
                             <input type="hidden" name="details" value="{{ $details }}">
+                            <input type="hidden" name="type_pension" value="{{ $type_pension }}">
 
 
                             <div class="faq-wrap">
@@ -678,6 +649,20 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function readURL(input) {
+          if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              document.querySelector("#img").setAttribute("src",e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+          }
+        }
+    </script>
 
     <script>
         function loadDeposant(){
