@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nom_wife');
             $table->string('prenom_wife');
             $table->string('no_conjoint_wife');
-            $table->string('date_mariage_wife');
+            $table->string('date_mariage_wife')->nullable();
             $table->string('sexe_wife')->nullable();
             $table->string('date_naissance_wife')->nullable();
             $table->string('lieu_naissance_wife')->nullable();

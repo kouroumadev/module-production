@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('employer_id')->constrained('employers');
             $table->string('no_ima_employee');
             $table->string('nom_employee');
             $table->string('prenom_employee');
@@ -22,6 +23,8 @@ return new class extends Migration
             $table->string('tel_employee')->nullable();
             $table->string('adresse_employee')->nullable();
             $table->string('situation_matri_employee');
+            $table->string('type_pension')->nullable();
+            $table->string('photo');
             $table->string('created_by')->nullable();
             $table->string('status')->default('1');
             $table->timestamps();

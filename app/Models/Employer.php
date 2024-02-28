@@ -11,7 +11,6 @@ class Employer extends Model
 
     protected $fillable = [
         'id',
-        'employee_id',
         'no_employer',
         'raison_sociale',
         'category',
@@ -19,7 +18,7 @@ class Employer extends Model
         'status'
     ];
 
-    public function employee() {
-        return $this->belongsTo(Employee::class, 'employee_id');
+    public function employees() {
+        return $this->hasMany(Employee::class, 'employer_id','id');
     }
 }

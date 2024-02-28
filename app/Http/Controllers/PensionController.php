@@ -10,6 +10,8 @@ use App\Models\user;
 use App\Models\Wife;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class PensionController extends Controller
 {
@@ -23,11 +25,30 @@ class PensionController extends Controller
         return view('pensionnaire.details', compact('emp'));
     }
     public function store(Request $request) {
-        dd($request->all());
+        // dd(json_decode($request->details));
         // dd(json_decode($request->details));
         $user_id = Auth::user()->id;
 
+
+        $file = $request->file('pensionnaire_photo')->getClientOriginalName();
+        $filename = pathinfo($file, PATHINFO_FILENAME);
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
+
+        $img = $filename."-".time()."-".$request->no_ima_employee.".".$extension;
+
+        Storage::disk('pensionnaireImg')->put($img,file_get_contents($request->file('pensionnaire_photo')));
+
+        $employer = new Employer();
+        $employer->no_employer = $request->no_employer;
+        $employer->raison_sociale = $request->raison_sociale;
+        $employer->category = $request->category;
+        $employer->created_by = $user_id;
+        $employer->save();
+        $employer_last_id = $employer->id;
+
+
         $employee = new Employee();
+        $employee->employer_id = $employer_last_id;
         $employee->no_ima_employee = $request->no_ima_employee;
         $employee->nom_employee = $request->nom_employee;
         $employee->prenom_employee = $request->prenom_employee;
@@ -37,6 +58,8 @@ class PensionController extends Controller
         $employee->tel_employee = $request->tel_employee;
         $employee->adresse_employee = $request->adresse_employee;
         $employee->situation_matri_employee = $request->situation_matri_employee;
+        $employee->type_pension = $request->type_pension;
+        $employee->photo = $img;
         $employee->created_by = $user_id;
         $employee->save();
         $employee_last_id = $employee->id;
@@ -52,15 +75,6 @@ class PensionController extends Controller
         $deposant->created_by = $user_id;
         $deposant->save();
 
-        $employer  = new Employer();
-        $employer->employee_id = $employee_last_id;
-        $employer->no_employer = $request->no_employer;
-        $employer->raison_sociale = $request->raison_sociale;
-        $employer->category = $request->category;
-        $employer->created_by = $user_id;
-        $employer->save();
-
-
         foreach(json_decode($request->details) as $data){
             $wife = new Wife();
             $wife->employee_id = $employee_last_id;
@@ -68,7 +82,6 @@ class PensionController extends Controller
             $wife->prenom_wife = $data->conjoint_prenom;
             $wife->no_conjoint_wife = $data->no_conjoint;
             $wife->date_mariage_wife = $data->date_mariage;
-            $wife->sexe_wife = $data->sexe;
             $wife->date_naissance_wife = $data->date_naissance;
             $wife->lieu_naissance_wife = $data->lieu_naissance;
             $wife->created_by = $user_id;
@@ -94,7 +107,7 @@ class PensionController extends Controller
 
         }
 
-        return redirect(route('pension.show'))->with('yes','Enregistrer avec succes');
+        return redirect(route('pension.index'))->with('yes','Enregistrer avec succes');
 
 
     }

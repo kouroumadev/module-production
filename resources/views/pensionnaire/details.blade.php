@@ -27,13 +27,15 @@
                     <div class="pd-20 card-box height-100-p">
                         <div class="profile-photo">
                             <a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-eye"></i></a>
-                            <img src="{{ asset('theme/vendors/images/photo1.jpg') }}" alt="" class="avatar-photo">
+                            {{-- <img src="{{ asset('theme/vendors/images/photo1.jpg') }}" alt="" class="avatar-photo"> --}}
+                            <img src="{{ asset('storage/pensionnaireImg/'.$emp->photo) }}" class="avatar-photo" alt="">
+
                             <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body pd-5">
                                             <div class="img-container">
-                                                <img id="image" src="{{ asset('theme/vendors/images/photo2.jpg') }}" alt="Picture">
+                                                <img id="image" src="{{ asset('storage/pensionnaireImg/'.$emp->photo) }}" alt="Picture">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -105,18 +107,18 @@
                                                         {{-- <h4 class="text-blue h5 mb-20">Edit Your Personal Setting</h4> --}}
                                                         <div class="form-group">
                                                             <label>N° Employeur</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->employers['0']->no_employer }}" type="text" readonly>
+                                                            <input class="form-control form-control-lg" value="{{ $emp->employer->no_employer }}" type="text" readonly>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Categorie</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->employers['0']->category }}" type="email" readonly>
+                                                            <input class="form-control form-control-lg" value="{{ $emp->employer->category }}" type="email" readonly>
                                                         </div>
                                                     </li>
                                                     <li class="weight-500 col-md-6">
                                                         {{-- <h4 class="text-blue h5 mb-20">Edit Social Media links</h4> --}}
                                                         <div class="form-group">
                                                             <label>Raison Sociale</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->employers['0']->raison_sociale }}" type="text" readonly>
+                                                            <input class="form-control form-control-lg" value="{{ $emp->employer->raison_sociale }}" type="text" readonly>
                                                         </div>
                                                     </li>
                                                 </ul>

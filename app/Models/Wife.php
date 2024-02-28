@@ -16,7 +16,6 @@ class Wife extends Model
         'prenom_wife',
         'no_conjoint_wife',
         'date_mariage_wife',
-        'sexe_wife',
         'date_naissance_wife',
         'lieu_naissance_wife',
         'created_by',

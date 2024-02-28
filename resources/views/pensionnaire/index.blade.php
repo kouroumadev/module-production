@@ -96,7 +96,7 @@
             <tr>
                 <td class="">{{ $emp->no_ima_employee }}</td>
                 <td class="">{{ $emp->prenom_employee }} <span class="text-uppercase">{{ $emp->nom_employee }}</span></td>
-                <td>{{ $emp->employers['0']->raison_sociale }}</td>
+                <td>{{ $emp->employer->raison_sociale }}</td>
                 <td>{{ $emp->created_at }}</td>
                 <td><span class="badge badge-warning">En Cours...</span></td>
                 <td>DCG</td>
@@ -196,7 +196,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Photo du Pensionnaire</label>
-                                        <input type="file" name="photo" class="form-control-file" id="exampleFormControlFile1" onchange="readURL(this)">
+                                        <input type="file" name="pensionnaire_photo" class="form-control-file" id="exampleFormControlFile1" onchange="readURL(this)">
                                     </div>
                                 </div>
                                 <div class="col-md-4">

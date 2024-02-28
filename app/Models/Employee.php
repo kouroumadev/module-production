@@ -11,6 +11,7 @@ class Employee extends Model
 
     protected $fillable = [
         'id',
+        'employer_id',
         'no_ima_employee',
         'nom_employee',
         'prenom_employee',
@@ -20,13 +21,15 @@ class Employee extends Model
         'tel_employee',
         'adresse_employee',
         'situation_matri_employee',
+        'type_pension',
+        'photo',
         'created_by',
         'status',
         'created_at'
     ];
 
-    public function employers() {
-        return $this->hasMany(Employer::class, 'employee_id');
+    public function employer() {
+        return $this->belongsTo(Employer::class, 'employer_id','id');
     }
     public function wifes() {
         return $this->hasMany(Wife::class, 'employee_id');
