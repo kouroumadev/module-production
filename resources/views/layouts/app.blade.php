@@ -48,12 +48,12 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.11.4/b-2.2.2/r-2.2.9/sc-2.0.5/sp-1.4.0/datatables.min.css"/>
 
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.11.4/b-2.2.2/r-2.2.9/sc-2.0.5/sp-1.4.0/datatables.min.js"></script>
+    {{-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jqc-1.12.4/dt-1.11.4/b-2.2.2/r-2.2.9/sc-2.0.5/sp-1.4.0/datatables.min.js"></script> --}}
 
 
 
 {{-- Ajax --}}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script> --}}
 
 
 
@@ -71,6 +71,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <!-- js -->
+    {{-- <script src="{{ asset('theme/src/scripts/jquery.min.js') }}"></script> --}}
     <script src="{{ asset('theme/vendors/scripts/core.js') }}"></script>
     <script src="{{ asset('theme/vendors/scripts/script.min.js') }}"></script>
     <script src="{{ asset('theme/vendors/scripts/process.js') }}"></script>
@@ -78,7 +79,7 @@
     <script src="{{ asset('theme/src/plugins/switchery/switchery.min.js') }}"></script>
     <script src="{{ asset('theme/src/plugins/apexcharts/apexcharts.min.js') }}"></script>
 
-    <script src="{{ asset('theme/vendors/scripts/dashboard.js') }}"></script>
+    {{-- <script src="{{ asset('theme/vendors/scripts/dashboard.js') }}"></script> --}}
     <script src="{{ asset('theme/src/plugins/jquery-steps/jquery.steps.js') }}"></script>
     <script src="{{ asset('theme/vendors/scripts/steps-setting.js') }}"></script>
     <script src="{{ asset('theme/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script>
