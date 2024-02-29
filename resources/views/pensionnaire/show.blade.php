@@ -53,7 +53,7 @@
                 <tr>
                     <td class="">{{ $emp->no_ima_employee }}</td>
                     <td class="">{{ $emp->prenom_employee }} <span class="text-uppercase">{{ $emp->nom_employee }}</span></td>
-                    <td>{{ $emp->employers['0']->raison_sociale }}</td>
+                    <td>{{ $emp->employer->raison_sociale }}</td>
                     <td>{{ $emp->created_at }}</td>
                     <td><span class="badge badge-warning">En Cours...</span></td>
                     <td>DCG</td>
