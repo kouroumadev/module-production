@@ -226,9 +226,67 @@
                                     <!-- docs Tab start -->
                                     <div class="tab-pane fade height-100-p" id="setting" role="tabpanel">
                                         <div class="profile-setting">
-                                           @foreach ($emp->docs as $key => $value)
+                                            <div class="row p-2">
+                                                <dir class="col-md-12">
+                                                    <table class="table table-bordered">
+                                                        <thead class="bg-success">
+                                                            <tr>
+                                                                <th scope="col" class="text-white">#</th>
+                                                                <th scope="col" class="text-white">Nom des Pièces fournis</th>
+                                                                <th scope="col" class="text-white">Voir de Fichier</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php
+                                                                   for($i=0;$i<count($emp->docs['0']->data['paths']);$i++){ ?>
+                                                                    <tr>
+                                                                        <th scope="row">{{ $i+1 }}</th>
+                                                                        <th scope="row">{{ $emp->docs['0']->data['titles'][$i] }}</th>
+                                                                        <th scope="row">
+                                                                            <div class="col-md-12 col-sm-12 mb-30">
+                                                                                <div class="pd-20 card-box height-100-p">
+                                                                                    {{-- <h5 class="h4">Large modal</h5> --}}
+                                                                                    <a href="#" class="btn-block" data-toggle="modal" data-target="#bd-example-modal-lg{{ $i }}" type="button">
+                                                                                        {{-- <img src="{{ asset('theme/vendors/images/modal-img1.jpg') }}" alt="modal"> --}}
+                                                                                        <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
+
+                                                                                    </a>
+                                                                                    <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg{{ $i }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                                                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                                                            <div class="modal-content">
+                                                                                                <div class="modal-header">
+                                                                                                    <h4 class="modal-title" id="myLargeModalLabel">{{ $emp->docs['0']->data['titles'][$i] }}</h4>
+                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                                                </div>
+                                                                                                <div class="modal-body">
+                                                                                                    <iframe src="{{ asset('storage/docs/'.$emp->docs['0']->data['paths'][$i]) }}" width="100%" height="500">
+                                                                                                        This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('storage/docs/'.$emp->docs['0']->data['paths'][$i]) }}">Download PDF</a>
+                                                                                                    </iframe>
+                                                                                                </div>
+                                                                                                {{-- <div class="modal-footer">
+                                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                                                                </div> --}}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            {{-- <iframe src="{{ asset('storage/docs/'.$emp->docs['0']->data['paths'][$i]) }}" width="50%" height="100%">
+                                                                                This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('storage/docs/'.$emp->docs['0']->data['paths'][$i]) }}">Download PDF</a>
+                                                                            </iframe> --}}
+                                                                        </th>
+                                                                        {{-- <th scope="row"><i class="fa fa-eye" aria-hidden="true"></i></th> --}}
+                                                                    </tr>
+                                                                  <?php }
+                                                                ?>
+                                                            </tbody>
+                                                    </table>
+                                                </dir>
+                                            </div>
+                                            {{-- @foreach ($emp->docs as $key => $value)
                                                {{ print_r($value->data['titles']) }}
-                                           @endforeach
+                                            @endforeach --}}
                                         </div>
                                     </div>
                                     <!-- docs Tab End -->
