@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deposant;
+use App\Models\Doc;
 use App\Models\Employee;
 use App\Models\Employer;
 use App\Models\Enfant;
@@ -25,7 +26,7 @@ class PensionController extends Controller
         return view('pensionnaire.details', compact('emp'));
     }
     public function store(Request $request) {
-        // dd(json_decode($request->details));
+        // dd($request->all());
         // dd(json_decode($request->details));
         $user_id = Auth::user()->id;
 
@@ -63,6 +64,37 @@ class PensionController extends Controller
         $employee->created_by = $user_id;
         $employee->save();
         $employee_last_id = $employee->id;
+
+
+
+        if($request->hasfile('files'))
+         {
+            $noms = [];
+            $titles = [];
+            $data = [];
+
+            foreach($request->file('files') as $file)
+            {
+                $name = time().rand(1,100).'.'.$file->extension();
+                $file->storeAs('public/docs', $name);
+                $noms[] = $name;
+            }
+
+            for($i=0; $i<count($noms); $i++){
+                $titles[] = $request->titles[$i];
+            }
+
+            $data['paths'] = $noms;
+            $data['titles'] = $titles;
+
+            $doc = new Doc();
+            $doc->employee_id = $employee_last_id;
+            $doc->data = json_encode($data);
+            $doc->level = '';
+            $doc->created_by = $user_id;
+            $doc->save();
+         }
+
 
         $deposant = new Deposant();
         $deposant->employee_id = $employee_last_id;

@@ -12,11 +12,18 @@ class Doc extends Model
     protected $fillable = [
         'id',
         'employee_id',
-        'type',
-        'nom',
+        'data',
+        'level',
         'created_by',
         'status'
     ];
+
+
+    // protected $casts = [
+    //     'noms' => 'array',
+    //     'titles' => 'array',
+    // ];
+
 
     public function employee() {
         return $this->belongsTo(Employee::class, 'employee_id');
