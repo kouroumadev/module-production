@@ -42,7 +42,7 @@
         @csrf
     <div class="col-md-4">
         <div class="form-group">
-            <select class=" form-control" id="type_pension" name="type_pension" data-style="btn-outline-success" data-size="5" required>
+            <select class="form-control" id="type_pension" name="type_pension" data-style="btn-outline-success" data-size="5" required>
                 <option selected>Selectionner le type de pension</option>
                 <option value="Retraite">Retraite</option>
                 <option value="reversion">Reversion</option>
@@ -174,14 +174,14 @@
                                     <div class="form-group">
                                         <label>Telephone:</label>
                                         <input type="text" class="form-control" name="tel_employee"
-                                            id="telephone_employe">
+                                            id="telephone_employe" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Adresse:</label>
                                         <input type="text" class="form-control" name="adresse_employee"
-                                            id="adresse_employe">
+                                            id="adresse_employe" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -196,7 +196,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Photo du Pensionnaire</label>
-                                        <input type="file" name="pensionnaire_photo" class="form-control-file" id="exampleFormControlFile1" onchange="readURL(this)">
+                                        <input type="file" name="pensionnaire_photo" class="form-control-file" id="exampleFormControlFile1" onchange="readURL(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -478,61 +478,61 @@
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <th scope="row">Demande adressé au DG</th>
-                                                <th scope="row"><input type="file" id="file1" name="file1" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg"   onchange="myFunction('file1','file1_statut')" id="file1" /></th>
+                                                <th scope="row"><input type="file" id="file11" name="file1" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg"   onchange="myFunction('file1','file1_statut')" id="file1" /></th>
                                                 <th scope="row" id="file1_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
                                                 <th scope="row">Le carnet d'assuré ou le dernier Bulletin</th>
-                                                <th scope="row"><input type="file"  id="file2" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file2','file2_statut')"></th>
+                                                <th scope="row"><input type="file"  id="file12" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file2','file2_statut')"></th>
                                                 <th scope="row" id="file2_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
                                                 <th scope="row">Acte ou le Certificat de décès</th>
-                                                <th scope="row"><input type="file"  id="file3" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file3','file3_statut')"></th>
+                                                <th scope="row"><input type="file"  id="file13" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file3','file3_statut')"></th>
                                                 <th scope="row" id="file3_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">4</th>
                                                 <th scope="row">Le procès verbal de conseil de famille</th>
-                                                <th scope="row"><input type="file"  id="file4" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file4','file4_statut')"></th>
+                                                <th scope="row"><input type="file"  id="file14" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file4','file4_statut')"></th>
                                                 <th scope="row" id="file4_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">5</th>
                                                 <th scope="row">Le certificat de résidence de chaque veuve</th>
-                                                <th scope="row"><input type="file"  id="file5" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file5','file5_statut')"></th>
+                                                <th scope="row"><input type="file"  id="file15" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file5','file5_statut')"></th>
                                                 <th scope="row" id="file5_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">6</th>
                                                 <th scope="row">Copie légalisée de l'extrait de mariage de chaque veuve</th>
-                                                <th scope="row"><input type="file"  id="file6" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file6','file6_statut')"></th>
+                                                <th scope="row"><input type="file"  id="file16" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file6','file6_statut')"></th>
                                                 <th scope="row" id="file6_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">7</th>
                                                 <th scope="row">Quatre(4) photos d'identités de chaque veuve</th>
-                                                <th scope="row"><input type="file"  id="file7" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file7','file7_statut')"></th>
+                                                <th scope="row"><input type="file"  id="file17" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file7','file7_statut')"></th>
                                                 <th scope="row" id="file7_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">8</th>
                                                 <th scope="row">La copie recto-verso de la carte d'identité de chaque veuve</th>
-                                                <th scope="row"><input type="file"  id="file8" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file8','file8_statut')"></th>
+                                                <th scope="row"><input type="file"  id="file18" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file8','file8_statut')"></th>
                                                 <th scope="row" id="file8_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">9</th>
                                                 <th scope="row">La copie légalisée de l'extrait de naissance de chaque enfant de moins de 17 ans</th>
-                                                <th scope="row"><input type="file"  id="file9" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file9','file9_statut')"></th>
+                                                <th scope="row"><input type="file"  id="file19" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file9','file9_statut')"></th>
                                                 <th scope="row" id="file9_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">10</th>
                                                 <th scope="row">Certificat de vie collective individuelle des enfants de moins de 17 ans</th>
-                                                <th scope="row"><input type="file"  id="file10" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file10','file10_statut')"></th>
+                                                <th scope="row"><input type="file"  id="file110" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file10','file10_statut')"></th>
                                                 {{-- <th scope="row" id="file10_statut"><span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span></th> --}}
                                                 <th scope="row" id="file10_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                             </tr>
@@ -540,7 +540,7 @@
                                             <tr>
                                                 <th scope="row">11</th>
                                                 <th scope="row">Numero de telephone de l'assure</th>
-                                                <th scope="row"><input type="file" id="file14" id="file14" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file14','file14_statut')"></th>
+                                                <th scope="row"><input type="file" id="file111" id="file14" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file14','file14_statut')"></th>
                                                 <th scope="row" id="file14_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                             </tr>
                                             @endif
