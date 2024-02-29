@@ -226,7 +226,9 @@
                                     <!-- docs Tab start -->
                                     <div class="tab-pane fade height-100-p" id="setting" role="tabpanel">
                                         <div class="profile-setting">
-
+                                           @foreach ($emp->docs as $key => $value)
+                                               {{ print_r($value->data['titles']) }}
+                                           @endforeach
                                         </div>
                                     </div>
                                     <!-- docs Tab End -->

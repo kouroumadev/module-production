@@ -19,10 +19,9 @@ class Doc extends Model
     ];
 
 
-    // protected $casts = [
-    //     'noms' => 'array',
-    //     'titles' => 'array',
-    // ];
+     protected $casts = [
+         'data' => 'array',
+     ];
 
 
     public function employee() {
