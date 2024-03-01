@@ -14,6 +14,13 @@ class HomeController extends Controller
     public function dashboard() {
         return view('dashboard');
     }
+    public function home() {
+        if (Auth::check()) {
+            return view('dashboard');
+        } else {
+            return view('login');
+        }
+    }
     public function login() {
         // Alert::error('Invalide Numéro', 'Ce N° d\'Immatriculation n\'existe pas dans la base de données de la CNSS');
         return view('login');

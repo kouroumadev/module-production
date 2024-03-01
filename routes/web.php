@@ -30,7 +30,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'login'])->name('login');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
+Route::get('/login', [App\Http\Controllers\HomeController::class, 'login'])->name('login');
 Route::post('/logout', [App\Http\Controllers\AuthController::class, 'Logout'])->name('user.logout');
 
 
