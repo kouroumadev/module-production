@@ -227,7 +227,7 @@
                                     <div class="tab-pane fade height-100-p" id="setting" role="tabpanel">
                                         <div class="profile-setting">
                                             <div class="row p-2">
-                                                <dir class="col-md-12">
+                                                <div class="col-md-12">
                                                     <table class="table table-bordered">
                                                         <thead class="bg-success">
                                                             <tr>
@@ -282,7 +282,7 @@
                                                                 ?>
                                                             </tbody>
                                                     </table>
-                                                </dir>
+                                                </div>
                                             </div>
                                             {{-- @foreach ($emp->docs as $key => $value)
                                                {{ print_r($value->data['titles']) }}

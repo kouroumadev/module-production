@@ -7,7 +7,7 @@ use App\Http\Requests\LoginRequest;
 use Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
@@ -40,7 +40,8 @@ class AuthController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return redirect('dashboard');
+        Alert::success(' Enregistrer', '');
+        return redirect('login');
     }
 
     public function Logout(){
