@@ -238,7 +238,7 @@
                                                             </thead>
                                                             <tbody>
                                                                 <?php
-                                                                   for($i=0;$i<count($emp->docs['0']->data['paths']);$i++){ ?>
+                                                                for($i=0;$i<count($emp->docs['0']->data['paths']);$i++){ ?>
                                                                     <tr>
                                                                         <th scope="row">{{ $i+1 }}</th>
                                                                         <th scope="row">{{ $emp->docs['0']->data['titles'][$i] }}</th>
@@ -278,8 +278,8 @@
                                                                         </th>
                                                                         {{-- <th scope="row"><i class="fa fa-eye" aria-hidden="true"></i></th> --}}
                                                                     </tr>
-                                                                  <?php }
-                                                                ?>
+                                                                <?php } ?>
+
                                                             </tbody>
                                                     </table>
                                                 </dir>

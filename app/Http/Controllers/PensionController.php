@@ -89,7 +89,7 @@ class PensionController extends Controller
 
             $doc = new Doc();
             $doc->employee_id = $employee_last_id;
-            $doc->data = json_encode($data);
+            $doc->data = $data;
             $doc->level = '';
             $doc->created_by = $user_id;
             $doc->save();

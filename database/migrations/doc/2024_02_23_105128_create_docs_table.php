@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('docs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->constrained('employees');
-            $table->longText('data')->nullable();
+            $table->json('data')->nullable();
             $table->string('level')->nullable();
             $table->string('created_by')->nullable();
             $table->string('status')->default('1');
