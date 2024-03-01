@@ -6,6 +6,7 @@ use App\Models\Deposant;
 use App\Models\Doc;
 use App\Models\Employee;
 use App\Models\Employer;
+use App\Models\Dept;
 use App\Models\Enfant;
 use App\Models\user;
 use App\Models\Wife;
@@ -23,8 +24,9 @@ class PensionController extends Controller
     }
     public function details(int $id){
         $emp = Employee::find($id);
+        $depts = Dept::all();
         // dd($emp);
-        return view('pensionnaire.details', compact('emp'));
+        return view('pensionnaire.details', compact('emp','depts'));
     }
     public function store(Request $request) {
         // dd($request->all());

@@ -24,6 +24,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/pension/show', [App\Http\Controllers\PensionController::class, 'show'])->name('pension.show');
     Route::get('/pension/details/{id}', [App\Http\Controllers\PensionController::class, 'details'])->name('pension.details');
 
+    // DEPARTEMENT
+    Route::get('/dept/index', [App\Http\Controllers\DeptController::class, 'index'])->name('dept.index');
+    Route::post('/dept/store', [App\Http\Controllers\DeptController::class, 'store'])->name('dept.store');
+
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'login'])->name('login');

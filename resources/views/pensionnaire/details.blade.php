@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <h5 class="text-center h5 mb-0">{{ $emp->prenom_employee }} <span class="text-uppercase">{{ $emp->nom_employee }}</span></h5>
-                        <p class="text-center text-muted font-14">Lorem ipsum dolor sit amet</p>
+                        {{-- <p class="text-center text-muted font-14">Lorem ipsum dolor sit amet</p> --}}
                         <div class="profile-info">
                             <h5 class="mb-20 h5 text-blue text-center">Infos Personnelles</h5>
                             <ul>
@@ -95,6 +95,9 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#setting" role="tab">Documents</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#end" role="tab">Transmission</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content">
@@ -290,6 +293,29 @@
                                         </div>
                                     </div>
                                     <!-- docs Tab End -->
+                                    <!-- end Tab End -->
+                                    <div class="tab-pane fade" id="end" role="tabpanel">
+                                        <div class="profile-setting p-5">
+                                            <form method="post">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label>Selectionner le departement concerner</label>
+                                                    <select class="form-control" required>
+                                                        <option value="">Selectionner</option>
+                                                        @foreach ($depts as $dept)
+                                                            <option value="{{ $dept->id }}">{{ $dept->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Observation</label>
+                                                    <textarea class="form-control" required></textarea>
+                                                </div>
+                                                <button type="submit" class="btn btn-success">Transferer</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- end Tab End -->
                                 </div>
                             </div>
                         </div>
