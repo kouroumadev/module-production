@@ -12,7 +12,7 @@ use App\Models\Wife;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PensionController extends Controller
 {
@@ -23,6 +23,7 @@ class PensionController extends Controller
     }
     public function details(int $id){
         $emp = Employee::find($id);
+        // dd($emp);
         return view('pensionnaire.details', compact('emp'));
     }
     public function store(Request $request) {
@@ -138,7 +139,7 @@ class PensionController extends Controller
             }
 
         }
-
+        Alert::success(' Document Enregistré', '');
         return redirect(route('pension.index'))->with('yes','Enregistrer avec succes');
 
 

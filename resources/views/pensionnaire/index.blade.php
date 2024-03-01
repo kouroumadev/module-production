@@ -43,7 +43,7 @@
     <div class="col-md-4">
         <div class="form-group">
             <select class="form-control" id="type_pension" name="type_pension" data-style="btn-outline-success" data-size="5" required>
-                <option selected>Selectionner le type de pension</option>
+                <option  selected>Selectionner le type de pension</option>
                 <option value="Retraite">Retraite</option>
                 <option value="reversion">Reversion</option>
                 <option value="Invalidite">Invalidite</option>
@@ -255,11 +255,11 @@
                                 <div id="accordion">
                                     <div class="card">
                                         <div class="card-header">
-                                            <div class="btn btn-block" data-toggle="collapse" data-target="#faq{{ $key }}">
+                                            <div class="btn btn-block" data-toggle="collapse" data-target="faq{{ $key }}">
                                             Conjoint(e) {{ $key+1}} - {{ $value['conjoint_name'] }} {{ $value['conjoint_prenom'] }}
                                             </div>
                                         </div>
-                                        <div id="#faq{{ $key }}" class="collapse show" data-parent="#accordion">
+                                        <div id="faq{{ $key }}" class="collapse show" data-parent="accordion">
                                             <div class="card-body">
                                                 <table class="table">
                                                     <thead>

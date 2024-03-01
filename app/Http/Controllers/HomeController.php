@@ -36,18 +36,29 @@ class HomeController extends Controller
 
         $no_immat = $request->no_immatriculation;
         $type_pension = $request->type_pension;
-        // dd($no_immat);
+        //  dd($type_pension);
         $employe = DB::connection('metier')->table('employe')->where('no_employe','=',$no_immat)->get();
-        // dd($employe);
-        if($employe->isEmpty()){
+
+        if ($type_pension == "Selectionner le type de pension") {
             $flag = '1';
-            // return view('pensionnaire.index', compact('flag'));
-            // return Redirect::back()->withErrors(['flag' => '1']);
-            // Alert::success('Success Title', 'Success Message');
+
+            Alert::error(' Invalide Type de pension', '');
+            return view('pensionnaire.index',compact('flag'));
+        } else if($employe->isEmpty()){
+            $flag = '1';
+
             Alert::error(' Invalide Numéro', 'Ce N° d\'Immatriculation n\'existe pas dans la base de données de la CNSS');
             return view('pensionnaire.index',compact('flag'));
-
         }
+
+        // dd($employe);
+        // if($employe->isEmpty()){
+        //     $flag = '1';
+
+        //     Alert::error(' Invalide Numéro', 'Ce N° d\'Immatriculation n\'existe pas dans la base de données de la CNSS');
+        //     return view('pensionnaire.index',compact('flag'));
+
+        // }
 
         $conjoints = DB::connection('metier')->table('conjoint')->where('no_employe','=',$no_immat)->get();
         $no_employeur = $employe[0]->no_employeur;
