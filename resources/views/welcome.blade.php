@@ -240,7 +240,7 @@
                         <span class="micon dw dw-edit-2"></span><span class="mtext">Parametrage</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ route('dept.index') }}">Utilisateurs</a></li>
+                        <li><a href="{{ route('user.index') }}">Utilisateurs</a></li>
                         <li><a href="{{ route('dept.index') }}">Departements</a></li>
                         <li><a href="getting-started.html">Getting Started</a></li>
                         <li><a href="color-settings.html">Color Settings</a></li>

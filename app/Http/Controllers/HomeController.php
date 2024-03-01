@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -43,18 +44,25 @@ class HomeController extends Controller
 
         $no_immat = $request->no_immatriculation;
         $type_pension = $request->type_pension;
+
+        $emp = Employee::where('no_ima_employee', $no_immat)->get();
+
+        if(!$emp->isEmpty()){
+            Alert::error('', "Ce N° d'Immatriculation existe deja dans la base de données de la CNSS");
+            return view('pensionnaire.index');
+        }
         //  dd($type_pension);
         $employe = DB::connection('metier')->table('employe')->where('no_employe','=',$no_immat)->get();
 
         if ($type_pension == "Selectionner le type de pension") {
             $flag = '1';
 
-            Alert::error(' Invalide Type de pension', '');
+            Alert::error('Invalide Type de pension', 'Selectionner le type de pension');
             return view('pensionnaire.index',compact('flag'));
         } else if($employe->isEmpty()){
             $flag = '1';
 
-            Alert::error(' Invalide Numéro', 'Ce N° d\'Immatriculation n\'existe pas dans la base de données de la CNSS');
+            Alert::error('Invalide Numéro', 'Ce N° d\'Immatriculation n\'existe pas dans la base de données de la CNSS');
             return view('pensionnaire.index',compact('flag'));
         }
 
