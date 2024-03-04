@@ -28,7 +28,6 @@ class HomeController extends Controller
     }
     public function PensionIndex() {
         $emps = Auth::user()->employees;
-
         return view('pensionnaire.index', compact('emps'));
     }
     public function reclamationIndex() {
@@ -37,6 +36,7 @@ class HomeController extends Controller
     public function prestationIndex() {
         return view('prestation.index');
     }
+
     public function demandeIndex() {
         return view('demande.index');
     }

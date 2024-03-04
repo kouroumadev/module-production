@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
+use App\Models\Dept;
 use Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -27,20 +28,25 @@ class AuthController extends Controller
     }
 
     public function Registration(){
-
-        return view('registration');
+        $depts = Dept::all();
+        return view('registration', compact('depts'));
     }
 
     public function SignUp(Request $request){
 
+        // dd($request->all());
+
         $user = User::create([
+            'dept_id' => $request->dept_id,
             'name' => $request->name,
             'email' => $request->email,
-            'type_user' => $request->type_user,
-            'password' => Hash::make($request->password)
+            // 'type_user' => $request->type_user,
+            'password' => Hash::make($request->password),
+            'c_password' => $request->password,
+            'photo' => '',
         ]);
 
-        Alert::success(' Enregistrer', '');
+        Alert::success('Enregistrer', 'Enregistrer avec success');
         return redirect('login');
     }
 

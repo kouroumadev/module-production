@@ -33,36 +33,44 @@
                         <form method="POST" action="{{ route('user.signup') }}">
                             @csrf
                             <div class="input-group custom">
-                                <input type="text" class="form-control form-control-lg" name="name" placeholder=" Nom complet">
+                                <select name="dept_id" id="" class="form-control form-control-lg" required>
+                                    <option value="">-- Selectionner le departement --</option>
+                                    @foreach ($depts as $dept)
+                                        <option value="{{ $dept->id }}">{{ $dept->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="input-group custom">
+                                <input type="text" class="form-control form-control-lg" name="name" placeholder="Nom complet">
                                 <div class="input-group-append custom">
                                     <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                                 </div>
                             </div>
-                            @error('name')
+                            {{-- @error('name')
                             <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                            @enderror --}}
                             <div class="input-group custom">
                                 <input type="email" class="form-control form-control-lg" name="email" placeholder=" Adresse Email">
                                 <div class="input-group-append custom">
-                                    <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
+                                    <span class="input-group-text"><i class="icon-copy dw dw-email-1"></i></span>
                                 </div>
                             </div>
-                            @error('email')
+                            {{-- @error('email')
                             <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                            @enderror --}}
                             <div class="input-group custom">
-                                <input type="password" class="form-control form-control-lg" name="password" placeholder="**********">
+                                <input type="password" class="form-control form-control-lg" name="password" placeholder="Mot de passe">
                                 <div class="input-group-append custom">
                                     <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
                                 </div>
                             </div>
-                            @error('password')
+                            {{-- @error('password')
                             <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                            @enderror --}}
                             <div class="input-group custom">
-                                <input type="text" class="form-control form-control-lg" name="type_user" placeholder=" Type utilisateur">
+                                <input type="password" class="form-control form-control-lg" name="c_password" placeholder="Confirmer Mot de passe">
                                 <div class="input-group-append custom">
-                                    <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
+                                    <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
                                 </div>
                             </div>
                             @error('type_user')
@@ -84,7 +92,7 @@
                                     <div class="input-group mb-0">
 
 
-											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sauvegarder">
+											<input class="btn btn-success btn-lg btn-block" type="submit" value="Sauvegarder">
 
                                         {{-- <a class="btn btn-success btn-lg btn-block" href="{{ route('dashboard') }}">Connexion</a> --}}
                                     </div>

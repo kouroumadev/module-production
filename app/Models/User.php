@@ -52,4 +52,9 @@ class User extends Authenticatable
     public function employees() {
         return $this->hasMany(Employee::class, 'created_by', 'id');
     }
+    public function dept() {
+        return $this->belongsTo(Dept::class, 'dept_id', 'id');
+    }
+
+
 }

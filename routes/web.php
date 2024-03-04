@@ -32,6 +32,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/index', [App\Http\Controllers\DeptController::class, 'userIndex'])->name('user.index');
     Route::post('/user/store', [App\Http\Controllers\DeptController::class, 'userStore'])->name('user.store');
 
+    //DIPRESS
+    Route::get('/dipress/pension', [App\Http\Controllers\DipressController::class, 'vieillesse'])->name('dipress.vieillesse');
+    Route::get('/dipress/maladie', [App\Http\Controllers\DipressController::class, 'maladie'])->name('dipress.maladie');
+    Route::get('/dipress/risque', [App\Http\Controllers\DipressController::class, 'risque'])->name('dipress.risque');
+    Route::get('/dipress/prestation-familiale', [App\Http\Controllers\DipressController::class, 'prestation'])->name('dipress.prestation');
+    //DIPESS/CONTENT
+    Route::get('dipress/pension/content', [App\Http\Controllers\DipressController::class, 'pensionContent'])->name('dipress.pension.content');
+
+
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class DeptController extends Controller
 {
@@ -21,19 +23,20 @@ class DeptController extends Controller
 
         $dept = new Dept();
         $dept->name = $request->name;
-        $dept->created_by = Auth::user()->id;
+        // $dept->created_by = Auth::user()->id;
         $dept->save();
         return redirect(route('dept.index'))->with('yes','Enregistrer avec succes');
     }
 
     public function userIndex() {
         $depts = Dept::all();
+        $users = User::all();
 
-        return view('user.index', compact('depts'));
+        return view('user.index', compact('depts','users'));
     }
 
     public function userStore(Request $request) {
-        dd($request->all());
+        // dd($request->all());
 
         if($request->hasFile('user_photo')){
             $file = $request->file('user_photo')->getClientOriginalName();
@@ -55,6 +58,8 @@ class DeptController extends Controller
 
         $user->save();
 
-        return redirect(route('user.index'))->with('yes','Ajouter avec succes');
+        Alert::success('Enregistrer', 'Enregistrer avec success');
+
+        return redirect(route('user.index'));
     }
 }

@@ -3,10 +3,9 @@
 @section('content')
 
 
-<div class="header bg-success">
+<div class="header" style="background: rgb(4, 147, 16)">
     <div class="header-left">
-        <div class="menu-icon dw dw-menu"></div>
-        <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+        <h5 class="text-white">Departement: {{ Auth::user()->dept->name }}</h5>
 
     </div>
     <div class="header-right">
@@ -58,7 +57,12 @@
             <div class="dropdown">
                 <a class="dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown">
                     <span class="user-icon">
+                        @if (Auth::user()->photo == "")
                         <img src="{{ asset('theme/vendors/images/photo1.jpg') }}" alt="">
+                        @else
+                        <img src="{{ asset('storage/userImg/'.Auth::user()->photo) }}" alt="">
+                        @endif
+
                     </span>
                     <span class="user-name text-white">{{ Auth::user()->name }}</span>
                 </a>
@@ -155,7 +159,7 @@
     </div>
 </div> --}}
 
-<div class="left-side-bar bg-success">
+<div class="left-side-bar" style="background: rgb(4, 147, 16)">
     <div class="brand-logo">
         <a href="{{ route('dashboard') }}">
             {{-- <img src="{{ asset('logos/top-logo.png') }}" alt="" class="dark-logo bg-danger"> --}}
@@ -169,17 +173,42 @@
         <div class="sidebar-menu">
             <ul id="accordion-menu">
 
+
+
                 <li onclick="makeActive(this,'1')" class="my-menu my-active" id="1">
                     <a href="{{ route('dashboard') }}" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-home"></span><span class="mtext">ACCEUIL</span>
                     </a>
                 </li>
 
+                @if (Auth::user()->dept->name == 'ADMIN' || Auth::user()->dept->name == 'DQE')
                 <li onclick="makeActive(this,'2')" class="my-menu" id="2">
                     <a href="{{ route('prestation.index') }}" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-home"></span><span class="mtext">PRESTATIONS</span>
                     </a>
                 </li>
+                @endif
+
+                @if (Auth::user()->dept->name == 'ADMIN' || Auth::user()->dept->name == 'DIPRES')
+                <li class="my-menu" onclick="makeActive(this,'17')" id="17">
+                    <a href="#" class="dropdown-toggle">
+                        <span class="micon dw dw-edit-2"></span><span class="mtext">PRESTATIONS</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="{{ route('dipress.vieillesse') }}">Assurances Vieilesse</a></li>
+                        <li><a href="{{ route('dipress.maladie') }}">Assurances Maladies</a></li>
+                        <li><a href="{{ route('dipress.prestation') }}">Prestations familiales</a></li>
+                        <li><a href="{{ route('dipress.risque') }}">Risques Professionnels</a></li>
+
+                    </ul>
+                </li>
+
+                @endif
+
+                @if (Auth::user()->dept->name == 'ADMIN' || Auth::user()->dept->name == 'DQE')
+
+
+
                 <li class="my-menu" onclick="makeActive(this,'3')" id="3">
                     <a href="{{ route('reclamation.index') }}" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">RECLAMATION</span>
@@ -232,6 +261,10 @@
                 <li class="my-menu" onclick="makeActive(this,'11')" id="11">
                     <div class="dropdown-divider"></div>
                 </li>
+                @endif
+                @if (Auth::user()->dept->name == 'ADMIN')
+
+
                 <li>
                     <div class="sidebar-small-cap">ESPACE ADMIN</div>
                 </li>
@@ -264,6 +297,7 @@
                         <span class="mtext">Landing Page <img src="vendors/images/coming-soon.png" alt="" width="25"></span>
                     </a>
                 </li>
+                @endif
             </ul>
         </div>
     </div>

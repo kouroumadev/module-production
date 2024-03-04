@@ -100,8 +100,8 @@
 
 
 <div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card-box mb-30 shadow-lg">
+    <div class="col-md-10">
+        <div class="card-box mb-30 shadow-lg p-2">
             <div class="pd-20">
                 <h4 class="text-blue h4">Liste des Utilisateurs</h4>
                 @if (session('yes'))
@@ -121,14 +121,32 @@
                         <tr>
                             <th class="table-plus text-white">Nom & Prenoms</th>
                             <th class="text-white">Email</th>
-                            <th class="text-white">Dept</th>
-                            <th class="text-white">Temp Pass</th>
+                            <th class="text-white">Departement</th>
+                            <th class="text-white">Mot de Pass Temporaire</th>
                             <th class="text-white">Status</th>
                             <th class="datatable-nosort text-white">Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($users as $user)
+                            <tr>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->dept->name }}</td>
+                                <td>{{ $user->c_password }}</td>
+                                <td>
+                                    @if ($user->status == '1')
+                                        <span class="badge badge-success">Actif</span>
+                                    @else
+                                    <span class="badge badge-secondary">Non Actif</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
