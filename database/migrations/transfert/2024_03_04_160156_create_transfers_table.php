@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('transfers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('employee_id')->constrained('employees');
+            $table->string('from_dept')->nullable();
+            $table->string('to_dept')->nullable();
+            $table->string('note')->nullable();
+            $table->string('status')->default('1');
             $table->timestamps();
         });
     }
