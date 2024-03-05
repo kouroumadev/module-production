@@ -11,6 +11,7 @@ class Transfer extends Model
     protected $fillable = [
         'id',
         'employee_id',
+        'type',
         'from_dept',
         'to_dept',
         'note',

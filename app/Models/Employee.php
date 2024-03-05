@@ -43,4 +43,7 @@ class Employee extends Model
     public function docs() {
         return $this->hasMany(Doc::class, 'employee_id');
     }
+    public function transfers() {
+        return $this->hasMany(Transfer::class, 'employee_id');
+    }
 }

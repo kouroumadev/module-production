@@ -32,14 +32,24 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/index', [App\Http\Controllers\DeptController::class, 'userIndex'])->name('user.index');
     Route::post('/user/store', [App\Http\Controllers\DeptController::class, 'userStore'])->name('user.store');
 
-    //DIPRESS
+    //DIPRESS PRESTATIONS
     Route::get('/dipress/pension', [App\Http\Controllers\DipressController::class, 'vieillesse'])->name('dipress.vieillesse');
     Route::get('/dipress/maladie', [App\Http\Controllers\DipressController::class, 'maladie'])->name('dipress.maladie');
     Route::get('/dipress/risque', [App\Http\Controllers\DipressController::class, 'risque'])->name('dipress.risque');
     Route::get('/dipress/prestation-familiale', [App\Http\Controllers\DipressController::class, 'prestation'])->name('dipress.prestation');
+
     //DIPESS/CONTENT
     Route::get('dipress/pension/content', [App\Http\Controllers\DipressController::class, 'pensionContent'])->name('dipress.pension.content');
+    Route::get('/dipress/pension/cotisation-info/{id}', [App\Http\Controllers\DipressController::class, 'PensionneCotisationInfo'])->name('pensionne.cotisation.info');
 
+    // DIPRESS
+    Route::get('/dipress/etude/index', [App\Http\Controllers\DipressController::class, 'etudeIndex'])->name('etude.index');
+    Route::get('/dipress/etude/traitement/{id}', [App\Http\Controllers\DipressController::class, 'etudeTraitement'])->name('etude.traitement');
+
+
+
+    // TRACKING
+    Route::post('/dipress/store', [App\Http\Controllers\TransferController::class, 'store'])->name('transfert.store');
 
 });
 

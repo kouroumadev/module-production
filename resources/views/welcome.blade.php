@@ -202,6 +202,31 @@
 
                     </ul>
                 </li>
+                <li class="my-menu" onclick="makeActive(this,'111')" id="111">
+                    <a href="{{ route('etude.index') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-edit2"></span><span class="mtext">ETUDE DE DOSSIER</span>
+                    </a>
+                </li>
+                <li class="my-menu" onclick="makeActive(this,'112')" id="112">
+                    <a href="#" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-edit2"></span><span class="mtext">DECOMPTE</span>
+                    </a>
+                </li>
+                <li class="my-menu" onclick="makeActive(this,'113')" id="113">
+                    <a href="#" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-edit2"></span><span class="mtext">NOUVELLE CONCESSION</span>
+                    </a>
+                </li>
+                <li class="my-menu" onclick="makeActive(this,'114')" id="114">
+                    <a href="#" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-edit2"></span><span class="mtext">BIOMETRIE</span>
+                    </a>
+                </li>
+                <li class="my-menu" onclick="makeActive(this,'115')" id="115">
+                    <a href="#" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-edit2"></span><span class="mtext">ANCIENNE CONCESSION</span>
+                    </a>
+                </li>
 
                 @endif
 

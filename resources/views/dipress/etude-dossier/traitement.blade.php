@@ -6,13 +6,13 @@
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="title">
-                <h4>PRESTATIONS</h4>
+                <h4>ETUDE DE DOSSIER</h4>
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">Prestations</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('pension.show') }}">Liste des Pensions</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Details du Pensionnaire</li>
+                    <li class="breadcrumb-item"><a href="{{ route('etude.index') }}">Etude de dossier</a></li>
+                    {{-- <li class="breadcrumb-item"><a href="{{ route('pension.show') }}">Liste des Pensions</a></li> --}}
+                    <li class="breadcrumb-item active" aria-current="page">Traitement de dossier</li>
                 </ol>
             </nav>
         </div>
@@ -96,9 +96,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#setting" role="tab">Documents</a>
                                     </li>
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#end" role="tab">Transmission</a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                                 <div class="tab-content">
                                     <!-- employeur -->
@@ -285,6 +285,11 @@
 
                                                             </tbody>
                                                     </table>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-end">
+                                                <div class="col-md-4 text-right">
+                                                    <a href="{{ route('pensionne.cotisation.info',$emp->no_ima_employee) }}" class="btn btn-success" target="_blank" rel="noopener noreferrer">Faire de Decompte</a>
                                                 </div>
                                             </div>
                                             {{-- @foreach ($emp->docs as $key => $value)

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('transfers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->constrained('employees');
+            $table->string('type')->nullable();
             $table->string('from_dept')->nullable();
             $table->string('to_dept')->nullable();
             $table->string('note')->nullable();
