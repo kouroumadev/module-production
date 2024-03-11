@@ -25,12 +25,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/pension/details/{id}', [App\Http\Controllers\PensionController::class, 'details'])->name('pension.details');
 
     // DEPARTEMENT
-    Route::get('/dept/index', [App\Http\Controllers\DeptController::class, 'deptIndex'])->name('dept.index');
-    Route::post('/dept/store', [App\Http\Controllers\DeptController::class, 'deptStore'])->name('dept.store');
+    Route::get('/dept/index', [App\Http\Controllers\AdminController::class, 'deptIndex'])->name('dept.index');
+    Route::post('/dept/store', [App\Http\Controllers\AdminController::class, 'deptStore'])->name('dept.store');
 
     // UTILISATEUR
-    Route::get('/user/index', [App\Http\Controllers\DeptController::class, 'userIndex'])->name('user.index');
-    Route::post('/user/store', [App\Http\Controllers\DeptController::class, 'userStore'])->name('user.store');
+    Route::get('/user/index', [App\Http\Controllers\AdminController::class, 'userIndex'])->name('user.index');
+    Route::post('/user/store', [App\Http\Controllers\AdminController::class, 'userStore'])->name('user.store');
+
+    // DOCUMENTS
+    Route::get('/doc/index', [App\Http\Controllers\AdminController::class, 'docIndex'])->name('doc.index');
+    Route::post('/doc/store', [App\Http\Controllers\AdminController::class, 'docStore'])->name('doc.store');
 
     //DIPRESS PRESTATIONS
     Route::get('/dipress/pension', [App\Http\Controllers\DipressController::class, 'vieillesse'])->name('dipress.vieillesse');

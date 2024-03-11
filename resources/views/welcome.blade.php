@@ -190,43 +190,8 @@
                 @endif
 
                 @if (Auth::user()->dept->name == 'ADMIN' || Auth::user()->dept->name == 'DIPRES')
-                <li class="my-menu" onclick="makeActive(this,'17')" id="17">
-                    <a href="#" class="dropdown-toggle">
-                        <span class="micon dw dw-edit-2"></span><span class="mtext">PRESTATIONS</span>
-                    </a>
-                    <ul class="submenu">
-                        <li><a href="{{ route('dipress.vieillesse') }}">Assurances Vieilesse</a></li>
-                        <li><a href="{{ route('dipress.maladie') }}">Assurances Maladies</a></li>
-                        <li><a href="{{ route('dipress.prestation') }}">Prestations familiales</a></li>
-                        <li><a href="{{ route('dipress.risque') }}">Risques Professionnels</a></li>
 
-                    </ul>
-                </li>
-                <li class="my-menu" onclick="makeActive(this,'111')" id="111">
-                    <a href="{{ route('etude.index') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-edit2"></span><span class="mtext">ETUDE DE DOSSIER</span>
-                    </a>
-                </li>
-                <li class="my-menu" onclick="makeActive(this,'112')" id="112">
-                    <a href="#" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-edit2"></span><span class="mtext">DECOMPTE</span>
-                    </a>
-                </li>
-                <li class="my-menu" onclick="makeActive(this,'113')" id="113">
-                    <a href="#" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-edit2"></span><span class="mtext">NOUVELLE CONCESSION</span>
-                    </a>
-                </li>
-                <li class="my-menu" onclick="makeActive(this,'114')" id="114">
-                    <a href="#" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-edit2"></span><span class="mtext">BIOMETRIE</span>
-                    </a>
-                </li>
-                <li class="my-menu" onclick="makeActive(this,'115')" id="115">
-                    <a href="#" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-edit2"></span><span class="mtext">ANCIENNE CONCESSION</span>
-                    </a>
-                </li>
+                    @include('dipress.left-menu')
 
                 @endif
 
@@ -300,6 +265,7 @@
                     <ul class="submenu">
                         <li><a href="{{ route('user.index') }}">Utilisateurs</a></li>
                         <li><a href="{{ route('dept.index') }}">Departements</a></li>
+                        <li><a href="{{ route('doc.index') }}">Documents</a></li>
                         <li><a href="getting-started.html">Getting Started</a></li>
                         <li><a href="color-settings.html">Color Settings</a></li>
                         <li><a href="third-party-plugins.html">Third Party Plugins</a></li>
