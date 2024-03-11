@@ -37,6 +37,11 @@ class DipressController extends Controller
     }
 
     public function etudeTraitement(int $id){
+
+        // $comptes = DB::connection('metier')->table('salaire')->where('no_employe','=',$no_immat)->get();
+
+        // dd($comptes);
+
         $emp = Employee::find($id);
         $depts = Dept::all();
         // dd($emp);
