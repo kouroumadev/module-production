@@ -51,46 +51,31 @@
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label class="weight-600">Custom Radio</label>
-                                                <div class="custom-control custom-radio mb-5">
-                                                    <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio4">Toggle this custom radio</label>
+                                                <label class="weight-600">Document Obligatoire</label>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="custom-control custom-radio mb-5">
+                                                            <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                                                            <label class="custom-control-label" for="customRadio4">Obligatoire</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="custom-control custom-radio mb-5">
+                                                            <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
+                                                            <label class="custom-control-label" for="customRadio5">Non Obligatoire</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="custom-control custom-radio mb-5">
-                                                    <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio5">Or toggle this other custom radio</label>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Adresse mail</label>
-                                                <input name="email" type="text" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Mot de passe Temporaire</label>
-                                                <input name="password" type="text" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-12">
+                                       <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Photo</label>
-                                                <input type="file" name="user_photo" class="form-control-file" id="exampleFormControlFile1" onchange="readURL(this)" required>
+                                                <label>Libelle du document</label>
+                                                <textarea class="form-control"></textarea>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <img src="" class="rounded" alt="No Image" id="img22" style='height:150px;'> <br>
-                                            </div>
-                                        </div>
+                                       </div>
                                     </div>
 
                             </div>
