@@ -388,15 +388,16 @@
                                             </div>
                                             <div class="profile-task-list pb-30">
                                                 <ul>
+
                                                     <li>
                                                         <div class="custom-control custom-checkbox mb-5">
                                                             <input type="checkbox" class="custom-control-input" id="task-1">
                                                             <label class="custom-control-label" for="task-1"></label>
                                                         </div>
-                                                        <div class="task-type">Email</div>
-                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea earum.
-                                                        <div class="task-assign">Assigned to Ferdinand M.
-                                                            <div class="due-date">due date <span>22 February 2019</span></div>
+                                                        {{-- <div class="task-type">Email</div> --}}
+                                                        Employeur
+                                                        <div class="task-assign">J'atesste que les informations sur l'employeur sont correctes
+                                                            {{-- <div class="due-date">due date <span>22 February 2019</span></div> --}}
                                                         </div>
                                                     </li>
                                                     <li>
@@ -404,10 +405,10 @@
                                                             <input type="checkbox" class="custom-control-input" id="task-2">
                                                             <label class="custom-control-label" for="task-2"></label>
                                                         </div>
-                                                        <div class="task-type">Email</div>
-                                                        Lorem ipsum dolor sit amet.
-                                                        <div class="task-assign">Assigned to Ferdinand M.
-                                                            <div class="due-date">due date <span>22 February 2019</span></div>
+                                                        {{-- <div class="task-type">Email</div> --}}
+                                                        Deposant
+                                                        <div class="task-assign">J'atesste que les informations sur le deposant sont correctes
+                                                            {{-- <div class="due-date">due date <span>22 February 2019</span></div> --}}
                                                         </div>
                                                     </li>
                                                     <li>
@@ -415,10 +416,10 @@
                                                             <input type="checkbox" class="custom-control-input" id="task-3">
                                                             <label class="custom-control-label" for="task-3"></label>
                                                         </div>
-                                                        <div class="task-type">Email</div>
-                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                        <div class="task-assign">Assigned to Ferdinand M.
-                                                            <div class="due-date">due date <span>22 February 2019</span></div>
+                                                        {{-- <div class="task-type">Email</div> --}}
+                                                        Grappe Familiale
+                                                        <div class="task-assign">J'atesste que les informations sur la grappe familiale sont correctes
+                                                            {{-- <div class="due-date">due date <span>22 February 2019</span></div> --}}
                                                         </div>
                                                     </li>
                                                     <li>
@@ -426,13 +427,43 @@
                                                             <input type="checkbox" class="custom-control-input" id="task-4">
                                                             <label class="custom-control-label" for="task-4"></label>
                                                         </div>
-                                                        <div class="task-type">Email</div>
-                                                        Lorem ipsum dolor sit amet. Id ea earum.
-                                                        <div class="task-assign">Assigned to Ferdinand M.
-                                                            <div class="due-date">due date <span>22 February 2019</span></div>
+                                                        {{-- <div class="task-type">Email</div> --}}
+                                                        Document
+                                                        <div class="task-assign">J'atesste que les informations liees aux documents sont correctes
+                                                            {{-- <div class="due-date">due date <span>22 February 2019</span></div> --}}
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="custom-control custom-checkbox mb-5">
+                                                            <input type="checkbox" class="custom-control-input" id="task-5">
+                                                            <label class="custom-control-label" for="task-5"></label>
+                                                        </div>
+                                                        {{-- <div class="task-type">Email</div> --}}
+                                                        Fiche Salaire
+                                                        <div class="task-assign">J'atesste que les informations sur la fiche salaire sont correctes
+                                                            {{-- <div class="due-date">due date <span>22 February 2019</span></div> --}}
                                                         </div>
                                                     </li>
                                                 </ul>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 mb-30">
+                                                    <div class="pd-20 card-box">
+                                                        <h5 class="h5 mb-20">Height Progress</h5>
+                                                        <div class="progress" style="height: 25px;">
+                                                            <div class="progress-bar bg-info" id="prog" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row justify-content-center">
+                                                    <div class="col-md-4">
+                                                        <a href="#" class="btn btn-success">Mise a la Retraite</a>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <a href="#" class="btn btn-warning">Invalidite</a>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <a href="#" class="btn btn-danger">Deces</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1001,5 +1032,32 @@
     </div>
 </div> --}}
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+
+    $('#task-1, #task-2, #task-3, #task-4, #task-4').on('change', function () {
+        if($('#task-1').is(':checked')){
+            $('#prog').css('width', '20%');
+            $('#prog').html('20%');
+        }
+        if($('#task-2').is(':checked')){
+            $('#prog').css('width', '40%');
+            $('#prog').html('40%');
+        }
+        if($('#task-3').is(':checked')){
+            $('#prog').css('width', '60%');
+            $('#prog').html('60%');
+        }
+        if($('#task-4').is(':checked')){
+            $('#prog').css('width', '80%');
+            $('#prog').html('80%');
+        }
+        if($('#task-5').is(':checked')){
+            $('#prog').css('width', '100%');
+            $('#prog').html('100%');
+        }
+    });
+
+</script>
 
 @endsection
