@@ -10,24 +10,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
-
-class DeptController extends Controller
+class AdminController extends Controller
 {
-    public function deptIndex() {
-        $depts = Dept::all();
 
-        return view('dept.index', compact('depts'));
-    }
-    public function deptStore(Request $request) {
-        // dd($request->all());
-
-        $dept = new Dept();
-        $dept->name = $request->name;
-        // $dept->created_by = Auth::user()->id;
-        $dept->save();
-        return redirect(route('dept.index'))->with('yes','Enregistrer avec succes');
-    }
-
+    //GESTION DES UTILISATEURS
     public function userIndex() {
         $depts = Dept::all();
         $users = User::all();
@@ -61,5 +47,34 @@ class DeptController extends Controller
         Alert::success('Enregistrer', 'Enregistrer avec success');
 
         return redirect(route('user.index'));
+    }
+
+    // END USER MANAGEMENT
+
+    // DEPT MANAGEMENT
+
+    public function deptIndex() {
+        $depts = Dept::all();
+
+        return view('dept.index', compact('depts'));
+    }
+    public function deptStore(Request $request) {
+        // dd($request->all());
+
+        $dept = new Dept();
+        $dept->name = $request->name;
+        // $dept->created_by = Auth::user()->id;
+        $dept->save();
+        return redirect(route('dept.index'))->with('yes','Enregistrer avec succes');
+    }
+
+    //END DEPT MANAGEMENT
+
+
+    public function docIndex() {
+        $depts = Dept::all();
+        $users = User::all();
+
+        return view('parametrage.file.index', compact('depts','users'));
     }
 }

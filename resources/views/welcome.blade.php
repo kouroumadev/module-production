@@ -265,6 +265,7 @@
                     <ul class="submenu">
                         <li><a href="{{ route('user.index') }}">Utilisateurs</a></li>
                         <li><a href="{{ route('dept.index') }}">Departements</a></li>
+                        <li><a href="{{ route('doc.index') }}">Documents</a></li>
                         <li><a href="getting-started.html">Getting Started</a></li>
                         <li><a href="color-settings.html">Color Settings</a></li>
                         <li><a href="third-party-plugins.html">Third Party Plugins</a></li>
