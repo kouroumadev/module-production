@@ -11,7 +11,7 @@
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('etude.index') }}">Etude de dossier</a></li>
-                    {{-- <li class="breadcrumb-item"><a href="{{ route('pension.show') }}">Liste des Pensions</a></li> --}}
+                    <li class="breadcrumb-item"><a href="{{ route('pension.show') }}">{{ $emp->type_pension }}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Traitement de dossier</li>
                 </ol>
             </nav>
@@ -23,7 +23,7 @@
     <div class="col-md-12">
         <div class="min-height-200px">
             <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
+                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-12 mb-30">
                     <div class="pd-20 card-box height-100-p">
                         <div class="profile-photo">
                             <a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-eye"></i></a>
@@ -79,7 +79,7 @@
 
                     </div>
                 </div>
-                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30">
+                <div class="col-xl-9 col-lg-8 col-md-9 col-sm-12 mb-30">
                     <div class="card-box height-100-p overflow-hidden">
                         <div class="profile-tab height-100-p">
                             <div class="tab height-100-p">
@@ -91,14 +91,17 @@
                                         <a class="nav-link" data-toggle="tab" href="#deposant" role="tab">Deposant</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#tasks" role="tab">Conjoints et Enfants</a>
+                                        <a class="nav-link" data-toggle="tab" href="#tasks" role="tab">Grappe Familiale</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#setting" role="tab">Documents</a>
                                     </li>
-                                    {{-- <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#end" role="tab">Transmission</a>
-                                    </li> --}}
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#compte" role="tab">Fiche Salaire</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#recap" role="tab">Recapitulatif</a>
+                                    </li>
                                 </ul>
                                 <div class="tab-content">
                                     <!-- employeur -->
@@ -324,6 +327,115 @@
                                         </div>
                                     </div>
                                     <!-- end Tab End -->
+
+                                    <div class="tab-pane fade" id="compte" role="tabpanel">
+                                        <div class="profile-setting p-5">
+                                            <div class="pb-10">
+                                                <div class="pd-20">
+                                                   <h5 class="text-blue h4">Compte Individuel</h5>
+                                               </div>
+                                               <table class="data-table table stripe hover nowrap dataTable no-footer dtr-inline"
+                                               id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                                                   <thead class="bg-success">
+                                                       <tr>
+                                                           <th class="table-plus text-white">Date Effet</th>
+                                                           <th class="text-white">Periode</th>
+                                                           <th class="text-white">Salaire Brute</th>
+                                                           <th class="text-white">SSC</th>
+                                                           <th class="text-white">Montant Coti</th>
+                                                           <th class="text-white">Part Salariale</th>
+                                                           <th class="text-white">Ajouter le</th>
+                                                           {{-- <th class="datatable-nosort text-white">Action</th> --}}
+                                                       </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                       @foreach ($comptes as $cpt)
+                                                       <tr>
+                                                           <td class="">{{ $cpt->dateeffet }}</td>
+                                                           <td class="">{{ $cpt->periode }}</td>
+                                                           <td class="text-center">{{ $cpt->salairebrut }}</td>
+                                                           <td class="text-center">{{ $cpt->salaire_soumis_cotisation }}</td>
+                                                           <td class="text-center">{{ $cpt->montant_cotisation }}</td>
+                                                           <td class="text-center">
+                                                            @if ($cpt->part == '')
+                                                                0.00
+                                                            @else
+                                                                {{ $cpt->part }}
+                                                            @endif
+                                                           </td>
+                                                           <td>{{ $cpt->date_created }}</td>
+
+                                                           {{-- <td>
+                                                               <a class="btn btn-success" href="{{ route('pension.details',$emp->id) }}">Traitement <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                                                           </td> --}}
+                                                       </tr>
+                                                       @endforeach
+                                                   </tbody>
+                                               </table>
+                                           </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="recap" role="tabpanel">
+                                        <div class="pd-20 profile-task-wrap">
+                                            <div class="task-title row align-items-center">
+                                                <div class="col-md-8 col-sm-12">
+                                                    <h5>Open Tasks (4 Left)</h5>
+                                                </div>
+                                                <div class="col-md-4 col-sm-12 text-right">
+                                                    <a href="task-add" data-toggle="modal" data-target="#task-add" class="bg-light-blue btn text-blue weight-500"><i class="ion-plus-round"></i> Add</a>
+                                                </div>
+                                            </div>
+                                            <div class="profile-task-list pb-30">
+                                                <ul>
+                                                    <li>
+                                                        <div class="custom-control custom-checkbox mb-5">
+                                                            <input type="checkbox" class="custom-control-input" id="task-1">
+                                                            <label class="custom-control-label" for="task-1"></label>
+                                                        </div>
+                                                        <div class="task-type">Email</div>
+                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea earum.
+                                                        <div class="task-assign">Assigned to Ferdinand M.
+                                                            <div class="due-date">due date <span>22 February 2019</span></div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="custom-control custom-checkbox mb-5">
+                                                            <input type="checkbox" class="custom-control-input" id="task-2">
+                                                            <label class="custom-control-label" for="task-2"></label>
+                                                        </div>
+                                                        <div class="task-type">Email</div>
+                                                        Lorem ipsum dolor sit amet.
+                                                        <div class="task-assign">Assigned to Ferdinand M.
+                                                            <div class="due-date">due date <span>22 February 2019</span></div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="custom-control custom-checkbox mb-5">
+                                                            <input type="checkbox" class="custom-control-input" id="task-3">
+                                                            <label class="custom-control-label" for="task-3"></label>
+                                                        </div>
+                                                        <div class="task-type">Email</div>
+                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                        <div class="task-assign">Assigned to Ferdinand M.
+                                                            <div class="due-date">due date <span>22 February 2019</span></div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="custom-control custom-checkbox mb-5">
+                                                            <input type="checkbox" class="custom-control-input" id="task-4">
+                                                            <label class="custom-control-label" for="task-4"></label>
+                                                        </div>
+                                                        <div class="task-type">Email</div>
+                                                        Lorem ipsum dolor sit amet. Id ea earum.
+                                                        <div class="task-assign">Assigned to Ferdinand M.
+                                                            <div class="due-date">due date <span>22 February 2019</span></div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

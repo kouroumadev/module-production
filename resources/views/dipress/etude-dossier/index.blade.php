@@ -86,7 +86,8 @@
                 <th class="text-white">Prenom & Nom</th>
                 <th class="text-white">Raison Sociale</th>
                 <th class="text-white">Date Creation</th>
-                <th class="text-white">Etat</th>
+                <th class="text-white">Type</th>
+                {{-- <th class="text-white">Etat</th> --}}
                 <th class="text-white">Etape</th>
                 <th class="datatable-nosort text-white">Action</th>
             </tr>
@@ -98,7 +99,8 @@
                 <td class="">{{ $emp->prenom_employee }} <span class="text-uppercase">{{ $emp->nom_employee }}</span></td>
                 <td>{{ $emp->employer->raison_sociale }}</td>
                 <td>{{ $emp->created_at }}</td>
-                <td><span class="badge badge-warning">En Cours...</span></td>
+                <td>{{ $emp->type_pension }}</td>
+                {{-- <td><span class="badge badge-warning">En Cours...</span></td> --}}
                 <td>DIPRES</td>
                 <td>
                     <a class="btn btn-success" href="{{ route('etude.traitement',$emp->id) }}">Traitement <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
