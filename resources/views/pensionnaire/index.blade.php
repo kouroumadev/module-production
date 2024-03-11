@@ -4,6 +4,14 @@
     a {
         text-decoration: none !important;
     }
+    #card-header-recap-conj1{
+        margin-bottom: 10px;
+    }
+    #card-header-recap-conj2{
+        background-color: transparent !important;
+        color: black;
+
+    }
 </style>
 
 
@@ -340,7 +348,7 @@
                                     <div class="form-group">
                                         <label>Telephone</label>
                                         <input type="text" class="form-control" name="telephone_deposant"
-                                            placeholder="Entrer le Numero de telephone">
+                                            placeholder="Entrer le Numero de telephone" id="telephone_deposant">
                                     </div>
                                 </div>
                             </div>
@@ -349,7 +357,7 @@
                                     <div class="form-group">
                                         <label>Adresse</label>
                                         <input type="text" class="form-control" name="adresse_deposant"
-                                            placeholder="Entrer l'adresse">
+                                            placeholder="Entrer l'adresse" id="adresse_deposant">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -363,7 +371,7 @@
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input type="text" class="form-control" name="email_deposant"
-                                            placeholder="Entrer email">
+                                            placeholder="Entrer email" onblur="recapDeposant()">
                                     </div>
                                 </div>
                                 {{-- <div class="col-md-4">
@@ -635,6 +643,103 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="card">
+                                        <div class="card-header" id="card-header-recap-conj1" >
+                                            <div class="btn btn-block" data-toggle="collapse"  data-target="#faq2">
+                                                <strong>INFOS CONJOINTS ET ENFANTS</strong>
+                                            </div>
+                                        </div>
+                                        <div class="faq-wrap">
+                                            @foreach ($data['employeDetails'] as $key => $value)
+                                            <div id="accordion">
+                                                <div class="card">
+                                                    <div class="card-header" id="card-header-recap-conj2">
+                                                        <div class="btn btn-block" data-toggle="collapse" data-target="faq{{ $key }}" >
+                                                        Conjoint(e) {{ $key+1}} - {{ $value['conjoint_name'] }} {{ $value['conjoint_prenom'] }}
+                                                        </div>
+                                                    </div>
+                                                    <div id="faq{{ $key }}" class="collapse show" data-parent="accordion">
+                                                        <div class="card-body">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">#</th>
+                                                                        <th scope="col">Nom</th>
+                                                                        <th scope="col">Prenom</th>
+                                                                        <th scope="col">date de Naissance</th>
+                                                                        <th scope="col">Lieu de Naissance</th>
+                                                                        <th scope="col">Ordre de Naissance</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach ($value['enfants'] as $key => $enfant)
+                                                                        @if ($enfant == null)
+                                                                            <div class="alert alert-secondary" role="alert">
+                                                                                Pas d'enfants
+                                                                            </div>
+                                                                        @else
+                                                                            <tr>
+                                                                                <th scope="row">{{ $key + 1 }}</th>
+                                                                                <td>{{ $enfant->nom }}</td>
+                                                                                <td>{{ $enfant->prenoms }}</td>
+                                                                                <td>{{ $enfant->date_naissance }}</td>
+                                                                                <td>{{ $enfant->lieu_naissance }}</td>
+                                                                                <td>{{ $enfant->ordre }}</td>
+            
+                                                                            </tr>
+                                                                        @endif
+                                                                    @endforeach
+            
+            
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="btn btn-block" data-toggle="collapse" data-target="#faq2">
+                                                <strong>INFOS DEPOSANT</strong>
+                                            </div>
+                                        </div>
+                                        <div id="faq2" class="collapse show" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Nom déposant</th>
+                                                            <td id="nom_dep"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Prenom déposant</th>
+                                                            <td id="prenom_dep"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Téléphone déposant</th>
+                                                            <td id="tel_dep"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Email déposant</th>
+                                                            <td id="email_dep"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Adresse déposant</th>
+                                                            <td id="adr_dep"></td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -646,23 +751,7 @@
             </div>
         </div>
 
-        {{-- <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    </div>
-                    <div class="modal-body">
-                        <img  alt="" id="file_preview" />
-                    </div>
-                    {{-- <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
+        
     </div>
 
     <script>
@@ -684,13 +773,32 @@
             if (document.getElementById('sameGuy').checked){
                 var nom = {!! json_encode($data['employe'][0]->nom) !!};
                 var prenom = {!! json_encode($data['employe'][0]->prenoms) !!};
-
+                var telephone_emp = document.getElementById("telephone_employe").value;
+                var adresse_emp = document.getElementById("adresse_employe").value;
+                
                 document.getElementById("nom_deposant").value = nom;
                 document.getElementById("prenom_deposant").value = prenom;
+                document.getElementById("telephone_deposant").value = telephone_emp;
+                document.getElementById("adresse_deposant").value = adresse_emp;
             } else {
                 document.getElementById("nom_deposant").value = "";
                 document.getElementById("prenom_deposant").value = "";
+                document.getElementById("telephone_deposant").value = "";
+                document.getElementById("adresse_deposant").value = "";
             }
+        }
+
+        function recapDeposant(){
+            var nom_deposant=document.getElementById("nom_deposant").value  
+            var prenom_deposant=document.getElementById("prenom_deposant").value 
+            var telephone_deposant=document.getElementById("telephone_deposant").value 
+            var adresse_deposant=document.getElementById("adresse_deposant").value 
+            var email_deposant=document.getElementById("email_deposant").value 
+
+            document.getElementById("nom_dep").value = nom_deposant;
+            document.getElementById("prenom_dep").value = prenom_deposant;
+            document.getElementById("telephone_dep").value = telephone_deposant;
+            document.getElementById("adresse_dep").value = adresse_deposant;
         }
     </script>
 
