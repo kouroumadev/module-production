@@ -794,7 +794,7 @@
             var telephone_deposant=document.getElementById("telephone_deposant").value 
             var adresse_deposant=document.getElementById("adresse_deposant").value 
             var email_deposant=document.getElementById("email_deposant").value 
-
+            alert(nom_deposant);
             document.getElementById("nom_dep").value = nom_deposant;
             document.getElementById("prenom_dep").value = prenom_deposant;
             document.getElementById("telephone_dep").value = telephone_deposant;
