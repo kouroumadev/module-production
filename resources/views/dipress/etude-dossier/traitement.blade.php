@@ -378,14 +378,14 @@
 
                                     <div class="tab-pane fade" id="recap" role="tabpanel">
                                         <div class="pd-20 profile-task-wrap">
-                                            <div class="task-title row align-items-center">
+                                            {{-- <div class="task-title row align-items-center">
                                                 <div class="col-md-8 col-sm-12">
                                                     <h5>Open Tasks (4 Left)</h5>
                                                 </div>
                                                 <div class="col-md-4 col-sm-12 text-right">
                                                     <a href="task-add" data-toggle="modal" data-target="#task-add" class="bg-light-blue btn text-blue weight-500"><i class="ion-plus-round"></i> Add</a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="profile-task-list pb-30">
                                                 <ul>
 
@@ -1035,7 +1035,8 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 
-    $('#task-1, #task-2, #task-3, #task-4, #task-4').on('change', function () {
+    $('#task-1, #task-2, #task-3, #task-4, #task-5').on('change', function () {
+        var val = 0;
         if($('#task-1').is(':checked')){
             $('#prog').css('width', '20%');
             $('#prog').html('20%');
