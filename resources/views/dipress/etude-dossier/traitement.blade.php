@@ -11,7 +11,7 @@
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('etude.index') }}">Etude de dossier</a></li>
-                    {{-- <li class="breadcrumb-item"><a href="{{ route('pension.show') }}">Liste des Pensions</a></li> --}}
+                    <li class="breadcrumb-item"><a href="{{ route('pension.show') }}">{{ $emp->type_pension }}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Traitement de dossier</li>
                 </ol>
             </nav>
@@ -91,14 +91,14 @@
                                         <a class="nav-link" data-toggle="tab" href="#deposant" role="tab">Deposant</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#tasks" role="tab">Conjoints et Enfants</a>
+                                        <a class="nav-link" data-toggle="tab" href="#tasks" role="tab">Grappe Familiale</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#setting" role="tab">Documents</a>
                                     </li>
-                                    {{-- <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#end" role="tab">Transmission</a>
-                                    </li> --}}
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#compte" role="tab">Compte Individuel</a>
+                                    </li>
                                 </ul>
                                 <div class="tab-content">
                                     <!-- employeur -->
@@ -324,6 +324,12 @@
                                         </div>
                                     </div>
                                     <!-- end Tab End -->
+
+                                    <div class="tab-pane fade" id="compte" role="tabpanel">
+                                        <div class="profile-setting p-5">
+                                            <h1>Compte>>......</h1>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
