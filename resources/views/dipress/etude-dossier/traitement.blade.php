@@ -387,7 +387,7 @@
                                                 </div>
                                             </div> --}}
                                             <div class="profile-task-list pb-30">
-                                                <ul>
+                                                <ul id="moi">
 
                                                     <li>
                                                         <div class="custom-control custom-checkbox mb-5">
@@ -445,23 +445,19 @@
                                                         </div>
                                                     </li>
                                                 </ul>
-                                                <div class="col-lg-4 col-md-6 col-sm-12 mb-30">
-                                                    <div class="pd-20 card-box">
-                                                        <h5 class="h5 mb-20">Height Progress</h5>
-                                                        <div class="progress" style="height: 25px;">
-                                                            <div class="progress-bar bg-info" id="prog" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 mb-30">
+                                                    <div class="pd-20 card-box shadow-lg">
+                                                        {{-- <h5 class="h5 mb-20">Height Progress</h5> --}}
+                                                        <div class="progress" style="height: 30px;">
+                                                            <div class="progress-bar bg-info" id="prog" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" myVal=0 >0</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row justify-content-center">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-6 justify-content-center">
                                                         <a href="#" class="btn btn-success">Mise a la Retraite</a>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <a href="#" class="btn btn-warning">Invalidite</a>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <a href="#" class="btn btn-danger">Deces</a>
+                                                        <a href="#" class="btn btn-success">Invalidite</a>
+                                                        <a href="#" class="btn btn-success">Deces</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1035,28 +1031,26 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 
-    $('#task-1, #task-2, #task-3, #task-4, #task-5').on('change', function () {
-        var val = 0;
-        if($('#task-1').is(':checked')){
-            $('#prog').css('width', '20%');
-            $('#prog').html('20%');
+    $('#moi input:checkbox').on('change', function () {
+
+        if($(this).is(':checked')){
+            var val = parseInt($('#prog').attr('myVal'), 10) + 20;
+            $("#prog").attr("myVal", val);
+            // console.log(val);
+            $('#prog').css('width', val+'%');
+            $('#prog').html(val+'%');
+
         }
-        if($('#task-2').is(':checked')){
-            $('#prog').css('width', '40%');
-            $('#prog').html('40%');
+        if(!$(this).is(':checked')){
+
+            var val = parseInt($('#prog').attr('myVal'), 10) - 20;
+            $("#prog").attr("myVal", val);
+            // console.log(val);
+            $('#prog').css('width', val+'%');
+            $('#prog').html(val+'%');
         }
-        if($('#task-3').is(':checked')){
-            $('#prog').css('width', '60%');
-            $('#prog').html('60%');
-        }
-        if($('#task-4').is(':checked')){
-            $('#prog').css('width', '80%');
-            $('#prog').html('80%');
-        }
-        if($('#task-5').is(':checked')){
-            $('#prog').css('width', '100%');
-            $('#prog').html('100%');
-        }
+
+
     });
 
 </script>
