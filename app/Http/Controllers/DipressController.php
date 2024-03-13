@@ -109,4 +109,8 @@ class DipressController extends Controller
             $data = MiseRetraite::all();
             return view('dipress.mise-a-retraite.index', compact('data'));
     }
+    public function miseRetraiteDecompte(int $id) {
+            $data = MiseRetraite::find($id);
+            return view('dipress.mise-a-retraite.decompte', compact('data'));
+    }
 }

@@ -10,6 +10,7 @@ class MiseRetraite extends Model
     use HasFactory;
 
     protected $fillable = [
+            'id',
             'employee_id',
             'pension_type',
             'no_pensionne',
