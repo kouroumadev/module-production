@@ -54,4 +54,12 @@ class DipressController extends Controller
         $pensioneInfo = DB::connection('metier')->table('pensionne')->where('no_employe',$id)->get();
         dd($pensioneInfo);
     }
+
+    //MISE EN RETARITE
+    public function miseRetraiteCreate(int $id) {
+        $emp_full = DB::connection('metier')->table('employe')->where('no_employe','=','153030000017')->get();
+        $emp = Employee::find($id);
+
+        return view('dipress.mise-a-retraite.create', compact('emp','emp_full'));
+    }
 }

@@ -455,7 +455,7 @@
                                                 </div>
                                                 <div class="row justify-content-center">
                                                     <div class="col-md-6 justify-content-center">
-                                                        <a href="#" class="btn btn-success">Mise a la Retraite</a>
+                                                        <a href="{{ route('miseRetaite.create',$emp->id) }}" class="btn btn-success">Mise a la Retraite</a>
                                                         <a href="#" class="btn btn-success">Invalidite</a>
                                                         <a href="#" class="btn btn-success">Deces</a>
                                                     </div>
