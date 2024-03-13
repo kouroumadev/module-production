@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Dept;
+use App\Models\MiseRetraite;
+use App\Models\Prefecture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class DipressController extends Controller
@@ -57,9 +60,53 @@ class DipressController extends Controller
 
     //MISE EN RETARITE
     public function miseRetraiteCreate(int $id) {
+
+        $prefectures = Prefecture::all();
         $emp_full = DB::connection('metier')->table('employe')->where('no_employe','=','153030000017')->get();
         $emp = Employee::find($id);
 
-        return view('dipress.mise-a-retraite.create', compact('emp','emp_full'));
+        return view('dipress.mise-a-retraite.create', compact('emp','emp_full','prefectures'));
+    }
+
+    public function miseRetraiteStore(Request $request){
+
+            // dd($request->all());
+
+            if ($request->pension_type == 'Retraite'){
+                $no = "01-0";
+            } else {
+                $no = "01-0";
+            }
+            $data = new MiseRetraite();
+
+            $data->employee_id = $request->emp_id;
+            $data->pension_type = $request->pension_type;
+            $data->no_pensionne = $no;
+            $data->no_bio = $request->no_bio;
+            $data->assign_pref_id = $request->assign_pref_id;
+            $data->first_job_date = $request->first_job_date;
+            $data->end_job_date = $request->end_job_date;
+            $data->annuite = $request->annuite;
+            $data->date_imma = $request->date_imma;
+            $data->last_location = $request->last_location;
+            $data->prefecture_id = $request->prefecture_id;
+            $data->socio_profess = $request->socio_profess;
+            $data->profession = $request->profession;
+            $data->email = $request->email;
+            $data->tel = $request->tel;
+            $data->sexe = $request->sexe;
+            $data->age = $request->age;
+            $data->created_by = Auth::user()->id;
+
+            $data->save();
+            Alert::success('Mise a la retraite effectue avec success', '');
+            return redirect(route('miseRetaite.index'))->with('yes','Enregistrer avec succes');
+
+
+    }
+
+    public function miseRetraiteIndex() {
+            $data = MiseRetraite::all();
+            return view('dipress.mise-a-retraite.index', compact('data'));
     }
 }
