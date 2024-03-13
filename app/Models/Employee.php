@@ -28,6 +28,10 @@ class Employee extends Model
         'created_at'
     ];
 
+    protected $cast = [
+      'date_naissance_employee' => 'datetime'
+    ];
+
     public function employer() {
         return $this->belongsTo(Employer::class, 'employer_id','id');
     }

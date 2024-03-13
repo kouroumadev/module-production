@@ -39,7 +39,7 @@
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Date de naissance</span>
-            <span class="float-right font-12">{{ $emp->date_naissance_employee }}</span>
+            <span class="float-right font-12">{{ $emp->date_naissance_employee->format('d.m.Y') }}</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Age actuel</span>
