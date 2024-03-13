@@ -80,7 +80,6 @@
 </form>
 <hr>
 
-
 @if (isset($emps))
 
 <div class="pb-20">
@@ -123,6 +122,7 @@
 
 
 @if(isset($data))
+
 
     <div class="row" id="employe-wrapper">
         <div class="col-md-12">
@@ -744,6 +744,62 @@
 
                             </div>
                         </section>
+                        <input type="text" name="code_employe" value="{{ $data['employe'][0]->code_employe }}" id="">
+<input type="hidden" name="date_jour" value="{{ $data['employe'][0]->date_jour }}" id="">
+<input type="hidden" name="date_embauche" value="{{ $data['employe'][0]->date_embauche }}" id="">
+<input type="hidden" name="date_etabl_cin" value="{{ $data['employe'][0]->date_etabl_cin }}" id="">
+<input type="hidden" name="date_immatriculation" value="{{ $data['employe'][0]->date_immatriculation }}" id="">
+<input type="hidden" name="datemodification" value="{{ $data['employe'][0]->datemodification }}" id="">
+<input type="hidden" name="employeur_id" value="{{ $data['employe'][0]->employeur_id }}" id="">
+<input type="hidden" name="lieu_etab_cin" value="{{ $data['employe'][0]->lieu_etab_cin }}" id="">
+<input type="hidden" name="nationalite" value="{{ $data['employe'][0]->nationalite }}" id="">
+<input type="hidden" name="date_created" value="{{ $data['employe'][0]->date_created }}" id="">
+<input type="hidden" name="no_cin" value="{{ $data['employe'][0]->no_cin }}" id="">
+<input type="hidden" name="nom_mere" value="{{ $data['employe'][0]->nom_mere }}" id="">
+<input type="hidden" name="nom_pere" value="{{ $data['employe'][0]->nom_pere }}" id="">
+<input type="hidden" name="pays_id" value="{{ $data['employe'][0]->pays_id }}" id="">
+<input type="hidden" name="prefecture" value="{{ $data['employe'][0]->prefecture }}" id="">
+<input type="hidden" name="prenom_mere" value="{{ $data['employe'][0]->prenom_mere }}" id="">
+<input type="hidden" name="prenom_pere" value="{{ $data['employe'][0]->prenom_pere }}" id="">
+<input type="hidden" name="no_employeur" value="{{ $data['employe'][0]->no_employeur }}" id="">
+<input type="hidden" name="profession" value="{{ $data['employe'][0]->profession }}" id="">
+<input type="hidden" name="sexe" value="{{ $data['employe'][0]->sexe }}" id="">
+<input type="hidden" name="situationpro" value="{{ $data['employe'][0]->situationpro }}" id="">
+<input type="hidden" name="statut" value="{{ $data['employe'][0]->statut }}" id="">
+<input type="hidden" name="statut_employe_id" value="{{ $data['employe'][0]->statut_employe_id }}" id="">
+<input type="hidden" name="adresse" value="{{ $data['employe'][0]->adresse }}" id="">
+<input type="hidden" name="anciencode_employeur" value="{{ $data['employe'][0]->anciencode_employeur }}" id="">
+<input type="hidden" name="ancien_num_employe" value="{{ $data['employe'][0]->ancien_num_employe }}" id="">
+<input type="hidden" name="datesortie" value="{{ $data['employe'][0]->datesortie }}" id="">
+<input type="hidden" name="tag_rattrapage" value="{{ $data['employe'][0]->tag_rattrapage }}" id="">
+<input type="hidden" name="user_id" value="{{ $data['employe'][0]->user_id }}" id="">
+<input type="hidden" name="categorie_id" value="{{ $data['employe'][0]->categorie_id }}" id="">
+{{-- <input type="hidden" name="tag_retraite" value="{{ $data['employe'][0]->tag_retraite }}" id=""> --}}
+<input type="hidden" name="tag_deces" value="{{ $data['employe'][0]->tag_deces }}" id="">
+<input type="hidden" name="tag_invalidite" value="{{ $data['employe'][0]->tag_invalidite }}" id="">
+<input type="hidden" name="tag_compte_indiv" value="{{ $data['employe'][0]->tag_compte_indiv }}" id="">
+<input type="hidden" name="tag_statut" value="{{ $data['employe'][0]->tag_statut }}" id="">
+<input type="hidden" name="tag_famille" value="{{ $data['employe'][0]->tag_famille }}" id="">
+<input type="hidden" name="prefecture_id" value="{{ $data['employe'][0]->prefecture_id }}" id="">
+<input type="hidden" name="code_prefecture" value="{{ $data['employe'][0]->code_prefecture }}" id="">
+<input type="hidden" name="pref_id" value="{{ $data['employe'][0]->pref_id }}" id="">
+<input type="hidden" name="agen_id" value="{{ $data['employe'][0]->agen_id }}" id="">
+<input type="hidden" name="agencecode_id" value="{{ $data['employe'][0]->agencecode_id }}" id="">
+<input type="hidden" name="tag_allocfam" value="{{ $data['employe'][0]->tag_allocfam }}" id="">
+<input type="hidden" name="tag_famille_pf" value="{{ $data['employe'][0]->tag_famille_pf }}" id="">
+<input type="hidden" name="tag_allocprepost" value="{{ $data['employe'][0]->tag_allocprepost }}" id="">
+<input type="hidden" name="tag_ijcongemat" value="{{ $data['employe'][0]->tag_ijcongemat }}" id="">
+<input type="hidden" name="tag_alloc_chomage" value="{{ $data['employe'][0]->tag_alloc_chomage }}" id="">
+<input type="hidden" name="tag_allocataire_pf" value="{{ $data['employe'][0]->tag_allocataire_pf }}" id="">
+<input type="hidden" name="tag_retraite" value="{{ $data['employe'][0]->tag_retraite }}" id="">
+<input type="hidden" name="age_reel_deces" value="{{ $data['employe'][0]->age_reel_deces }}" id="">
+<input type="hidden" name="assignation_id" value="{{ $data['employe'][0]->assignation_id }}" id="">
+<input type="hidden" name="date_deces" value="{{ $data['employe'][0]->date_deces }}" id="">
+<input type="hidden" name="no_acte_deces" value="{{ $data['employe'][0]->no_acte_deces }}" id="">
+<input type="hidden" name="tag_famille_rp" value="{{ $data['employe'][0]->tag_famille_rp }}" id="">
+<input type="hidden" name="tag_rente_deces" value="{{ $data['employe'][0]->tag_rente_deces }}" id="">
+<input type="hidden" name="tag_suspension" value="{{ $data['employe'][0]->tag_suspension }}" id="">
+<input type="hidden" name="matricule" value="{{ $data['employe'][0]->matricule }}" id="">
 
                         <button type="submit" class="btn btn-success">Envoyer</button>
                     </form>

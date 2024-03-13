@@ -17,12 +17,11 @@ return new class extends Migration
             $table->string('no_ima_employee');
             $table->string('nom_employee');
             $table->string('code_employe')->nullable();
-            $table->string('date_created')->nullable();
             $table->string('date_jour')->nullable();
-            $table->string('date_ambauche')->nullable();
+            $table->string('date_embauche')->nullable();
             $table->string('date_etabl_cin')->nullable();
             $table->string('date_immatriculation')->nullable();
-            $table->string('date_modification')->nullable();
+            $table->string('datemodification')->nullable();
             $table->string('employeur_id')->nullable();
             $table->string('lieu_etab_cin')->nullable();
             $table->string('nationalite')->nullable();
@@ -34,7 +33,6 @@ return new class extends Migration
             $table->string('prefecture')->nullable();
             $table->string('prenom_mere')->nullable();
             $table->string('prenom_pere')->nullable();
-            $table->string('no_employeur')->nullable();
             $table->string('profession')->nullable();
             $table->string('sexe')->nullable();
             $table->string('situationpro')->nullable();
@@ -47,30 +45,30 @@ return new class extends Migration
             $table->string('tag_rattrapage')->nullable();
             $table->string('user_id')->nullable();
             $table->string('categorie_id')->nullable();
-            $table->string('tag_retraite')->nullable();
-            $table->string('tag_deces')->nullable();
-            $table->string('tag_invalidite')->nullable();
-            $table->string('tag_compte_indiv')->nullable();
-            $table->string('tag_statut')->nullable();
-            $table->string('tag_famille')->nullable();
+            $table->integer('tag_retraite')->nullable();
+            $table->integer('tag_deces')->nullable();
+            $table->integer('tag_invalidite')->nullable();
+            $table->integer('tag_compte_indiv')->nullable();
+            $table->integer('tag_statut')->nullable();
+            $table->integer('tag_famille')->nullable();
             $table->string('prefecture_id')->nullable();
             $table->string('code_prefecture')->nullable();
             $table->string('pref_id')->nullable();
             $table->string('agen_id')->nullable();
-            $table->string('agenceode_id')->nullable();
-            $table->string('tag_allocfam')->nullable();
-            $table->string('tag_famille_pf')->nullable();
-            $table->string('tag_allocprepost')->nullable();
-            $table->string('tag_ijcongemat')->nullable();
-            $table->string('tag_alloc_chomage')->nullable();
-            $table->string('tag_allocataire_pf')->nullable();
+            $table->string('agencecode_id')->nullable();
+            $table->integer('tag_allocfam')->nullable();
+            $table->integer('tag_famille_pf')->nullable();
+            $table->integer('tag_allocprepost')->nullable();
+            $table->integer('tag_ijcongemat')->nullable();
+            $table->integer('tag_alloc_chomage')->nullable();
+            $table->integer('tag_allocataire_pf')->nullable();
             $table->string('age_reel_deces')->nullable();
             $table->string('assignation_id')->nullable();
             $table->string('date_deces')->nullable();
-            $table->string('no_acte_deces')->nullable();
-            $table->string('tag_famille_rp')->nullable();
-            $table->string('tag_rente_deces')->nullable();
-            $table->string('tag_suspension')->nullable();
+            $table->integer('no_acte_deces')->nullable();
+            $table->integer('tag_famille_rp')->nullable();
+            $table->integer('tag_rente_deces')->nullable();
+            $table->integer('tag_suspension')->nullable();
             $table->string('matricule')->nullable();
             $table->string('no_employeur')->nullable();
             $table->string('prenom_employee');
@@ -83,9 +81,12 @@ return new class extends Migration
             $table->string('type_pension')->nullable();
             $table->string('photo');
             $table->string('created_by')->nullable();
-            $table->string('status')->default('1');
+            $table->integer('status')->default('1');
+            $table->integer('no_dossier')->nullable();
+            $table->string('email_employee')->nullable();
             $table->timestamps();
         });
+    
     }
 
     /**
