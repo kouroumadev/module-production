@@ -26,14 +26,19 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="notification-list mx-h-350 customscroll">
                         <ul>
-                            <li>
-                                <a href="#">
-                                    <img src="vendors/images/img.jpg" alt="">
-                                    <h3>John Doe</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-                                </a>
-                            </li>
-                            <li>
+                            @forelse ($users->notifications as $notification )
+                                <li>
+                                    <a href="#">
+                                        <img src="vendors/images/img.jpg" alt="">
+                                        <h3>John Doe</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+                                    </a>
+                                </li>
+                            @empty
+                                <div> Pas de notifications</div>
+                            @endforelse
+                            
+                            {{-- <li>
                                 <a href="#">
                                     <img src="vendors/images/photo1.jpg" alt="">
                                     <h3>Lea R. Frith</h3>
@@ -67,7 +72,7 @@
                                     <h3>Vicki M. Coleman</h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </div>
