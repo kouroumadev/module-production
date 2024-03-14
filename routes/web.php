@@ -36,6 +36,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/doc/index', [App\Http\Controllers\AdminController::class, 'docIndex'])->name('doc.index');
     Route::post('/doc/store', [App\Http\Controllers\AdminController::class, 'docStore'])->name('doc.store');
 
+    // PRESTATIONS ADMIN
+    Route::get('/prest/index', [App\Http\Controllers\AdminController::class, 'PrestIndex'])->name('prest.index');
+    Route::post('/prest/store', [App\Http\Controllers\AdminController::class, 'PrestStore'])->name('prest.store');
+
+    // PRESTATIONS ADMIN
+    // Route::get('/piece/index', [App\Http\Controllers\AdminController::class, 'PieceIndex'])->name('piece.index');
+    // Route::post('/piece/store', [App\Http\Controllers\AdminController::class, 'PieceStore'])->name('piece.store');
+
     //DIPRESS PRESTATIONS
     Route::get('/dipress/pension', [App\Http\Controllers\DipressController::class, 'vieillesse'])->name('dipress.vieillesse');
     Route::get('/dipress/maladie', [App\Http\Controllers\DipressController::class, 'maladie'])->name('dipress.maladie');

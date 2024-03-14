@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Dept;
 use App\Models\User;
+use App\Models\Prestation;
+use App\Models\Piece;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -72,9 +74,50 @@ class AdminController extends Controller
 
 
     public function docIndex() {
-        $depts = Dept::all();
-        $users = User::all();
+        $prestations = Prestation::all();
+        $pieces = Piece::all();
 
-        return view('parametrage.file.index', compact('depts','users'));
+        return view('parametrage.file.index', compact('prestations','pieces'));
+    }
+
+    public function docStore(Request $request) {
+        //  dd($request->all());
+
+        $piece = new Piece();
+        $piece->nom_piece = $request->nom_piece;
+        $piece->prestation_id = $request->prestation_id;
+        $piece->obligation = $request->obligation;
+        $piece->save();
+        return redirect(route('doc.index'))->with('yes','Enregistrer avec succes');
+    }
+
+    public function PrestIndex() {
+        $prestations = Prestation::all();
+
+        return view('parametrage.prestation.index', compact('prestations'));
+    }
+    public function PrestStore(Request $request) {
+        // dd($request->all());
+
+        $prest = new Prestation();
+        $prest->nom_prestation = $request->nom_prestation;
+        // $dept->created_by = Auth::user()->id;
+        $prest->save();
+        return redirect(route('prest.index'))->with('yes','Enregistrer avec succes');
+    }
+
+    public function PieceIndex() {
+        $prestations = Prestation::all();
+
+        return view('parametrage.piece.index', compact('prestations'));
+    }
+    public function PieceStore(Request $request) {
+         dd($request->all());
+
+        $prest = new Prestation();
+        $prest->nom_prestation = $request->nom_prestation;
+        // $dept->created_by = Auth::user()->id;
+        $prest->save();
+        return redirect(route('prest.index'))->with('yes','Enregistrer avec succes');
     }
 }
