@@ -12,7 +12,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Etude de dossier</a></li>
                     <li class="breadcrumb-item"><a href="#"></a>Mise a la retraite</li>
-                    <li class="breadcrumb-item active" aria-current="page">Decompte Pensionne</li>
+                    <li class="breadcrumb-item active" aria-current="page">Suite Decompte Pensionne</li>
                 </ol>
             </nav>
         </div>
@@ -92,6 +92,49 @@
     </div>
 </div>
 
+<div class="row card-box mb-30 p-2 shadow-lg">
+    <div class="col-md-4">
+        <span class="font-weight-bold font-14">LIBELLE</span><br>
+        <span class="font-12">AVANT 2006</span> <br>
+        <span class="font-12">DE 2006 AU 04 SEPTEMBRE 2009</span> <br>
+        <span class="font-12">DE 05 SEPTEMBRE 2009 AU 31 DECEMBRE 2010</span> <br>
+        <span class="font-12">DEPUIS 2011</span> <br>
+        <span class="font-12">DEPUIS 2019</span>
+    </div>
+    <div class="col-md-2 text-right">
+        <span class="font-weight-bold font-14">DATE DEBUT</span><br>
+        <span class="font-12">01/01/1960</span> <br>
+        <span class="font-12">01/01/2006</span> <br>
+        <span class="font-12">05/09/2009</span> <br>
+        <span class="font-12">01/01/2011</span> <br>
+        <span class="font-12">01/01/2019</span>
+    </div>
+    <div class="col-md-2 text-right">
+        <span class="font-weight-bold font-14">DATE FIN</span><br>
+        <span class="font-12">31/12/2005</span> <br>
+        <span class="font-12">04/04/2009</span> <br>
+        <span class="font-12">31/12/2010</span> <br>
+        <span class="font-12">31/12/2018</span> <br>
+        <span class="font-12">24/01/2055</span>
+    </div>
+    <div class="col-md-2 text-right">
+        <span class="font-weight-bold font-14">PLANCHER</span><br>
+        <span class="font-12">75000</span> <br>
+        <span class="font-12">100000</span> <br>
+        <span class="font-12">100000</span> <br>
+        <span class="font-12">200000</span> <br>
+        <span class="font-12">440000</span>
+    </div>
+    <div class="col-md-2 text-right">
+        <span class="font-weight-bold font-14">PLAFOND</span><br>
+        <span class="font-12">400000</span> <br>
+        <span class="font-12">800000</span> <br>
+        <span class="font-12">800000</span> <br>
+        <span class="font-12">1500000</span> <br>
+        <span class="font-12">2500000</span>
+    </div>
+</div>
+
 <div class="card-box mb-30 shadow-lg">
     <div class="pd-20">
         {{-- <h4 class="text-blue h4">Liste des dossiers a decompter</h4> --}}
@@ -108,25 +151,81 @@
                    <th class="text-white text-center">SALAIRE ANNUEL</th>
                    <th class="text-white text-center">NBRE DE MOIS</th>
                    <th class="text-white text-center">SALAIRE MENSUEL</th>
-                   <th class="text-white text-center">DETAILS</th>
+                   <th class="text-white text-center">SSC MENSUEL</th>
 
                    {{-- <th class="datatable-nosort text-white">Action</th> --}}
                </tr>
            </thead>
            <tbody>
+            <?php
+                 $salaire_an=0;
+                 $total_mois=0;
+                 $total_ssc=0;
+            ?>
 
                @foreach ($comptes as $cpt)
+               <?php
+                $salaire_an += (int)$cpt->salaireAnnuel;
+                $total_mois += (int)$cpt->mois;
+                $val = (int)$cpt->salairebrut;
+
+                if((1900 <= $cpt->annee) && ($cpt->annee <= 2005)){
+                    if($val> 0 && $val<= 75000){
+                        $soumis = 75000;
+                    } else if($val > 75000 && $val <= 400000){
+                        $soumis = $val;
+                    } else{
+                        $soumis = 400000;
+                    }
+                }
+                if((2006 <= $cpt->annee) && ($cpt->annee <= 2010)){
+                    if($val> 0 && $val<= 100000){
+                        $soumis = 100000;
+                    } else if($val > 100000 && $val <= 800000){
+                        $soumis = $val;
+                    } else{
+                        $soumis = 800000;
+                    }
+                }
+                if((2011 <= $cpt->annee) && ($cpt->annee <= 2018)){
+                    if($val> 0 && $val<= 200000){
+                        $soumis = 200000;
+                    } else if($val > 200000 && $val <= 1500000){
+                        $soumis = $val;
+                    } else{
+                        $soumis = 1500000;
+                    }
+                }
+                if((2019 <= $cpt->annee) && ($cpt->annee <= 2055)){
+                    if($val> 0 && $val<= 550000){
+                        $soumis = 550000;
+                    } else if($val > 550000 && $val <= 2500000){
+                        $soumis = $val;
+                    } else{
+                        $soumis = 2500000;
+                    }
+                }
+
+                $total_ssc += $soumis;
+
+               ?>
                <tr>
                    <td class="">{{ $loop->index+1 }}</td>
                    <td class="text-center">{{ $cpt->annee }}</td>
-                   <td class="text-center">{{ $cpt->salaireAnnuel }}</td>
+                   <td class="text-center">{{ (int)$cpt->salaireAnnuel }}</td>
                    <td class="text-center">{{ $cpt->mois }}</td>
-                   <td class="text-center">{{ $cpt->salairebrut }}</td>
-                   <td class="text-center">
-                   <a href="{{ route('miseRetaite.details', $cpt->annee) }}" class="btn btn-success">Voir <i class="fa fa-eye" aria-hidden="true"></i></a>
-                   </td>
+                   <td class="text-center">{{ (int)$cpt->salairebrut }}</td>
+                   <td class="text-center">{{ $soumis }}</td>
                </tr>
                @endforeach
+               <tr>
+                    <td class="font-weight-bold">Total:</td>
+                    <td></td>
+                    <td class="text-center">{{ number_format($salaire_an) }}</td>
+                    <td class="text-center">{{ $total_mois }}/120</td>
+                    <td></td>
+                    <td class="text-center">{{ $total_ssc }}</td>
+               </tr>
            </tbody>
        </table>
    </div>
@@ -137,5 +236,6 @@
         <a href="{{ route('miseRetaite.decompte.suite', $data->id) }}" class="btn btn-success text-white">Suite Decompte <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
     </div>
 </div>
+
 
 @endsection

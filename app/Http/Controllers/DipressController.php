@@ -111,6 +111,39 @@ class DipressController extends Controller
     }
     public function miseRetraiteDecompte(int $id) {
             $data = MiseRetraite::find($id);
-            return view('dipress.mise-a-retraite.decompte', compact('data'));
+
+            $comptes = DB::connection('metier')->table('gest_employe')
+                        ->where('no_employe','296241250990')
+                        ->select('annee', 'salairebrut', DB::raw('count(*) as mois'), DB::raw("SUM(salairebrut) as salaireAnnuel"))
+                        // ->select('annee', DB::raw('count(*) as mois'))
+                        ->groupBy('annee')
+                        ->get();
+
+                        // dd($comptes);
+
+            return view('dipress.mise-a-retraite.decompte', compact('data','comptes'));
+    }
+    public function miseRetraiteDecompteSuite(int $id) {
+            $data = MiseRetraite::find($id);
+
+            $comptes = DB::connection('metier')->table('gest_employe')
+                        ->where('no_employe','296241250990')
+                        ->select('annee', 'salairebrut', DB::raw('count(*) as mois'), DB::raw("SUM(salairebrut) as salaireAnnuel"))
+                        // ->select('annee', DB::raw('count(*) as mois'))
+                        ->groupBy('annee')
+                        ->get();
+
+                        // dd($comptes);
+
+            return view('dipress.mise-a-retraite.suite', compact('data','comptes'));
+    }
+    public function miseRetraiteDecompteDetails(int $id) {
+        $comptes = DB::connection('metier')->table('gest_employe')
+                    ->where('no_employe','296241250990')
+                    ->where('annee',$id)
+                    ->get();
+
+        return view('dipress.mise-a-retraite.details', compact('comptes'));
+
     }
 }

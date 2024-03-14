@@ -41,13 +41,11 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
-                    $i = 1;
-                ?>
+
                 @foreach ($data as $dat)
 
                     <tr>
-                        <td class="table-plus">{{ $i }}</td>
+                        <td class="table-plus">{{ $loop->index+1 }}</td>
                         <td>{{ $dat->no_pensionne }}</td>
                         <td>{{ $dat->pension_type }}</td>
                         <td>{{ $dat->employee->prenom_employee }}</td>
@@ -60,9 +58,7 @@
                             <a href="{{ route('miseRetaite.decompte',$dat->id) }}" class="btn btn-warning">Faire le decompte <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                         </td>
                     </tr>
-                    <?php
-                        $i++;
-                    ?>
+
                 @endforeach
             </tbody>
         </table>
