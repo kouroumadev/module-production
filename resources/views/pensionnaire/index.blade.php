@@ -263,8 +263,8 @@
                                 <div id="accordion">
                                     <div class="card">
                                         <div class="card-header">
-                                            <div class="btn btn-block" data-toggle="collapse" data-target="faq{{ $key }}">
-                                            Conjoint(e) {{ $key+1}} - {{ $value['conjoint_name'] }} {{ $value['conjoint_prenom'] }}
+                                            <div class="btn btn-block text-bold" data-toggle="collapse" data-target="faq{{ $key }}">
+                                            <span class="text-bold">Conjoint(e) {{ $key+1}} - {{ strtoupper($value['conjoint_name']) }} {{ strtoupper($value['conjoint_prenom']) }} </span> 
                                             </div>
                                         </div>
                                         <div id="faq{{ $key }}" class="collapse show" data-parent="accordion">
@@ -281,6 +281,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        <h5 class="text-center p-3">Liste des enfants</h5>
                                                         @foreach ($value['enfants'] as $key => $enfant)
                                                             @if ($enfant == null)
                                                                 <div class="alert alert-secondary" role="alert">
@@ -364,14 +365,14 @@
                                     <div class="form-group">
                                         <label>CIN</label>
                                         <input type="text" class="form-control" name="cin_deposant"
-                                            placeholder="Entrer CIN">
+                                            placeholder="Entrer CIN" id="cin_deposant">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input type="text" class="form-control" name="email_deposant"
-                                            placeholder="Entrer email" onblur="recapDeposant()">
+                                            placeholder="Entrer email" id="email_deposant" onblur="recapDeposant()">
                                     </div>
                                 </div>
                                 {{-- <div class="col-md-4">
@@ -398,17 +399,27 @@
                                         </thead>
                                         <tbody>
                                             @php
-                                                
+                                                $retraite= \App\Models\Prestation::where('nom_prestation','RETRAITE')->get();
+                                                $retraite_doc = \App\Models\Piece::where('prestation_id',$retraite[0]->id)->get();
+                                                // dd($retraite_doc);
                                             @endphp
                                             @if ($type_pension == "Retraite")
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <th scope="row">Lettre de transmission faite par l'employeur ou le beneficiaire adressée au DG <span class="text-danger">*</span></th>
-                                                    <input type="hidden" name="titles[]" value="Lettre de transmission faite par l'employeur ou le beneficiaire adressée au DG">
-                                                    <th scope="row"><input type="file" id="file1" name="files[]" accept="application/pdf" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg"   onchange="myFunction('file1','file1_statut')" required /></th>
-                                                    <th scope="row" id="file1_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                                </tr>
-                                                <tr>
+                                                @foreach ($retraite_doc as $key => $item)
+                                                    <tr>
+                                                        <th scope="row">{{$key+1}}</th>
+                                                        <th scope="row">{{$item->nom_piece}} 
+                                                            @if ($item->obligation == '1')
+                                                                <span class="text-danger">*</span> 
+                                                            @endif
+                                                            
+                                                        </th>
+                                                        <input type="hidden" name="titles[]" value="{{$item->nom_piece}}">
+                                                        <th scope="row"><input type="file" id="file{{$key}}" name="files[]" accept="application/pdf" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg"   onchange="myFunction('file{{$key}}','file{{$key}}_statut')" required /></th>
+                                                        <th scope="row" id="file{{$key}}_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
+                                                    </tr>
+                                                @endforeach
+                                                
+                                                {{-- <tr>
                                                     <th scope="row">2</th>
                                                     <th scope="row">Le carnet d'assuré sociale ou la carte d'assuré sociale <span class="text-danger">*</span></th>
                                                     <input type="hidden" name="titles[]" value="Le carnet d'assuré social ou la carte d'assuré social">
@@ -456,7 +467,7 @@
                                                     <th scope="row">La photocopie recto-verso de la carte d'identite nationale <span class="text-danger">*</span></th>
                                                     <input type="hidden" name="titles[]" value="La photocopie recto-verso de la carte d'identite nationale">
                                                     <th scope="row"><input type="file" name="files[]"  id="file10" accept="application/pdf" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file10','file10_statut')"></th>
-                                                    {{-- <th scope="row" id="file10_statut"><span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span></th> --}}
+                                                    
                                                     <th scope="row" id="file10_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                                 </tr>
                                                 <tr>
@@ -480,7 +491,7 @@
                                                     <th scope="row"><input type="file" name="files[]" id="file13" id="file13" accept="application/pdf" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file13','file13_statut')"></th>
                                                     <th scope="row" id="file13_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                                 </tr>
-                                                
+                                                 --}}
                                             @elseif ($type_pension == "reversion")
                                             <tr>
                                                 <th scope="row">1</th>
@@ -540,16 +551,10 @@
                                                 <th scope="row">10</th>
                                                 <th scope="row">Certificat de vie collective individuelle des enfants de moins de 17 ans <span class="text-danger">*</span></th>
                                                 <th scope="row"><input type="file"  id="file10" accept="application/pdf" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file10','file10_statut')"></th>
-                                                {{-- <th scope="row" id="file10_statut"><span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span></th> --}}
                                                 <th scope="row" id="file10_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
                                             </tr>
 
-                                            {{-- <tr>
-                                                <th scope="row">11</th>
-                                                <th scope="row">Numero de telephone de l'assure</th>
-                                                <th scope="row"><input type="file" id="file14" id="file14" accept="application/pdf" class="form-control-file form-control height-auto" data-toggle="modal" data-target="#bd-example-modal-lg" onchange="myFunction('file14','file14_statut')"></th>
-                                                <th scope="row" id="file14_statut"><span class="badge badge-danger"><i class="icon-copy fa fa-warning" aria-hidden="true"></i> Non Chargé</span></th>
-                                            </tr> --}}
+                                            
                                             @endif
                                         </tbody>
                                     </table>
@@ -640,7 +645,7 @@
                                                 <div class="card">
                                                     <div class="card-header" id="card-header-recap-conj2">
                                                         <div class="btn btn-block" data-toggle="collapse" data-target="faq{{ $key }}" >
-                                                        Conjoint(e) {{ $key+1}} - {{ $value['conjoint_name'] }} {{ $value['conjoint_prenom'] }}
+                                                            <span class="text-bold">Conjoint(e) {{ $key+1}} - {{ strtoupper($value['conjoint_name']) }} {{ strtoupper($value['conjoint_prenom']) }} </span>
                                                         </div>
                                                     </div>
                                                     <div id="faq{{ $key }}" class="collapse show" data-parent="accordion">
@@ -657,6 +662,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                                    <h5 class="text-center">Liste des enfants</h5>
                                                                     @foreach ($value['enfants'] as $key => $enfant)
                                                                         @if ($enfant == null)
                                                                             <div class="alert alert-secondary" role="alert">
@@ -718,6 +724,10 @@
                                                             <th>Adresse déposant</th>
                                                             <td id="adr_dep"></td>
                                                         </tr>
+                                                        <tr>
+                                                            <th>CIN déposant</th>
+                                                            <td id="cin_dep"></td>
+                                                        </tr>
 
                                                     </tbody>
                                                 </table>
@@ -758,7 +768,6 @@
 <input type="hidden" name="tag_rattrapage" value="{{ $data['employe'][0]->tag_rattrapage }}" id="">
 <input type="hidden" name="user_id" value="{{ $data['employe'][0]->user_id }}" id="">
 <input type="hidden" name="categorie_id" value="{{ $data['employe'][0]->categorie_id }}" id="">
-{{-- <input type="hidden" name="tag_retraite" value="{{ $data['employe'][0]->tag_retraite }}" id=""> --}}
 <input type="hidden" name="tag_deces" value="{{ $data['employe'][0]->tag_deces }}" id="">
 <input type="hidden" name="tag_invalidite" value="{{ $data['employe'][0]->tag_invalidite }}" id="">
 <input type="hidden" name="tag_compte_indiv" value="{{ $data['employe'][0]->tag_compte_indiv }}" id="">
@@ -834,16 +843,20 @@
             var telephone_deposant=document.getElementById("telephone_deposant").value 
             var adresse_deposant=document.getElementById("adresse_deposant").value 
             var email_deposant=document.getElementById("email_deposant").value 
+            var cin_deposant=document.getElementById("cin_deposant").value 
             alert(nom_deposant);
-            document.getElementById("nom_dep").value = nom_deposant;
-            document.getElementById("prenom_dep").value = prenom_deposant;
-            document.getElementById("telephone_dep").value = telephone_deposant;
-            document.getElementById("adresse_dep").value = adresse_deposant;
+            document.getElementById("nom_dep").innerHTML = nom_deposant;
+            document.getElementById("prenom_dep").innerHTML = prenom_deposant;
+            document.getElementById("tel_dep").innerHTML = telephone_deposant;
+            document.getElementById("adr_dep").innerHTML = adresse_deposant;
+            document.getElementById("cin_dep").innerHTML = cin_deposant;
+            document.getElementById("email_dep").innerHTML = email_deposant;
         }
     </script>
 
     <script>
         function myFunction(file,status){
+            //alert(file)
             // $.ajaxSetup({
             //     headers: ({
             //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
