@@ -119,19 +119,19 @@
     </div>
     <div class="col-md-2 text-right">
         <span class="font-weight-bold font-14">PLANCHER</span><br>
-        <span class="font-12">75000</span> <br>
-        <span class="font-12">100000</span> <br>
-        <span class="font-12">100000</span> <br>
-        <span class="font-12">200000</span> <br>
-        <span class="font-12">440000</span>
+        <span class="font-12">75 000</span> <br>
+        <span class="font-12">100 000</span> <br>
+        <span class="font-12">100 000</span> <br>
+        <span class="font-12">200 000</span> <br>
+        <span class="font-12">440 000</span>
     </div>
     <div class="col-md-2 text-right">
         <span class="font-weight-bold font-14">PLAFOND</span><br>
-        <span class="font-12">400000</span> <br>
-        <span class="font-12">800000</span> <br>
-        <span class="font-12">800000</span> <br>
-        <span class="font-12">1500000</span> <br>
-        <span class="font-12">2500000</span>
+        <span class="font-12">400 000</span> <br>
+        <span class="font-12">800 000</span> <br>
+        <span class="font-12">800 000</span> <br>
+        <span class="font-12">1 500 000</span> <br>
+        <span class="font-12">2 500 000</span>
     </div>
 </div>
 
@@ -212,23 +212,52 @@
                <tr>
                    <td class="">{{ $loop->index+1 }}</td>
                    <td class="text-center">{{ $cpt->annee }}</td>
-                   <td class="text-center">{{ (int)$cpt->salaireAnnuel }}</td>
+                   <td class="text-center">{{ number_format((int)$cpt->salaireAnnuel,0,""," ") }}</td>
                    <td class="text-center">{{ $cpt->mois }}</td>
-                   <td class="text-center">{{ (int)$cpt->salairebrut }}</td>
-                   <td class="text-center">{{ $soumis }}</td>
+                   <td class="text-center">{{ number_format((int)$cpt->salairebrut,0,""," ") }}</td>
+                   <td class="text-center">{{ number_format($soumis,0,""," ") }}</td>
                </tr>
                @endforeach
                <tr>
                     <td class="font-weight-bold">Total:</td>
                     <td></td>
-                    <td class="text-center">{{ number_format($salaire_an) }}</td>
-                    <td class="text-center">{{ $total_mois }}/120</td>
+                    <td class="text-center font-weight-bold">{{ number_format($salaire_an,0,""," ") }}</td>
+                    <td class="text-center font-weight-bold">{{ $total_mois }}/120</td>
                     <td></td>
-                    <td class="text-center">{{ $total_ssc }}</td>
+                    <td class="text-center font-weight-bold">{{ number_format($total_ssc,0,""," ") }}</td>
                </tr>
            </tbody>
        </table>
    </div>
+</div>
+
+<div class="card-box mb-30 shadow-lg p-3">
+
+    <div class="row">
+        <div class="col-md-4">
+            <span class="font-12">SALAIRE MENSUEL MOYEN :</span> <br>
+            <span class="font-12">SALAIRE MENSUEL MOYEN SOUMIS EN {{ \Carbon\Carbon::parse($data->end_job_date)->format('Y') }} :</span> <br>
+        </div>
+        <div class="col-md-4">
+            <span class="font-12">{{ number_format($total_ssc,0,""," ") }} / {{ $total_mois }} = <span class="font-weight-bold">{{ number_format($total_ssc/$total_mois,0,""," ") }}</span></span> <br>
+            <span class="font-12 font-weight-bold text-success" style="margin-left: 98px;">{{ number_format($total_ssc/$total_mois,0,""," ") }}</span> <br>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row justify-content-between">
+        <div class="col-md-6">
+            <span class="font-12">MONTANT MENSUEL DE LA PENSION : {{ number_format($total_ssc/$total_mois,0,""," ") }} x 30 x 2% = </span> <br>
+            <span class="font-12">MONTANT ANNUEL DE LA PENSION :</span> <br>
+            <span class="font-12">PENSION <span class="font-weight-bold">TRIMESTRIELLE</span> :</span> <br>
+        </div>
+        <div class="col-md-6 text-center">
+            <span class="font-14 font-weight-bold text-success">{{ number_format((($total_ssc/$total_mois)*30*2)/100,0,""," ") }}</span> <br>
+            <span class="font-14 font-weight-bold">{{ number_format(((($total_ssc/$total_mois)*30*2)/100)*12,0,""," ") }}</span> <br>
+            <span class="font-14 font-weight-bold text-success">{{ number_format((((($total_ssc/$total_mois)*30*2)/100)*12)/4,0,""," ") }}</span> <br>
+        </div>
+    </div>
+
 </div>
 
 <div class="footer-wrap pd-20 mb-20 card-box justify-content-lg-end">
