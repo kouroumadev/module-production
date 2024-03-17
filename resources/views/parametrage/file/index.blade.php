@@ -114,6 +114,7 @@
     id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                     <thead class="bg-success">
                         <tr>
+                            <th class="text-white">N°</th>
                             <th class="table-plus text-white">Nom de la Pièce</th>
                             <th class="text-white">Prestation</th>
                             <th class="text-white">Obligation</th>
@@ -123,8 +124,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pieces as $piece)
+                        @foreach ($pieces as $key => $piece)
                             <tr>
+                                <td>{{ $key+1 }}</td>
                                 <td>{{ $piece->nom_piece }}</td>
                                 <td>{{ $piece->prestation->nom_prestation }}</td>
                                 
