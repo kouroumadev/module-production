@@ -262,7 +262,7 @@
 
 <div class="footer-wrap pd-20 mb-20 card-box justify-content-lg-end">
     <div class="col-md-4 justify-content-end">
-        <a href="{{ route('miseRetaite.decompte.suite', $data->id) }}" class="btn btn-success text-white">Suite Decompte <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        <a href="{{ route('miseRetaite.decompte.suite', $data->id) }}" class="btn btn-success text-white">Fin Decompte <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
     </div>
 </div>
 

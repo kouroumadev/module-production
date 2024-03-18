@@ -31,7 +31,7 @@
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Sexe</span>
-            <span class="float-right font-12">{{ $emp_full[0]->sexe }}</span>
+            <span class="float-right font-12">{{ $emp->sexe }}</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Prefecture</span>
@@ -47,23 +47,23 @@
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Nationalite</span>
-            <span class="float-right font-12">{{ $emp_full[0]->nationalite }}</span>
+            <span class="float-right font-12">{{ $emp->nationalite }}</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Profession</span>
-            <span class="float-right font-12">{{ $emp_full[0]->profession }}</span>
+            <span class="float-right font-12">{{ $emp->profession }}</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Date de premiere embauche</span>
-            <span class="float-right font-12">{{ $emp_full[0]->date_embauche }}</span>
+            <span class="float-right font-12">{{ $emp->date_embauche }}</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Annuite de service</span>
-            <span class="float-right font-12">{{ \Carbon\Carbon::parse($emp_full[0]->date_embauche)->diffInMonths(\Carbon\Carbon::now()) }} mois</span>
+            <span class="float-right font-12">{{ \Carbon\Carbon::parse($emp->date_embauche)->diffInMonths(\Carbon\Carbon::now()) }} mois</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">(Depuis la date de premiere embauche jusqu'a ce jour)</span>
-            <span class="float-right font-12"> {{ \Carbon\Carbon::parse($emp_full[0]->date_embauche)->diffInYears(\Carbon\Carbon::now()) }} ans</span>
+            <span class="float-right font-12"> {{ \Carbon\Carbon::parse($emp->date_embauche)->diffInYears(\Carbon\Carbon::now()) }} ans</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Employeur(s)</span>
@@ -82,7 +82,7 @@
         </div>
         <div>
             <span class="text-left font-weight-bold font-14">Agence</span>
-            <span class="float-right font-12">{{ $emp_full[0]->agence }}</span>
+            <span class="float-right font-12">{{ $emp->agence }}</span>
         </div>
         <div>
             <span class="text-left font-weight-bold font-14">Lieu de naissance</span>
@@ -90,15 +90,15 @@
         </div>
         <div>
             <span class="text-left font-weight-bold font-14">Pays</span>
-            <span class="float-right font-12">{{ $emp_full[0]->pays_id }}</span>
+            <span class="float-right font-12">{{ $emp->pays_id }}</span>
         </div>
         <div>
             <span class="text-left font-weight-bold font-14">NoCIN</span>
-            <span class="float-right font-12">{{ $emp_full[0]->no_cin }}</span>
+            <span class="float-right font-12">{{ $emp->no_cin }}</span>
         </div>
         <div>
             <span class="text-left font-weight-bold font-14">Date immatriculation en cotisation</span>
-            <span class="float-right font-12">{{ $emp_full[0]->date_immatriculation }}</span>
+            <span class="float-right font-12">{{ $emp->date_immatriculation }}</span>
         </div>
         <div>
             <span class="text-left font-weight-bold font-14">Date acception dossier</span>
@@ -149,7 +149,7 @@
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-6 col-form-label">No CIN</label>
                     <div class="col-sm-8 col-md-6">
-                        <input class="form-control" name="no_ci" type="text" value="{{ $emp_full[0]->no_cin }}" required>
+                        <input class="form-control" name="no_ci" type="text" value="{{ $emp->no_cin }}" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -201,7 +201,7 @@
                         <input class="form-control" type="text" name="last_location" value="{{ $emp->adresse_employee }}" required>
                         <input type="hidden" name="emp_id" value="{{ $emp->id }}">
                         <input type="hidden" name="pension_type" value="{{ $emp->type_pension }}">
-                        <input type="hidden" name="sexe" value="{{ $emp_full[0]->sexe }}">
+                        <input type="hidden" name="sexe" value="{{ $emp->sexe }}">
                         <input type="hidden" name="age" value="{{ \Carbon\Carbon::parse($emp->date_naissance_employee)->diff(\Carbon\Carbon::now())->format('%y'); }} ">
                     </div>
                 </div>
@@ -231,7 +231,7 @@
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-6 col-form-label">Profession</label>
                     <div class="col-sm-8 col-md-6">
-                        <input class="form-control" type="text" name="profession" value="{{ $emp_full[0]->profession }}" required>
+                        <input class="form-control" type="text" name="profession" value="{{ $emp->profession }}" required>
                     </div>
                 </div>
                 <div class="form-group row">

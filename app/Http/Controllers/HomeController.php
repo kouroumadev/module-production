@@ -47,7 +47,7 @@ class HomeController extends Controller
         // dd($type_pension);
         if ($type_pension == "reversion" || $type_pension == "Pensions Temporaires d'Orphelin" ) {
             $pensionne = DB::connection('metier')->table('pensionne')->where('no_pensionne','=',$no_immat)->get();
-            
+
              // cheching if pensionne number exist  in pensionne table.////
             if ($pensionne->isEmpty()) {
                 Alert::error('', "Ce N° de pension n'existe pas dans la base de données de la CNSS");
@@ -57,7 +57,7 @@ class HomeController extends Controller
                 $no_immat_pensionne = $pensionne[0]->no_employe;
                 $employe = DB::connection('metier')->table('employe')->where('no_employe','=',$no_immat_pensionne)->get();
                 $emp_app = Employee::where('no_ima_employee', $employe[0]->no_employe)->get();
-            
+
                 //dd($emp_app);
                 if($emp_app->isEmpty()){
                     Alert::error('', "Ce N° de pension n'est pas associé à un assuré de la CNSS");
@@ -69,15 +69,15 @@ class HomeController extends Controller
                 $no_employeur = $employe[0]->no_employeur;
                 $employeur = DB::connection('metier')->table('employeur')->where('no_employeur','=',$no_employeur)->get();
                 $employeDeails = [];
-                
+
                 $data = [];
-            
+
 
                     foreach ($conjoints as $value) {
-                    
+
                         $enfants = DB::connection('metier')->table('enfant')->where('no_conjoint',$value->no_conjoint)->get();
                         $items = [
-                            
+
                             'enfants' =>$enfants,
                             'conjoint_name'=> $value->nom,
                             'conjoint_prenom'=> $value->prenoms,
@@ -88,11 +88,11 @@ class HomeController extends Controller
 
 
                         ];
-                    
+
                         array_push($employeDeails,$items);
-                        
+
                     };
-                
+
                     $data['employeDetails']= $employeDeails;
                     $data['employe'] = $employe;
                     $data['employeur'] = $employeur;
@@ -105,12 +105,12 @@ class HomeController extends Controller
 
                 if ($type_pension == "Selectionner le type de pension") {
                 $flag = '1';
-    
+
                 Alert::error('Invalide Type de pension', 'Selectionner le type de pension');
                 return view('pensionnaire.index',compact('flag'));
                 } else if($employe->isEmpty()){
                     $flag = '1';
-        
+
                     Alert::error('Invalide Numéro', 'Ce N° d\'Immatriculation n\'existe pas dans la base de données de la CNSS');
                     return view('pensionnaire.index',compact('flag'));
                 } elseif (!$emp->isEmpty()) {
@@ -122,15 +122,15 @@ class HomeController extends Controller
                 $no_employeur = $employe[0]->no_employeur;
                 $employeur = DB::connection('metier')->table('employeur')->where('no_employeur','=',$no_employeur)->get();
                 $employeDeails = [];
-                
+
                 $data = [];
-            
+
 
                     foreach ($conjoints as $value) {
-                    
+
                         $enfants = DB::connection('metier')->table('enfant')->where('no_conjoint',$value->no_conjoint)->get();
                         $items = [
-                            
+
                             'enfants' =>$enfants,
                             'conjoint_name'=> $value->nom,
                             'conjoint_prenom'=> $value->prenoms,
@@ -141,22 +141,22 @@ class HomeController extends Controller
 
 
                         ];
-                    
+
                         array_push($employeDeails,$items);
-                        
+
                     };
-                
+
                     $data['employeDetails']= $employeDeails;
                     $data['employe'] = $employe;
                     $data['employeur'] = $employeur;
                     return view('pensionnaire.index',compact('data','type_pension'));
         }
-        
-       
 
-        
-            
-        
+
+
+
+
+
     }
 
 }

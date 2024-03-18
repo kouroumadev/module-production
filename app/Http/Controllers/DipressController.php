@@ -62,10 +62,12 @@ class DipressController extends Controller
     public function miseRetraiteCreate(int $id) {
 
         $prefectures = Prefecture::all();
-        $emp_full = DB::connection('metier')->table('employe')->where('no_employe','=','153030000017')->get();
+        // $emp_full = DB::connection('metier')->table('employe')->where('no_employe','=','153030000017')->get();
         $emp = Employee::find($id);
 
-        return view('dipress.mise-a-retraite.create', compact('emp','emp_full','prefectures'));
+        // dd($emp);
+
+        return view('dipress.mise-a-retraite.create', compact('emp','prefectures'));
     }
 
     public function miseRetraiteStore(Request $request){
@@ -120,6 +122,7 @@ class DipressController extends Controller
                         ->get();
 
                         // dd($comptes);
+                        // dd($data);
 
             return view('dipress.mise-a-retraite.decompte', compact('data','comptes'));
     }
@@ -127,7 +130,7 @@ class DipressController extends Controller
             $data = MiseRetraite::find($id);
 
             $comptes = DB::connection('metier')->table('gest_employe')
-                        ->where('no_employe','296241250990')
+                        ->where('no_employe',$data->employee->no_ima_employee) #296241250990
                         ->select('annee', 'salairebrut', DB::raw('count(*) as mois'), DB::raw("SUM(salairebrut) as salaireAnnuel"))
                         // ->select('annee', DB::raw('count(*) as mois'))
                         ->groupBy('annee')
@@ -138,8 +141,9 @@ class DipressController extends Controller
             return view('dipress.mise-a-retraite.suite', compact('data','comptes'));
     }
     public function miseRetraiteDecompteDetails(int $id) {
+        $data = MiseRetraite::find($id);
         $comptes = DB::connection('metier')->table('gest_employe')
-                    ->where('no_employe','296241250990')
+                    ->where('no_employe',$data->employee->no_ima_employee)
                     ->where('annee',$id)
                     ->get();
 

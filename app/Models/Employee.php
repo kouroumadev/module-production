@@ -26,7 +26,6 @@ class Employee extends Model
         'created_by',
         'status',
         'created_at',
-
         'code_employe',
         'date_jour',
         'date_embauche',
@@ -85,7 +84,7 @@ class Employee extends Model
         'tag_rente_deces',
         'tag_suspension',
         'matricule',
-        
+
     ];
 
     protected $cast = [
