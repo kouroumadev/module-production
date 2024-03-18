@@ -1,7 +1,12 @@
 @extends('welcome')
 
 @section('body')
-
+@php
+   $employee = \App\Models\Employee::where('no_ima_employee',$emp->employee->no_ima_employee )->get();
+   $employeur = \App\Models\Employer::find($employee[0]->employer_id);
+   //$deposant = \App\Models\Employer::find($employee[0]->employer_id);
+   //dd($employee[0]->wifes);
+@endphp
 <div class="page-header shadow-lg">
     <div class="row">
         <div class="col-md-12 col-sm-12">
@@ -28,14 +33,14 @@
                         <div class="profile-photo">
                             <a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-eye"></i></a>
                             {{-- <img src="{{ asset('theme/vendors/images/photo1.jpg') }}" alt="" class="avatar-photo"> --}}
-                            <img src="{{ asset('storage/pensionnaireImg/'.$emp->photo) }}" class="avatar-photo" alt="">
+                            <img src="{{ asset('storage/pensionnaireImg/'.$emp->employee->photo) }}" class="avatar-photo" alt="">
 
                             <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body pd-5">
                                             <div class="img-container">
-                                                <img id="image" src="{{ asset('storage/pensionnaireImg/'.$emp->photo) }}" alt="Picture">
+                                                <img id="image" src="{{ asset('storage/pensionnaireImg/'.$emp->employee->photo) }}" alt="Picture">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -46,31 +51,31 @@
                                 </div>
                             </div>
                         </div>
-                        <h5 class="text-center h5 mb-0">{{ $emp->prenom_employee }} <span class="text-uppercase">{{ $emp->nom_employee }}</span></h5>
+                        <h5 class="text-center h5 mb-0">{{ $emp->employee->prenom_employee }} <span class="text-uppercase">{{ $emp->employee->nom_employee }}</span></h5>
                         {{-- <p class="text-center text-muted font-14">Lorem ipsum dolor sit amet</p> --}}
                         <div class="profile-info">
                             <h5 class="mb-20 h5 text-blue text-center">Infos Personnelles</h5>
                             <ul>
                                 <li>
-                                    <span>N° Immatriculation:</span> {{ $emp->no_ima_employee }}
+                                    <span>N° Immatriculation:</span> {{ $emp->employee->no_ima_employee }}
                                 </li>
                                 <li>
-                                    <span>Numero de Telephone:</span> {{ $emp->tel_employee }}
+                                    <span>Numero de Telephone:</span> {{ $emp->employee->tel_employee }}
                                 </li>
                                 <li>
-                                    <span>Date de Naissance:</span> {{ $emp->date_naissance_employee }}
+                                    <span>Date de Naissance:</span> {{ $emp->employee->date_naissance_employee }}
                                 </li>
                                 <li>
-                                    <span>Lieu de Naissance:</span> {{ $emp->lieu_naissance_employee }}
+                                    <span>Lieu de Naissance:</span> {{ $emp->employee->lieu_naissance_employee }}
                                 </li>
                                 <li>
-                                    <span>Prefecture:</span> {{ $emp->prefecture_employee }}
+                                    <span>Prefecture:</span> {{ $emp->employee->prefecture_employee }}
                                 </li>
                                 <li>
-                                    <span>Situation Matrimoniale:</span> {{ $emp->situation_matri_employee }}
+                                    <span>Situation Matrimoniale:</span> {{ $emp->employee->situation_matri_employee }}
                                 </li>
                                 <li>
-                                    <span>Adresse:</span> {{ $emp->adresse_employee }}
+                                    <span>Adresse:</span> {{ $emp->employee->adresse_employee }}
                                 </li>
                             </ul>
                         </div>
@@ -110,18 +115,18 @@
                                                         {{-- <h4 class="text-blue h5 mb-20">Edit Your Personal Setting</h4> --}}
                                                         <div class="form-group">
                                                             <label>N° Employeur</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->employer->no_employer }}" type="text" readonly>
+                                                            <input class="form-control form-control-lg" value="{{ $employeur->no_employer }}" type="text" readonly>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Categorie</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->employer->category }}" type="email" readonly>
+                                                            <input class="form-control form-control-lg" value="{{ $employeur->category}}" type="email" readonly>
                                                         </div>
                                                     </li>
                                                     <li class="weight-500 col-md-6">
                                                         {{-- <h4 class="text-blue h5 mb-20">Edit Social Media links</h4> --}}
                                                         <div class="form-group">
                                                             <label>Raison Sociale</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->employer->raison_sociale }}" type="text" readonly>
+                                                            <input class="form-control form-control-lg" value="{{ $employeur->raison_sociale }}" type="text" readonly>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -138,30 +143,30 @@
                                                         {{-- <h4 class="text-blue h5 mb-20">Edit Your Personal Setting</h4> --}}
                                                         <div class="form-group">
                                                             <label>Nom</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->deposants['0']->nom_deposant }}" type="text" readonly>
+                                                            <input class="form-control form-control-lg" value="{{ $employee[0]->deposants[0]->nom_deposant}}" type="text" readonly>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>N° Telephone</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->deposants['0']->telephone_deposant }}" type="email" readonly>
+                                                            <input class="form-control form-control-lg" value="{{ $employee[0]->deposants[0]->telephone_deposant }}" type="email" readonly>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Adresse</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->deposants['0']->adresse_deposant }}" type="email" readonly>
+                                                            <input class="form-control form-control-lg" value="{{ $employee[0]->deposants[0]->adresse_deposant}}" type="email" readonly>
                                                         </div>
                                                     </li>
                                                     <li class="weight-500 col-md-6">
                                                         {{-- <h4 class="text-blue h5 mb-20">Edit Social Media links</h4> --}}
                                                         <div class="form-group">
                                                             <label>Prenom</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->deposants['0']->prenom_deposant }}" type="text" readonly>
+                                                            <input class="form-control form-control-lg" value="{{ $employee[0]->deposants[0]->prenom_deposant }}" type="text" readonly>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>CIN</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->deposants['0']->cin_deposant }}" type="text" readonly>
+                                                            <input class="form-control form-control-lg" value="{{ $employee[0]->deposants[0]->cin_deposant }}" type="text" readonly>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Adresse Email</label>
-                                                            <input class="form-control form-control-lg" value="{{ $emp->deposants['0']->email_deposant }}" type="text" readonly>
+                                                            <input class="form-control form-control-lg" value="{{ $employee[0]->deposants[0]->email_deposant }}" type="text" readonly>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -174,7 +179,7 @@
                                         <div class="pd-20 profile-task-wrap">
                                             <div class="container pd-0">
                                                 <div class="faq-wrap">
-                                                    @foreach ($emp->wifes as $key => $value)
+                                                    @foreach ($employee[0]->wifes as $key => $value)
                                                     <div id="accordion">
                                                         <div class="card">
                                                             <div class="card-header">
@@ -236,53 +241,52 @@
                                                             <tr>
                                                                 <th scope="col" class="text-white">#</th>
                                                                 <th scope="col" class="text-white">Nom des Pièces fournis</th>
-                                                                <th scope="col" class="text-white">Voir de Fichier</th>
+                                                                <th scope="col" class="text-white">Voir le Fichier</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <?php
-                                                                for($i=0;$i<count($emp->docs['0']->data['paths']);$i++){ ?>
-                                                                    <tr>
-                                                                        <th scope="row">{{ $i+1 }}</th>
-                                                                        <th scope="row">{{ $emp->docs['0']->data['titles'][$i] }}</th>
-                                                                        <th scope="row">
-                                                                            <div class="col-md-12 col-sm-12 mb-30">
-                                                                                <div class="pd-20 card-box height-100-p">
-                                                                                    {{-- <h5 class="h4">Large modal</h5> --}}
-                                                                                    <a href="#" class="btn-block" data-toggle="modal" data-target="#bd-example-modal-lg{{ $i }}" type="button">
-                                                                                        {{-- <img src="{{ asset('theme/vendors/images/modal-img1.jpg') }}" alt="modal"> --}}
-                                                                                        <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
+                                                                @foreach ($emp->data['paths'] as $key => $doc)
+                                                                <tr>
+                                                                    <th scope="row">{{ $key+1 }}</th>
+                                                                    <th scope="row">{{ $emp->data['titles'][$key] }}</th>
+                                                                    <th scope="row">
+                                                                        <div class="col-md-12 col-sm-12 mb-30">
+                                                                            <div class="pd-20 card-box height-100-p">
+                                                                                {{-- <h5 class="h4">Large modal</h5> --}}
+                                                                                <a href="#" class="btn-block" data-toggle="modal" data-target="#bd-example-modal-lg{{ $key }}" type="button">
+                                                                                    {{-- <img src="{{ asset('theme/vendors/images/modal-img1.jpg') }}" alt="modal"> --}}
+                                                                                    <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
 
-                                                                                    </a>
-                                                                                    <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg{{ $i }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                                                        <div class="modal-dialog modal-lg modal-dialog-centered">
-                                                                                            <div class="modal-content">
-                                                                                                <div class="modal-header">
-                                                                                                    <h4 class="modal-title" id="myLargeModalLabel">{{ $emp->docs['0']->data['titles'][$i] }}</h4>
-                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                                                </div>
-                                                                                                <div class="modal-body">
-                                                                                                    <iframe src="{{ asset('storage/docs/'.$emp->docs['0']->data['paths'][$i]) }}" width="100%" height="500">
-                                                                                                        This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('storage/docs/'.$emp->docs['0']->data['paths'][$i]) }}">Download PDF</a>
-                                                                                                    </iframe>
-                                                                                                </div>
-                                                                                                {{-- <div class="modal-footer">
-                                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                                                                </div> --}}
+                                                                                </a>
+                                                                                <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                                                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <h4 class="modal-title" id="myLargeModalLabel">{{ $emp->data['titles'][$key] }}</h4>
+                                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                                                             </div>
+                                                                                            <div class="modal-body">
+                                                                                                <iframe src="{{ asset('storage/docs/'.$emp->data['paths'][$key]) }}" width="100%" height="500">
+                                                                                                    This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('storage/docs/'.$emp->data['paths'][$key]) }}">Download PDF</a>
+                                                                                                </iframe>
+                                                                                            </div>
+                                                                                            {{-- <div class="modal-footer">
+                                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                                                            </div> --}}
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            {{-- <iframe src="{{ asset('storage/docs/'.$emp->docs['0']->data['paths'][$i]) }}" width="50%" height="100%">
-                                                                                This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('storage/docs/'.$emp->docs['0']->data['paths'][$i]) }}">Download PDF</a>
-                                                                            </iframe> --}}
-                                                                        </th>
-                                                                        {{-- <th scope="row"><i class="fa fa-eye" aria-hidden="true"></i></th> --}}
-                                                                    </tr>
-                                                                <?php } ?>
-
+                                                                        </div>
+                                                                        {{-- <iframe src="{{ asset('storage/docs/'.$emp->docs['0']->data['paths'][$i]) }}" width="50%" height="100%">
+                                                                            This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('storage/docs/'.$emp->docs['0']->data['paths'][$i]) }}">Download PDF</a>
+                                                                        </iframe> --}}
+                                                                    </th>
+                                                                    {{-- <th scope="row"><i class="fa fa-eye" aria-hidden="true"></i></th> --}}
+                                                                </tr>
+                                                                @endforeach
+                                                                
                                                             </tbody>
                                                     </table>
                                                 </div>
@@ -310,9 +314,10 @@
                                                 <div class="form-group">
                                                     <label>Observation</label>
                                                     <textarea name="note" class="form-control" required></textarea>
-                                                    <input type="hidden" name="employee_id" value="{{ $emp->id }}">
-                                                    <input type="hidden" name="type" value="{{ $emp->type_pension }}">
-                                                    <input type="hidden" name="route" value="pension.show">
+                                                    <input type="hidden" name="employee_id" value="{{ $emp->employee->id }}">
+                                                    <input type="hidden" name="type" value="{{ $emp->type_doc }}">
+                                                    <input type="hidden" name="doc_id" value="{{ $emp->id }}">
+                                                    <input type="hidden" name="route" value="pension.index">
                                                 </div>
                                                 <button type="submit" class="btn btn-success">Transferer</button>
                                             </form>

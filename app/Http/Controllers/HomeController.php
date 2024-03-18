@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Doc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -27,8 +28,10 @@ class HomeController extends Controller
         return view('login');
     }
     public function PensionIndex() {
-        $emps = Auth::user()->employees;
-        //dd($emps);
+        //$emps = Auth::user()->employees;
+        $emps = Doc::all();
+        
+        //dd($emps->employee);
         return view('pensionnaire.index', compact('emps'));
     }
     public function reclamationIndex() {

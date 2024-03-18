@@ -23,15 +23,16 @@ class PensionController extends Controller
         return view('pensionnaire.show', compact('emps'));
     }
     public function details(int $id){
-        $emp = Employee::find($id);
+        //$emp = Employee::find($id);
+        $emp = Doc::find($id);
         $depts = Dept::all();
-        // dd($emp);
+         //dd($emp->data['paths'][0]);
         return view('pensionnaire.details', compact('emp','depts'));
     }
     public function store(Request $request) {
         $no_dossier = rand(1,100);
         //dd($request->all());
-        $emp = Employee::where('no_ima_employee',$request->no_ima_employee)->get();
+        $emp = Doc::where('no_ima_employee',$request->no_ima_employee)->get();
         //dd($emp[0]->id);
         $user_id = Auth::user()->id;
         // dd($request->all());

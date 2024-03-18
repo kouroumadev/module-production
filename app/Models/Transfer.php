@@ -15,11 +15,22 @@ class Transfer extends Model
         'from_dept',
         'to_dept',
         'note',
+        'doc_id',
         'status'
     ];
 
     public function employee() {
         return $this->belongsTo(Employee::class, 'employee_id');
+    }
+
+    public function docs() {
+        return $this->belongsTo(Doc::class, 'doc_id');
+    }
+    public function froms() {
+        return $this->belongsTo(Dept::class, 'from_dept');
+    }
+    public function tos() {
+        return $this->belongsTo(Dept::class, 'to_dept');
     }
 
 

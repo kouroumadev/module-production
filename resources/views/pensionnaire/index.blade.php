@@ -95,7 +95,7 @@
                     <tr>
                         <th class="table-plus text-white">Immat.</th>
                         <th class="text-white">Prenom & Nom</th>
-                        <th class="text-white">Raison Sociale</th>
+                        {{-- <th class="text-white">Raison Sociale</th> --}}
                         <th class="text-white">Date Creation</th>
                         <th class="text-white">Etat</th>
                         <th class="text-white">Doc</th>
@@ -104,20 +104,38 @@
                 </thead>
                 <tbody>
                     @foreach ($emps as $key => $emp)
-                        <tr>
+                    @php
+                        $trans=\App\Models\Transfer::where('doc_id',11)->get();
+                        dd($trans);
+                    @endphp
+                    <tr>
+                        <td class="">{{ $emp->employee->no_ima_employee }}</td>
+                        <td class="">{{ $emp->employee->prenom_employee }} <span
+                                class="text-uppercase">{{ $emp->employee->nom_employee }}</span></td>
+                        {{-- <td>{{ $emp->employer->raison_sociale }}</td> --}}
+                        <td>{{ $emp->created_at }}</td>
+                        <td><span class="badge badge-warning">En Cours...</span></td>
+                        {{-- <td>{{$emp->docs[0]->type_doc}}</td> --}}
+                        <td>{{ $emp->type_doc }}</td>
+                        <td>
+                            <a class="btn btn-success" href="{{ route('pension.details', $emp->id) }}">Traitement <i
+                                    class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                        </td>
+                    </tr>
+                        {{-- <tr>
                             <td class="">{{ $emp->no_ima_employee }}</td>
                             <td class="">{{ $emp->prenom_employee }} <span
                                     class="text-uppercase">{{ $emp->nom_employee }}</span></td>
                             <td>{{ $emp->employer->raison_sociale }}</td>
                             <td>{{ $emp->created_at }}</td>
                             <td><span class="badge badge-warning">En Cours...</span></td>
-                            {{-- <td>{{$emp->docs[0]->type_doc}}</td> --}}
+                            {{-- <td>{{$emp->docs[0]->type_doc}}</td>
                             <td>type doc</td>
                             <td>
                                 <a class="btn btn-success" href="{{ route('pension.details', $emp->id) }}">Traitement <i
                                         class="fa fa-chevron-right" aria-hidden="true"></i> </a>
                             </td>
-                        </tr>
+                        </tr> --}}
                     @endforeach
                     {{-- @foreach ($emps as $emp)
                     <tr>
