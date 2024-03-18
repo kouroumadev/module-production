@@ -97,8 +97,8 @@
             <tr>
                 <td class="">{{ $emp->no_ima_employee }}</td>
                 <td class="">{{ $emp->prenom_employee }} <span class="text-uppercase">{{ $emp->nom_employee }}</span></td>
-                <td>{{ $emp->employer->raison_sociale }}</td>
-                <td>{{ $emp->created_at }}</td>
+                <td class="d-inline-block text-truncate" style="max-width: 350px;">{{ $emp->employer->raison_sociale }}</td>
+                <td>{{ \Carbon\Carbon::parse($emp->created_at)->format('d/m/Y')}} </td>
                 <td>{{ $emp->type_pension }}</td>
                 {{-- <td><span class="badge badge-warning">En Cours...</span></td> --}}
                 <td>DIPRES</td>

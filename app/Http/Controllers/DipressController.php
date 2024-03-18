@@ -74,6 +74,7 @@ class DipressController extends Controller
 
             // dd($request->all());
 
+
             if ($request->pension_type == 'Retraite'){
                 $no = "01-0";
             } else {
@@ -101,6 +102,14 @@ class DipressController extends Controller
             $data->created_by = Auth::user()->id;
 
             $data->save();
+
+            $emp = Employee::find($request->emp_id);
+            $emp->update([
+                'tag_retraite' => 0
+            ]);
+
+
+
             Alert::success('Mise a la retraite effectue avec success', '');
             return redirect(route('miseRetaite.index'))->with('yes','Enregistrer avec succes');
 
