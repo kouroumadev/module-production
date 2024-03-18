@@ -28,6 +28,7 @@ class HomeController extends Controller
     }
     public function PensionIndex() {
         $emps = Auth::user()->employees;
+        //dd($emps);
         return view('pensionnaire.index', compact('emps'));
     }
     public function reclamationIndex() {
@@ -96,13 +97,15 @@ class HomeController extends Controller
                     $data['employeDetails']= $employeDeails;
                     $data['employe'] = $employe;
                     $data['employeur'] = $employeur;
+                    $data['emp_app'] = $emp_app;
+                    //dd($data['emp_app']);
                 return view('pensionnaire.index',compact('data','type_pension'));
             }
             //dd($type_pension);
         } else {
                 $emp = Employee::where('no_ima_employee', $no_immat)->get();
                 $employe = DB::connection('metier')->table('employe')->where('no_employe','=',$no_immat)->get();
-
+                //dd($employe[0]->tag_retraite);
                 if ($type_pension == "Selectionner le type de pension") {
                 $flag = '1';
 
@@ -117,6 +120,10 @@ class HomeController extends Controller
                     Alert::error('', "Ce N° d'Immatriculation existe deja dans la base de données de la CNSS");
                     return view('pensionnaire.index');
                 }
+                // elseif ($employe[0]->tag_retraite == 0) {
+                //     Alert::error('', "Cet employe(é) est déjà à la retraite");
+                //     return view('pensionnaire.index');
+                // }
 
                 $conjoints = DB::connection('metier')->table('conjoint')->where('no_employe','=',$no_immat)->get();
                 $no_employeur = $employe[0]->no_employeur;
@@ -149,6 +156,7 @@ class HomeController extends Controller
                     $data['employeDetails']= $employeDeails;
                     $data['employe'] = $employe;
                     $data['employeur'] = $employeur;
+                    //dd($data['employeDetails']);
                     return view('pensionnaire.index',compact('data','type_pension'));
         }
 

@@ -98,12 +98,12 @@
                         <th class="text-white">Raison Sociale</th>
                         <th class="text-white">Date Creation</th>
                         <th class="text-white">Etat</th>
-                        <th class="text-white">Etape</th>
+                        <th class="text-white">Doc</th>
                         <th class="datatable-nosort text-white">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($emps as $emp)
+                    @foreach ($emps as $key => $emp)
                         <tr>
                             <td class="">{{ $emp->no_ima_employee }}</td>
                             <td class="">{{ $emp->prenom_employee }} <span
@@ -111,13 +111,143 @@
                             <td>{{ $emp->employer->raison_sociale }}</td>
                             <td>{{ $emp->created_at }}</td>
                             <td><span class="badge badge-warning">En Cours...</span></td>
-                            <td>DCG</td>
+                            {{-- <td>{{$emp->docs[0]->type_doc}}</td> --}}
+                            <td>type doc</td>
                             <td>
                                 <a class="btn btn-success" href="{{ route('pension.details', $emp->id) }}">Traitement <i
                                         class="fa fa-chevron-right" aria-hidden="true"></i> </a>
                             </td>
                         </tr>
                     @endforeach
+                    {{-- @foreach ($emps as $emp)
+                    <tr>
+                        <td class="">{{ $emp->no_ima_employee }}</td>
+                        <td class="">{{ $emp->prenom_employee }} <span class="text-uppercase">{{ $emp->nom_employee }}</span></td>
+                        <td>{{ $emp->employer->raison_sociale }}</td>
+                        <td>{{ $emp->created_at }}</td>
+                        <td>
+                            @if ($emp->transfers['0']->status == '0')
+                                <span class="badge badge-success font-14">traite</span>
+                            @else
+                                <span class="badge badge-warning">en cours..</span>
+                            @endif
+                        </td>
+                        <td>
+                        <?php
+                                $from_dept = DB::table('depts')->where('id',$emp->transfers['0']->from_dept)->value('name');
+                                $to_dept = DB::table('depts')->where('id',$emp->transfers['0']->to_dept)->value('name');
+                            ?>
+                            {{ $from_dept }} -> {{ $to_dept }}  <a href="task-add" data-toggle="modal" data-target="#task-add" class="bg-light-blue btn text-blue weight-500"><i class="fa fa-eye"></i> Details</a>
+
+                        </td>
+                        <td>
+                            <a class="btn btn-success" href="{{ route('pension.details',$emp->id) }}">Traitement <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                        </td>
+
+                        <div class="modal fade customscroll" id="task-add" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Tasks Add</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Close Modal">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body pd-0">
+
+                                        <div class="profile-timeline">
+                                            <div class="timeline-month">
+                                                <h5>Dossier en cours de traitement</h5>
+                                            </div>
+                                            <div class="profile-timeline-list">
+                                                <ul>
+                                                    <li>
+                                                        <div class="date">{{ $from_dept }}</div>
+                                                    
+
+                                                        <p>
+                                                            <span class="font-weight-bold text-success"><i class="icon-copy ion-folder"></i> Recu de: <span class="task-time">{{ $emp->deposants['0']->prenom_deposant }} {{ $emp->deposants['0']->nom_deposant }}</span></span> <br>
+                                                            <span class="font-weight-bold ml-2 text-success"><i class="ion-android-alarm-clock"></i> Date: <span class="task-time">{{ $emp->created_at->format('d M') }} {{ $emp->created_at->format('Y') }} à {{ $emp->created_at->format('H:i:s') }}</span></span>
+                                                        </p>
+                                                        <p>
+                                                            <span class="font-weight-bold text-success"><i class="icon-copy ion-folder"></i> Transmi à: <span class="task-time">{{ $to_dept }}</span></span> <br>
+                                                            <span class="font-weight-bold ml-2 text-success"><i class="ion-android-alarm-clock"></i> Date: <span class="task-time">{{ $emp->transfers['0']->created_at->format('d M') }} {{ $emp->transfers['0']->created_at->format('Y') }} à {{ $emp->transfers['0']->created_at->format('H:i:s') }}</span></span>
+                                                        </p>
+                                                        <p>
+                                                            <span class="font-weight-bold text-success"><i class="ion-ios-chatboxes"></i> Observation: <span class="task-time">{{ $emp->transfers['0']->note }}</span></span> <br>
+                                                        </p>
+                                                        
+                                                    </li>
+                                                    <li>
+                                                        <div class="date">10 Aug</div>
+                                                        <div class="task-name"><i class="ion-ios-clock"></i> Event Added</div>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                        <div class="task-time">09:30 am</div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="date">10 Aug</div>
+                                                        <div class="task-name"><i class="ion-ios-clock"></i> Event Added</div>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                        <div class="task-time">09:30 am</div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="timeline-month">
+                                                <h5>July, 2020</h5>
+                                            </div>
+                                            <div class="profile-timeline-list">
+                                                <ul>
+                                                    <li>
+                                                        <div class="date">12 July</div>
+                                                        <div class="task-name"><i class="ion-android-alarm-clock"></i> Task Added</div>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                        <div class="task-time">09:30 am</div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="date">10 July</div>
+                                                        <div class="task-name"><i class="ion-ios-chatboxes"></i> Task Added</div>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                        <div class="task-time">09:30 am</div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="timeline-month">
+                                                <h5>June, 2020</h5>
+                                            </div>
+                                            <div class="profile-timeline-list">
+                                                <ul>
+                                                    <li>
+                                                        <div class="date">12 June</div>
+                                                        <div class="task-name"><i class="ion-android-alarm-clock"></i> Task Added</div>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                        <div class="task-time">09:30 am</div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="date">10 June</div>
+                                                        <div class="task-name"><i class="ion-ios-chatboxes"></i> Task Added</div>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                        <div class="task-time">09:30 am</div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="date">10 June</div>
+                                                        <div class="task-name"><i class="ion-ios-clock"></i> Event Added</div>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                        <div class="task-time">09:30 am</div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">Add</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                @endforeach --}}
                 </tbody>
             </table>
         </div>
@@ -184,42 +314,85 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Telephone:</label>
-                                            <input type="text" class="form-control" name="tel_employee"
-                                                id="telephone_employe" required>
+                                @if ($type_pension == 'reversion')
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Telephone:</label>
+                                                <input type="text" class="form-control" name="tel_employee"
+                                                  value="{{ $data['emp_app'][0]->tel_employee}}" readonly  id="telephone_employe" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Adresse:</label>
+                                                <input type="text" class="form-control" name="adresse_employee"
+                                                   value="{{ $data['emp_app'][0]->adresse_employee }}" readonly id="adresse_employe" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Situation Matrimoniale:</label>
+                                                <input type="text" class="form-control" name="situation_matri_employee"
+                                                    value="{{ $data['employe'][0]->statut }}" id="statut" readonly>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Adresse:</label>
-                                            <input type="text" class="form-control" name="adresse_employee"
-                                                id="adresse_employe" required>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Photo du Pensionnaire</label>
+                                                {{-- <input type="file" name="pensionnaire_photo" class="form-control-file"
+                                                    id="exampleFormControlFile1" onchange="readURL(this)" required> --}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img src="{{asset('storage/pensionnaireImg/'.$data['emp_app'][0]->photo)}}" class="rounded" alt="No Image" id="img"
+                                                style='height:150px;'> <br>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Situation Matrimoniale:</label>
-                                            <input type="text" class="form-control" name="situation_matri_employee"
-                                                value="{{ $data['employe'][0]->statut }}" id="statut" readonly>
+                                @else
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Telephone:</label>
+                                                <input type="text" class="form-control" name="tel_employee"
+                                                    id="telephone_employe" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Adresse:</label>
+                                                <input type="text" class="form-control" name="adresse_employee"
+                                                    id="adresse_employe" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Situation Matrimoniale:</label>
+                                                <input type="text" class="form-control" name="situation_matri_employee"
+                                                    value="{{ $data['employe'][0]->statut }}" id="statut" readonly>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Photo du Pensionnaire</label>
-                                            <input type="file" name="pensionnaire_photo" class="form-control-file"
-                                                id="exampleFormControlFile1" onchange="readURL(this)" required>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Photo du Pensionnaire</label>
+                                                <input type="file" name="pensionnaire_photo" class="form-control-file"
+                                                    id="exampleFormControlFile1" onchange="readURL(this)" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img src="" class="rounded" alt="No Image" id="img"
+                                                style='height:150px;'> <br>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <img src="" class="rounded" alt="No Image" id="img"
-                                            style='height:150px;'> <br>
-                                    </div>
-                                </div>
+                                @endif
+                                
+                                
                             </section>
                             <!-- Step 2 -->
                             <h5>Infos Employeur</h5>
@@ -266,7 +439,9 @@
                                 <input type="hidden" name="details" value="{{ $details }}">
                                 <input type="hidden" name="type_pension" value="{{ $type_pension }}">
 
-
+                                @if ($data['employeDetails'] == null)
+                                    <h4 style="text-align: center">Pas de Conjoint</h4>
+                                @else
                                 <div class="faq-wrap">
                                     @foreach ($data['employeDetails'] as $key => $value)
                                         <div id="accordion">
@@ -323,6 +498,8 @@
                                         </div>
                                     @endforeach
                                 </div>
+                                @endif
+                                
 
                             </section>
                             <!-- Step 4 -->
@@ -970,7 +1147,7 @@
                 var adresse_deposant = document.getElementById("adresse_deposant").value
                 var email_deposant = document.getElementById("email_deposant").value
                 var cin_deposant = document.getElementById("cin_deposant").value
-                alert(nom_deposant);
+                //alert(nom_deposant);
                 document.getElementById("nom_dep").innerHTML = nom_deposant;
                 document.getElementById("prenom_dep").innerHTML = prenom_deposant;
                 document.getElementById("tel_dep").innerHTML = telephone_deposant;
