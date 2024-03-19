@@ -16,6 +16,7 @@ class Transfer extends Model
         'to_dept',
         'note',
         'doc_id',
+        'transfer_id',
         'status'
     ];
 
@@ -31,6 +32,9 @@ class Transfer extends Model
     }
     public function tos() {
         return $this->belongsTo(Dept::class, 'to_dept');
+    }
+    public function transfers() {
+        return $this->belongsTo(Transfer::class, 'transfer_id');
     }
 
 

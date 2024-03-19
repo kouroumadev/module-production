@@ -62,6 +62,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/dipress/mise-a-retraite/decompte/suite/{id}', [App\Http\Controllers\DipressController::class, 'miseRetraiteDecompteSuite'])->name('miseRetaite.decompte.suite');
     Route::get('/dipress/mise-a-retraite/details/{id}', [App\Http\Controllers\DipressController::class, 'miseRetraiteDecompteDetails'])->name('miseRetaite.details');
 
+    // SECRETARIAT
+    Route::get('/secretariat/index', [App\Http\Controllers\SecretariatController::class, 'SercretariatIndex'])->name('secretariat.index');
+    Route::get('/secretariat/etude/traitement/{id}', [App\Http\Controllers\SecretariatController::class, 'etudeTraitement'])->name('etude.traitement');
+
     // TRACKING
     Route::post('/dipress/store', [App\Http\Controllers\TransferController::class, 'store'])->name('transfert.store');
 

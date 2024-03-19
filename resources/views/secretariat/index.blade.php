@@ -12,7 +12,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href={{ route('dashboard') }}>Acceuil</a></li>
                     {{-- <li class="breadcrumb-item" aria-current="page"><a href="{{ route('dipress.vieillesse') }}">Gestion des Assurances vieillesse</a></li> --}}
-                    <li class="breadcrumb-item active" aria-current="page">Etude de dossier</li>
+                    <li class="breadcrumb-item active" aria-current="page">Secretariat</li>
                 </ol>
             </nav>
         </div>

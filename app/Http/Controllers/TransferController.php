@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dept;
+use App\Models\Doc;
 use App\Models\Transfer;
 use App\Models\User;
 use App\Notifications\TrackingNotification;
@@ -22,8 +23,8 @@ class TransferController extends Controller
 
         $to_dept = Dept::find($request->to_dept);
         $to_dept_name = $to_dept->name;
-
-        // dd($request->all(),$from_dept);
+        $doc = Doc::find($request->doc_id);
+         //dd($doc);
 
         $trans = new Transfer();
         $trans->employee_id = $request->employee_id;
@@ -34,6 +35,11 @@ class TransferController extends Controller
         $trans->doc_id = $request->doc_id;
         $trans->status = '0';
         $trans->save(); 
+        $trans_last_id = $trans->id;
+
+        
+        $doc->transfer_id = $trans_last_id;
+        $doc->save();
        // dd($to_dept_name);
         // Notification::send($user, new TrackingNotification($to_dept_name,$from_dept_name))
 ;       Alert::success('Document Transferé avec success', '');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Dept;
+use App\Models\Doc;
 use App\Models\MiseRetraite;
 use App\Models\Prefecture;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class DipressController extends Controller
     // SECTION ETUDE
     public function etudeIndex() {
         // $emps = Auth::user()->employees;
-        $emps = Employee::all();
+        $emps = Doc::all();
         return view('dipress.etude-dossier.index', compact('emps'));
     }
 

@@ -16,6 +16,7 @@ class Doc extends Model
         'data',
         'level',
         'created_by',
+        'transfer_id',
         'status'
     ];
 
@@ -28,5 +29,8 @@ class Doc extends Model
 
     public function employee() {
         return $this->belongsTo(Employee::class, 'employee_id');
+    }
+    public function transfers() {
+        return $this->belongsTo(Transfer::class, 'transfer_id');
     }
 }

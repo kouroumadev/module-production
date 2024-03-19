@@ -105,8 +105,11 @@
                 <tbody>
                     @foreach ($emps as $key => $emp)
                     @php
-                        $trans=\App\Models\Transfer::where('doc_id',11)->get();
-                        dd($trans);
+                        // $trans=\App\Models\Transfer::where('doc_id',11)->get();
+                        // $from_dept = DB::table('depts')->where('id',$emp->transfers['0']->from_dept)->value('name');
+                        //         $to_dept = DB::table('depts')->where('id',$emp->transfers['0']->to_dept)->value('name');
+                        //         dd($from_dept);
+                        
                     @endphp
                     <tr>
                         <td class="">{{ $emp->employee->no_ima_employee }}</td>
@@ -114,13 +117,35 @@
                                 class="text-uppercase">{{ $emp->employee->nom_employee }}</span></td>
                         {{-- <td>{{ $emp->employer->raison_sociale }}</td> --}}
                         <td>{{ $emp->created_at }}</td>
-                        <td><span class="badge badge-warning">En Cours...</span></td>
+                        @if ($emp->transfer_id == null)
+                            <td><span class="badge badge-warning">En Cours...</span></td>
+                        @else
+                            @php
+                                $from=\App\Models\Dept::where('id',$emp->transfers->from_dept)->get();
+                                $to=\App\Models\Dept::where('id',$emp->transfers->to_dept)->get();
+                                //dd($from[0]->name);
+                            @endphp
+                            <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td> 
+                        @endif
+                        
                         {{-- <td>{{$emp->docs[0]->type_doc}}</td> --}}
                         <td>{{ $emp->type_doc }}</td>
+                        @if ($emp->transfer_id != null && Auth::user()->dept->name == $to[0]->name)
+                            <td>
+                                <a class="btn btn-success" href="{{ route('pension.details', $emp->id) }}">Traitement <i
+                                        class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                            </td>
+                        @elseif ($emp->transfer_id == null && Auth::user()->dept->name == "DQE")
+                            <td>
+                                <a class="btn btn-success" href="{{ route('pension.details', $emp->id) }}">Traitement <i
+                                        class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                            </td>
+                        @else
                         <td>
-                            <a class="btn btn-success" href="{{ route('pension.details', $emp->id) }}">Traitement <i
-                                    class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                            <span>En attente</span>
                         </td>
+                        @endif
+                        
                     </tr>
                         {{-- <tr>
                             <td class="">{{ $emp->no_ima_employee }}</td>
@@ -154,6 +179,7 @@
                         <?php
                                 $from_dept = DB::table('depts')->where('id',$emp->transfers['0']->from_dept)->value('name');
                                 $to_dept = DB::table('depts')->where('id',$emp->transfers['0']->to_dept)->value('name');
+                                dd($from_dept);
                             ?>
                             {{ $from_dept }} -> {{ $to_dept }}  <a href="task-add" data-toggle="modal" data-target="#task-add" class="bg-light-blue btn text-blue weight-500"><i class="fa fa-eye"></i> Details</a>
 
