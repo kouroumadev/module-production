@@ -150,6 +150,11 @@ class DipressController extends Controller
 
             return view('dipress.mise-a-retraite.suite', compact('data','comptes'));
     }
+    public function miseRetraiteDecompteDone(int $id) {
+            $data = MiseRetraite::find($id);
+
+            return view('dipress.mise-a-retraite.done', compact('data'));
+    }
     public function miseRetraiteDecompteDetails(int $id) {
         $data = MiseRetraite::find($id);
         $comptes = DB::connection('metier')->table('gest_employe')

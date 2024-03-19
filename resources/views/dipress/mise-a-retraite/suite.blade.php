@@ -57,10 +57,6 @@
     </div>
 
     <div class="col-md-6">
-        <div>
-            <span class="text-left font-weight-bold font-14">Date de premiere embauche</span>
-            <span class="float-right font-12">{{ $data->profession }}</span>
-       </div>
        <div>
             <span class="text-left font-weight-bold font-14">Date de premiere embauche</span>
             <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->first_job_date)->format('d-m-Y') }}</span>
@@ -99,7 +95,8 @@
         <span class="font-12">DE 2006 AU 04 SEPTEMBRE 2009</span> <br>
         <span class="font-12">DE 05 SEPTEMBRE 2009 AU 31 DECEMBRE 2010</span> <br>
         <span class="font-12">DEPUIS 2011</span> <br>
-        <span class="font-12">DEPUIS 2019</span>
+        <span class="font-12">DE 2019 A 2021</span> <br>
+        <span class="font-12">DE 2021 A 2055</span>
     </div>
     <div class="col-md-2 text-right">
         <span class="font-weight-bold font-14">DATE DEBUT</span><br>
@@ -107,7 +104,8 @@
         <span class="font-12">01/01/2006</span> <br>
         <span class="font-12">05/09/2009</span> <br>
         <span class="font-12">01/01/2011</span> <br>
-        <span class="font-12">01/01/2019</span>
+        <span class="font-12">01/01/2019</span> <br>
+        <span class="font-12">01/01/2021</span>
     </div>
     <div class="col-md-2 text-right">
         <span class="font-weight-bold font-14">DATE FIN</span><br>
@@ -115,7 +113,8 @@
         <span class="font-12">04/04/2009</span> <br>
         <span class="font-12">31/12/2010</span> <br>
         <span class="font-12">31/12/2018</span> <br>
-        <span class="font-12">24/01/2055</span>
+        <span class="font-12">31/12/2020</span> <br>
+        <span class="font-12">31/12/2055</span>
     </div>
     <div class="col-md-2 text-right">
         <span class="font-weight-bold font-14">PLANCHER</span><br>
@@ -123,7 +122,8 @@
         <span class="font-12">100 000</span> <br>
         <span class="font-12">100 000</span> <br>
         <span class="font-12">200 000</span> <br>
-        <span class="font-12">440 000</span>
+        <span class="font-12">440 000</span> <br>
+        <span class="font-12">550 000</span>
     </div>
     <div class="col-md-2 text-right">
         <span class="font-weight-bold font-14">PLAFOND</span><br>
@@ -131,6 +131,7 @@
         <span class="font-12">800 000</span> <br>
         <span class="font-12">800 000</span> <br>
         <span class="font-12">1 500 000</span> <br>
+        <span class="font-12">2 500 000</span> <br>
         <span class="font-12">2 500 000</span>
     </div>
 </div>
@@ -196,7 +197,17 @@
                         $soumis = 1500000;
                     }
                 }
-                if((2019 <= $cpt->annee) && ($cpt->annee <= 2055)){
+                if((2019 <= $cpt->annee) && ($cpt->annee <= 2021)){
+                    if($val> 0 && $val<= 440000){
+                        $soumis = 440000;
+                    } else if($val > 440000 && $val <= 2500000){
+                        $soumis = $val;
+                    } else{
+                        $soumis = 2500000;
+                    }
+                }
+
+                if((2022 <= $cpt->annee) && ($cpt->annee <= 2055)){
                     if($val> 0 && $val<= 550000){
                         $soumis = 550000;
                     } else if($val > 550000 && $val <= 2500000){
@@ -212,19 +223,19 @@
                <tr>
                    <td class="">{{ $loop->index+1 }}</td>
                    <td class="text-center">{{ $cpt->annee }}</td>
-                   <td class="text-center">{{ number_format((int)$cpt->salaireAnnuel,0,""," ") }}</td>
+                   <td class="text-center font-weight-bold">{{ number_format((int)$cpt->salaireAnnuel,0,""," ") }}</td>
                    <td class="text-center">{{ $cpt->mois }}</td>
-                   <td class="text-center">{{ number_format((int)$cpt->salairebrut,0,""," ") }}</td>
-                   <td class="text-center">{{ number_format($soumis,0,""," ") }}</td>
+                   <td class="text-center font-weight-bold">{{ number_format((int)$cpt->salairebrut,0,""," ") }}</td>
+                   <td class="text-center font-weight-bold">{{ number_format($soumis,0,""," ") }}</td>
                </tr>
                @endforeach
                <tr>
                     <td class="font-weight-bold">Total:</td>
                     <td></td>
-                    <td class="text-center font-weight-bold">{{ number_format($salaire_an,0,""," ") }}</td>
-                    <td class="text-center font-weight-bold">{{ $total_mois }}/120</td>
+                    <td class="text-center font-weight-bold text-danger">{{ number_format($salaire_an,0,""," ") }}</td>
+                    <td class="text-center font-weight-bold text-danger">{{ $total_mois }}/120</td>
                     <td></td>
-                    <td class="text-center font-weight-bold">{{ number_format($total_ssc,0,""," ") }}</td>
+                    <td class="text-center font-weight-bold text-danger">{{ number_format($total_ssc,0,""," ") }}</td>
                </tr>
            </tbody>
        </table>
@@ -241,8 +252,8 @@
             </div>
             <div class="col-md-6 text-right">
                 <span class="font-12">{{ number_format($total_ssc,0,""," ") }} / {{ $total_mois }} = <span class="font-weight-bold">{{ number_format($total_ssc/$total_mois,0,""," ") }}</span></span> <br>
-                <span class="font-12 font-weight-bold text-success" style="margin-left: 98px;">{{ number_format($total_ssc/$total_mois,0,""," ") }}</span> <br>
-                <span class="font-12 font-weight-bold text-success" style="margin-left: 98px;"></span> <br>
+                <span class="font-12 font-weight-bold text-danger" style="margin-left: 98px;">{{ number_format($total_ssc/$total_mois,0,""," ") }}</span> <br>
+                <span class="font-12 font-weight-bold text-danger" style="margin-left: 98px;"></span> <br>
             </div>
         </div>
 
@@ -250,14 +261,14 @@
     <div class="col-md-6">
         <div class="row card-box mb-30 shadow-lg p-2">
             <div class="col-md-8">
-                <span class="font-12">MONTANT MENSUEL DE LA PENSION : {{ number_format($total_ssc/$total_mois,0,""," ") }} x 30 x 2% = </span> <br>
+                <span class="font-12">MONTANT MENSUEL DE LA PENSION : {{ number_format($total_ssc/$total_mois,0,""," ") }} x {{ $data->annuite }} x 2% = </span> <br>
                 <span class="font-12">MONTANT ANNUEL DE LA PENSION :</span> <br>
                 <span class="font-12">PENSION <span class="font-weight-bold">TRIMESTRIELLE</span> :</span> <br>
             </div>
             <div class="col-md-4 text-right">
-                <span class="font-14 font-weight-bold text-success">{{ number_format((($total_ssc/$total_mois)*30*2)/100,0,""," ") }}</span> <br>
+                <span class="font-14 font-weight-bold text-danger">{{ number_format((($total_ssc/$total_mois)*$data->annuite*2)/100,0,""," ") }}</span> <br>
                 <span class="font-14 font-weight-bold">{{ number_format(((($total_ssc/$total_mois)*30*2)/100)*12,0,""," ") }}</span> <br>
-                <span class="font-14 font-weight-bold text-success">{{ number_format((((($total_ssc/$total_mois)*30*2)/100)*12)/4,0,""," ") }}</span> <br>
+                <span class="font-14 font-weight-bold text-danger">{{ number_format((((($total_ssc/$total_mois)*30*2)/100)*12)/4,0,""," ") }}</span> <br>
             </div>
         </div>
     </div>
@@ -288,7 +299,7 @@
        <hr>
        <div>
             <span class="text-left font-weight-bold font-14">Montant de base de la pension</span>
-            <span class="float-right font-weight-bold font-14">{{ number_format((((($total_ssc/$total_mois)*30*2)/100)*12)/4,0,""," ") }}</span>
+            <span class="float-right font-weight-bold font-14 text-danger">{{ number_format((((($total_ssc/$total_mois)*30*2)/100)*12)/4,0,""," ") }}</span>
        </div>
     </div>
     <div class="col-md-6">
@@ -309,7 +320,7 @@
 
 <div class="footer-wrap pd-20 mb-20 card-box justify-content-lg-end">
     <div class="col-md-4 justify-content-end">
-        <a href="{{ route('miseRetaite.decompte.suite', $data->id) }}" class="btn btn-success text-white">Fin Decompte <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        <a href="{{ route('miseRetaite.decompte.done', $data->id) }}" class="btn btn-success text-white">Terminer <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
     </div>
 </div>
 
