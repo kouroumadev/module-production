@@ -40,7 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/prest/index', [App\Http\Controllers\AdminController::class, 'PrestIndex'])->name('prest.index');
     Route::post('/prest/store', [App\Http\Controllers\AdminController::class, 'PrestStore'])->name('prest.store');
 
-    
+
     //DIPRESS PRESTATIONS
     Route::get('/dipress/pension', [App\Http\Controllers\DipressController::class, 'vieillesse'])->name('dipress.vieillesse');
     Route::get('/dipress/maladie', [App\Http\Controllers\DipressController::class, 'maladie'])->name('dipress.maladie');
@@ -60,6 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/dipress/mise-a-retraite/index', [App\Http\Controllers\DipressController::class, 'miseRetraiteIndex'])->name('miseRetaite.index');
     Route::get('/dipress/mise-a-retraite/decompte/{id}', [App\Http\Controllers\DipressController::class, 'miseRetraiteDecompte'])->name('miseRetaite.decompte');
     Route::get('/dipress/mise-a-retraite/decompte/suite/{id}', [App\Http\Controllers\DipressController::class, 'miseRetraiteDecompteSuite'])->name('miseRetaite.decompte.suite');
+    Route::get('/dipress/mise-a-retraite/decompte/done/{id}', [App\Http\Controllers\DipressController::class, 'miseRetraiteDecompteDone'])->name('miseRetaite.decompte.done');
     Route::get('/dipress/mise-a-retraite/details/{id}', [App\Http\Controllers\DipressController::class, 'miseRetraiteDecompteDetails'])->name('miseRetaite.details');
 
     // TRACKING
