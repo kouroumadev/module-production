@@ -696,13 +696,26 @@
                                                             </th>
                                                             <input type="hidden" name="titles[]"
                                                                 value="{{ $item->nom_piece }}">
-                                                            <th scope="row"><input type="file"
+                                                            <th scope="row">
+                                                                @if ($item->obligation == '1')
+                                                                    <input type="file"
                                                                     id="file{{ $key }}" name="files[]"
                                                                     accept="application/pdf"
                                                                     class="form-control-file form-control height-auto"
                                                                     data-toggle="modal" data-target="#bd-example-modal-lg"
                                                                     onchange="myFunction('file{{ $key }}','file{{ $key }}_statut')"
-                                                                    required /></th>
+                                                                    required />
+                                                                @else
+                                                                    <input type="file"
+                                                                    id="file{{ $key }}" name="files[]"
+                                                                    accept="application/pdf"
+                                                                    class="form-control-file form-control height-auto"
+                                                                    data-toggle="modal" data-target="#bd-example-modal-lg"
+                                                                    onchange="myFunction('file{{ $key }}','file{{ $key }}_statut')"
+                                                                     />
+                                                                @endif
+                                                                
+                                                            </th>
                                                             <th scope="row" id="file{{ $key }}_statut"><span
                                                                     class="badge badge-danger"><i
                                                                         class="icon-copy fa fa-warning"
