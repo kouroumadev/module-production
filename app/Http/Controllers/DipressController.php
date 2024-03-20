@@ -147,7 +147,7 @@ class DipressController extends Controller
                         ->groupBy('annee')
                         ->get();
 
-                        dd($comptes);
+                        // dd($comptes);
 
             return view('dipress.mise-a-retraite.suite', compact('data','comptes'));
     }
