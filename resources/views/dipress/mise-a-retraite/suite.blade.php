@@ -218,6 +218,7 @@
                 }
 
                 $total_ssc += $soumis;
+                print_r($soumis);
 
                ?>
                <tr>
