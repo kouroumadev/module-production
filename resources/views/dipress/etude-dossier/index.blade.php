@@ -30,7 +30,7 @@
                         Dossier(s) en cours
                     </div>
                     <div class="progress-data">
-                        <h1 class="text-white">{{ count($emps) }}</h1>
+                        <h1 class="text-white">{{ count($docs) }}</h1>
                     </div>
                     <small class="pl-1 text-white">Gestion de la situation des pensionnés</small>
                 </div>
@@ -73,7 +73,7 @@
 </div>
 <hr>
 
-@if (isset($emps))
+{{-- @if (isset($emps))
         <div class="pb-20">
             <div class="pd-20">
                 <h4 class="text-blue h4">Liste des pensionnaires</h4>
@@ -226,8 +226,72 @@
                 </tbody>
             </table>
         </div>
-@endif
+@endif --}}
 
+@if (isset($docs))
+        <div class="pb-20">
+            <div class="pd-20">
+                <h4 class="text-blue h4">Liste des pensionnaires</h4>
+            </div>
+            <table class="data-table table stripe hover nowrap dataTable no-footer dtr-inline" id="DataTables_Table_0"
+                role="grid" aria-describedby="DataTables_Table_0_info">
+                <thead class="bg-success">
+                    <tr>
+                        <th class="table-plus text-white">N° Dossier</th>
+                        {{-- <th class="text-white">Prenom & Nom</th> --}}
+                        {{-- <th class="text-white">Raison Sociale</th> --}}
+                        <th class="text-white">Date Creation</th>
+                        <th class="text-white">Etat</th>
+                        <th class="text-white"> Type de Doc</th>
+                        <th class="datatable-nosort text-white">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($docs as $key => $emp)
+                    
+                    <tr>
+                        <td class="">{{ $emp->no_dossier}}</td>
+                        {{-- <td class="">{{ $emp->employee->prenom_employee }} <span
+                                class="text-uppercase">{{ $emp->employee->nom_employee }}</span></td> --}}
+                        {{-- <td>{{ $emp->employer->raison_sociale }}</td> --}}
+                        <td>{{ $emp->created_at }}</td>
+                        @if ($emp->transfer_id == null)
+                            <td><span class="badge badge-warning">En Cours...</span></td>
+                        @else
+                            @php
+                                $from=\App\Models\Dept::where('id',$emp->transfers->from_dept)->get();
+                                $to=\App\Models\Dept::where('id',$emp->transfers->to_dept)->get();
+                                //dd($from[0]->name);
+                            @endphp
+                            <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td> 
+                        @endif
+                        
+                        {{-- <td>{{$emp->docs[0]->type_doc}}</td> --}}
+                        <td>{{ $emp->type_doc }}</td>
+                        @if ($emp->transfer_id != null && Auth::user()->dept->name == $to[0]->name)
+                            <td>
+                                <a class="btn btn-success" href="{{  route('etude.traitement',$emp->employee->id)  }}">Traitement <i
+                                        class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                            </td>
+                        @elseif ($emp->transfer_id == null && Auth::user()->dept->name == "DQE")
+                            <td>
+                                <a class="btn btn-success" href="{{ route('etude.traitement',$emp->employee->id) }}">Traitement <i
+                                        class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                            </td>
+                        @else
+                        <td>
+                            <span>En attente</span>
+                        </td>
+                        @endif
+                        
+                    </tr>
+                        
+                    @endforeach
+                    
+                </tbody>
+            </table>
+        </div>
+    @endif
 
 
 @endsection

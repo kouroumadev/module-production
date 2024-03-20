@@ -37,8 +37,8 @@ class DipressController extends Controller
     public function etudeIndex() {
         // $emps = Auth::user()->employees;
         // dd($emps);
-        $emps = Employee::all();
-        return view('dipress.etude-dossier.index', compact('emps'));
+        $docs = Doc::all();
+        return view('dipress.etude-dossier.index', compact('docs'));
     }
 
     public function etudeTraitement(int $id){

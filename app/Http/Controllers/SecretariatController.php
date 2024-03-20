@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Doc;
+use Illuminate\Support\Facades\Auth;
 
 class SecretariatController extends Controller
 {
     
     public function SercretariatIndex(){
-
-        $emps = Doc::all();
+        $dep_id = Auth::user()->dept_id;
+        //dd($dep_id);
+        $docs = Doc::all();
         
-        //dd($emps->employee);
-        return view('secretariat.index', compact('emps'));
+        //dd($docs->employee);
+        return view('secretariat.index', compact('docs'));
     }
 }
