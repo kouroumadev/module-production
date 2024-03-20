@@ -14,6 +14,7 @@ class Doc extends Model
         'id',
         'employee_id',
         'data',
+        'type_doc',
         'level',
         'created_by',
         'transfer_id',

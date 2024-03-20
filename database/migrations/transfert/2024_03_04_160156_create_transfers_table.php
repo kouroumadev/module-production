@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('from_dept')->nullable();
             $table->string('to_dept')->nullable();
             $table->string('note')->nullable();
+            $table->string('doc_id')->nullable();
             $table->string('status')->default('1');
             $table->timestamps();
         });
