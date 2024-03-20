@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('employee_id')->constrained('employees');
             $table->json('data')->nullable();
+            $table->json('type_doc')->nullable();
             $table->string('level')->nullable();
             $table->string('created_by')->nullable();
+            $table->string('transfer_id')->nullable();
             $table->string('status')->default('1');
             $table->timestamps();
         });
