@@ -16,7 +16,6 @@ class Transfer extends Model
         'to_dept',
         'note',
         'doc_id',
-        'transfer_id',
         'status'
     ];
 
