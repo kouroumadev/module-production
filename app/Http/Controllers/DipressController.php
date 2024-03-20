@@ -36,7 +36,8 @@ class DipressController extends Controller
     // SECTION ETUDE
     public function etudeIndex() {
         // $emps = Auth::user()->employees;
-        $emps = Doc::all();
+        // dd($emps);
+        $emps = Employee::all();
         return view('dipress.etude-dossier.index', compact('emps'));
     }
 
@@ -126,7 +127,7 @@ class DipressController extends Controller
 
             $comptes = DB::connection('metier')->table('gest_employe')
                         ->where('no_employe','296241250990')
-                        ->select('annee', 'salairebrut', DB::raw('count(*) as mois'), DB::raw("SUM(salairebrut) as salaireAnnuel"))
+                        ->select('annee', 'no_employe', 'salairebrut', DB::raw('count(*) as mois'), DB::raw("SUM(salairebrut) as salaireAnnuel"))
                         // ->select('annee', DB::raw('count(*) as mois'))
                         ->groupBy('annee')
                         ->get();
@@ -141,12 +142,12 @@ class DipressController extends Controller
 
             $comptes = DB::connection('metier')->table('gest_employe')
                         ->where('no_employe',$data->employee->no_ima_employee) #296241250990
-                        ->select('annee', 'salairebrut', DB::raw('count(*) as mois'), DB::raw("SUM(salairebrut) as salaireAnnuel"))
+                        ->select('annee', 'no_employe', 'salairebrut', DB::raw('count(*) as mois'), DB::raw("SUM(salairebrut) as salaireAnnuel"))
                         // ->select('annee', DB::raw('count(*) as mois'))
                         ->groupBy('annee')
                         ->get();
 
-                        // dd($comptes);
+                        dd($comptes);
 
             return view('dipress.mise-a-retraite.suite', compact('data','comptes'));
     }
@@ -155,11 +156,11 @@ class DipressController extends Controller
 
             return view('dipress.mise-a-retraite.done', compact('data'));
     }
-    public function miseRetraiteDecompteDetails(int $id) {
-        $data = MiseRetraite::find($id);
+    public function miseRetraiteDecompteDetails(int $id, int $year) {
+
         $comptes = DB::connection('metier')->table('gest_employe')
-                    ->where('no_employe',$data->employee->no_ima_employee)
-                    ->where('annee',$id)
+                    ->where('no_employe',$id)
+                    ->where('annee',$year)
                     ->get();
 
         return view('dipress.mise-a-retraite.details', compact('comptes'));

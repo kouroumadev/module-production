@@ -16,8 +16,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('employee_id')->constrained('employees')->onDelete('cascade');
             $table->json('data')->nullable();
-            $table->json('type_doc')->nullable();
+            $table->string('type_doc')->nullable();
             $table->string('level')->nullable();
+            $table->string('no_dossier')->nullable();
             $table->string('created_by')->nullable();
             $table->string('transfer_id')->nullable();
             $table->string('status')->default('1');

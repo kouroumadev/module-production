@@ -119,11 +119,11 @@
                <tr>
                    <td class="">{{ $loop->index+1 }}</td>
                    <td class="text-center">{{ $cpt->annee }}</td>
-                   <td class="text-center">{{ $cpt->salaireAnnuel }}</td>
+                   <td class="text-center">{{ number_format((int)$cpt->salaireAnnuel,0,""," ") }}</td>
                    <td class="text-center">{{ $cpt->mois }}</td>
-                   <td class="text-center">{{ $cpt->salairebrut }}</td>
+                   <td class="text-center">{{ number_format((int)$cpt->salairebrut,0,""," ") }}</td>
                    <td class="text-center">
-                   <a href="{{ route('miseRetaite.details', $cpt->annee) }}" class="btn btn-success">Voir <i class="fa fa-eye" aria-hidden="true"></i></a>
+                   <a href="{{ route('miseRetaite.details', [$cpt->no_employe,$cpt->annee]) }}" class="btn btn-success">Voir <i class="fa fa-eye" aria-hidden="true"></i></a>
                    </td>
                </tr>
                @endforeach

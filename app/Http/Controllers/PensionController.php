@@ -31,8 +31,8 @@ class PensionController extends Controller
     }
     public function store(Request $request) {
         $no_dossier = rand(1,100);
-        //dd($request->all());
-        $emp = Doc::where('no_ima_employee',$request->no_ima_employee)->get();
+        // dd($request->all());
+        $emp = Employee::where('no_ima_employee',$request->no_ima_employee)->get();
         //dd($emp[0]->id);
         $user_id = Auth::user()->id;
         // dd($request->all());
@@ -154,7 +154,9 @@ class PensionController extends Controller
 
         Alert::success(' Document Enregistré', '');
         return redirect(route('pension.index'))->with('yes','Enregistrer avec succes');
-        } else {
+        }
+        else
+        {
 
 
             $no_dossier = rand(1,100);
@@ -258,7 +260,7 @@ class PensionController extends Controller
                 foreach($request->file('files') as $key => $file)
                 {
                     $name = time().rand(1,100).'.'.$file->extension();
-                    //$file->storeAs('public/docs', $name);
+                    $file->storeAs('public/docs', $name);
                     $noms[] = $name;
                     $titles[] = $request->titles[$key];
                 }

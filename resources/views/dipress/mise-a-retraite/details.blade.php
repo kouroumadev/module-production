@@ -46,19 +46,19 @@
            <tbody>
                @foreach ($comptes as $cpt)
                <tr>
-                   <td class="">{{ $cpt->dateeffet }}</td>
+                   <td class="">{{ \Carbon\Carbon::parse($cpt->dateeffet)->format('d/m/Y') }}</td>
                    <td class="">{{ $cpt->periode }}</td>
-                   <td class="text-center">{{ $cpt->salairebrut }}</td>
-                   <td class="text-center">{{ $cpt->salaire_soumis_cotisation }}</td>
-                   <td class="text-center">{{ $cpt->montant_cotisation }}</td>
+                   <td class="text-center">{{ number_format((int)$cpt->salairebrut,0,""," ") }}</td>
+                   <td class="text-center">{{ number_format((int)$cpt->salaire_soumis_cotisation,0,""," ") }}</td>
+                   <td class="text-center">{{ number_format((int)$cpt->montant_cotisation,0,""," ") }}</td>
                    <td class="text-center">
                     @if ($cpt->part == '')
                         0.00
                     @else
-                        {{ $cpt->part }}
+                        {{ number_format((int)$cpt->part,0,""," ") }}
                     @endif
                    </td>
-                   <td>{{ $cpt->date_created }}</td>
+                   <td>{{ \Carbon\Carbon::parse($cpt->date_created)->format('d/m/Y')  }}</td>
                </tr>
                @endforeach
            </tbody>

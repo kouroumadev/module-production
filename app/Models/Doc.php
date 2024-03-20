@@ -16,6 +16,7 @@ class Doc extends Model
         'data',
         'type_doc',
         'level',
+        'no_dossier',
         'created_by',
         'transfer_id',
         'status'
