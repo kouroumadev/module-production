@@ -30,7 +30,7 @@
                         Dossier(s) en cours
                     </div>
                     <div class="progress-data">
-                        <h1 class="text-white">{{ count($docs) }}</h1>
+                        <h1 class="text-white">{{ count($trans) }}</h1>
                     </div>
                     <small class="pl-1 text-white">Gestion de la situation des pensionnés</small>
                 </div>
@@ -73,7 +73,7 @@
 </div>
 <hr>
 
-@if (isset($docs))
+@if (isset($trans))
         <div class="pb-20">
             <div class="pd-20">
                 <h4 class="text-blue h4">Liste des pensionnaires</h4>
@@ -83,51 +83,51 @@
                 <thead class="bg-success">
                     <tr>
                         <th class="table-plus text-white">N° Dossier</th>
-                        {{-- <th class="text-white">Prenom & Nom</th> --}}
-                        {{-- <th class="text-white">Raison Sociale</th> --}}
                         <th class="text-white">Date Creation</th>
+                        <th class="text-white">Reception</th> 
+                        <th class="text-white">Sortie</th>
                         <th class="text-white">Etat</th>
+                        <th class="text-white">Observation</th>
+                        <th class="text-white">Dead Line</th>
                         <th class="text-white"> Type de Doc</th>
                         <th class="datatable-nosort text-white">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($docs as $key => $emp)
-                    @if ($emp->transfers != null && $emp->transfers->to_dept == $dep_id)
+                    @foreach ($trans as $key => $tran)
+                    @php
+                        $current_date = \Carbon\Carbon::parse(\Carbon\Carbon::now());
+                    @endphp
+                    @if ($tran != null)
                         <tr>
-                            <td class="">{{ $emp->no_dossier}}</td>
-                            {{-- <td class="">{{ $emp->employee->prenom_employee }} <span
-                                    class="text-uppercase">{{ $emp->employee->nom_employee }}</span></td> --}}
-                            {{-- <td>{{ $emp->employer->raison_sociale }}</td> --}}
-                            <td>{{ $emp->created_at }}</td>
-                            @if ($emp->transfer_id == null)
-                                <td><span class="badge badge-warning">En Cours...</span></td>
+                            <td class="">{{ $tran->doc->no_dossier}}</td>
+                           
+                            <td>{{ $tran->doc->created_at }}</td>
+                            <td>{{ $tran->created_at }}</td>
+                            @if ($tran->to->name == "SECRETARIAT")
+                                <td></td>
                             @else
-                                @php
-                                    $from=\App\Models\Dept::where('id',$emp->transfers->from_dept)->get();
-                                    $to=\App\Models\Dept::where('id',$emp->transfers->to_dept)->get();
-                                    //dd($from[0]->name);
-                                @endphp
-                                <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td> 
+                                <td>{{ $tran->created_at }}</td>
                             @endif
+                            <td><span class="badge badge-warning">{{$tran->from->name}} -> {{$tran->to->name}}</span></td>
+                            <td>{{$current_date->diffInDays($tran->created_at )}}</td>
+                            <td>1 jour</td>
                             
-                            {{-- <td>{{$emp->docs[0]->type_doc}}</td> --}}
-                            <td>{{ $emp->type_doc }}</td>
-                            @if ($emp->transfer_id != null && Auth::user()->dept->name == $to[0]->name)
+                            <td>{{ $tran->doc->type_doc }}</td>
+                            @if ($tran->to->name == Auth::user()->dept->name)
                                 <td>
-                                    <a class="btn btn-success" href="{{ route('pension.details', $emp->id) }}">Traitement <i
-                                            class="fa fa-chevron-right" aria-hidden="true"></i> </a>
-                                </td>
-                            @elseif ($emp->transfer_id == null && Auth::user()->dept->name == "DQE")
-                                <td>
-                                    <a class="btn btn-success" href="{{ route('pension.details', $emp->id) }}">Traitement <i
+                                    <a class="btn btn-success" href="{{ route('pension.details', $tran->doc->id) }}">Traitement <i
                                             class="fa fa-chevron-right" aria-hidden="true"></i> </a>
                                 </td>
                             @else
-                            <td>
-                                <span>En attente</span>
-                            </td>
+                                <td>En attente</td>
                             @endif
+                            {{-- <td>
+                                <a class="btn btn-success" href="{{ route('pension.details', $tran->doc->id) }}">Traitement <i
+                                        class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                            </td> --}}
+                            
+                            
                             
                         </tr>
                     @else

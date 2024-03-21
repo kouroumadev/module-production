@@ -317,7 +317,14 @@
                                                     <input type="hidden" name="employee_id" value="{{ $emp->employee->id }}">
                                                     <input type="hidden" name="type" value="{{ $emp->type_doc }}">
                                                     <input type="hidden" name="doc_id" value="{{ $emp->id }}">
-                                                    <input type="hidden" name="route" value="pension.index">
+                                                    @if (Auth::user()->dept->name == "DQE")
+                                                     <input type="hidden" name="route" value="pension.index">
+                                                    @elseif (Auth::user()->dept->name == "SECRETARIAT")
+                                                        <input type="hidden" name="route" value="secretariat.index">
+                                                    @elseif (Auth::user()->dept->name == "DIPRES")
+                                                        Í<input type="hidden" name="route" value="etude.index">
+                                                    @endif
+                                                    
                                                 </div>
                                                 <button type="submit" class="btn btn-success">Transferer</button>
                                             </form>

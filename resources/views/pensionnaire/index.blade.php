@@ -98,53 +98,59 @@
                         <th class="text-white">Reception</th> 
                         <th class="text-white">Sortie</th>
                         <th class="text-white">Etat</th>
-                        <th class="text-white">Observation</th>
+                        <th class="text-white">Etat actuel</th>
+                        <th class="text-white">Observ</th>
                         <th class="text-white">Dead Line</th>
                         <th class="text-white"> Type de Doc</th>
                         <th class="datatable-nosort text-white">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($docs as $key => $emp)
+                    @foreach ($docs as $key => $doc)
                     @php
                         $current_date = \Carbon\Carbon::parse(\Carbon\Carbon::now());
                     @endphp
+                    
+                        
                     <tr>
-                        <td class="">{{ $emp->no_dossier}}</td>
-                        {{-- <td class="">{{ $emp->employee->prenom_employee }} <span
-                                class="text-uppercase">{{ $emp->employee->nom_employee }}</span></td> --}}
-                        {{-- <td>{{ $emp->employer->raison_sociale }}</td> --}}
-                        <td>{{ $emp->created_at }}</td>
-                        <td>{{ $emp->created_at }}</td>
-                        @if ($emp->transfer_id == null)
+                        <td class="">{{ $doc->no_dossier}}</td>
+                        
+                        <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y')  }}</td>
+                        <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y') }}</td>
+                        @if ($doc->transfers == null)
                             <td></td>
                         @else
-                            <td>{{ $emp->transfers->created_at }}</td>  
+                            <td>{{ \Carbon\Carbon::parse($doc->transfers->created_at )->format('d/m/Y') }} </td>  
                         @endif
                         
-                        @if ($emp->transfer_id == null)
-                            <td><span class="badge badge-warning">En Cours...</span></td>
+                        @if ($doc->transfers == null)
+                            <td><span class="badge badge-warning">{{Auth::user()->dept->name}}</span></td>
+                            <td></td>
                         @else
                             @php
-                                $from=\App\Models\Dept::where('id',$emp->transfers->from_dept)->get();
-                                $to=\App\Models\Dept::where('id',$emp->transfers->to_dept)->get();
+                                $from=\App\Models\Dept::where('id',$doc->transfers->from_dept)->get();
+                                $to=\App\Models\Dept::where('id',$doc->transfers->to_dept)->get();
                                 
                                 //dd($current_date );
                             @endphp
                             <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td> 
+                            <td><span class="badge badge-primary"> {{$to[0]->name}}  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span></td> 
                         @endif
                         
-                        <td>{{$current_date->diffInDays($emp->created_at)}}</td>
-                        <td>1 jour</td>
-                        <td>{{ $emp->type_doc }}</td>
-                        @if ($emp->transfer_id != null && Auth::user()->dept->name == $to[0]->name)
+                        <td>{{$current_date->diffInDays($doc->created_at)}}</td>
+                        @if (Auth::user()->dept->id == (int)$deadline[0]->dept_id)
+                            <td> {{$deadline[0]->name}} Jour(s)</td>
+                        @endif
+                        
+                        <td>{{ $doc->type_doc }}</td>
+                        @if ($doc->transfers != null && Auth::user()->dept->name == $to[0]->name)
                             <td>
-                                <a class="btn btn-success" href="{{ route('pension.details', $emp->id) }}">Traitement <i
+                                <a class="btn btn-success" href="{{ route('pension.details', $doc->id) }}">Traitement <i
                                         class="fa fa-chevron-right" aria-hidden="true"></i> </a>
                             </td>
-                        @elseif ($emp->transfer_id == null && Auth::user()->dept->name == "DQE")
+                        @elseif ($doc->transfers == null && Auth::user()->dept->name == "DQE")
                             <td>
-                                <a class="btn btn-success" href="{{ route('pension.details', $emp->id) }}">Traitement <i
+                                <a class="btn btn-success" href="{{ route('pension.details', $doc->id) }}">Traitement <i
                                         class="fa fa-chevron-right" aria-hidden="true"></i> </a>
                             </td>
                         @else
@@ -154,7 +160,7 @@
                         @endif
                         
                     </tr>
-                        
+                   
                     @endforeach
                     
                 </tbody>

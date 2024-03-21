@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Deadline;
 use App\Models\Employee;
 use App\Models\Doc;
 use Illuminate\Http\Request;
@@ -30,9 +31,10 @@ class HomeController extends Controller
     public function PensionIndex() {
         //$emps = Auth::user()->employees;
         $docs = Doc::all();
-        
-        //dd($docs->employee);
-        return view('pensionnaire.index', compact('docs'));
+        $deadline = Deadline::where('dept_id',Auth::user()->dept_id)->get();
+        $dead_name = $deadline[0]->name;
+        //dd($docs);
+        return view('pensionnaire.index', compact('docs','deadline'));
     }
     public function reclamationIndex() {
         return view('reclamation.index');

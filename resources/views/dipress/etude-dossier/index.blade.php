@@ -238,31 +238,55 @@
                 <thead class="bg-success">
                     <tr>
                         <th class="table-plus text-white">N° Dossier</th>
-                        {{-- <th class="text-white">Prenom & Nom</th> --}}
-                        {{-- <th class="text-white">Raison Sociale</th> --}}
                         <th class="text-white">Date Creation</th>
+                        <th class="text-white">Reception</th> 
+                        <th class="text-white">Sortie</th>
                         <th class="text-white">Etat</th>
+                        <th class="text-white">Observation</th>
+                        <th class="text-white">Dead Line</th>
                         <th class="text-white"> Type de Doc</th>
                         <th class="datatable-nosort text-white">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($trans as $tran)
+                    @php
+                        $current_date = \Carbon\Carbon::parse(\Carbon\Carbon::now());
+                    @endphp
 
+                    @if ($tran != null)
+                        
+                    
                     <tr>
                         <td class="">{{ $tran->doc->no_dossier}}</td>
                         {{-- <td class="">{{ $emp->employee->prenom_employee }} <span
                                 class="text-uppercase">{{ $emp->employee->nom_employee }}</span></td> --}}
                         {{-- <td>{{ $emp->employer->raison_sociale }}</td> --}}
-                        <td>{{ \Carbon\Carbon::parse($tran->created_at)->format('d/m/Y') }}</td>
-                        @if ($tran->transfer_id == null)
+                        {{-- <td>{{ \Carbon\Carbon::parse($tran->created_at)->format('d/m/Y') }}</td> --}}
+                        <td>{{  \Carbon\Carbon::parse($tran->doc->created_at)->format('d/m/Y') }}</td>
+                        <td>{{  \Carbon\Carbon::parse($tran->created_at )->format('d/m/Y')}}</td>
+                        @if ($tran->to->name == "DIPRES")
+                            <td></td>
+                        @else
+                            <td>{{ $tran->created_at }}</td>
+                        @endif
+                        
+                        <td><span class="badge badge-warning">{{$tran->from->name}} -> {{$tran->to->name}}</span></td>
+                        <td>{{$current_date->diffInDays($tran->created_at )}}</td>
+                        <td>1 jour</td>
+                        <td>{{ $tran->doc->type_doc }}</td>
+                        {{-- <td>
+                            <a class="btn btn-success" href="{{ route('pension.details', $tran->doc->id) }}">Traitement <i
+                                    class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                        </td> --}}
+                        {{-- @if ($tran->transfer_id == null)
                             <td><span class="badge badge-warning">En Cours...</span></td>
                         @else
                             <td><span class="badge badge-warning">{{$tran->from->name}} -> {{$tran->to->name}}</span></td>
-                        @endif
+                        @endif --}}
 
                         {{-- <td>{{$emp->docs[0]->type_doc}}</td> --}}
-                        <td>{{ $tran->doc->type_doc }}</td>
+                        {{-- <td>{{ $tran->doc->type_doc }}</td> --}}
 
                         @if (count($tran->employee->mise_retraites)>0)
                             <td>
@@ -291,6 +315,9 @@
                         @endif --}}
 
                     </tr>
+                    @else
+                        
+                    @endif
                     @endforeach
 
                 </tbody>

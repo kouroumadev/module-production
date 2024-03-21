@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Deadline;
 use App\Models\Employee;
 use App\Models\Dept;
 use App\Models\Doc;
@@ -42,8 +43,11 @@ class DipressController extends Controller
         // $docs = Doc::all();
 
         $trans = Transfer::where('from_dept', Auth::user()->dept->id)->orWhere('to_dept', Auth::user()->dept->id)->get();
+        $deadline = Deadline::where('dept_id',Auth::user()->dept_id)->get();
+        $dead_name = $deadline[0]->name;
+        
         // dd($data);
-        return view('dipress.etude-dossier.index', compact('trans'));
+        return view('dipress.etude-dossier.index', compact('trans','dead_name'));
     }
 
     public function etudeTraitement(int $id){
