@@ -248,7 +248,7 @@
                 </thead>
                 <tbody>
                     @foreach ($docs as $key => $emp)
-                    
+                    @if ($emp->transfers->to_dept == $dep_id)
                     <tr>
                         <td class="">{{ $emp->no_dossier}}</td>
                         {{-- <td class="">{{ $emp->employee->prenom_employee }} <span
@@ -285,6 +285,9 @@
                         @endif
                         
                     </tr>
+                    @else
+                        
+                    @endif
                         
                     @endforeach
                     

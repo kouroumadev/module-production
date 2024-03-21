@@ -93,43 +93,47 @@
                 </thead>
                 <tbody>
                     @foreach ($docs as $key => $emp)
-                    
-                    <tr>
-                        <td class="">{{ $emp->no_dossier}}</td>
-                        {{-- <td class="">{{ $emp->employee->prenom_employee }} <span
-                                class="text-uppercase">{{ $emp->employee->nom_employee }}</span></td> --}}
-                        {{-- <td>{{ $emp->employer->raison_sociale }}</td> --}}
-                        <td>{{ $emp->created_at }}</td>
-                        @if ($emp->transfer_id == null)
-                            <td><span class="badge badge-warning">En Cours...</span></td>
-                        @else
-                            @php
-                                $from=\App\Models\Dept::where('id',$emp->transfers->from_dept)->get();
-                                $to=\App\Models\Dept::where('id',$emp->transfers->to_dept)->get();
-                                //dd($from[0]->name);
-                            @endphp
-                            <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td> 
-                        @endif
-                        
-                        {{-- <td>{{$emp->docs[0]->type_doc}}</td> --}}
-                        <td>{{ $emp->type_doc }}</td>
-                        @if ($emp->transfer_id != null && Auth::user()->dept->name == $to[0]->name)
+                    @if ($emp->transfers->to_dept == $dep_id)
+                        <tr>
+                            <td class="">{{ $emp->no_dossier}}</td>
+                            {{-- <td class="">{{ $emp->employee->prenom_employee }} <span
+                                    class="text-uppercase">{{ $emp->employee->nom_employee }}</span></td> --}}
+                            {{-- <td>{{ $emp->employer->raison_sociale }}</td> --}}
+                            <td>{{ $emp->created_at }}</td>
+                            @if ($emp->transfer_id == null)
+                                <td><span class="badge badge-warning">En Cours...</span></td>
+                            @else
+                                @php
+                                    $from=\App\Models\Dept::where('id',$emp->transfers->from_dept)->get();
+                                    $to=\App\Models\Dept::where('id',$emp->transfers->to_dept)->get();
+                                    //dd($from[0]->name);
+                                @endphp
+                                <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td> 
+                            @endif
+                            
+                            {{-- <td>{{$emp->docs[0]->type_doc}}</td> --}}
+                            <td>{{ $emp->type_doc }}</td>
+                            @if ($emp->transfer_id != null && Auth::user()->dept->name == $to[0]->name)
+                                <td>
+                                    <a class="btn btn-success" href="{{ route('pension.details', $emp->id) }}">Traitement <i
+                                            class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                                </td>
+                            @elseif ($emp->transfer_id == null && Auth::user()->dept->name == "DQE")
+                                <td>
+                                    <a class="btn btn-success" href="{{ route('pension.details', $emp->id) }}">Traitement <i
+                                            class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                                </td>
+                            @else
                             <td>
-                                <a class="btn btn-success" href="{{ route('pension.details', $emp->id) }}">Traitement <i
-                                        class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                                <span>En attente</span>
                             </td>
-                        @elseif ($emp->transfer_id == null && Auth::user()->dept->name == "DQE")
-                            <td>
-                                <a class="btn btn-success" href="{{ route('pension.details', $emp->id) }}">Traitement <i
-                                        class="fa fa-chevron-right" aria-hidden="true"></i> </a>
-                            </td>
-                        @else
-                        <td>
-                            <span>En attente</span>
-                        </td>
-                        @endif
+                            @endif
+                            
+                        </tr>
+                    @else
                         
-                    </tr>
+                    @endif
+                   
                         
                     @endforeach
                     

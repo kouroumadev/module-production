@@ -35,10 +35,11 @@ class DipressController extends Controller
 
     // SECTION ETUDE
     public function etudeIndex() {
+        $dep_id = Auth::user()->dept_id;
         // $emps = Auth::user()->employees;
         // dd($emps);
         $docs = Doc::all();
-        return view('dipress.etude-dossier.index', compact('docs'));
+        return view('dipress.etude-dossier.index', compact('docs','dep_id'));
     }
 
     public function etudeTraitement(int $id){

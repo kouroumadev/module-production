@@ -14,7 +14,7 @@ class SecretariatController extends Controller
         //dd($dep_id);
         $docs = Doc::all();
         
-        //dd($docs->employee);
-        return view('secretariat.index', compact('docs'));
+        //dd($docs->employees);
+        return view('secretariat.index', compact('docs','dep_id'));
     }
 }
