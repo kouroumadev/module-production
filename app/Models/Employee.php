@@ -109,4 +109,7 @@ class Employee extends Model
     public function transfers() {
         return $this->hasMany(Transfer::class, 'employee_id');
     }
+    public function mise_retraites() {
+        return $this->hasMany(MiseRetraite::class, 'employee_id');
+    }
 }

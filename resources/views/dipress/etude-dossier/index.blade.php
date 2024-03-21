@@ -263,9 +263,16 @@
 
                         {{-- <td>{{$emp->docs[0]->type_doc}}</td> --}}
                         <td>{{ $tran->doc->type_doc }}</td>
-                        <td>
-                            <a class="btn btn-success" href="{{ route('etude.traitement',$tran->employee->id) }}">Traitement <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
-                        </td>
+
+                        @if (count($tran->employee->mise_retraites)>0)
+                            <td>
+                                <span class="badge badge-pill badge-primary">Déja traité</span>
+                            </td>
+                        @else
+                            <td>
+                                <a class="btn btn-success" href="{{ route('etude.traitement',$tran->employee->id) }}">Traitement <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                            </td>
+                        @endif
 
                         {{-- @if ($emp->transfer_id != null && Auth::user()->dept->name == $to[0]->name)
                             <td>
