@@ -36,6 +36,7 @@ class DipressController extends Controller
 
     // SECTION ETUDE
     public function etudeIndex() {
+        $dep_id = Auth::user()->dept_id;
         // $emps = Auth::user()->employees;
         // dd($emps);
         // $docs = Doc::all();

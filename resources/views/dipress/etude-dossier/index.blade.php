@@ -284,7 +284,6 @@
                         @endif --}}
 
                     </tr>
-
                     @endforeach
 
                 </tbody>
