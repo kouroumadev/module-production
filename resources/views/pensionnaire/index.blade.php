@@ -94,35 +94,48 @@
                 <thead class="bg-success">
                     <tr>
                         <th class="table-plus text-white">N° Dossier</th>
-                        {{-- <th class="text-white">Prenom & Nom</th> --}}
-                        {{-- <th class="text-white">Raison Sociale</th> --}}
                         <th class="text-white">Date Creation</th>
+                        <th class="text-white">Reception</th> 
+                        <th class="text-white">Sortie</th>
                         <th class="text-white">Etat</th>
+                        <th class="text-white">Observation</th>
+                        <th class="text-white">Dead Line</th>
                         <th class="text-white"> Type de Doc</th>
                         <th class="datatable-nosort text-white">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($docs as $key => $emp)
-                    
+                    @php
+                        $current_date = \Carbon\Carbon::parse(\Carbon\Carbon::now());
+                    @endphp
                     <tr>
                         <td class="">{{ $emp->no_dossier}}</td>
                         {{-- <td class="">{{ $emp->employee->prenom_employee }} <span
                                 class="text-uppercase">{{ $emp->employee->nom_employee }}</span></td> --}}
                         {{-- <td>{{ $emp->employer->raison_sociale }}</td> --}}
                         <td>{{ $emp->created_at }}</td>
+                        <td>{{ $emp->created_at }}</td>
+                        @if ($emp->transfer_id == null)
+                            <td></td>
+                        @else
+                            <td>{{ $emp->transfers->created_at }}</td>  
+                        @endif
+                        
                         @if ($emp->transfer_id == null)
                             <td><span class="badge badge-warning">En Cours...</span></td>
                         @else
                             @php
                                 $from=\App\Models\Dept::where('id',$emp->transfers->from_dept)->get();
                                 $to=\App\Models\Dept::where('id',$emp->transfers->to_dept)->get();
-                                //dd($from[0]->name);
+                                
+                                //dd($current_date );
                             @endphp
                             <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td> 
                         @endif
                         
-                        {{-- <td>{{$emp->docs[0]->type_doc}}</td> --}}
+                        <td>{{$current_date->diffInDays($emp->created_at)}}</td>
+                        <td>1 jour</td>
                         <td>{{ $emp->type_doc }}</td>
                         @if ($emp->transfer_id != null && Auth::user()->dept->name == $to[0]->name)
                             <td>
