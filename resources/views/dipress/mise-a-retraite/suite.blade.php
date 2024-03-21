@@ -218,7 +218,7 @@
                 }
 
                 $total_ssc += $soumis;
-                print_r($soumis);
+                // print_r($soumis);
 
                ?>
                <tr>
@@ -230,13 +230,16 @@
                    <td class="text-center font-weight-bold">{{ number_format($soumis,0,""," ") }}</td>
                </tr>
                @endforeach
+               @php
+                   $total_ssc_final = $total_ssc*$total_mois;
+               @endphp
                <tr>
                     <td class="font-weight-bold">Total:</td>
                     <td></td>
                     <td class="text-center font-weight-bold text-danger">{{ number_format($salaire_an,0,""," ") }}</td>
                     <td class="text-center font-weight-bold text-danger">{{ $total_mois }}/120</td>
                     <td></td>
-                    <td class="text-center font-weight-bold text-danger">{{ number_format($total_ssc,0,""," ") }}</td>
+                    <td class="text-center font-weight-bold text-danger">{{ number_format($total_ssc_final,0,""," ") }}</td>
                </tr>
            </tbody>
        </table>

@@ -7,6 +7,7 @@ use App\Models\Dept;
 use App\Models\Doc;
 use App\Models\MiseRetraite;
 use App\Models\Prefecture;
+use App\Models\Transfer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -38,8 +39,11 @@ class DipressController extends Controller
         $dep_id = Auth::user()->dept_id;
         // $emps = Auth::user()->employees;
         // dd($emps);
-        $docs = Doc::all();
-        return view('dipress.etude-dossier.index', compact('docs','dep_id'));
+        // $docs = Doc::all();
+
+        $trans = Transfer::where('from_dept', Auth::user()->dept->id)->orWhere('to_dept', Auth::user()->dept->id)->get();
+        // dd($data);
+        return view('dipress.etude-dossier.index', compact('trans'));
     }
 
     public function etudeTraitement(int $id){
@@ -81,6 +85,7 @@ class DipressController extends Controller
             if ($request->pension_type == 'Retraite'){
                 $no = "01-0";
             } else {
+                $last = MiseRetraite::all()->last();
                 $no = "01-0";
             }
             $data = new MiseRetraite();
@@ -121,6 +126,7 @@ class DipressController extends Controller
 
     public function miseRetraiteIndex() {
             $data = MiseRetraite::all();
+
             return view('dipress.mise-a-retraite.index', compact('data'));
     }
     public function miseRetraiteDecompte(int $id) {

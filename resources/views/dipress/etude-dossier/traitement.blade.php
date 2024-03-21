@@ -58,7 +58,7 @@
                                     <span>Numero de Telephone:</span> {{ $emp->tel_employee }}
                                 </li>
                                 <li>
-                                    <span>Date de Naissance:</span> {{ $emp->date_naissance_employee }}
+                                    <span>Date de Naissance:</span> {{ \Carbon\Carbon::parse($emp->date_naissance_employee)->format('d/m/Y') }}
                                 </li>
                                 <li>
                                     <span>Lieu de Naissance:</span> {{ $emp->lieu_naissance_employee }}
@@ -207,7 +207,7 @@
                                                                                         <th scope="row">{{ $key + 1 }}</th>
                                                                                         <td>{{ $enfant->nom_enfant }}</td>
                                                                                         <td>{{ $enfant->prenom_enfant }}</td>
-                                                                                        <td>{{ $enfant->date_naissance_enfant }}</td>
+                                                                                        <td>{{ \Carbon\Carbon::parse($enfant->date_naissance_enfant)->format('d/m/Y') }}</td>
                                                                                         <td>{{ $enfant->lieu_naissance_enfant }}</td>
                                                                                         <td>{{ $enfant->ordre_naissance_enfant }}</td>
 
@@ -351,11 +351,11 @@
                                                    <tbody>
                                                        @foreach ($comptes as $cpt)
                                                        <tr>
-                                                           <td class="">{{ $cpt->dateeffet }}</td>
+                                                           <td class="">{{ \Carbon\Carbon::parse($cpt->dateeffet)->format('d/m/Y') }}</td>
                                                            <td class="">{{ $cpt->periode }}</td>
-                                                           <td class="text-center">{{ $cpt->salairebrut }}</td>
-                                                           <td class="text-center">{{ $cpt->salaire_soumis_cotisation }}</td>
-                                                           <td class="text-center">{{ $cpt->montant_cotisation }}</td>
+                                                           <td class="text-center">{{ number_format($cpt->salairebrut,0,""," ") }}</td>
+                                                           <td class="text-center">{{ number_format($cpt->salaire_soumis_cotisation,0,""," ") }}</td>
+                                                           <td class="text-center">{{ number_format($cpt->montant_cotisation,0,""," ") }}</td>
                                                            <td class="text-center">
                                                             @if ($cpt->part == '')
                                                                 0.00
@@ -363,7 +363,7 @@
                                                                 {{ $cpt->part }}
                                                             @endif
                                                            </td>
-                                                           <td>{{ $cpt->date_created }}</td>
+                                                           <td>{{ \Carbon\Carbon::parse($cpt->date_created)->format('d/m/Y') }}</td>
 
                                                            {{-- <td>
                                                                <a class="btn btn-success" href="{{ route('pension.details',$emp->id) }}">Traitement <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
