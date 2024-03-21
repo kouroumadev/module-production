@@ -62,6 +62,10 @@
             <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->first_job_date)->format('d-m-Y') }}</span>
        </div>
        <div>
+            <span class="text-left font-weight-bold font-14">Nom</span>
+            <span class="float-right font-12">{{ $data->employee->nom_employee }}</span>
+       </div>
+       <div>
             <span class="text-left font-weight-bold font-14">Date de mise a la retraite</span>
             <span class="float-right font-12 font-weight-bold text-danger">{{ \Carbon\Carbon::parse($data->end_job_date)->format('d-m-Y') }}</span>
        </div>
@@ -79,11 +83,11 @@
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Age</span>
-            <span class="float-right font-12">{{ $data->age }}</span>
+            <span class="float-right font-12">{{ $data->age }} ans</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Annuite globale</span>
-            <span class="float-right font-12 font-weight-bold text-danger">{{ $data->annuite }}</span>
+            <span class="float-right font-12 font-weight-bold text-danger">{{ $data->annuite }} ans</span>
        </div>
     </div>
 </div>
@@ -231,7 +235,7 @@
                </tr>
                @endforeach
                @php
-                   $total_ssc_final = $total_ssc*$total_mois;
+                   $total_ssc_final = $total_ssc*12;
                @endphp
                <tr>
                     <td class="font-weight-bold">Total:</td>
@@ -255,8 +259,8 @@
                 <span class="font-12"></span> <br>
             </div>
             <div class="col-md-6 text-right">
-                <span class="font-12">{{ number_format($total_ssc,0,""," ") }} / {{ $total_mois }} = <span class="font-weight-bold">{{ number_format($total_ssc/$total_mois,0,""," ") }}</span></span> <br>
-                <span class="font-12 font-weight-bold text-danger" style="margin-left: 98px;">{{ number_format($total_ssc/$total_mois,0,""," ") }}</span> <br>
+                <span class="font-12">{{ number_format($total_ssc_final,0,""," ") }} / {{ $total_mois }} = <span class="font-weight-bold">{{ number_format($total_ssc_final/$total_mois,0,""," ") }}</span></span> <br>
+                <span class="font-12 font-weight-bold text-danger" style="margin-left: 98px;">{{ number_format($total_ssc_final/$total_mois,0,""," ") }}</span> <br>
                 <span class="font-12 font-weight-bold text-danger" style="margin-left: 98px;"></span> <br>
             </div>
         </div>
@@ -265,14 +269,14 @@
     <div class="col-md-6">
         <div class="row card-box mb-30 shadow-lg p-2">
             <div class="col-md-8">
-                <span class="font-12">MONTANT MENSUEL DE LA PENSION : {{ number_format($total_ssc/$total_mois,0,""," ") }} x {{ $data->annuite }} x 2% = </span> <br>
+                <span class="font-12">MONTANT MENSUEL DE LA PENSION : {{ number_format($total_ssc_final/$total_mois,0,""," ") }} x {{ $data->annuite }} x 2% = </span> <br>
                 <span class="font-12">MONTANT ANNUEL DE LA PENSION :</span> <br>
                 <span class="font-12">PENSION <span class="font-weight-bold">TRIMESTRIELLE</span> :</span> <br>
             </div>
             <div class="col-md-4 text-right">
-                <span class="font-14 font-weight-bold text-danger">{{ number_format((($total_ssc/$total_mois)*$data->annuite*2)/100,0,""," ") }}</span> <br>
-                <span class="font-14 font-weight-bold">{{ number_format(((($total_ssc/$total_mois)*30*2)/100)*12,0,""," ") }}</span> <br>
-                <span class="font-14 font-weight-bold text-danger">{{ number_format((((($total_ssc/$total_mois)*30*2)/100)*12)/4,0,""," ") }}</span> <br>
+                <span class="font-14 font-weight-bold text-danger">{{ number_format((($total_ssc_final/$total_mois)*$data->annuite*2)/100,0,""," ") }}</span> <br>
+                <span class="font-14 font-weight-bold">{{ number_format(((($total_ssc_final/$total_mois)*30*2)/100)*12,0,""," ") }}</span> <br>
+                <span class="font-14 font-weight-bold text-danger">{{ number_format((((($total_ssc_final/$total_mois)*30*2)/100)*12)/4,0,""," ") }}</span> <br>
             </div>
         </div>
     </div>
@@ -293,6 +297,13 @@
             <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->end_job_date)->addMonths()->format('d/m/Y') }}</span>
        </div>
        <div>
+            @php
+            $data_first_pay =  \Carbon\Carbon::parse($data->created_at)->addMonths()->firstOfMonth()->format('d/m/Y');
+            @endphp
+            <span class="text-left font-weight-bold font-12">Date prevu de 1er paiement</span>
+            <span class="float-right font-12">{{ $data_first_pay }}</span>
+       </div>
+       <div>
             <span class="text-left font-weight-bold font-12">Nombre de mois total</span>
             <span class="float-right font-12">{{ \Carbon\Carbon::createFromDate(null, 12, 31)->diffInMonths(\Carbon\Carbon::parse($data->created_at)) }}</span>
        </div>
@@ -302,8 +313,38 @@
        </div>
        <hr>
        <div>
+            @php
+                $montant_base_pens = (((($total_ssc_final/$total_mois)*30*2)/100)*12)/4;
+            @endphp
             <span class="text-left font-weight-bold font-14">Montant de base de la pension</span>
-            <span class="float-right font-weight-bold font-14 text-danger">{{ number_format((((($total_ssc/$total_mois)*30*2)/100)*12)/4,0,""," ") }}</span>
+            <span class="float-right font-weight-bold font-14 text-danger">{{ number_format($montant_base_pens,0,""," ") }}</span>
+       </div>
+       <div>
+            <span class="text-left font-weight-bold font-14">Montant revalorisation</span>
+            <span class="float-right font-weight-bold font-14 ">0</span>
+       </div>
+       <div>
+            @php
+                $supp_af = count($data->employee->enfants)*9000;
+                $montant_tot_pens = $montant_base_pens+$supp_af;
+                $mois = \Carbon\Carbon::now()->diffInMonths($data_first_pay);
+                $montant_arr = $montant_tot_pens*$mois;
+                $montant_tot_first_pay = $montant_tot_pens+$montant_arr;
+            @endphp
+            <span class="text-left font-weight-bold font-14">Supplément AF</span>
+            <span class="float-right font-weight-bold font-14 ">{{ number_format($supp_af,0,""," ") }}</span>
+       </div>
+       <div>
+            <span class="text-left font-weight-bold font-14">Montant total de la pension</span>
+            <span class="float-right font-weight-bold font-14 text-info">{{ number_format($montant_tot_pens,0,""," ") }}</span>
+       </div>
+       <div>
+            <span class="text-left font-weight-bold font-14">Montant des arriérés</span>
+            <span class="float-right font-weight-bold font-14">{{ number_format($montant_arr,0,""," ") }}</span>
+       </div>
+       <div>
+            <span class="text-left font-weight-bold font-14">Montant total du premier paiement</span>
+            <span class="float-right font-weight-bold font-14 text-success">{{ number_format($montant_tot_first_pay,0,""," ") }}</span>
        </div>
     </div>
     <div class="col-md-6">
@@ -311,10 +352,7 @@
             <span class="text-left font-weight-bold font-12">Date validation dossier</span>
             <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->created_at)->format('d/m/Y') }}</span>
        </div>
-       <div>
-            <span class="text-left font-weight-bold font-12">Date prevu de 1er paiement</span>
-            <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->created_at)->addMonths()->firstOfMonth()->format('d/m/Y') }}</span>
-       </div>
+
        <div>
             <span class="text-left font-weight-bold font-12">Prescription</span>
             <span class="float-right font-12">NON</span>
