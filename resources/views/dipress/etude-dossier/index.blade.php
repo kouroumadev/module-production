@@ -30,7 +30,7 @@
                         Dossier(s) en cours
                     </div>
                     <div class="progress-data">
-                        <h1 class="text-white">{{ count($docs) }}</h1>
+                        <h1 class="text-white">{{ count($trans) }}</h1>
                     </div>
                     <small class="pl-1 text-white">Gestion de la situation des pensionnés</small>
                 </div>
@@ -228,7 +228,7 @@
         </div>
 @endif --}}
 
-@if (isset($docs))
+@if (isset($trans))
         <div class="pb-20">
             <div class="pd-20">
                 <h4 class="text-blue h4">Liste des pensionnaires</h4>
@@ -247,28 +247,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($docs as $key => $emp)
-                    
+                    @foreach ($trans as $tran)
+
                     <tr>
-                        <td class="">{{ $emp->no_dossier}}</td>
+                        <td class="">{{ $tran->doc->no_dossier}}</td>
                         {{-- <td class="">{{ $emp->employee->prenom_employee }} <span
                                 class="text-uppercase">{{ $emp->employee->nom_employee }}</span></td> --}}
                         {{-- <td>{{ $emp->employer->raison_sociale }}</td> --}}
-                        <td>{{ $emp->created_at }}</td>
-                        @if ($emp->transfer_id == null)
+                        <td>{{ \Carbon\Carbon::parse($tran->created_at)->format('d/m/Y') }}</td>
+                        @if ($tran->transfer_id == null)
                             <td><span class="badge badge-warning">En Cours...</span></td>
                         @else
-                            @php
-                                $from=\App\Models\Dept::where('id',$emp->transfers->from_dept)->get();
-                                $to=\App\Models\Dept::where('id',$emp->transfers->to_dept)->get();
-                                //dd($from[0]->name);
-                            @endphp
-                            <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td> 
+                            <td><span class="badge badge-warning">{{$tran->from->name}} -> {{$tran->to->name}}</span></td>
                         @endif
-                        
+
                         {{-- <td>{{$emp->docs[0]->type_doc}}</td> --}}
-                        <td>{{ $emp->type_doc }}</td>
-                        @if ($emp->transfer_id != null && Auth::user()->dept->name == $to[0]->name)
+                        <td>{{ $tran->doc->type_doc }}</td>
+                        <td>
+                            <a class="btn btn-success" href="{{ route('etude.traitement',$tran->employee->id) }}">Traitement <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                        </td>
+
+                        {{-- @if ($emp->transfer_id != null && Auth::user()->dept->name == $to[0]->name)
                             <td>
                                 <a class="btn btn-success" href="{{  route('etude.traitement',$emp->employee->id)  }}">Traitement <i
                                         class="fa fa-chevron-right" aria-hidden="true"></i> </a>
@@ -282,12 +281,12 @@
                         <td>
                             <span>En attente</span>
                         </td>
-                        @endif
-                        
+                        @endif --}}
+
                     </tr>
-                        
+
                     @endforeach
-                    
+
                 </tbody>
             </table>
         </div>

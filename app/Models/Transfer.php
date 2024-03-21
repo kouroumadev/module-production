@@ -23,16 +23,16 @@ class Transfer extends Model
         return $this->belongsTo(Employee::class, 'employee_id');
     }
 
-    public function docs() {
+    public function doc() {
         return $this->belongsTo(Doc::class, 'doc_id');
     }
-    public function froms() {
+    public function from() {
         return $this->belongsTo(Dept::class, 'from_dept');
     }
-    public function tos() {
+    public function to() {
         return $this->belongsTo(Dept::class, 'to_dept');
     }
-    public function transfers() {
+    public function transfer() {
         return $this->belongsTo(Transfer::class, 'transfer_id');
     }
 
