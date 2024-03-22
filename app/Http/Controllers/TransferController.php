@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dept;
 use App\Models\Doc;
+use App\Models\Employee;
 use App\Models\Transfer;
 use App\Models\User;
 use App\Notifications\TrackingNotification;
@@ -112,9 +113,10 @@ class TransferController extends Controller
     }
 
     public function Tracking($id){
-        
+        $last_doc = Transfer::where('doc_id',$id)->latest()->first();
         $track = Transfer::where('doc_id', $id)->get();
-       // dd(Transfer::where('doc_id', $id)->get());
-        return view('tracking.index',compact('track'));
+        $emp = Employee::find($last_doc->employee_id);
+        //dd( $last_doc  );
+        return view('tracking.index',compact('track','emp','last_doc'));
     }
 }
