@@ -14,8 +14,9 @@ return new class extends Migration
     {
         Schema::create('decomptes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('employee_id')->constrained();
             $table->foreignId('mise_retraite_id')->constrained();
-            $table->string('mont_moy_mens')->nullable();
+            $table->string('sal_moy_mens')->nullable();
             $table->string('mont_mens_pens')->nullable();
             $table->string('pens_trimes')->nullable();
             $table->string('montant_arr')->nullable();
