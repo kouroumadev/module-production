@@ -11,7 +11,7 @@
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Etude de dossier</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('miseRetaite.decompte.suite', $data->id) }}"></a>Suite Decompte Pensionne</li>
+                    <li class="breadcrumb-item"><a href="{{ route('miseRetaite.decompte.suite', $data->miseRetraite->id) }}">Suite Decompte Pensionne</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Fin Decompte Pensionne</li>
                 </ol>
             </nav>
@@ -19,7 +19,7 @@
     </div>
 </div>
 
-<h5 class="text-center text-success">OPERATION REUSSIE: CET ASSURE EST MAINTENANT PENSIONNE: RETRAITE</h5>
+<h5 class="text-center text-success">DECOMPTE VALIDE DE: {{ $data->miseRetraite->no_pensionne }}-{{ $data->employee->prenom_employee }} {{ $data->employee->nom_employee }}</h5>
 <div class="text-center mt-2">
     <img class="img-thumbnail" style="width: 150px; height: 150px;" id="image" src="{{ asset('storage/pensionnaireImg/'.$data->employee->photo) }}" alt="Picture">
 </div>
@@ -29,7 +29,7 @@
     <div class="col-md-6">
        <div>
             <span class="text-left font-weight-bold font-14">No PENSIONNE</span>
-            <span class="float-right font-weight-bold font-12">{{ $data->no_pensionne }}</span>
+            <span class="float-right font-weight-bold font-12">{{ $data->miseRetraite->no_pensionne }}</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Prenoms</span>
@@ -41,15 +41,15 @@
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Sexe</span>
-            <span class="float-right font-12">{{ $data->sexe }}</span>
+            <span class="float-right font-12">{{ $data->miseRetraite->sexe }}</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Prefecture de naissance</span>
-            <span class="float-right font-12">{{ DB::table('prefecture')->where('code',$data->prefecture_id)->value('code') }}-{{ DB::table('prefecture')->where('code',$data->prefecture_id)->value('libelle') }}</span>
+            <span class="float-right font-12">{{ DB::table('prefecture')->where('code',$data->miseRetraite->prefecture_id)->value('code') }}-{{ DB::table('prefecture')->where('code',$data->miseRetraite->prefecture_id)->value('libelle') }}</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Categorie socioprefessionnelle</span>
-            <span class="float-right font-12">{{ $data->socio_profess }}</span>
+            <span class="float-right font-12">{{ $data->miseRetraite->socio_profess }}</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Date de naissance</span>
@@ -105,7 +105,7 @@
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Assignation</span>
-            <span class="float-right font-12">{{ DB::table('prefecture')->where('code',$data->assign_pref_id)->value('code') }}-{{ DB::table('prefecture')->where('code',$data->assign_pref_id)->value('libelle') }}</span>
+            <span class="float-right font-12">{{ DB::table('prefecture')->where('code',$data->miseRetraite->assign_pref_id)->value('code') }}-{{ DB::table('prefecture')->where('code',$data->miseRetraite->assign_pref_id)->value('libelle') }}</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Lieu de naissance</span>
@@ -151,11 +151,11 @@
         </div>
         <div>
             <span class="text-left font-weight-bold font-14">Date de première embauche</span>
-            <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->first_job_date)->format('d-m-Y') }}</span>
+            <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->miseRetraite->first_job_date)->format('d-m-Y') }}</span>
         </div>
         <div>
             <span class="text-left font-weight-bold font-14">Annuite globale:</span>
-            <span class="float-right font-weight-bold text-success font-12">{{ $data->annuite }} ans</span>
+            <span class="float-right font-weight-bold text-success font-12">{{ $data->miseRetraite->annuite }} ans</span>
         </div>
     </div>
     <div class="col-md-6">
@@ -165,7 +165,7 @@
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Date Immatriculation en Cotisation</span>
-            <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->end_job_date)->format('d-m-Y') }}</span>
+            <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->miseRetraite->end_job_date)->format('d-m-Y') }}</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Taux acquis</span>
@@ -182,11 +182,11 @@
         </div>
         <div>
             <span class="text-left font-weight-bold font-14">Date de dépot du dossier</span>
-            <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->created_at)->format('d/m/Y') }}</span>
+            <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->miseRetraite->created_at)->format('d/m/Y') }}</span>
         </div>
         <div>
             <span class="text-left font-weight-bold font-14">Date de première jouisssance</span>
-            <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->end_job_date)->addMonths()->format('d/m/Y') }}</span>
+            <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->miseRetraite->end_job_date)->addMonths()->format('d/m/Y') }}</span>
         </div>
     </div>
     <div class="col-md-6">
@@ -196,12 +196,76 @@
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Date validation du dossier</span>
-            <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->created_at)->format('d/m/Y') }}</span>
+            <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->miseRetraite->created_at)->format('d/m/Y') }}</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Service actuel:</span>
             <span class="float-right font-weight-bold text-success font-12">SERVICE PENSION</span>
        </div>
+    </div>
+</div>
+
+
+<div class="row mt-2 card-box mb-30 p-2 shadow-lg">
+    <div class="col-md-6">
+        <div>
+            <span class="text-left font-weight-bold font-14">Date de première jouissance</span>
+            <span class="float-right font-12 font-weight-bold text-danger">{{ \Carbon\Carbon::parse($data->miseRetraite->end_job_date)->addMonths()->format('d/m/Y') }}</span>
+        </div>
+        <hr>
+        <div>
+            <span class="text-left font-weight-bold font-14">Salaire Moyen Mensuel</span>
+            <span class="float-right font-12 font-weight-bold">{{ $data->sal_moy_mens }}</span>
+        </div>
+        <div>
+            <span class="text-left font-weight-bold font-14">Montant Mensuel Pension</span>
+            <span class="float-right font-12 font-weight-bold text-success">{{ $data->mont_mens_pens }}</span>
+        </div>
+        <div>
+            <span class="text-left font-weight-bold font-14">PENSION TRIMESTRIELLE</span>
+            <span class="float-right font-12 font-weight-bold text-success">{{ $data->pens_trimes }}</span>
+        </div>
+        <div>
+            <span class="text-left font-weight-bold font-14">Montant des arriérés</span>
+            <span class="float-right font-12 font-weight-bold">{{ number_format($data->montant_arr,0,""," ") }}</span>
+        </div>
+        <div>
+            <span class="text-left font-weight-bold font-14">Montant revalorisation</span>
+            <span class="float-right font-12 font-weight-bold">{{ $data->mont_revalo }}</span>
+        </div>
+        <div>
+            <span class="text-left font-weight-bold font-14">Supplément AF</span>
+            <span class="float-right font-12 font-weight-bold">{{ number_format(count($data->employee->enfants)*9000,0,""," ") }}</span>
+        </div>
+        <div>
+            <span class="text-left font-weight-bold font-14">Montant total de la pension</span>
+            <span class="float-right font-12 font-weight-bold">{{ number_format($data->montant_tot_pens,0,""," ") }}</span>
+        </div>
+        <div>
+            <span class="text-left font-weight-bold font-14">Montant du prenier paiement</span>
+            <span class="float-right font-12 font-weight-bold">{{ number_format($data->montant_tot_first_pay,0,""," ") }}</span>
+        </div>
+        <div>
+            <span class="text-left font-weight-bold font-14">Nombre de mois total</span>
+            <span class="float-right font-12 font-weight-bold">{{ $data->nbre_mois_tot }} mois</span>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <div>
+            <span class="text-left font-weight-bold font-14">Date prévue du premier paiement</span>
+            <span class="float-right font-12 font-weight-bold">{{ \Carbon\Carbon::parse($data->miseRetraite->created_at)->addMonths()->firstOfMonth()->format('d/m/Y')}}</span>
+        </div>
+        <hr>
+        <div>
+            <span class="text-left font-weight-bold font-14">Solde du compte</span>
+            <span class="float-right font-12 font-weight-bold">0</span>
+        </div>
+        <div>
+            <span class="text-left font-weight-bold font-14">Montant Annuel Pension</span>
+            <span class="float-right font-12 font-weight-bold">{{ $data->mont_annu_pension }}</span>
+        </div>
+
     </div>
 </div>
 
@@ -216,9 +280,9 @@
 
 
 <div class="footer-wrap pd-20 mb-20 card-box justify-content-lg-end">
-    <div class="col-md-4 justify-content-end">
+    {{-- <div class="col-md-4 justify-content-end">
         <a href="{{ route('miseRetaite.decompte.done', $data->id) }}" class="btn btn-success text-white">Terminer <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-    </div>
+    </div> --}}
 </div>
 
 

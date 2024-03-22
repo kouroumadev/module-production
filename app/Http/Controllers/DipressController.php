@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deadline;
+use App\Models\Decompte;
 use App\Models\Employee;
 use App\Models\Dept;
 use App\Models\Doc;
@@ -44,8 +45,14 @@ class DipressController extends Controller
 
         $trans = Transfer::where('from_dept', Auth::user()->dept->id)->orWhere('to_dept', Auth::user()->dept->id)->get();
         $deadline = Deadline::where('dept_id',Auth::user()->dept_id)->get();
-        $dead_name = $deadline[0]->name;
-        
+
+        if(count($deadline)>0){
+            $dead_name = $deadline[0]->name;
+        } else {
+            $dead_name = "";
+        }
+
+
         // dd($data);
         return view('dipress.etude-dossier.index', compact('trans','dead_name'));
     }
@@ -164,10 +171,35 @@ class DipressController extends Controller
     }
 
     public function miseRetraiteDecompteStore(Request $request) {
-        dd($request->all());
+        // dd($request->all());
+
+        $dec = new Decompte();
+
+      $dec->employee_id = $request->employee_id;
+      $dec->mise_retraite_id = $request->mise_retraite_id;
+      $dec->sal_moy_mens = $request->sal_moy_mens;
+      $dec->mont_mens_pens = $request->mont_mens_pens;
+      $dec->pens_trimes = $request->pens_trimes;
+      $dec->montant_arr = $request->montant_arr;
+      $dec->mont_revalo = $request->mont_revalo;
+      $dec->montant_tot_pens = $request->montant_tot_pens;
+      $dec->montant_tot_first_pay = $request->montant_tot_first_pay;
+      $dec->nbre_mois_tot = $request->nbre_mois_tot;
+      $dec->prescription = $request->prescription;
+      $dec->solde_compte = $request->solde_compte;
+      $dec->mont_annu_pension = $request->mont_annu_pension;
+
+      $dec->save();
+
+      $last_id = $dec->id;
+
+      Alert::success('Decompte effecuté avec succès !', '');
+      return redirect(route('miseRetaite.decompte.done',$last_id ))->with('yes','Enregistrer avec succes');
+
+
     }
     public function miseRetraiteDecompteDone(int $id) {
-            $data = MiseRetraite::find($id);
+            $data = Decompte::find($id);
 
             return view('dipress.mise-a-retraite.done', compact('data'));
     }

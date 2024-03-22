@@ -11,8 +11,9 @@ class Decompte extends Model
 
     protected $fillable = [
         'id',
+        'employee_id',
         'mise_retraite_id',
-        'mont_moy_mens',
+        'sal_moy_mens',
         'mont_mens_pens',
         'pens_trimes',
         'montant_arr',
@@ -26,4 +27,12 @@ class Decompte extends Model
         'created_by',
         'status',
     ];
+
+    public function employee() {
+        return $this->belongsTo(Employee::class, 'employee_id','id');
+    }
+
+    public function miseRetraite() {
+        return $this->belongsTo(MiseRetraite::class, 'mise_retraite_id','id');
+    }
 }
