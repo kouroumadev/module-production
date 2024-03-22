@@ -33,7 +33,7 @@ class HomeController extends Controller
         $docs = Doc::all();
         $deadline = Deadline::where('dept_id',Auth::user()->dept_id)->get();
         $dead_name = $deadline[0]->name;
-        //dd($docs);
+        //dd($docs->transfers);
         return view('pensionnaire.index', compact('docs','deadline'));
     }
     public function reclamationIndex() {

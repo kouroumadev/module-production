@@ -68,8 +68,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/secretariat/index', [App\Http\Controllers\SecretariatController::class, 'SercretariatIndex'])->name('secretariat.index');
     Route::get('/secretariat/etude/traitement/{id}', [App\Http\Controllers\SecretariatController::class, 'SecretariatTraitement'])->name('secretariat.traitement');
 
-    // TRACKING
+    // TRANFERT
     Route::post('/dipress/store', [App\Http\Controllers\TransferController::class, 'store'])->name('transfert.store');
+
+
+    // TRACKING
+    Route::get('/tracking/{id}', [App\Http\Controllers\TransferController::class, 'Tracking'])->name('transfert.tracking');
 
 });
 
