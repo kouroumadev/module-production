@@ -161,15 +161,15 @@
     <div class="col-md-6">
         <div>
             <span class="text-left font-weight-bold font-14">Date Immatriculation en Cotisation</span>
-            <span class="float-right font-12"></span>
+            <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->employee->date_imma)->format('d-m-Y') }}</span>
        </div>
        <div>
-            <span class="text-left font-weight-bold font-14">Date Immatriculation en Cotisation</span>
-            <span class="float-right font-12">{{ \Carbon\Carbon::parse($data->miseRetraite->end_job_date)->format('d-m-Y') }}</span>
+            <span class="text-left font-weight-bold font-14">Date de cessation activites</span>
+            <span class="float-right font-weight-bold text-danger font-12">{{ \Carbon\Carbon::parse($data->miseRetraite->end_job_date)->format('d-m-Y') }}</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Taux acquis</span>
-            <span class="float-right font-12"></span>
+            <span class="float-right font-12">{{ (int)$data->miseRetraite->annuite*2 }} %</span>
        </div>
     </div>
 </div>
@@ -205,7 +205,6 @@
     </div>
 </div>
 
-
 <div class="row mt-2 card-box mb-30 p-2 shadow-lg">
     <div class="col-md-6">
         <div>
@@ -239,7 +238,7 @@
         </div>
         <div>
             <span class="text-left font-weight-bold font-14">Montant total de la pension</span>
-            <span class="float-right font-12 font-weight-bold">{{ number_format($data->montant_tot_pens,0,""," ") }}</span>
+            <span class="float-right font-12 font-weight-bold text-danger">{{ number_format($data->montant_tot_pens,0,""," ") }}</span>
         </div>
         <div>
             <span class="text-left font-weight-bold font-14">Montant du prenier paiement</span>
@@ -267,6 +266,33 @@
         </div>
 
     </div>
+</div>
+
+<div class="row mt-2 card-box mb-30 p-2 shadow-lg">
+    <div class="col-md-6">
+        <div>
+            <span class="text-left font-weight-bold font-14">Conjoint(s)</span>
+            @foreach ($data->employee->wifes as $wife)
+                <span class="float-right font-14">{{ $wife->no_conjoint_wife }}-{{ $wife->prenom_wife }}-{{ $wife->nom_wife }}</span> <br>
+            @endforeach
+        </div>
+        <hr>
+
+        <div>
+            <span class="text-left font-weight-bold font-14">Dernier Employeur</span>
+            <span class="float-right font-12 font-weight-bold text-success">{{ $data->employee->employer->no_employer }}-{{ $data->employee->employer->raison_sociale }}</span>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <div>
+            <span class="text-left font-weight-bold font-14">Enfant(s)</span>
+            @foreach ($data->employee->enfants as $enf)
+                <span class="float-right font-14">{{ $enf->prenom_enfant }}-{{ $enf->nom_enfant }}</span> <br>
+            @endforeach
+        </div>
+    </div>
+
 </div>
 
 
