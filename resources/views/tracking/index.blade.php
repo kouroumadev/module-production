@@ -116,6 +116,7 @@
             <tr>
                 
                 <th class="text-white">Rec</th> 
+                <th class="text-white">Etat Precedent</th>
                 <th class="text-white">Etat actuel</th>
                 <th class="text-white">Obs</th>
                 <th class="text-white">DeadLine</th>
@@ -126,74 +127,37 @@
             @foreach ($track as $key => $doc)
             @php
                 $current_date = \Carbon\Carbon::parse(\Carbon\Carbon::now());
-                //dd($doc->transfers );
+                $deadline = \App\Models\Deadline::where('dept_id',$doc->to_dept)->get();
+                //dd($deadline[0]->name);
             @endphp
             
                 <tr>
 
                     <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y') }}</td>
-                    <td><span class="badge badge-warning">{{$doc->to->name}}</span></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><span class="badge badge-warning">{{$doc->from->name}}</span></td>
+                    <td><span class="badge badge-success">{{$doc->to->name}}</span></td>
+                    @if ($current_date->diffInDays($doc->created_at) < (int)$deadline[0]->name)
+                        <td >
+                            {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style=" text-align:center"></span> 
+                        </td>
+                    @elseif ($current_date->diffInDays($doc->created_at) == (int)$deadline[0]->name)
+                        <td >
+                            {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span> 
+                        </td>
+                    @elseif ($current_date->diffInDays($doc->created_at) > (int)$deadline[0]->name)
+                        <td >
+                            {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
+                        </td>
+                    @endif
+                    <td>{{$deadline[0]->name}} Jour(s)</td>
+                    <td> <a href="{{route('user.tracking',$doc->users->id)}}"> {{$doc->users->name}} </a> </td>
 
                    
                     
                     
                 </tr>
             
-                {{-- @php
-                    $from=\App\Models\Dept::where('id',$doc->transfers->from_dept)->get();
-                    $to=\App\Models\Dept::where('id',$doc->transfers->to_dept)->get();
-                @endphp --}}
                 
-                {{-- <tr>
-                    <td class=""> <a href="{{route('transfert.tracking',$doc->id)}}">{{ $doc->no_dossier}}</a> </td>
-                    <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y')  }}</td>
-                    <td> <span class="text-success"><i class="icon-copy ion-arrow-right-a"></i></span> {{$to[0]->name}} {{  \Carbon\Carbon::parse($doc->transfers->created_at)->format('d/m/Y') }}</td>
-                    <td> <span class="text-danger"><i class="icon-copy ion-arrow-left-a"></i></span> {{$from[0]->name}}{{ \Carbon\Carbon::parse($doc->transfers->created_at )->format('d/m/Y') }} </td>
-                    <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td> 
-                    <td><span class="badge badge-primary"> {{$to[0]->name}}  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span></td> 
-                    @if ($current_date->diffInDays($doc->transfers->created_at) < (int)$deadline[0]->name)
-                        <td >
-                        {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style=" text-align:center"></span> 
-                        </td>
-                    @elseif ($current_date->diffInDays($doc->transfers->created_at) == (int)$deadline[0]->name)
-                        <td >
-                        {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span> 
-                        </td>
-                    @elseif ($current_date->diffInDays($doc->transfers->created_at) > (int)$deadline[0]->name)
-                        <td >
-                        {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
-                        </td>
-                    @endif  
-
-                    @if (Auth::user()->dept->id == $deadline[0]->dept_id)
-                        <td> {{$deadline[0]->name}} Jour(s)</td>
-                    @endif
-                
-                    <td>{{ $doc->type_doc }}</td> 
-
-                    @if (Auth::user()->dept->name == $to[0]->name)
-                        <td>
-                            <a class="btn btn-success" href="{{ route('pension.details', $doc->id) }}">Traitement <i
-                                    class="fa fa-chevron-right" aria-hidden="true"></i> </a>
-                        </td>
-                    
-                    @else
-                    <td>
-                        <span>En attente</span>
-                    </td>
-                @endif 
-                </tr>--}}
-
-            
-               
-            
-
-
-            
-           
             @endforeach
             
         </tbody>

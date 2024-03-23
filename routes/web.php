@@ -74,6 +74,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // TRACKING
     Route::get('/tracking/{id}', [App\Http\Controllers\TransferController::class, 'Tracking'])->name('transfert.tracking');
+    Route::get('/tracking/user/{id}', [App\Http\Controllers\TransferController::class, 'UserTracking'])->name('user.tracking');
 
 });
 

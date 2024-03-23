@@ -123,20 +123,20 @@
 
                             @if ($current_date->diffInDays($doc->created_at) < (int)$deadline[0]->name)
                                 <td >
-                                {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style=" text-align:center"></span> 
+                                    {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style=" text-align:center"></span> 
                                 </td>
                             @elseif ($current_date->diffInDays($doc->created_at) == (int)$deadline[0]->name)
                                 <td >
-                                {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span> 
+                                    {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span> 
                                 </td>
                             @elseif ($current_date->diffInDays($doc->created_at) > (int)$deadline[0]->name)
                                 <td >
-                                {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
+                                    {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
                                 </td>
                             @endif
 
                             @if (Auth::user()->dept->id == $deadline[0]->dept_id)
-                            <td> {{$deadline[0]->name}} Jour(s)</td>
+                                <td> {{$deadline[0]->name}} Jour(s)</td>
                             @endif
                         
                             <td>{{ $doc->type_doc }}</td>

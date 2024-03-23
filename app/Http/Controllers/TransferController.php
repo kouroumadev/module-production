@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Deadline;
 use App\Models\Dept;
 use App\Models\Doc;
 use App\Models\Employee;
@@ -113,10 +114,21 @@ class TransferController extends Controller
     }
 
     public function Tracking($id){
-        $last_doc = Transfer::where('doc_id',$id)->latest()->first();
         $track = Transfer::where('doc_id', $id)->get();
-        $emp = Employee::find($last_doc->employee_id);
-        //dd( $last_doc  );
-        return view('tracking.index',compact('track','emp','last_doc'));
+        if (sizeof($track) == 0) {
+            Alert::warning('Etat Initial', "Le document est à état initial veillez transféréz le dossier svp ");
+            return redirect()->back();
+        } else {
+            $last_doc = Transfer::where('doc_id',$id)->latest()->first();
+            $emp = Employee::find($last_doc->employee_id);
+            
+            return view('tracking.index',compact('track','emp','last_doc'));
+        }
+        
+       
+    }
+
+    public function UserTracking($id){
+        dd($id);
     }
 }
