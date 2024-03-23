@@ -120,6 +120,7 @@
                                                 </li>
                                             </ul>
                                         </div>
+                                        
                                         <div class="timeline-month">
                                             <h5>July, 2020</h5>
                                         </div>

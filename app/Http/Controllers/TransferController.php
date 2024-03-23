@@ -130,5 +130,7 @@ class TransferController extends Controller
 
     public function UserTracking($id){
         dd($id);
+
+        return view('tracking.user');
     }
 }
