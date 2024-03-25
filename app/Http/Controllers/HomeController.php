@@ -31,10 +31,10 @@ class HomeController extends Controller
     public function PensionIndex() {
         //$emps = Auth::user()->employees;
         $docs = Doc::all();
-        $deadline = Deadline::where('dept_id',Auth::user()->dept_id)->get();
-        $dead_name = $deadline[0]->name;
+        // $deadline = Deadline::where('dept_id',Auth::user()->dept_id)->get();
+        // $dead_name = $deadline[0]->name;
         //dd($docs->transfers);
-        return view('pensionnaire.index', compact('docs','deadline'));
+        return view('pensionnaire.index', compact('docs'));
     }
     public function reclamationIndex() {
         return view('reclamation.index');

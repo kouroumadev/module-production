@@ -33,9 +33,10 @@ class Transfer extends Model
     public function to() {
         return $this->belongsTo(Dept::class, 'to_dept');
     }
-    public function transfer() {
-        return $this->belongsTo(Transfer::class, 'transfer_id');
-    }
+
+    // public function transfer() {
+    //     return $this->belongsTo(Transfer::class, 'transfer_id');
+    // }
 
     public function users() {
         return $this->belongsTo(User::class, 'user_id');

@@ -109,6 +109,8 @@
                     @foreach ($docs as $key => $doc)
                     @php
                         $current_date = \Carbon\Carbon::parse(\Carbon\Carbon::now());
+                        $deadline = \App\Models\Deadline::where('dept_id',Auth::user()->dept_id)->get();
+                        $dead_name = $deadline[0]->name;
                         //dd($doc->transfers );
                     @endphp
                     @if ($doc->transfers == null)
@@ -121,23 +123,23 @@
                             <td><span class="badge badge-warning">{{Auth::user()->dept->name}}</span></td>
                             {{-- <td><span class="badge badge-warning">Initial...</span></td>  --}}
 
-                            @if ($current_date->diffInDays($doc->created_at) < (int)$deadline[0]->name)
+                            @if ($current_date->diffInDays($doc->created_at) < (int)$dead_name)
                                 <td >
                                     {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style=" text-align:center"></span> 
                                 </td>
-                            @elseif ($current_date->diffInDays($doc->created_at) == (int)$deadline[0]->name)
+                            @elseif ($current_date->diffInDays($doc->created_at) == (int)$dead_name)
                                 <td >
                                     {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span> 
                                 </td>
-                            @elseif ($current_date->diffInDays($doc->created_at) > (int)$deadline[0]->name)
+                            @elseif ($current_date->diffInDays($doc->created_at) > (int)$dead_name)
                                 <td >
                                     {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
                                 </td>
                             @endif
 
-                            @if (Auth::user()->dept->id == $deadline[0]->dept_id)
-                                <td> {{$deadline[0]->name}} Jour(s)</td>
-                            @endif
+                            {{-- @if (Auth::user()->dept->id == $deadline[0]->dept_id) --}}
+                                <td> {{$dead_name}} Jour(s)</td>
+                            {{-- @endif --}}
                         
                             <td>{{ $doc->type_doc }}</td>
                             
@@ -158,6 +160,8 @@
                         @php
                             $from=\App\Models\Dept::where('id',$doc->transfers->from_dept)->get();
                             $to=\App\Models\Dept::where('id',$doc->transfers->to_dept)->get();
+                            $deadline2 = \App\Models\Deadline::where('dept_id',$doc->transfers->to_dept)->get();
+                            $dead_name2 = $deadline2[0]->name;
                         @endphp
                         
                         <tr>
@@ -167,23 +171,23 @@
                             <td> <span class="text-danger"><i class="icon-copy ion-arrow-left-a"></i></span> {{$from[0]->name}}{{ \Carbon\Carbon::parse($doc->transfers->created_at )->format('d/m/Y') }} </td>
                             {{-- <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td>  --}}
                             <td><span class="badge badge-primary"> {{$to[0]->name}}  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span></td> 
-                            @if ($current_date->diffInDays($doc->transfers->created_at) < (int)$deadline[0]->name)
+                            @if ($current_date->diffInDays($doc->transfers->created_at) < (int)$dead_name2)
                                 <td >
                                 {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style=" text-align:center"></span> 
                                 </td>
-                            @elseif ($current_date->diffInDays($doc->transfers->created_at) == (int)$deadline[0]->name)
+                            @elseif ($current_date->diffInDays($doc->transfers->created_at) == (int)$dead_name2)
                                 <td >
                                 {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span> 
                                 </td>
-                            @elseif ($current_date->diffInDays($doc->transfers->created_at) > (int)$deadline[0]->name)
+                            @elseif ($current_date->diffInDays($doc->transfers->created_at) > (int)$dead_name2)
                                 <td >
                                 {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
                                 </td>
                             @endif  
 
-                            @if (Auth::user()->dept->id == $deadline[0]->dept_id)
-                                <td> {{$deadline[0]->name}} Jour(s)</td>
-                            @endif
+                            {{-- @if (Auth::user()->dept->id == $deadline[0]->dept_id) --}}
+                                <td> {{$dead_name2}} Jour(s)</td>
+                            {{-- @endif --}}
                         
                             <td>{{ $doc->type_doc }}</td> 
 
