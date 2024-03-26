@@ -14,6 +14,10 @@
         color: black;
 
     }
+    a[href="#finish"],a[href="#finish"]:hover{
+        background-color: transparent !important;
+        display: none;
+    }
 </style>
 
 
@@ -963,6 +967,8 @@
                                     </div>
 
                                 </div>
+
+
                             </section>
                             <input type="hidden" name="code_employe" value="{{ $data['employe'][0]->code_employe }}"
                                 id="">
@@ -1075,7 +1081,8 @@
                             <input type="hidden" name="matricule" value="{{ $data['employe'][0]->matricule }}"
                                 id="">
 
-                            <button type="submit" class="btn btn-success">Envoyer</button>
+                                <button type="submit" class="btn btn-success">Envoyer</button>
+
                         </form>
                     </div>
                 </div>

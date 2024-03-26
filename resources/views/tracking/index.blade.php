@@ -156,61 +156,66 @@
                     <td> <a href="{{route('user.tracking',$doc->users->id)}}"> {{$doc->users->name}} </a> </td>
 
                    
-                    <div class="modal fade customscroll" id="task-add" tabindex="-1" role="dialog">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Tasks Add</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Close Modal">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body pd-0">
-
-                                    <div class="profile-timeline">
-                                        <div class="timeline-month">
-                                            <h5>Historique du dossier {{ $last_doc->doc->no_dossier }} </h5>
-                                        </div>
-                                        <div class="profile-timeline-list">
-                                            <ul>
-                                                <li>
-                                                    <div class="date">{{ $doc->from->name}}</div>
-                                                    {{-- <div class="task-name"><i class="ion-ios-chatboxes"></i> {{ $to_dept }}</div> --}}
-
-                                                    <p>
-                                                        <span class="font-weight-bold text-success"><i class="icon-copy ion-folder"></i> Recu de: <span class="task-time">{{$doc->users->name}}</span></span> <br>
-                                                        <span class="font-weight-bold ml-2 text-success"><i class="ion-android-alarm-clock"></i> Date: <span class="task-time">{{ $doc->created_at->format('d M') }} {{ $doc->created_at->format('Y') }} à {{ $doc->created_at->format('H:i:s') }}</span></span>
-                                                    </p>
-                                                    <p>
-                                                        <span class="font-weight-bold text-success"><i class="icon-copy ion-folder"></i> Transmi à: <span class="task-time">{{ $doc->to->name }}</span></span> <br>
-                                                        <span class="font-weight-bold ml-2 text-success"><i class="ion-android-alarm-clock"></i> Date: <span class="task-time">{{ $doc->created_at->format('d M') }} {{ $doc->created_at->format('Y') }} à {{ $doc->created_at->format('H:i:s') }}</span></span>
-                                                    </p>
-                                                    <p>
-                                                        <span class="font-weight-bold text-success"><i class="ion-ios-chatboxes"></i> Observation: <span class="task-time">{{ $doc->note }}</span></span> <br>
-                                                    </p>
-                                                    {{-- <div class="task-time">09:30 am</div> --}}
-                                                </li>
-                                               
-                                            </ul>
-                                        </div>
-                                        
-                                        
-                                    </div>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Add</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     
                     
                 </tr>
             
                 
             @endforeach
+
+            <div class="modal fade customscroll" id="task-add" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Historique du dossier {{ $last_doc->doc->no_dossier }} </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Close Modal">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body pd-0">
+
+                            <div class="profile-timeline">
+                                <div class="timeline-month">
+                                    <h5></h5>
+                                </div>
+                                <div class="profile-timeline-list">
+                                    <ul>
+                                        @foreach ($track as $key => $doc)
+                                            <li>
+                                                <div class="date">{{ $doc->from->name}}</div>
+                                                {{-- <div class="task-name"><i class="ion-ios-chatboxes"></i> {{ $to_dept }}</div> --}}
+
+                                                <p>
+                                                    <span class="font-weight-bold text-success"><i class="icon-copy ion-folder"></i> Recu de: <span class="task-time">{{$doc->users->name}}</span></span> <br>
+                                                    <span class="font-weight-bold ml-2 text-success"><i class="ion-android-alarm-clock"></i> Date: <span class="task-time">{{ $doc->created_at->format('d M') }} {{ $doc->created_at->format('Y') }} à {{ $doc->created_at->format('H:i:s') }}</span></span>
+                                                </p>
+                                                <p>
+                                                    <span class="font-weight-bold text-success"><i class="icon-copy ion-folder"></i> Transmi à: <span class="task-time">{{ $doc->to->name }}</span></span> <br>
+                                                    <span class="font-weight-bold ml-2 text-success"><i class="ion-android-alarm-clock"></i> Date: <span class="task-time">{{ $doc->created_at->format('d M') }} {{ $doc->created_at->format('Y') }} à {{ $doc->created_at->format('H:i:s') }}</span></span>
+                                                </p>
+                                                <p>
+                                                    <span class="font-weight-bold text-success"><i class="ion-ios-chatboxes"></i> Observation: <span class="task-time">{{ $doc->note }}</span></span> <br>
+                                                </p>
+                                                {{-- <div class="task-time">09:30 am</div> --}}
+                                            </li>
+                                        @endforeach
+                                        
+                                       
+                                    </ul>
+                                </div>
+                                
+                                
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            {{-- <button type="button" class="btn btn-primary">Add</button> --}}
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
         </tbody>
     </table>
