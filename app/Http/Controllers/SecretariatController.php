@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class SecretariatController extends Controller
 {
     
-    public function SercretariatIndex(){
+    public function SecretariatIndex(){
         $dep_id = Auth::user()->dept_id;
         //dd($dep_id);
         //$docs = Doc::all();

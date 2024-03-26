@@ -3802,6 +3802,11 @@ body.IE .register-page-wrap .container{
 	background-color: #1b00ff;
 	font-weight: 600;
 }
+.wizard-content .wizard > .actions > ul > li > a[href="#finish"] {
+	border-color: transparent;
+	border-width: 0px;
+	color: transparent;
+  }
 .wizard-content .wizard>.actions>ul>li>a[href="#previous"]{
 	border-color: #1b00ff;
 	border-width: 2px;

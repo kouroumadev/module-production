@@ -227,7 +227,7 @@
                     </a>
                 </li>
                 @endif
-                @if (Auth::user()->dept->name == 'SECRETARIAT')
+                @if (Auth::user()->dept->name == 'SECRETARIAT' || Auth::user()->dept->name == 'DIRGA')
                 <li class="my-menu" onclick="makeActive(this,'15')" id="4">
                     <a href="{{ route('secretariat.index') }}" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">DOSSIER</span>
