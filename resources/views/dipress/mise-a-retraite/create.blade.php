@@ -115,7 +115,7 @@
     </div>
 </div>
 
-<form action=" {{ route('miseRetaite.store') }}" method="post">
+<form action=" {{ route('miseRetaite.store') }}" method="post" id="retraite_form">
 
     @csrf
 
@@ -149,19 +149,19 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-6 col-form-label">No CIN</label>
                         <div class="col-sm-8 col-md-6">
-                            <input class="form-control" name="no_ci" type="text" value="{{ $emp->no_cin }}" required>
+                            <input class="form-control" id="no_ci" name="no_ci" type="text" value="{{ $emp->no_cin }}" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-6 col-form-label">NoBiometrie</label>
                         <div class="col-sm-8 col-md-6">
-                            <input class="form-control" name="no_bio" type="text" required>
+                            <input class="form-control" id="no_bio" name="no_bio" type="text" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-6 col-form-label">Assignation</label>
                         <div class="col-sm-8 col-md-6">
-                            <select class="custom-select col-12" name="assign_pref_id" required>
+                            <select class="custom-select col-12" id="assign_pref_id" name="assign_pref_id" required>
                                 <option value="">-- Selectionner --</option>
                                 @foreach ($prefectures as $pref)
                                 <option value="{{ $pref->code }}">{{ $pref->code }}-{{ $pref->libelle }}</option>
@@ -190,7 +190,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-6 col-form-label">Date Immatriculation pension</label>
                         <div class="col-sm-8 col-md-6">
-                            <input class="form-control" type="date" name="date_imma" required>
+                            <input class="form-control" type="date" id="date_imma" name="date_imma" required>
                         </div>
                     </div>
                 </div>
@@ -198,10 +198,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-6 col-form-label">Derniere Adresse</label>
                         <div class="col-sm-8 col-md-6">
-                            {{-- <input class="form-control" type="text" name="last_location" value="{{ $emp->adresse_employee }}" required> --}}
-                            <textarea name="last_location" class="form-control" required>
-                                {{ $emp->adresse_employee }}
-                            </textarea>
+                            <input class="form-control" type="text" id="last_location" name="last_location" value="{{ $emp->adresse_employee }}" required>
                             <input type="hidden" name="emp_id" value="{{ $emp->id }}">
                             <input type="hidden" name="pension_type" value="{{ $emp->type_pension }}">
                             <input type="hidden" name="sexe" value="{{ $emp->sexe }}">
@@ -211,7 +208,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-6 col-form-label">Prefecture de naissance</label>
                         <div class="col-sm-8 col-md-6">
-                            <select class="custom-select col-12" name="prefecture_id" required>
+                            <select class="custom-select col-12" id="prefecture_id" name="prefecture_id" required>
                                 <option value="">-- Selectionner --</option>
                                 <option selected value="{{ $emp->prefecture_employee }}">{{ DB::table('prefecture')->where('code',$emp->prefecture_employee)->value('libelle') }}</option>
                                 @foreach ($prefectures as $pref)
@@ -223,7 +220,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-6 col-form-label">Categorie socio-professionnelle</label>
                         <div class="col-sm-8 col-md-6">
-                            <select class="custom-select col-12" name="socio_profess" required>
+                            <select class="custom-select col-12" id="socio_profess" name="socio_profess" required>
                                 <option value="">-- Selectionner --</option>
                                 <option value="01-EMPLOYE">01-EMPLOYE</option>
                                 <option value="02-CADRE MOYEN">02-CADRE MOYEN</option>
@@ -234,19 +231,19 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-6 col-form-label">Profession</label>
                         <div class="col-sm-8 col-md-6">
-                            <input class="form-control" type="text" name="profession" value="{{ $emp->profession }}" required>
+                            <input class="form-control" type="text" id="profession" name="profession" value="{{ $emp->profession }}" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-6 col-form-label">Email</label>
                         <div class="col-sm-8 col-md-6">
-                            <input class="form-control" type="email" name="email" placeholder="adresse email" required>
+                            <input class="form-control" type="email" id="email" name="email" placeholder="adresse email" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-6 col-form-label">Telephone</label>
                         <div class="col-sm-8 col-md-6">
-                            <input class="form-control" type="text" name="tel" value="{{ $emp->tel_employee }}" required>
+                            <input class="form-control" type="text" id="tel" name="tel" value="{{ $emp->tel_employee }}" required>
                         </div>
                     </div>
 
@@ -255,9 +252,45 @@
         </div>
     </div>
 
-    <div class="row mt-2 mb-2 justify-content-lg-end">
-        <div class="col-md-4 mt-4">
-            <button type="submit" class="btn btn-success">Confirmation de la mise a la retraite</button>
+    <div class="row justify-content-lg-end">
+        <div class="col-md-4">
+            <button type="button" id="conf_modal" class="btn btn-success my-3">Confirmation de la mise a la retraite</button>
+            {{-- <a href="#" id="conf_modal" class="btn btn-success my-3" data-toggle="modal" data-target="#confirmation-modal" type="button">
+                Confirmation de la mise a la retraite
+            </a> --}}
+            <div class="modal fade" id="patapata" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center font-18">
+                            <h4 class="padding-top-30 mb-30 weight-500">Confirmez-vous la mise à la retraite de cet employer ?</h4>
+                            <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                                    NON
+                                </div>
+                                <div class="col-6">
+                                    <button type="button" id="send_retraite_form" class="btn btn-primary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-check"></i></button>
+                                    OUI
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="potopoto" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                    <div class="modal-content bg-danger text-white">
+                        <div class="modal-body text-center">
+                            <h3 class="text-white mb-15"><i class="fa fa-exclamation-triangle"></i> Alert</h3>
+                            <p class="text-uppercase">
+                                veuillez remplir tous les champs obligatoires.
+                            </p>
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -270,6 +303,36 @@
 
     $(document).ready(function () {
         $('#cessation_date').prop('disabled',true);
+
+        $('#send_retraite_form').on('click', function() {
+            $("#retraite_form").submit();
+        });
+
+        $('#conf_modal').on('click', function() {
+            var no_ci =  $("#no_ci").val();
+            var no_bio =  $("#no_bio").val();
+            var assign_pref_id =  $("#assign_pref_id").val();
+            var first_job_date =  $("#first_job_date").val();
+            var cessation_date =  $("#cessation_date").val();
+            var annuite =  $("#annuite").val();
+            var date_imma =  $("#date_imma").val();
+            var last_location =  $("#last_location").val();
+            var prefecture_id =  $("#prefecture_id").val();
+            var socio_profess =  $("#socio_profess").val();
+            var profession =  $("#profession").val();
+            var email =  $("#email").val();
+            var tel =  $("#tel").val();
+
+            if(no_ci=="" || no_bio=="" || assign_pref_id=="" || first_job_date=="" || cessation_date==""
+                || annuite=="" || date_imma=="" || last_location=="" || prefecture_id=="" || socio_profess==""
+                || email=="" || tel=="" || profession==""
+            ){
+                $('#potopoto').modal('show');
+            } else {
+                $('#patapata').modal('show');
+            }
+
+        });
     });
 
     $("#first_job_date").blur(function (){
