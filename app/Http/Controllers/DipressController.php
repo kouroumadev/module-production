@@ -200,8 +200,9 @@ class DipressController extends Controller
     }
     public function miseRetraiteDecompteDone(int $id) {
             $data = Decompte::find($id);
+            $depts = Dept::all();
 
-            return view('dipress.mise-a-retraite.done', compact('data'));
+            return view('dipress.mise-a-retraite.done', compact('data','depts'));
     }
     public function miseRetraiteDecompteDetails(int $id, int $year) {
 

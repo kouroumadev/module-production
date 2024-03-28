@@ -147,19 +147,19 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">No CIN</label>
+                        <label class="col-sm-12 col-md-6 col-form-label">No CIN <span class="text-danger">*</span></label>
                         <div class="col-sm-8 col-md-6">
                             <input class="form-control" id="no_ci" name="no_ci" type="text" value="{{ $emp->no_cin }}" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">NoBiometrie</label>
+                        <label class="col-sm-12 col-md-6 col-form-label">NoBiometrie <span class="text-danger">*</span></label>
                         <div class="col-sm-8 col-md-6">
                             <input class="form-control" id="no_bio" name="no_bio" type="text" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">Assignation</label>
+                        <label class="col-sm-12 col-md-6 col-form-label">Assignation <span class="text-danger">*</span></label>
                         <div class="col-sm-8 col-md-6">
                             <select class="custom-select col-12" id="assign_pref_id" name="assign_pref_id" required>
                                 <option value="">-- Selectionner --</option>
@@ -170,25 +170,25 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">Date premiere embauche</label>
+                        <label class="col-sm-12 col-md-6 col-form-label">Date premiere embauche <span class="text-danger">*</span></label>
                         <div class="col-sm-8 col-md-6">
                             <input class="form-control" id="first_job_date" type="date" name="first_job_date" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">Date cessation activite</label>
+                        <label class="col-sm-12 col-md-6 col-form-label">Date cessation activite <span class="text-danger">*</span></label>
                         <div class="col-sm-8 col-md-6">
                             <input class="form-control" type="date" name="end_job_date" id="cessation_date" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">Annuite</label>
+                        <label class="col-sm-12 col-md-6 col-form-label">Annuite <span class="text-danger">*</span></label>
                         <div class="col-sm-8 col-md-6">
                             <input class="form-control" type="text" name="annuite" id="annuite" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">Date Immatriculation pension</label>
+                        <label class="col-sm-12 col-md-6 col-form-label">Date Immatriculation pension <span class="text-danger">*</span></label>
                         <div class="col-sm-8 col-md-6">
                             <input class="form-control" type="date" id="date_imma" name="date_imma" required>
                         </div>
@@ -196,7 +196,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">Derniere Adresse</label>
+                        <label class="col-sm-12 col-md-6 col-form-label">Derniere Adresse <span class="text-danger">*</span></label>
                         <div class="col-sm-8 col-md-6">
                             <input class="form-control" type="text" id="last_location" name="last_location" value="{{ $emp->adresse_employee }}" required>
                             <input type="hidden" name="emp_id" value="{{ $emp->id }}">
@@ -206,7 +206,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">Prefecture de naissance</label>
+                        <label class="col-sm-12 col-md-6 col-form-label">Prefecture de naissance <span class="text-danger">*</span></label>
                         <div class="col-sm-8 col-md-6">
                             <select class="custom-select col-12" id="prefecture_id" name="prefecture_id" required>
                                 <option value="">-- Selectionner --</option>
@@ -218,7 +218,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">Categorie socio-professionnelle</label>
+                        <label class="col-sm-12 col-md-6 col-form-label">Categorie socio-professionnelle <span class="text-danger">*</span></label>
                         <div class="col-sm-8 col-md-6">
                             <select class="custom-select col-12" id="socio_profess" name="socio_profess" required>
                                 <option value="">-- Selectionner --</option>
@@ -229,19 +229,19 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">Profession</label>
+                        <label class="col-sm-12 col-md-6 col-form-label">Profession <span class="text-danger">*</span></label>
                         <div class="col-sm-8 col-md-6">
                             <input class="form-control" type="text" id="profession" name="profession" value="{{ $emp->profession }}" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">Email</label>
+                        <label class="col-sm-12 col-md-6 col-form-label">Email <span class="text-danger">*</span></label>
                         <div class="col-sm-8 col-md-6">
                             <input class="form-control" type="email" id="email" name="email" placeholder="adresse email" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">Telephone</label>
+                        <label class="col-sm-12 col-md-6 col-form-label">Telephone <span class="text-danger">*</span></label>
                         <div class="col-sm-8 col-md-6">
                             <input class="form-control" type="text" id="tel" name="tel" value="{{ $emp->tel_employee }}" required>
                         </div>
