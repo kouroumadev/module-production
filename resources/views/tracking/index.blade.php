@@ -117,8 +117,8 @@
         role="grid" aria-describedby="DataTables_Table_0_info">
         <thead class="bg-success">
             <tr>
-                
-                <th class="text-white">Rec</th> 
+
+                <th class="text-white">Rec</th>
                 <th class="text-white">Etat Precedent</th>
                 <th class="text-white">Etat actuel</th>
                 <th class="text-white">Obs</th>
@@ -133,7 +133,7 @@
                 $deadline = \App\Models\Deadline::where('dept_id',$doc->to_dept)->get();
                 //dd($deadline[0]->name);
             @endphp
-            
+
                 <tr>
 
                     <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y') }}</td>
@@ -141,27 +141,27 @@
                     <td><span class="badge badge-success">{{$doc->to->name}}</span></td>
                     @if ($current_date->diffInDays($doc->created_at) < (int)$deadline[0]->name)
                         <td >
-                            {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style=" text-align:center"></span> 
+                            {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style=" text-align:center"></span>
                         </td>
                     @elseif ($current_date->diffInDays($doc->created_at) == (int)$deadline[0]->name)
                         <td >
-                            {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span> 
+                            {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span>
                         </td>
                     @elseif ($current_date->diffInDays($doc->created_at) > (int)$deadline[0]->name)
                         <td >
-                            {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
+                            {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span>
                         </td>
                     @endif
                     <td>{{$deadline[0]->name}} Jour(s)</td>
                     <td> <a href="{{route('user.tracking',$doc->users->id)}}"> {{$doc->users->name}} </a> </td>
 
-                   
-                    
-                    
-                    
+
+
+
+
                 </tr>
-            
-                
+
+
             @endforeach
 
             <div class="modal fade customscroll" id="task-add" tabindex="-1" role="dialog">
@@ -200,12 +200,12 @@
                                                 {{-- <div class="task-time">09:30 am</div> --}}
                                             </li>
                                         @endforeach
-                                        
-                                       
+
+
                                     </ul>
                                 </div>
-                                
-                                
+
+
                             </div>
 
                         </div>
@@ -216,7 +216,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </tbody>
     </table>
 </div>

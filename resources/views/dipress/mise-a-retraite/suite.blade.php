@@ -88,7 +88,8 @@
        <div>
             <span class="text-left font-weight-bold font-14">Annuite globale</span>
 
-            <span class="float-right font-12 font-weight-bold text-danger">{{ \Carbon\Carbon::parse($data->employee->date_embauche)->diff($data->created_at)->format('%y ans de %m mois '); }}</span>
+            <span class="float-right font-12 font-weight-bold text-danger">{{ $data->annuite }}</span>
+            {{-- <span class="float-right font-12 font-weight-bold text-danger">{{ \Carbon\Carbon::parse($data->employee->date_embauche)->diff($data->created_at)->format('%y ans de %m mois '); }}</span> --}}
        </div>
     </div>
 </div>

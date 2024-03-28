@@ -456,12 +456,14 @@
                                                 <div id="all_btns" class="row justify-content-center">
                                                     <div class="col-md-6 justify-content-center">
                                                         @if (count($emp->mise_retraites)>0)
-                                                            <a href="#" class="btn btn-success disabled">Mise a la Retraite <i class="icon-copy fa fa-check" aria-hidden="true"></i></a>
+                                                            <a href="#" class="btn btn-success disabled"><i class="icon-copy fa fa-sign-out" aria-hidden="true"></i> Mise a la Retraite <i class="icon-copy fa fa-check" aria-hidden="true"></i></a>
+                                                            <a href="#" class="btn btn-success disabled"><i class="icon-copy fa fa-wheelchair-alt" aria-hidden="true"></i> Invalidité</a>
                                                         @else
-                                                            <a href="{{ route('miseRetaite.create',$emp->id) }}" class="btn btn-success">Mise a la Retraite</a>
+                                                            <a href="{{ route('miseRetaite.create',$emp->id) }}" class="btn btn-success"><i class="icon-copy fa fa-sign-out" aria-hidden="true"> Mise a la Retraite</a>
+                                                            <a href="#" class="btn btn-success"> <i class="icon-copy fa fa-wheelchair-alt" aria-hidden="true"></i>Invalidité</a>
                                                         @endif
-                                                        <a href="#" class="btn btn-success">Invalidite</a>
-                                                        <a href="#" class="btn btn-success">Deces</a>
+
+                                                        <a href="#" class="btn btn-success"><i class="fa-solid fa-book-skull" aria-hidden="true"></i> Deces</a>
                                                     </div>
                                                 </div>
                                             </div>
