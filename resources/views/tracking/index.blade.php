@@ -99,15 +99,15 @@
 </div>
 
 <div class="pb-20">
-    <div class=" row pd-20">
+    <div class=" row pd-20 pt-10">
         <div class="col-4">
             <span class="text-left font-weight-bold font-20">Parcours du dossier N°{{ $last_doc->doc->no_dossier }}</span>
         </div>
         <div class="col-4">
-            <span class="text-left font-weight-bold font-20">Date de creation :{{ $last_doc->doc->created_at  }}</span>
+            <span class="text-left font-weight-bold font-20">Date de creation :{{ \Carbon\Carbon::parse($last_doc->doc->created_at)->format('d/m/Y') }}</span>
         </div>
         <div class="col-4">
-            <span class="text-left font-weight-bold font-20">Document :{{ $last_doc->doc->type_doc  }}</span>
+            <span class="text-left font-weight-bold font-20">Document :{{ strtoupper($last_doc->doc->type_doc)  }}</span>
         </div>
     </div>
     <div>
@@ -131,7 +131,7 @@
             @php
                 $current_date = \Carbon\Carbon::parse(\Carbon\Carbon::now());
                 $deadline = \App\Models\Deadline::where('dept_id',$doc->to_dept)->get();
-                //dd($deadline[0]->name);
+                //dd($doc->doc->created_at);
             @endphp
             
                 <tr>
@@ -139,19 +139,16 @@
                     <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y') }}</td>
                     <td><span class="badge badge-warning">{{$doc->from->name}}</span></td>
                     <td><span class="badge badge-success">{{$doc->to->name}}</span></td>
-                    @if ($current_date->diffInDays($doc->created_at) < (int)$deadline[0]->name)
-                        <td >
-                            {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style=" text-align:center"></span> 
-                        </td>
-                    @elseif ($current_date->diffInDays($doc->created_at) == (int)$deadline[0]->name)
-                        <td >
-                            {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span> 
-                        </td>
-                    @elseif ($current_date->diffInDays($doc->created_at) > (int)$deadline[0]->name)
-                        <td >
-                            {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
-                        </td>
-                    @endif
+                    @if ($doc->doc->created_at->diffInDays($doc->created_at) <=(int)$deadline[0]->name)
+                                
+                    <td >
+                    {{$doc->doc->created_at->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span> 
+                    </td>
+                @else 
+                    <td >
+                    {{$doc->doc->created_at->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
+                    </td>
+                @endif  
                     <td>{{$deadline[0]->name}} Jour(s)</td>
                     <td> <a href="{{route('user.tracking',$doc->users->id)}}"> {{$doc->users->name}} </a> </td>
 

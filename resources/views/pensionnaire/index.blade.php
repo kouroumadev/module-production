@@ -127,15 +127,12 @@
                             <td><span class="badge badge-warning">{{Auth::user()->dept->name}}</span></td>
                             {{-- <td><span class="badge badge-warning">Initial...</span></td>  --}}
 
-                            @if ($current_date->diffInDays($doc->created_at) < (int)$dead_name)
+                            @if ($current_date->diffInDays($doc->created_at) <= (int)$dead_name)
                                 <td >
-                                    {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style=" text-align:center"></span> 
+                                    {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style=" text-align:center; background-color:green"> à temps</span> 
                                 </td>
-                            @elseif ($current_date->diffInDays($doc->created_at) == (int)$dead_name)
-                                <td >
-                                    {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span> 
-                                </td>
-                            @elseif ($current_date->diffInDays($doc->created_at) > (int)$dead_name)
+                            @else
+                         
                                 <td >
                                     {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
                                 </td>
@@ -172,20 +169,17 @@
                             <td class=""> <a href="{{route('transfert.tracking',$doc->id)}}">{{ $doc->no_dossier}}</a> </td>
                             <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y')  }}</td>
                             <td> <span class="text-success"><i class="icon-copy ion-arrow-right-a"></i></span> {{$to[0]->name}} {{  \Carbon\Carbon::parse($doc->transfers->created_at)->format('d/m/Y') }}</td>
-                            <td> <span class="text-danger"><i class="icon-copy ion-arrow-left-a"></i></span> {{$from[0]->name}}{{ \Carbon\Carbon::parse($doc->transfers->created_at )->format('d/m/Y') }} </td>
+                            <td> <span class="text-danger"><i class="icon-copy ion-arrow-left-a"></i></span> {{$from[0]->name}} {{ \Carbon\Carbon::parse($doc->transfers->created_at )->format('d/m/Y') }} </td>
                             {{-- <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td>  --}}
                             <td><span class="badge badge-primary"> {{$to[0]->name}}  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span></td> 
-                            @if ($current_date->diffInDays($doc->transfers->created_at) < (int)$dead_name2)
+                            @if ($doc->created_at->diffInDays($doc->transfers->created_at) <=(int)$dead_name2)
+                                
                                 <td >
-                                {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style=" text-align:center"></span> 
+                                {{$doc->created_at->diffInDays($doc->transfers->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span> 
                                 </td>
-                            @elseif ($current_date->diffInDays($doc->transfers->created_at) == (int)$dead_name2)
+                            @else 
                                 <td >
-                                {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span> 
-                                </td>
-                            @elseif ($current_date->diffInDays($doc->transfers->created_at) > (int)$dead_name2)
-                                <td >
-                                {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
+                                {{$doc->created_at->diffInDays($doc->transfers->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
                                 </td>
                             @endif  
 
