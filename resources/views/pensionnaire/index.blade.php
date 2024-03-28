@@ -99,7 +99,7 @@
                     <tr>
                         <th class="table-plus text-white">N° Dossier</th>
                         <th class="text-white">Creation</th>
-                        <th class="text-white">Rec</th> 
+                        <th class="text-white">Rec</th>
                         <th class="text-white">Sortie</th>
                         {{-- <th class="text-white">Etat</th> --}}
                         <th class="text-white">Etat actuel</th>
@@ -127,24 +127,27 @@
                             <td><span class="badge badge-warning">{{Auth::user()->dept->name}}</span></td>
                             {{-- <td><span class="badge badge-warning">Initial...</span></td>  --}}
 
-                            @if ($current_date->diffInDays($doc->created_at) <= (int)$dead_name)
+                            @if ($current_date->diffInDays($doc->created_at) < (int)$dead_name)
                                 <td >
-                                    {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style=" text-align:center; background-color:green"> à temps</span> 
+                                    {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style=" text-align:center"></span>
                                 </td>
-                            @else
-                         
+                            @elseif ($current_date->diffInDays($doc->created_at) == (int)$dead_name)
                                 <td >
-                                    {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
+                                    {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span>
+                                </td>
+                            @elseif ($current_date->diffInDays($doc->created_at) > (int)$dead_name)
+                                <td >
+                                    {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span>
                                 </td>
                             @endif
 
                             {{-- @if (Auth::user()->dept->id == $deadline[0]->dept_id) --}}
                                 <td> {{$dead_name}} Jour(s)</td>
                             {{-- @endif --}}
-                        
+
                             <td>{{ $doc->type_doc }}</td>
-                            
-                            
+
+
                             @if (Auth::user()->dept->name == "DQE")
                                 <td>
                                     <a class="btn btn-success" href="{{ route('pension.details', $doc->id) }}">Traitement <i
@@ -155,46 +158,54 @@
                                     <span>En attente</span>
                                 </td>
                             @endif
-                            
+
                         </tr>
                     @else
                         @php
                             $from=\App\Models\Dept::where('id',$doc->transfers->from_dept)->get();
                             $to=\App\Models\Dept::where('id',$doc->transfers->to_dept)->get();
                             $deadline2 = \App\Models\Deadline::where('dept_id',$doc->transfers->to_dept)->get();
-                            $dead_name2 = $deadline2[0]->name;
+                            if(count($deadline2)>0){
+                                $dead_name2 = $deadline2[0]->name;
+                            } else {
+                                $dead_name2 = "";
+                            }
+
                         @endphp
-                        
+
                         <tr>
                             <td class=""> <a href="{{route('transfert.tracking',$doc->id)}}">{{ $doc->no_dossier}}</a> </td>
                             <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y')  }}</td>
                             <td> <span class="text-success"><i class="icon-copy ion-arrow-right-a"></i></span> {{$to[0]->name}} {{  \Carbon\Carbon::parse($doc->transfers->created_at)->format('d/m/Y') }}</td>
-                            <td> <span class="text-danger"><i class="icon-copy ion-arrow-left-a"></i></span> {{$from[0]->name}} {{ \Carbon\Carbon::parse($doc->transfers->created_at )->format('d/m/Y') }} </td>
+                            <td> <span class="text-danger"><i class="icon-copy ion-arrow-left-a"></i></span> {{$from[0]->name}}{{ \Carbon\Carbon::parse($doc->transfers->created_at )->format('d/m/Y') }} </td>
                             {{-- <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td>  --}}
-                            <td><span class="badge badge-primary"> {{$to[0]->name}}  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span></td> 
-                            @if ($doc->created_at->diffInDays($doc->transfers->created_at) <=(int)$dead_name2)
-                                
+                            <td><span class="badge badge-primary"> {{$to[0]->name}}  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span></td>
+                            @if ($current_date->diffInDays($doc->transfers->created_at) < (int)$dead_name2)
                                 <td >
-                                {{$doc->created_at->diffInDays($doc->transfers->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span> 
+                                {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style=" text-align:center"></span>
                                 </td>
-                            @else 
+                            @elseif ($current_date->diffInDays($doc->transfers->created_at) == (int)$dead_name2)
                                 <td >
-                                {{$doc->created_at->diffInDays($doc->transfers->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
+                                {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span>
                                 </td>
-                            @endif  
+                            @elseif ($current_date->diffInDays($doc->transfers->created_at) > (int)$dead_name2)
+                                <td >
+                                {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span>
+                                </td>
+                            @endif
 
                             {{-- @if (Auth::user()->dept->id == $deadline[0]->dept_id) --}}
                                 <td> {{$dead_name2}} Jour(s)</td>
                             {{-- @endif --}}
-                        
-                            <td>{{ $doc->type_doc }}</td> 
+
+                            <td>{{ $doc->type_doc }}</td>
 
                             @if (Auth::user()->dept->name == $to[0]->name)
                                 <td>
                                     <a class="btn btn-success" href="{{ route('pension.details', $doc->id) }}">Traitement <i
                                             class="fa fa-chevron-right" aria-hidden="true"></i> </a>
                                 </td>
-                            
+
                             @else
                             <td>
                                 <span>En attente</span>
@@ -203,14 +214,14 @@
                         </tr>
 
                     @endif
-                       
-                    
 
 
-                    
-                   
+
+
+
+
                     @endforeach
-                    
+
                 </tbody>
             </table>
         </div>
@@ -354,8 +365,8 @@
                                         </div>
                                     </div>
                                 @endif
-                                
-                                
+
+
                             </section>
                             <!-- Step 2 -->
                             <h5>Infos Employeur</h5>
@@ -462,7 +473,7 @@
                                     @endforeach
                                 </div>
                                 @endif
-                                
+
 
                             </section>
                             <!-- Step 4 -->
@@ -633,7 +644,7 @@
                                                                     onchange="myFunction('file{{ $key }}','file{{ $key }}_statut')"
                                                                      />
                                                                 @endif
-                                                                
+
                                                             </th>
                                                             <th scope="row" id="file{{ $key }}_statut"><span
                                                                     class="badge badge-danger"><i
@@ -642,8 +653,8 @@
                                                         </tr>
                                                     @endforeach
 
-                                                    
-                                               
+
+
                                                 @elseif ($type_pension == 'reversion')
                                                 @foreach ($reversion_doc as $key => $item)
                                                         <tr>
@@ -669,7 +680,7 @@
                                                                         aria-hidden="true"></i> Non Chargé</span></th>
                                                         </tr>
                                                 @endforeach
-                                                   
+
                                                 @elseif ($type_pension == 'Invalidite')
                                                 @foreach ($invalidite_doc as $key => $item)
                                                 <tr>
@@ -1136,16 +1147,16 @@
 
         <script>
             function myFunction(file, status) {
-                
+
                 if (file != '') {
-                    
+
 
                     document.getElementById(status).innerHTML =
                         '<span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span>';
                 }
             }
-            
-            
+
+
         </script>
 
     @endif

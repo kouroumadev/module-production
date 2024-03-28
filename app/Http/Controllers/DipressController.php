@@ -92,6 +92,8 @@ class DipressController extends Controller
 
             // dd($request->all());
 
+            $annuite = \Carbon\Carbon::parse($request->first_job_date)->diff($request->end_job_date)->format('%y ans et %m mois ');
+            // dd($request->first_job_date, $request->end_job_date, $nn);
 
             if ($request->pension_type == 'Retraite'){
                 $no = "01-0";
@@ -108,7 +110,7 @@ class DipressController extends Controller
             $data->assign_pref_id = $request->assign_pref_id;
             $data->first_job_date = $request->first_job_date;
             $data->end_job_date = $request->end_job_date;
-            $data->annuite = $request->annuite;
+            $data->annuite = $annuite;
             $data->date_imma = $request->date_imma;
             $data->last_location = $request->last_location;
             $data->prefecture_id = $request->prefecture_id;
@@ -200,8 +202,9 @@ class DipressController extends Controller
     }
     public function miseRetraiteDecompteDone(int $id) {
             $data = Decompte::find($id);
+            $depts = Dept::all();
 
-            return view('dipress.mise-a-retraite.done', compact('data'));
+            return view('dipress.mise-a-retraite.done', compact('data','depts'));
     }
     public function miseRetraiteDecompteDetails(int $id, int $year) {
 

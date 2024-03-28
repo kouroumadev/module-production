@@ -239,7 +239,7 @@
                     <tr>
                         <th class="table-plus text-white">N° Dossier</th>
                         <th class="text-white">Date Creation</th>
-                        <th class="text-white">Reception</th> 
+                        <th class="text-white">Reception</th>
                         <th class="text-white">Sortie</th>
                         <th class="text-white">Etat</th>
                         <th class="text-white">Observation</th>
@@ -255,8 +255,8 @@
                     @endphp
 
                     @if ($tran != null)
-                        
-                    
+
+
                     <tr>
                         <td class="">{{ $tran->doc->no_dossier}}</td>
                         {{-- <td class="">{{ $emp->employee->prenom_employee }} <span
@@ -270,7 +270,7 @@
                         @else
                             <td>{{ $tran->created_at }}</td>
                         @endif
-                        
+
                         <td><span class="badge badge-warning">{{$tran->from->name}} -> {{$tran->to->name}}</span></td>
                         <td>{{$current_date->diffInDays($tran->created_at )}}</td>
                         <td>1 jour</td>
@@ -288,15 +288,15 @@
                         {{-- <td>{{$emp->docs[0]->type_doc}}</td> --}}
                         {{-- <td>{{ $tran->doc->type_doc }}</td> --}}
 
-                        @if (count($tran->employee->mise_retraites)>0)
+                        {{-- @if (count($tran->employee->mise_retraites)>0)
                             <td>
                                 <span class="badge badge-pill badge-primary">Déja traité</span>
                             </td>
-                        @else
+                        @else --}}
                             <td>
                                 <a class="btn btn-success" href="{{ route('etude.traitement',$tran->employee->id) }}">Traitement <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
                             </td>
-                        @endif
+                        {{-- @endif --}}
 
                         {{-- @if ($emp->transfer_id != null && Auth::user()->dept->name == $to[0]->name)
                             <td>
@@ -316,7 +316,7 @@
 
                     </tr>
                     @else
-                        
+
                     @endif
                     @endforeach
 

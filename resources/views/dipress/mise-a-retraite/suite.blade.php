@@ -88,7 +88,8 @@
        <div>
             <span class="text-left font-weight-bold font-14">Annuite globale</span>
 
-            <span class="float-right font-12 font-weight-bold text-danger">{{ \Carbon\Carbon::parse($data->employee->date_embauche)->diff($data->created_at)->format('%y ans de %m mois '); }}</span>
+            <span class="float-right font-12 font-weight-bold text-danger">{{ $data->annuite }}</span>
+            {{-- <span class="float-right font-12 font-weight-bold text-danger">{{ \Carbon\Carbon::parse($data->employee->date_embauche)->diff($data->created_at)->format('%y ans de %m mois '); }}</span> --}}
        </div>
     </div>
 </div>
@@ -291,7 +292,7 @@
     </div>
 </div>
 
-<form action="{{ route('miseRetaite.decompte.store') }}" method="post">
+<form action="{{ route('miseRetaite.decompte.store') }}" method="post" id="decompte_form">
     @csrf
     <div class="row card-box mb-30 shadow-lg p-2">
         <div class="col-md-6">
@@ -386,11 +387,48 @@
 
     <div class="footer-wrap pd-20 mb-20 card-box justify-content-lg-end">
         <div class="col-md-4 justify-content-end">
-            <button type="submit" class="btn btn-success">Valider</button>
+            {{-- <button type="submit" class="btn btn-success">Valider</button> --}}
+            <button type="button" id="conf_modal_suite" class="btn btn-success my-3">Valider</button>
+
+            <div class="modal fade" id="patapata_suite" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content bg-success text-white">
+                        <div class="modal-body text-center font-18">
+                            <h4 class=" text-white padding-top-30 mb-30 weight-500">Confirmez-vous le decompte pour cet employer ?</h4>
+                            <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-secondary btn-light border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                                    NON
+                                </div>
+                                <div class="col-6">
+                                    <button type="button" id="send_decompte_form" class="btn btn-primary btn-light border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-check"></i></button>
+                                    OUI
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
 </form>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+     $(document).ready(function () {
+
+        $('#conf_modal_suite').on('click', function() {
+            $('#patapata_suite').modal('show');
+        });
+
+        $('#send_decompte_form').on('click', function() {
+            $("#decompte_form").submit();
+        });
+     });
+</script>
 
 
 

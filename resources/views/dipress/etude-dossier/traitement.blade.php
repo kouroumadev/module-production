@@ -360,7 +360,7 @@
                                                             @if ($cpt->part == '')
                                                                 0.00
                                                             @else
-                                                                {{ $cpt->part }}
+                                                                {{ number_format($cpt->part,0,""," ") }}
                                                             @endif
                                                            </td>
                                                            <td>{{ \Carbon\Carbon::parse($cpt->date_created)->format('d/m/Y') }}</td>
@@ -453,11 +453,17 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row justify-content-center">
+                                                <div id="all_btns" class="row justify-content-center">
                                                     <div class="col-md-6 justify-content-center">
-                                                        <a href="{{ route('miseRetaite.create',$emp->id) }}" class="btn btn-success">Mise a la Retraite</a>
-                                                        <a href="#" class="btn btn-success">Invalidite</a>
-                                                        <a href="#" class="btn btn-success">Deces</a>
+                                                        @if (count($emp->mise_retraites)>0)
+                                                            <a href="#" class="btn btn-success disabled"><i class="icon-copy fa fa-sign-out" aria-hidden="true"></i> Mise a la Retraite <i class="icon-copy fa fa-check" aria-hidden="true"></i></a>
+                                                            <a href="#" class="btn btn-success disabled"><i class="icon-copy fa fa-wheelchair-alt" aria-hidden="true"></i> Invalidité</a>
+                                                        @else
+                                                            <a href="{{ route('miseRetaite.create',$emp->id) }}" class="btn btn-success"><i class="icon-copy fa fa-sign-out" aria-hidden="true"> Mise a la Retraite</a>
+                                                            <a href="#" class="btn btn-success"> <i class="icon-copy fa fa-wheelchair-alt" aria-hidden="true"></i>Invalidité</a>
+                                                        @endif
+
+                                                        <a href="#" class="btn btn-success"><i class="fa-solid fa-book-skull" aria-hidden="true"></i> Deces</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1029,7 +1035,12 @@
 </div> --}}
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <script>
+
+    $( document ).ready(function() {
+        $("#all_btns").hide();
+    });
 
     $('#moi input:checkbox').on('change', function () {
 
@@ -1040,6 +1051,10 @@
             $('#prog').css('width', val+'%');
             $('#prog').html(val+'%');
 
+            if(val == 100){
+                $("#all_btns").show();
+            }
+
         }
         if(!$(this).is(':checked')){
 
@@ -1048,6 +1063,7 @@
             // console.log(val);
             $('#prog').css('width', val+'%');
             $('#prog').html(val+'%');
+            $("#all_btns").hide();
         }
 
 

@@ -296,19 +296,36 @@
 </div>
 
 
+<div class="row mt-2 card-box mb-30 p-2 shadow-lg">
 
+    <div class="col-md-6 justify-content-end">
+        <h6 class="my-3">Transfert</h6>
+        <form method="post" action="{{ route('transfert.store') }}">
+            @csrf
+            <div class="form-group">
+                <label>Selectionner le departement concerner <span class="text-danger">*</span></label>
+                <select name="to_dept" class="form-control" required>
+                    <option value="">Selectionner</option>
+                    @foreach ($depts as $dept)
+                        <option value="{{ $dept->id }}">{{ $dept->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Observation <span class="text-danger">*</span></label>
+                <textarea name="note" class="form-control" required></textarea>
+                <input type="hidden" name="employee_id" value="{{ $data->employee->id }}">
+                <input type="hidden" name="type" value="{{ $data->employee->type_pension }}">
+                <input type="hidden" name="doc_id" value="{{ $data->employee->docs['0']->id }}">
+                <input type="hidden" name="route" value="dipress.index">
 
+            </div>
+            <button type="submit" class="btn btn-success">Transferer</button>
+        </form>
+    </div>
+    <div class="col-md-4">
 
-
-
-
-
-
-
-<div class="footer-wrap pd-20 mb-20 card-box justify-content-lg-end">
-    {{-- <div class="col-md-4 justify-content-end">
-        <a href="{{ route('miseRetaite.decompte.done', $data->id) }}" class="btn btn-success text-white">Terminer <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-    </div> --}}
+    </div>
 </div>
 
 
