@@ -162,7 +162,7 @@
        id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
            <thead class="bg-success">
                <tr>
-                   <th class="table-plus text-white">#</th>
+                   {{-- <th class="table-plus text-white">#</th> --}}
                    <th class="text-white text-center">ANNEE</th>
                    <th class="text-white text-center">SALAIRE ANNUEL</th>
                    <th class="text-white text-center">NBRE DE MOIS</th>
@@ -178,6 +178,7 @@
                  $salaire_an=0;
                  $total_mois=0;
                  $total_ssc=0;
+                 $i=1;
             ?>
 
                @foreach ($comptes as $cpt)
@@ -239,11 +240,12 @@
                 }
 
                 $total_ssc += $soumis;
+
                 // print_r($soumis);
 
                ?>
                <tr>
-                   <td class="">{{ $loop->index+1 }}</td>
+                   {{-- <td class="">{{ $i }}</td> --}}
                    <td class="text-center">{{ $cpt->annee }}</td>
                    <td class="text-center font-weight-bold">{{ number_format((int)$cpt->salaireAnnuel,0,""," ") }}</td>
                    <td class="text-center">{{ $cpt->mois }}</td>
@@ -251,15 +253,21 @@
                    <td class="text-center font-weight-bold">{{ $code }}</td>
                    <td class="text-center font-weight-bold">{{ number_format($soumis,0,""," ") }}</td>
                </tr>
+               {{-- @php
+                   $i++;
+               @endphp --}}
+
                @endforeach
                @php
                    $total_ssc_final = $total_ssc*12;
+
                @endphp
                <tr>
-                    <td class="font-weight-bold">Total:</td>
-                    <td></td>
+                    <td class="text-center font-weight-bold">Total:</td>
+                    {{-- <td></td> --}}
                     <td class="text-center font-weight-bold text-danger">{{ number_format($salaire_an,0,""," ") }}</td>
                     <td class="text-center font-weight-bold text-danger">{{ $total_mois }}/120</td>
+                    <td></td>
                     <td></td>
                     <td class="text-center font-weight-bold text-danger">{{ number_format($total_ssc_final,0,""," ") }}</td>
                </tr>
