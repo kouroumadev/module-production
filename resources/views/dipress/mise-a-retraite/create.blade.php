@@ -43,7 +43,7 @@
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Age actuel</span>
-            <span class="float-right font-12">{{ \Carbon\Carbon::parse($emp->date_naissance_employee)->diff(\Carbon\Carbon::now())->format('%y ans, %m mois et %d jours'); }} </span>
+            <span class="float-right font-12">{{ \Carbon\Carbon::parse($emp->date_naissance_employee)->diff(\Carbon\Carbon::now())->format('%y ans et %m mois'); }} </span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Nationalite</span>
@@ -55,16 +55,16 @@
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Date de premiere embauche</span>
-            <span class="float-right font-12">{{ \Carbon\Carbon::parse($emp->date_embauche)->format('d/m/Y') }}</span>
+            <span class="float-right font-12">{{ \Carbon\Carbon::parse($emp->date_embauche)->format('d-m-Y') }}</span>
        </div>
-       <div>
+       {{-- <div>
             <span class="text-left font-weight-bold font-14">Annuite de service</span>
             <span class="float-right font-12">{{ \Carbon\Carbon::parse($emp->date_embauche)->diffInMonths(\Carbon\Carbon::now()) }} mois</span>
-       </div>
-       <div>
+       </div> --}}
+       {{-- <div>
             <span class="text-left font-weight-bold font-14">(Depuis la date de premiere embauche jusqu'a ce jour)</span>
-            <span class="float-right font-12"> {{ \Carbon\Carbon::parse($emp->date_embauche)->diffInYears(\Carbon\Carbon::now()) }} ans</span>
-       </div>
+            <span class="float-right font-12"> {{  \Carbon\Carbon::parse($emp->date_embauche)->diff(\Carbon\Carbon::now())->format('%y ans et %m mois'); }}</span>
+       </div> --}}
        <div>
             <span class="text-left font-weight-bold font-14">Employeur(s)</span>
             <span class="float-right font-12">{{ $emp->employer->raison_sociale }}</span>
@@ -98,7 +98,7 @@
         </div>
         <div>
             <span class="text-left font-weight-bold font-14">Date immatriculation en cotisation</span>
-            <span class="float-right font-12">{{ \Carbon\Carbon::parse($emp->date_immatriculation)->format('d/m/Y') }}</span>
+            <span class="float-right font-12">{{ \Carbon\Carbon::parse($emp->date_immatriculation)->format('d-m-Y') }}</span>
         </div>
         <div>
             <span class="text-left font-weight-bold font-14">Date acception dossier</span>
@@ -153,7 +153,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">NoBiometrie <span class="text-danger">*</span></label>
+                        <label class="col-sm-12 col-md-6 col-form-label">NoBiometrie</label>
                         <div class="col-sm-8 col-md-6">
                             <input class="form-control" id="no_bio" name="no_bio" type="text" required>
                         </div>
@@ -235,9 +235,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-6 col-form-label">Email <span class="text-danger">*</span></label>
+                        <label class="col-sm-12 col-md-6 col-form-label">Email</label>
                         <div class="col-sm-8 col-md-6">
-                            <input class="form-control" type="email" id="email" name="email" placeholder="adresse email" required>
+                            <input class="form-control" type="email" id="email" name="email" value="{{ $emp->email_employee }}" placeholder="adresse email" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -291,6 +291,20 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="potopoto_1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                    <div class="modal-content bg-danger text-white">
+                        <div class="modal-body text-center">
+                            <h3 class="text-white mb-15"><i class="fa fa-exclamation-triangle"></i> Alert</h3>
+                            <p class="text-uppercase">
+                                l'annuiter ne doit pas etre superieure a 30 ans
+                            </p>
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -310,7 +324,7 @@
 
         $('#conf_modal').on('click', function() {
             var no_ci =  $("#no_ci").val();
-            var no_bio =  $("#no_bio").val();
+            // var no_bio =  $("#no_bio").val();
             var assign_pref_id =  $("#assign_pref_id").val();
             var first_job_date =  $("#first_job_date").val();
             var cessation_date =  $("#cessation_date").val();
@@ -320,12 +334,17 @@
             var prefecture_id =  $("#prefecture_id").val();
             var socio_profess =  $("#socio_profess").val();
             var profession =  $("#profession").val();
-            var email =  $("#email").val();
+            // var email =  $("#email").val();
             var tel =  $("#tel").val();
 
-            if(no_ci=="" || no_bio=="" || assign_pref_id=="" || first_job_date=="" || cessation_date==""
+            if(annuite !="" && annuite > 30){
+                $('#potopoto_1').modal('show');
+                $('#cessation_date').val('');
+            }
+
+            if(no_ci=="" || assign_pref_id=="" || first_job_date=="" || cessation_date==""
                 || annuite=="" || date_imma=="" || last_location=="" || prefecture_id=="" || socio_profess==""
-                || email=="" || tel=="" || profession==""
+                || tel=="" || profession==""
             ){
                 $('#potopoto').modal('show');
             } else {
@@ -366,7 +385,16 @@
         if (fin_date.getMonth() < debut_date.getMonth() || (fin_date.getMonth() == debut_date.getMonth() && fin_date.getDate() < debut_date.getDate())) {
             years--;
         }
-        $('#annuite').val(years.toString().replace(/[^0-9]/g, ''));
+        var ann = years.toString().replace(/[^0-9]/g, '');
+
+        if(ann > 30){
+            $('#potopoto_1').modal('show');
+            $('#cessation_date').val('');
+        } else {
+            $('#annuite').val(ann);
+        }
+        // console.log(ann);
+
 
     });
 

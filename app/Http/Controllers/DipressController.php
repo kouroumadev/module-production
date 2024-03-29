@@ -93,7 +93,7 @@ class DipressController extends Controller
             // dd($request->all());
 
             $annuite = \Carbon\Carbon::parse($request->first_job_date)->diff($request->end_job_date)->format('%y ans et %m mois ');
-            // dd($request->first_job_date, $request->end_job_date, $nn);
+            // dd($request->first_job_date, $request->end_job_date, $annuite);
 
             if ($request->pension_type == 'Retraite'){
                 $no = "01-0";
@@ -126,7 +126,14 @@ class DipressController extends Controller
 
             $emp = Employee::find($request->emp_id);
             $emp->update([
-                'tag_retraite' => 0
+                'tag_retraite' => 0,
+                'tel_employee' => $request->tel,
+                'email_employee' => $request->email,
+                'date_embauche' => $request->first_job_date,
+                'no_cin' => $request->no_ci,
+                'assignation_id' => $request->assign_pref_id,
+                'adresse_employee' => $request->last_location,
+                'profession' => $request->profession,
             ]);
 
 

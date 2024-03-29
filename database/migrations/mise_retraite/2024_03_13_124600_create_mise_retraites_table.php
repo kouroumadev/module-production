@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('employee_id')->constrained('employees');
             $table->string('pension_type');
             $table->string('no_pensionne');
-            $table->string('no_bio');
+            $table->string('no_bio')->nullable();
             $table->string('assign_pref_id');
             $table->string('first_job_date');
             $table->string('end_job_date');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('prefecture_id');
             $table->string('socio_profess');
             $table->string('profession');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('tel');
             $table->string('sexe');
             $table->string('age');

@@ -95,8 +95,17 @@
 </div>
 
 <div class="row card-box mb-30 p-2 shadow-lg">
-    <div class="col-md-4">
-        <span class="font-weight-bold font-14">LIBELLE</span><br>
+    <div class="col-md-1">
+        <span class="font-weight-bold font-14 text-danger">CODE</span><br>
+        <span class="font-12 font-weight-bold">A1</span> <br>
+        <span class="font-12 font-weight-bold">A2</span> <br>
+        <span class="font-12 font-weight-bold">A2</span> <br>
+        <span class="font-12 font-weight-bold">A3</span> <br>
+        <span class="font-12 font-weight-bold">A4</span> <br>
+        <span class="font-12 font-weight-bold">A5</span>
+    </div>
+    <div class="col-md-3">
+        <span class="font-weight-bold font-14 text-danger">LIBELLE</span><br>
         <span class="font-12">AVANT 2006</span> <br>
         <span class="font-12">DE 2006 AU 04 SEPTEMBRE 2009</span> <br>
         <span class="font-12">DE 05 SEPTEMBRE 2009 AU 31 DECEMBRE 2010</span> <br>
@@ -105,7 +114,7 @@
         <span class="font-12">DE 2021 A 2055</span>
     </div>
     <div class="col-md-2 text-right">
-        <span class="font-weight-bold font-14">DATE DEBUT</span><br>
+        <span class="font-weight-bold font-14 text-danger">DATE DEBUT</span><br>
         <span class="font-12">01/01/1960</span> <br>
         <span class="font-12">01/01/2006</span> <br>
         <span class="font-12">05/09/2009</span> <br>
@@ -114,7 +123,7 @@
         <span class="font-12">01/01/2021</span>
     </div>
     <div class="col-md-2 text-right">
-        <span class="font-weight-bold font-14">DATE FIN</span><br>
+        <span class="font-weight-bold font-14 text-danger">DATE FIN</span><br>
         <span class="font-12">31/12/2005</span> <br>
         <span class="font-12">04/04/2009</span> <br>
         <span class="font-12">31/12/2010</span> <br>
@@ -123,7 +132,7 @@
         <span class="font-12">31/12/2055</span>
     </div>
     <div class="col-md-2 text-right">
-        <span class="font-weight-bold font-14">PLANCHER</span><br>
+        <span class="font-weight-bold font-14 text-danger">PLANCHER</span><br>
         <span class="font-12">75 000</span> <br>
         <span class="font-12">100 000</span> <br>
         <span class="font-12">100 000</span> <br>
@@ -132,7 +141,7 @@
         <span class="font-12">550 000</span>
     </div>
     <div class="col-md-2 text-right">
-        <span class="font-weight-bold font-14">PLAFOND</span><br>
+        <span class="font-weight-bold font-14 text-danger">PLAFOND</span><br>
         <span class="font-12">400 000</span> <br>
         <span class="font-12">800 000</span> <br>
         <span class="font-12">800 000</span> <br>
@@ -158,6 +167,7 @@
                    <th class="text-white text-center">SALAIRE ANNUEL</th>
                    <th class="text-white text-center">NBRE DE MOIS</th>
                    <th class="text-white text-center">SALAIRE MENSUEL</th>
+                   <th class="text-white text-center">CODE</th>
                    <th class="text-white text-center">SSC MENSUEL</th>
 
                    {{-- <th class="datatable-nosort text-white">Action</th> --}}
@@ -177,6 +187,7 @@
                 $val = (int)$cpt->salairebrut;
 
                 if((1900 <= $cpt->annee) && ($cpt->annee <= 2005)){
+                    $code = "A1";
                     if($val> 0 && $val<= 75000){
                         $soumis = 75000;
                     } else if($val > 75000 && $val <= 400000){
@@ -186,6 +197,7 @@
                     }
                 }
                 if((2006 <= $cpt->annee) && ($cpt->annee <= 2010)){
+                    $code = "A2";
                     if($val> 0 && $val<= 100000){
                         $soumis = 100000;
                     } else if($val > 100000 && $val <= 800000){
@@ -195,6 +207,7 @@
                     }
                 }
                 if((2011 <= $cpt->annee) && ($cpt->annee <= 2018)){
+                    $code = "A3";
                     if($val> 0 && $val<= 200000){
                         $soumis = 200000;
                     } else if($val > 200000 && $val <= 1500000){
@@ -204,6 +217,7 @@
                     }
                 }
                 if((2019 <= $cpt->annee) && ($cpt->annee <= 2021)){
+                    $code = "A4";
                     if($val> 0 && $val<= 440000){
                         $soumis = 440000;
                     } else if($val > 440000 && $val <= 2500000){
@@ -214,6 +228,7 @@
                 }
 
                 if((2022 <= $cpt->annee) && ($cpt->annee <= 2055)){
+                    $code = "A5";
                     if($val> 0 && $val<= 550000){
                         $soumis = 550000;
                     } else if($val > 550000 && $val <= 2500000){
@@ -233,6 +248,7 @@
                    <td class="text-center font-weight-bold">{{ number_format((int)$cpt->salaireAnnuel,0,""," ") }}</td>
                    <td class="text-center">{{ $cpt->mois }}</td>
                    <td class="text-center font-weight-bold">{{ number_format((int)$cpt->salairebrut,0,""," ") }}</td>
+                   <td class="text-center font-weight-bold">{{ $code }}</td>
                    <td class="text-center font-weight-bold">{{ number_format($soumis,0,""," ") }}</td>
                </tr>
                @endforeach
@@ -263,10 +279,16 @@
             <div class="col-md-6 text-right">
                 @php
                     $sal_moy_mens = number_format($total_ssc_final/$total_mois,0,""," ");
+                    $annuite_string = explode(" ",$data->annuite);
+                    $annuite = (int)$annuite_string[0];
+                    $month = (int)$annuite_string[3];
+
+                    $added_mon = ($month*2)/12;
+
                 @endphp
                 <span class="font-12">{{ number_format($total_ssc_final,0,""," ") }} / {{ $total_mois }} = <span class="font-weight-bold">{{ $sal_moy_mens }}</span></span> <br>
                 <span class="font-12 font-weight-bold text-danger" style="margin-left: 98px;">{{ number_format($total_ssc_final/$total_mois,0,""," ") }}</span> <br>
-                <span class="font-12 font-weight-bold text-danger" style="margin-left: 98px;"></span> <br>
+
             </div>
         </div>
 
@@ -274,15 +296,16 @@
     <div class="col-md-6">
         <div class="row card-box mb-30 shadow-lg p-2">
             <div class="col-md-8">
-                <span class="font-12">MONTANT MENSUEL DE LA PENSION : {{ number_format($total_ssc_final/$total_mois,0,""," ") }} x {{ $data->annuite }} x 2% = </span> <br>
+                <span class="font-12">MONTANT MENSUEL DE LA PENSION : {{ number_format($total_ssc_final/$total_mois,0,""," ") }} x {{ $annuite }} x 2% + {{ $added_mon }}% = </span> <br>
                 <span class="font-12">MONTANT ANNUEL DE LA PENSION :</span> <br>
                 <span class="font-12">PENSION <span class="font-weight-bold">TRIMESTRIELLE</span> :</span> <br>
+                {{-- <span class="font-12">test {{  $added_mon }} <br> --}}
             </div>
             <div class="col-md-4 text-right">
                 @php
-                    $mont_mens_pens = number_format((($total_ssc_final/$total_mois)*$data->annuite*2)/100,0,""," ");
-                    $pens_trimes = number_format((((($total_ssc_final/$total_mois)*30*2)/100)*12)/4,0,""," ");
-                    $mont_annu_pension = number_format(((($total_ssc_final/$total_mois)*30*2)/100)*12,0,""," ");
+                    $mont_mens_pens = number_format((($total_ssc_final/$total_mois)*$annuite*(2+$added_mon))/100,0,""," ");
+                    $pens_trimes = number_format((((($total_ssc_final/$total_mois)*$annuite*(2+$added_mon))/100)*12)/4,0,""," ");
+                    $mont_annu_pension = number_format(((($total_ssc_final/$total_mois)*$annuite*(2+$added_mon))/100)*12,0,""," ");
                 @endphp
                 <span class="font-14 font-weight-bold text-danger">{{ $mont_mens_pens }}</span> <br>
                 <span class="font-14 font-weight-bold">{{ $mont_annu_pension }}</span> <br>
@@ -327,7 +350,7 @@
         <hr>
         <div>
                 @php
-                    $montant_base_pens = (((($total_ssc_final/$total_mois)*30*2)/100)*12)/4;
+                    $montant_base_pens = (((($total_ssc_final/$total_mois)*$annuite*(2+$added_mon))/100)*12)/4;
                 @endphp
                 <span class="text-left font-weight-bold font-14">Montant de base de la pension</span>
                 <span class="float-right font-weight-bold font-14 text-danger">{{ number_format($montant_base_pens,0,""," ") }}</span>

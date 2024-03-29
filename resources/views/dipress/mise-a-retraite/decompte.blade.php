@@ -83,7 +83,7 @@
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Age</span>
-            <span class="float-right font-12">{{ $data->age }}</span>
+            <span class="float-right font-12">{{ $data->age }} ans</span>
        </div>
        <div>
             <span class="text-left font-weight-bold font-14">Annuite globale</span>
