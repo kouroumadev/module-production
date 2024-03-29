@@ -11,16 +11,16 @@ use App\Models\User;
 use App\Notifications\TrackingNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
+//use Illuminate\Support\Facades\Notification;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use App\Notifications\TransfertDocNotification;
 use function PHPUnit\Framework\isEmpty;
-
+use Notification;
 class TransferController extends Controller
 {
     public function store(Request $request){
         //dd($request->doc_id);
-        $user = User::where('dept_id',$request->to_dept)->get();
+        $user_notified = User::where('dept_id',$request->to_dept)->get();
         $from_dept = Dept::find(Auth::user()->dept->id);
         $from_dept_name = $from_dept->name;
 
@@ -48,6 +48,7 @@ class TransferController extends Controller
             $doc->transfer_id = $trans_last_id;
             $doc->save();
                 //dd($to_dept_name);
+                $user_notified->each->notify(new TransfertDocNotification());
                    // Notification::send($user, new TrackingNotification($to_dept_name,$from_dept_name));       Alert::success('Document Transferé avec success', '');
             return redirect(route($request->route));
         } else {
@@ -79,6 +80,8 @@ class TransferController extends Controller
 
                     $dep = Dept::find($request->to_dept);
                     Alert::success('Tranfert reçu', "Le document à été transfré au departement ".$dep->name);  
+                    $user_notified->each->notify(new TransfertDocNotification());
+
                     return redirect(route($request->route));
                   } else {
                     // $old = Transfer::find($last_trans->id);
@@ -102,6 +105,8 @@ class TransferController extends Controller
 
                     $dep = Dept::find($request->to_dept);
                     Alert::success('Tranfert reçu', "Le document à été transfré au departement ".$dep->name);  
+                    $user_notified->each->notify(new TransfertDocNotification());
+
                     return redirect(route($request->route));
                   }
             }
