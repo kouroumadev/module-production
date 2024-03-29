@@ -168,6 +168,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
     ])->toArray(),
 
@@ -186,6 +187,7 @@ return [
         // 'Example' => App\Facades\Example::class,
         // 'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
 
+        'Notification' => Illuminate\Support\Facades\Notification::class,
 
     ])->toArray(),
 

@@ -83,35 +83,46 @@
                 <thead class="bg-success">
                     <tr>
                         <th class="table-plus text-white">N° Dossier</th>
-                        <th class="text-white">Date Creation</th>
-                        <th class="text-white">Reception</th> 
-                        <th class="text-white">Sortie</th>
-                        <th class="text-white">Etat</th>
-                        <th class="text-white">Observation</th>
-                        <th class="text-white">Dead Line</th>
-                        <th class="text-white"> Type de Doc</th>
-                        <th class="datatable-nosort text-white">Action</th>
+                        <th class="text-white">Creation</th>
+                        <th class="text-white">Rec</th> 
+                        {{-- <th class="text-white">Sortie</th> --}}
+                        <th class="text-white">Etat Precedent</th>
+                        <th class="text-white">Obs</th>
+                        <th class="text-white">DeadLine</th>
+                        <th class="text-white">Doc</th>
+                        <th class="datatable-nosort text-white">Act</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($trans as $key => $tran)
                     @php
                         $current_date = \Carbon\Carbon::parse(\Carbon\Carbon::now());
+                        $deadline = \App\Models\Deadline::where('dept_id',Auth::user()->dept_id)->get();
+                        $dead_name = $deadline[0]->name;
                     @endphp
                     @if ($tran != null)
                         <tr>
                             <td class="">{{ $tran->doc->no_dossier}}</td>
                            
-                            <td>{{ $tran->doc->created_at }}</td>
-                            <td>{{ $tran->created_at }}</td>
-                            @if ($tran->to->name == "SECRETARIAT")
+                            <td>{{ \Carbon\Carbon::parse($tran->doc->created_at)->format('d/m/Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($tran->created_at)->format('d/m/Y') }}</td>
+                            {{-- @if ($tran->to->name == "SECRETARIAT")
                                 <td></td>
                             @else
-                                <td>{{ $tran->created_at }}</td>
-                            @endif
+                                <td>{{ \Carbon\Carbon::parse($tran->created_at)->format('d/m/Y') }}</td>
+                            @endif --}}
                             <td><span class="badge badge-warning">{{$tran->from->name}} -> {{$tran->to->name}}</span></td>
-                            <td>{{$current_date->diffInDays($tran->created_at )}}</td>
-                            <td>1 jour</td>
+                            @if ($current_date->diffInDays($tran->created_at) <= (int)$dead_name)
+                                <td >
+                                    {{$current_date->diffInDays($tran->created_at)}} <span class="badge " style=" text-align:center; background-color:green"> à temps</span> 
+                                </td>
+                            @else
+                        
+                                <td >
+                                    {{$current_date->diffInDays($tran->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span> 
+                                </td>
+                            @endif                            
+                            <td>{{$dead_name}} Jour(s)</td>
                             
                             <td>{{ $tran->doc->type_doc }}</td>
                             @if ($tran->to->name == Auth::user()->dept->name)
@@ -122,10 +133,7 @@
                             @else
                                 <td>En attente</td>
                             @endif
-                            {{-- <td>
-                                <a class="btn btn-success" href="{{ route('pension.details', $tran->doc->id) }}">Traitement <i
-                                        class="fa fa-chevron-right" aria-hidden="true"></i> </a>
-                            </td> --}}
+                            
                             
                             
                             
