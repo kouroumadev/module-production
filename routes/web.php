@@ -40,6 +40,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/prest/index', [App\Http\Controllers\AdminController::class, 'PrestIndex'])->name('prest.index');
     Route::post('/prest/store', [App\Http\Controllers\AdminController::class, 'PrestStore'])->name('prest.store');
 
+    // TEST PDF
+    Route::get('fiche-decompte', [App\Http\Controllers\AdminController::class, 'FicheDecompte'])->name('fiche-decompte');
+    Route::get('fiche-paie', [App\Http\Controllers\AdminController::class, 'FichePaie'])->name('fiche-paie');
+    Route::get('carte-retraite', [App\Http\Controllers\AdminController::class, 'CarteRetraite'])->name('carte-retraite');
+    
 
     //DIPRESS PRESTATIONS
     Route::get('/dipress/pension', [App\Http\Controllers\DipressController::class, 'vieillesse'])->name('dipress.vieillesse');

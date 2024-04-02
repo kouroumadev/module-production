@@ -160,9 +160,10 @@ return [
          * Package Service Providers...
          */
         // RealRashid\SweetAlert\SweetAlertServiceProvider::class,
-
+        Milon\Barcode\BarcodeServiceProvider::class,
         /*
          * Application Service Providers...
+         * 
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
@@ -188,6 +189,8 @@ return [
         // 'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
 
         'Notification' => Illuminate\Support\Facades\Notification::class,
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
 
     ])->toArray(),
 

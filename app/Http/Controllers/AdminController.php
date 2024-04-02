@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class AdminController extends Controller
 {
@@ -112,7 +114,7 @@ class AdminController extends Controller
         return view('parametrage.piece.index', compact('prestations'));
     }
     public function PieceStore(Request $request) {
-         dd($request->all());
+         //dd($request->all());
 
         $prest = new Prestation();
         $prest->nom_prestation = $request->nom_prestation;
@@ -120,4 +122,62 @@ class AdminController extends Controller
         $prest->save();
         return redirect(route('prest.index'))->with('yes','Enregistrer avec succes');
     }
+
+    public function FicheDecompte()
+    {
+        
+
+        $data = [
+            'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
+            'adresse'=>'Kaloum',
+            'date_immatriculation' => date('m/d/Y'),
+            'no_immatriculation' => '129876543890',
+            'categorie'=>'E+20',
+            'date' => date('m/d/Y'),
+            
+        ];
+
+        $pdf = PDF::loadView('test.fiche-decompte', $data);
+        // $pdf->setPaper('A4', 'landscape');
+        return $pdf->download('fiche-decompte.pdf');
+    }
+
+    public function FichePaie()
+    {
+        
+
+        $data = [
+            'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
+            'adresse'=>'Kaloum',
+            'date_immatriculation' => date('m/d/Y'),
+            'no_immatriculation' => '129876543890',
+            'categorie'=>'E+20',
+            'date' => date('m/d/Y'),
+            
+        ];
+
+        $pdf = PDF::loadView('test.fiche-paie', $data);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->download('fiche-paie.pdf');
+    }
+
+    public function CarteRetraite()
+    {
+        
+
+        $data = [
+            'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
+            'adresse'=>'Kaloum',
+            'date_immatriculation' => date('m/d/Y'),
+            'no_immatriculation' => '129876543890',
+            'categorie'=>'E+20',
+            'date' => date('m/d/Y'),
+            
+        ];
+
+        $pdf = PDF::loadView('test.carte-retraite', $data);
+        // $pdf->setPaper('A4', 'landscape');
+        return $pdf->download('carte-retraite.pdf');
+    }
+
 }

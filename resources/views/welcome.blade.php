@@ -205,11 +205,13 @@
                         <li><a href="{{ route('dept.index') }}">Departements</a></li>
                         <li><a href="{{ route('doc.index') }}">Documents</a></li>
                         <li><a href="{{ route('prest.index') }}">Prestations</a></li>
-                        {{-- <li><a href="{{ route('piece.index') }}">Pieces</a></li> --}}
+                        <li><a href="{{ route('fiche-decompte') }}">fiche-decompte</a></li>
+                        <li><a href="{{ route('fiche-paie') }}">fiche-paie</a></li>
+                        <li><a href="{{ route('carte-retraite') }}">carte-retraite</a></li>
                         
                     </ul>
                 </li>
-                <li class="my-menu" onclick="makeActive(this,'13')" id="13">
+                {{-- <li class="my-menu" onclick="makeActive(this,'13')" id="13">
                     <a href="#" class="dropdown-toggle">
                         <span class="micon dw dw-edit-2"></span><span class="mtext">Documentation</span>
                     </a>
@@ -225,7 +227,7 @@
                         <span class="micon dw dw-paper-plane1"></span>
                         <span class="mtext">Landing Page <img src="vendors/images/coming-soon.png" alt="" width="25"></span>
                     </a>
-                </li>
+                </li> --}}
                 @endif
                 @if (Auth::user()->dept->name == 'SECRETARIAT' || Auth::user()->dept->name == 'DIRGA')
                 <li class="my-menu" onclick="makeActive(this,'15')" id="4">
