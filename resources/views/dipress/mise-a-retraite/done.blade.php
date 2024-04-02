@@ -25,6 +25,91 @@
 </div>
 
 
+<div class="row justify-content-center mt-2 card-box mb-30 p-2 shadow-lg">
+    <div class="col-md-2 text-center">
+        <span class="">FICHE DECOMPTE</span>
+        <a href="#" class="btn-block" data-toggle="modal" data-target="#bd-example-modal-lg-decompte" type="button">
+            <img src="{{ asset('theme/vendors/images/pdf-logo.jpeg') }}" alt="modal">
+            {{-- <i class="fa fa-eye fa-2x" aria-hidden="true"></i> --}}
+        </a>
+        <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg-decompte" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">Fiche Decompte</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="{{ asset('storage/decompteFiles/'.$data->id.'-fiche-decompte.pdf') }}" width="100%" height="500">
+                            This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('storage/decompteFiles/'.$data->id.'-fiche-decompte.pdf') }}">Download PDF</a>
+                        </iframe>
+                    </div>
+                    {{-- <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2 text-center">
+        <span class="">CARTE RETRAITE</span>
+        <a href="#" class="btn-block" data-toggle="modal" data-target="#bd-example-modal-lg-retraite" type="button">
+            <img src="{{ asset('theme/vendors/images/pdf-logo.jpeg') }}" alt="modal">
+            {{-- <i class="fa fa-eye fa-2x" aria-hidden="true"></i> --}}
+        </a>
+        <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg-retraite" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">Carte Retraite</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="{{ asset('storage/decompteFiles/'.$data->id.'-carte-retraite.pdf') }}" width="100%" height="500">
+                            This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('storage/decompteFiles/'.$data->id.'-carte-retraite') }}">Download PDF</a>
+                        </iframe>
+                    </div>
+                    {{-- <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2 text-center">
+        <span class="">FICHE PAIE</span>
+        <a href="#" class="btn-block" data-toggle="modal" data-target="#bd-example-modal-lg-paie" type="button">
+            <img src="{{ asset('theme/vendors/images/pdf-logo.jpeg') }}" alt="modal">
+            {{-- <i class="fa fa-eye fa-2x" aria-hidden="true"></i> --}}
+        </a>
+        <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg-paie" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">Fiche Paie</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="{{ asset('storage/decompteFiles/'.$data->id.'-fiche-paie.pdf') }}" width="100%" height="500">
+                            This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('storage/decompteFiles/'.$data->id.'-fiche-paie.pdf') }}">Download PDF</a>
+                        </iframe>
+                    </div>
+                    {{-- <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
 <div class="row mt-2 card-box mb-30 p-2 shadow-lg">
     <div class="col-md-6">
        <div>

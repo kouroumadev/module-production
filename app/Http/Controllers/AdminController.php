@@ -125,7 +125,7 @@ class AdminController extends Controller
 
     public function FicheDecompte()
     {
-        
+
 
         $data = [
             'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
@@ -134,7 +134,7 @@ class AdminController extends Controller
             'no_immatriculation' => '129876543890',
             'categorie'=>'E+20',
             'date' => date('m/d/Y'),
-            
+
         ];
 
         $pdf = PDF::loadView('test.fiche-decompte', $data);
@@ -144,7 +144,7 @@ class AdminController extends Controller
 
     public function FichePaie()
     {
-        
+
 
         $data = [
             'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
@@ -153,7 +153,7 @@ class AdminController extends Controller
             'no_immatriculation' => '129876543890',
             'categorie'=>'E+20',
             'date' => date('m/d/Y'),
-            
+
         ];
 
         $pdf = PDF::loadView('test.fiche-paie', $data);
@@ -163,7 +163,7 @@ class AdminController extends Controller
 
     public function CarteRetraite()
     {
-        
+
 
         $data = [
             'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
@@ -172,7 +172,7 @@ class AdminController extends Controller
             'no_immatriculation' => '129876543890',
             'categorie'=>'E+20',
             'date' => date('m/d/Y'),
-            
+
         ];
 
         $pdf = PDF::loadView('test.carte-retraite', $data);

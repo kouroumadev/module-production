@@ -286,7 +286,7 @@
                                                                     {{-- <th scope="row"><i class="fa fa-eye" aria-hidden="true"></i></th> --}}
                                                                 </tr>
                                                                 @endforeach
-                                                                
+
                                                             </tbody>
                                                     </table>
                                                 </div>
@@ -324,7 +324,7 @@
                                                     @elseif (Auth::user()->dept->name == "DIPRES")
                                                         Í<input type="hidden" name="route" value="etude.index">
                                                     @endif
-                                                    
+
                                                 </div>
                                                 <button type="submit" class="btn btn-success">Transferer</button>
                                             </form>
