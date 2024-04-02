@@ -26,7 +26,6 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="notification-list mx-h-350 customscroll">
                         <ul>
-                            @forelse ($users->notifications as $notification )
                                 <li>
                                     <a href="#">
                                         <img src="vendors/images/img.jpg" alt="">
@@ -34,9 +33,7 @@
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                     </a>
                                 </li>
-                            @empty
-                                <div> Pas de notifications</div>
-                            @endforelse
+                            
                             
                             {{-- <li>
                                 <a href="#">

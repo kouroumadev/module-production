@@ -2,7 +2,11 @@
 
 @section('content')
 
-
+@php
+  $user = \App\Models\User::find(Auth::user()->id);
+  $notif = \Illuminate\Support\Facades\DB::table('notifications')->where('notifiable_id',Auth::user()->id)->count();
+  //dd($notif);
+@endphp
 <div class="header" style="background: rgb(4, 147, 16)">
     <div class="header-left">
         <h5 class="text-white">Departement: {{ Auth::user()->dept->name }}</h5>
@@ -20,30 +24,22 @@
             <div class="dropdown">
                 <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
                     <i class="icon-copy dw dw-notification text-white"></i>
-                    <span class="badge notification-active"></span>
+                    <span class=" notification-active text-white bg-danger border-radius-20">{{$notif}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="notification-list mx-h-350 customscroll">
                         <ul>
-                            {{-- @forelse ($users->notifications as $notification )
+                            @foreach ($user->unreadNotifications as $notification)
                                 <li>
-                                    <a href="#">
-                                        <img src="vendors/images/img.jpg" alt="">
-                                        <h3>John Doe</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
+                                    <a href="{{route('message.read',$notification->id)}}">
+                                        <img src="{{ asset('storage/userImg/'.$user->photo) }}" alt="">
+                                        <h3>{{$notification->data['from_user_name']}}</h3>
+                                        <p>N° Dossier: {{$notification->data['no_dossier']}} du Departement:{{$notification->data['from_dept_name']}}</p>
                                     </a>
                                 </li>
-                            @empty
-                                <div> Pas de notifications</div>
-                            @endforelse --}}
-                            <li>
-                                <a href="#">
-                                    <img src="{{ asset('theme/vendors/images/img.jpg') }}" alt="">
-                                    <h3>John Doe</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-                                </a>
-                            </li>
-                            <li>
+                            @endforeach
+                            
+                            {{-- <li>
                                 <a href="#">
                                     <img src="{{ asset('theme/vendors/images/photo1.jpg') }}" alt="">
                                     <h3>Lea R. Frith</h3>
@@ -56,7 +52,7 @@
                                     <h3>Erik L. Richards</h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                 </a>
-                            </li>
+                            </li> --}}
 
 
                         </ul>
@@ -211,27 +207,18 @@
                         
                     </ul>
                 </li>
-                {{-- <li class="my-menu" onclick="makeActive(this,'13')" id="13">
-                    <a href="#" class="dropdown-toggle">
-                        <span class="micon dw dw-edit-2"></span><span class="mtext">Documentation</span>
-                    </a>
-                    <ul class="submenu">
-                        <li><a href="introduction.html">Introduction</a></li>
-                        <li><a href="getting-started.html">Getting Started</a></li>
-                        <li><a href="color-settings.html">Color Settings</a></li>
-                        <li><a href="third-party-plugins.html">Third Party Plugins</a></li>
-                    </ul>
-                </li>
-                <li class="my-menu" onclick="makeActive(this,'14')" id="14">
-                    <a href="https://dropways.github.io/deskapp-free-single-page-website-template/" target="_blank" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-paper-plane1"></span>
-                        <span class="mtext">Landing Page <img src="vendors/images/coming-soon.png" alt="" width="25"></span>
-                    </a>
-                </li> --}}
+                
                 @endif
-                @if (Auth::user()->dept->name == 'SECRETARIAT' || Auth::user()->dept->name == 'DIRGA')
-                <li class="my-menu" onclick="makeActive(this,'15')" id="4">
+                @if (Auth::user()->dept->name == 'SECRETARIAT')
+                <li class="my-menu" onclick="makeActive(this,'13')" id="4">
                     <a href="{{ route('secretariat.index') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-edit2"></span><span class="mtext">DOSSIER</span>
+                    </a>
+                </li>
+                @endif
+                @if ( Auth::user()->dept->name == 'DIRGA')
+                <li class="my-menu" onclick="makeActive(this,'14')" id="4">
+                    <a href="{{ route('dirga.index') }}" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-edit2"></span><span class="mtext">DOSSIER</span>
                     </a>
                 </li>

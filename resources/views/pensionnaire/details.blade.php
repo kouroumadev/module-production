@@ -322,8 +322,11 @@
                                                     @elseif (Auth::user()->dept->name == "SECRETARIAT")
                                                         <input type="hidden" name="route" value="secretariat.index">
                                                     @elseif (Auth::user()->dept->name == "DIPRES")
-                                                        Í<input type="hidden" name="route" value="etude.index">
+                                                        <input type="hidden" name="route" value="etude.index">
+                                                    @elseif (Auth::user()->dept->name == "DIRGA")
+                                                        <input type="hidden" name="route" value="dirga.index">
                                                     @endif
+
                                                     
                                                 </div>
                                                 <button type="submit" class="btn btn-success">Transferer</button>

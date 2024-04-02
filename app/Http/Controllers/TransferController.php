@@ -11,9 +11,9 @@ use App\Models\User;
 use App\Notifications\TrackingNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-//use Illuminate\Support\Facades\Notification;
+use \Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
-use App\Notifications\TransfertDocNotification;
+use App\Notifications\TransfertDoc;
 use function PHPUnit\Framework\isEmpty;
 use Notification;
 class TransferController extends Controller
@@ -23,10 +23,12 @@ class TransferController extends Controller
         $user_notified = User::where('dept_id',$request->to_dept)->get();
         $from_dept = Dept::find(Auth::user()->dept->id);
         $from_dept_name = $from_dept->name;
-
+        $from_mail = Auth::user()->email;
+        $from_user_name = Auth::user()->name;
         $to_dept = Dept::find($request->to_dept);
         $to_dept_name = $to_dept->name;
         $doc = Doc::find($request->doc_id);
+        $no_dossier = $doc->no_dossier;
          //dd($doc);
         $last_trans = Transfer::latest()->first();
         //dd($last_trans);
@@ -50,7 +52,7 @@ class TransferController extends Controller
             //dd($to_dept_name);
             
             Alert::success('Tranfert reçu', "Le document à été transfré au departement ".$to_dept_name);
-            $user_notified->each->notify(new TransfertDocNotification());
+            $user_notified->each->notify(new TransfertDoc($to_dept_name,$from_dept_name,$from_mail,$from_user_name,$no_dossier));
             return redirect(route($request->route));
         } else {
             if ($request->to_dept == Auth::user()->dept->id) {
@@ -81,11 +83,11 @@ class TransferController extends Controller
 
                     
                     Alert::success('Tranfert reçu', "Le document à été transfré au departement ".$to_dept_name);  
-                    $user_notified->each->notify(new TransfertDocNotification());
+                    $user_notified->each->notify(new TransfertDoc($to_dept_name,$from_dept_name,$from_mail,$from_user_name,$no_dossier));
 
                     return redirect(route($request->route));
                   } else {
-                    
+                    //dd($request->route);
                     $trans = new Transfer();
                     $trans->employee_id = $request->employee_id;
                     $trans->type = $request->type;
@@ -101,9 +103,9 @@ class TransferController extends Controller
                     $doc->transfer_id = $trans_last_id;
                     $doc->save();
 
-                    
+                    //dd($from_mail);
                     Alert::success('Tranfert reçu', "Le document à été transfré au departement ".$to_dept_name);  
-                    $user_notified->each->notify(new TransfertDocNotification());
+                    $user_notified->each->notify(new TransfertDoc($to_dept_name,$from_dept_name,$from_mail,$from_user_name,$no_dossier));
                     //dd($to_dept_name);
                     return redirect(route($request->route));
                   }
@@ -135,5 +137,15 @@ class TransferController extends Controller
         dd($id);
 
         return view('tracking.user');
+    }
+
+    public function ReadMessage($id){
+        $notification = DB::table('notifications')->find($id);
+        $user = User::find($notification->notifiable_id);
+        $user->unreadNotifications()->update(['read_at' => now()]);
+        // dd(json_encode($notification->data->from_user_name));
+        Alert::success('Notification Lu', " ");  
+
+        return redirect()->back();
     }
 }

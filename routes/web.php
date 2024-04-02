@@ -73,8 +73,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/secretariat/index', [App\Http\Controllers\SecretariatController::class, 'SecretariatIndex'])->name('secretariat.index');
     Route::get('/secretariat/etude/traitement/{id}', [App\Http\Controllers\SecretariatController::class, 'SecretariatTraitement'])->name('secretariat.traitement');
 
+    // DIRGA
+    Route::get('/dirga/index', [App\Http\Controllers\DirgaController::class, 'DirgaIndex'])->name('dirga.index');
+    Route::get('/dirga/etude/traitement/{id}', [App\Http\Controllers\DirgaController::class, 'DirgaTraitement'])->name('dirga.traitement');
+
     // TRANFERT
     Route::post('/dipress/store', [App\Http\Controllers\TransferController::class, 'store'])->name('transfert.store');
+    Route::get('/message/read/{id}', [App\Http\Controllers\TransferController::class, 'ReadMessage'])->name('message.read');
 
 
     // TRACKING
