@@ -32,22 +32,22 @@ class TransferController extends Controller
         //dd($last_trans);
         if ($last_trans == null) {
 
-            $trans = new Transfer();
-            $trans->employee_id = $request->employee_id;
-            $trans->type = $request->type;
-            $trans->from_dept = Auth::user()->dept->id;
-            $trans->to_dept = $request->to_dept;
-            $trans->note = $request->note;
-            $trans->doc_id = $request->doc_id;
-            $trans->user_id = Auth::user()->id;
-            $trans->status = '0';
-            $trans->save(); 
-            $trans_last_id = $trans->id;
+            // $trans = new Transfer();
+            // $trans->employee_id = $request->employee_id;
+            // $trans->type = $request->type;
+            // $trans->from_dept = Auth::user()->dept->id;
+            // $trans->to_dept = $request->to_dept;
+            // $trans->note = $request->note;
+            // $trans->doc_id = $request->doc_id;
+            // $trans->user_id = Auth::user()->id;
+            // $trans->status = '0';
+            // $trans->save(); 
+            // $trans_last_id = $trans->id;
 
                     
-            $doc->transfer_id = $trans_last_id;
-            $doc->save();
-                //dd($to_dept_name);
+            // $doc->transfer_id = $trans_last_id;
+            // $doc->save();
+                dd($to_dept_name);
                 $user_notified->each->notify(new TransfertDocNotification());
                    // Notification::send($user, new TrackingNotification($to_dept_name,$from_dept_name));       Alert::success('Document Transferé avec success', '');
             return redirect(route($request->route));
