@@ -4,7 +4,7 @@
 
 @php
   $user = \App\Models\User::find(Auth::user()->id);
-  $notif = \Illuminate\Support\Facades\DB::table('notifications')->where('notifiable_id',Auth::user()->id)->count();
+  $notif = \Illuminate\Support\Facades\DB::table('notifications')->where('notifiable_id',Auth::user()->id)->where('read_at',null)->count();
   //dd($notif);
 @endphp
 <div class="header" style="background: rgb(4, 147, 16)">
