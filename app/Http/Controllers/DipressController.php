@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class DipressController extends Controller
@@ -208,8 +209,65 @@ class DipressController extends Controller
 
     }
     public function miseRetraiteDecompteDone(int $id) {
+
             $data = Decompte::find($id);
             $depts = Dept::all();
+
+            // dd($data->miseRetraite->annuite);
+
+             //FICHE DECOMPTE
+             $annuite_string = explode(" ",$data->miseRetraite->annuite);
+             $annuite = (int)$annuite_string[0];
+             $month = (int)$annuite_string[3];
+
+             $decompteData = [
+                'date' => date('m/d/Y'),
+                'no_dossier' => $data->miseRetraite->no_pensionne,
+                'prenom' => $data->employee->prenom_employee,
+                'nom' => $data->employee->nom_employee,
+                'no_assure' => $data->employee->no_ima_employee,
+                'date_naiss' => $data->employee->date_naissance_employee,
+                'lieu_naiss' => $data->employee->lieu_naissance_employee,
+                'agence' => $data->employee->agencecode_id,
+                'assign' => $data->miseRetraite->assign_pref_id,
+                'employer' => $data->employee->employer->raison_sociale,
+                'salaire' => $data->sal_moy_mens,
+                'annuite' => $data->miseRetraite->annuite,
+                'percent' => $annuite*2,
+                'mont_ann_pension' => $data->mont_annu_pension,
+                'mont_trimestre' => $data->pens_trimes,
+                'mont_trimestre_revalorise' => $data->mont_revalo,
+                'mont_AF' => number_format(count($data->employee->enfants)*9000,0,""," "),
+                'mont_total_pension' => $data->montant_tot_pens,
+                'no_imma' => $data->employee->no_ima_employee,
+                'photo' => $data->employee->photo,
+                'pere' => $data->employee->prenom_pere,
+                'mere' => $data->employee->prenom_mere." ".$data->employee->nom_mere,
+                'c_in' => $data->employee->no_cin,
+                'date_end_job' => $data->miseRetraite->end_job_date,
+                'enfnats' => $data->employee->enfants,
+
+
+            ];
+
+            $pdf = PDF::loadView('files.decompte.fiche-decompte', $decompteData);
+            $path = storage_path('app/public/decompteFiles');
+            $fileName = $data->id.'-fiche-decompte.pdf';
+            $pdf->save($path . '/' . $fileName);
+
+            //CARTE REATRAITE
+            $pdf = PDF::loadView('files.decompte.carte-retraite', $decompteData);
+            $path = storage_path('app/public/decompteFiles');
+            $fileName = $data->id.'-carte-retraite.pdf';
+            $pdf->save($path . '/' . $fileName);
+
+            //CARTE PAIE
+            $pdf = PDF::loadView('files.decompte.fiche-paie', $decompteData);
+            $path = storage_path('app/public/decompteFiles');
+            $fileName = $data->id.'-fiche-paie.pdf';
+            $pdf->save($path . '/' . $fileName);
+
+
 
             return view('dipress.mise-a-retraite.done', compact('data','depts'));
     }

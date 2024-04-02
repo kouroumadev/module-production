@@ -286,7 +286,7 @@
                                                                     {{-- <th scope="row"><i class="fa fa-eye" aria-hidden="true"></i></th> --}}
                                                                 </tr>
                                                                 @endforeach
-                                                                
+
                                                             </tbody>
                                                     </table>
                                                 </div>
@@ -327,7 +327,6 @@
                                                         <input type="hidden" name="route" value="dirga.index">
                                                     @endif
 
-                                                    
                                                 </div>
                                                 <button type="submit" class="btn btn-success">Transferer</button>
                                             </form>
