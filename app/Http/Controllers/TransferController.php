@@ -32,24 +32,25 @@ class TransferController extends Controller
         //dd($last_trans);
         if ($last_trans == null) {
 
-            // $trans = new Transfer();
-            // $trans->employee_id = $request->employee_id;
-            // $trans->type = $request->type;
-            // $trans->from_dept = Auth::user()->dept->id;
-            // $trans->to_dept = $request->to_dept;
-            // $trans->note = $request->note;
-            // $trans->doc_id = $request->doc_id;
-            // $trans->user_id = Auth::user()->id;
-            // $trans->status = '0';
-            // $trans->save(); 
-            // $trans_last_id = $trans->id;
+            $trans = new Transfer();
+            $trans->employee_id = $request->employee_id;
+            $trans->type = $request->type;
+            $trans->from_dept = Auth::user()->dept->id;
+            $trans->to_dept = $request->to_dept;
+            $trans->note = $request->note;
+            $trans->doc_id = $request->doc_id;
+            $trans->user_id = Auth::user()->id;
+            $trans->status = '0';
+            $trans->save(); 
+            $trans_last_id = $trans->id;
 
                     
-            // $doc->transfer_id = $trans_last_id;
-            // $doc->save();
-                dd($to_dept_name);
-                $user_notified->each->notify(new TransfertDocNotification());
-                   // Notification::send($user, new TrackingNotification($to_dept_name,$from_dept_name));       Alert::success('Document Transferé avec success', '');
+            $doc->transfer_id = $trans_last_id;
+            $doc->save();
+            //dd($to_dept_name);
+            
+            Alert::success('Tranfert reçu', "Le document à été transfré au departement ".$to_dept_name);
+            $user_notified->each->notify(new TransfertDocNotification());
             return redirect(route($request->route));
         } else {
             if ($request->to_dept == Auth::user()->dept->id) {
@@ -78,16 +79,13 @@ class TransferController extends Controller
                     $doc->transfer_id = $trans_last_id;
                     $doc->save();
 
-                    $dep = Dept::find($request->to_dept);
-                    Alert::success('Tranfert reçu', "Le document à été transfré au departement ".$dep->name);  
+                    
+                    Alert::success('Tranfert reçu', "Le document à été transfré au departement ".$to_dept_name);  
                     $user_notified->each->notify(new TransfertDocNotification());
 
                     return redirect(route($request->route));
                   } else {
-                    // $old = Transfer::find($last_trans->id);
-                    // $old->status = 1;
-                    // $old->save();
-                    //dd($old);
+                    
                     $trans = new Transfer();
                     $trans->employee_id = $request->employee_id;
                     $trans->type = $request->type;
@@ -103,10 +101,10 @@ class TransferController extends Controller
                     $doc->transfer_id = $trans_last_id;
                     $doc->save();
 
-                    $dep = Dept::find($request->to_dept);
-                    Alert::success('Tranfert reçu', "Le document à été transfré au departement ".$dep->name);  
+                    
+                    Alert::success('Tranfert reçu', "Le document à été transfré au departement ".$to_dept_name);  
                     $user_notified->each->notify(new TransfertDocNotification());
-
+                    //dd($to_dept_name);
                     return redirect(route($request->route));
                   }
             }
