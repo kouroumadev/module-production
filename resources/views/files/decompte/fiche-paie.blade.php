@@ -37,9 +37,9 @@
            <tr>
                 <h3 style="text-align: center; position: relative; left:80">PENSION DE RETRAITE</h3>
                 <h1 style="text-align: center; position: relative; left:80">FICHE DE PAIE</h1>
-                <h2 style="text-align: center; position: relative; left:80"> <span style="color: red"> N° 01-508780 </span> </h2>
+                <h2 style="text-align: center; position: relative; left:80"> <span style="color: red"> N° {{ $no_dossier }} </span> </h2>
                 <h2 style="text-align: center; position: relative; left:80">ASSIGNATION</h2>
-                
+
                 <ol style="position: relative; left:150">
                     <li>BOKÉ</li>
                 </ol>
@@ -47,18 +47,18 @@
             </tr>
         </tbody>
     </table>
-           
 
 
-             
+
+
          <table style="width: 100%; position:absolute; top:250">
             <tbody>
                <tr style="margin-top: 0 !important">
-    
+
                   <td>
                     <img src="{{ storage_path('app/public/pensionnaireImg/'.$photo) }}" style="width:100px; height:100px; margin-left:300px" alt="" srcset="">
                     </td>
-    
+
                </tr>
                <tr>
                 <table style="margin-top: 10px">
@@ -99,10 +99,10 @@
                             <th style="width: 30%; text-align:left; font-size: 13px">DATE DE JOUISSANCE:</th>
                             <td style="font-size: 13px; color: red;"></td>
                         </tr>
-    
-    
+
+
                     </tbody>
-    
+
                 </table>
                </tr>
                <tr>
@@ -115,102 +115,45 @@
                             <th>Date de naissance</th>
                             <th>Expiration du Droit</th>
                             <th>Observation</th>
-    
+
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $i=1;
+                        @endphp
+
+                        @foreach ($enfants as $enf)
+
+
                         <tr>
-                            <td>1</td>
-                            <td style="text-align: center">Fatou Camara</td>
-                            <td style="text-align: center"> {{$date}}</td>
-                            <td style="color: red; text-align: center">{{$date}}<</td>
-                            <td> </td>
-    
+                            <td>{{ $i }}</td>
+                            <td style="text-align: center">{{ $enf->prenom_enfant }} {{ $enf->nom_enfant }}</td>
+                            <td style="text-align: center"> {{ \Carbon\Carbon::parse($enf->date_naissance_enfant)->format('d/m/Y') }}</td>
+                            <td style="color: red; text-align: center">{{ \Carbon\Carbon::parse($enf->date_naissance_enfant)->addYears(18)->format('d/m/Y') }}<</td>
+                            <td></td>
+
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Fatou Camara</td>
-                            <td style="text-align: center">{{$date}}</td>
-                            <td style="color: red;text-align: center">{{$date}}<</td>
-                            <td> </td>
-    
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Fatou Camara</td>
-                            <td style="text-align: center"> {{$date}}</td>
-                            <td style="color: red;text-align: center">{{$date}}<</td>
-                            <td> </td>
-    
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Fatou Camara</td>
-                            <td style="text-align: center"> {{$date}}</td>
-                            <td style="color: red;text-align: center">{{$date}}<</td>
-                            <td> </td>
-    
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Fatou Camara</td>
-                            <td style="text-align: center">{{$date}}</td>
-                            <td style="color: red;text-align: center">{{$date}}<</td>
-                            <td> </td>
-    
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Fatou Camara</td>
-                            <td style="text-align: center">  {{$date}}</td>
-                            <td style="color: red;text-align: center">{{$date}}<</td>
-                            <td> </td>
-    
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>Fatou Camara</td>
-                            <td style="text-align: center">{{$date}}</td>
-                            <td style="color: red;text-align: center">{{$date}}<</td>
-                            <td> </td>
-    
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>Fatou Camara</td>
-                            <td style="text-align: center">{{$date}}</td>
-                            <td style="color: red;text-align: center">{{$date}}<</td>
-                            <td> </td>
-    
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>Fatou Camara</td>
-                            <td style="text-align: center">{{$date}}</td>
-                            <td style="color: red;text-align: center">{{$date}}<</td>
-                            <td> </td>
-    
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>Fatou Camara</td>
-                            <td style="text-align: center">{{$date}}</td>
-                            <td style="color: red;text-align: center">{{$date}}<</td>
-                            <td> </td>
-    
-                        </tr>
+
+                        @php
+                            $i++;
+                        @endphp
+                        @endforeach
+
+
+
                     </tbody>
                 </table>
                </tr>
             </tbody>
-    
+
         </table>
 
-        
+
             <div style="position: relative; top: 80">
                 {!! DNS2D::getBarcodeHTML($no_imma, 'QRCODE',5,5) !!}
             </div>
- 
+
 
         <div style="position:absolute; bottom:2">
             <div style="width: 20%; font-size: 11px;position: relative; top:30">
@@ -224,7 +167,7 @@
             </div>
         </div>
 
-            
+
 </div>
 </body>
 </html>
@@ -263,7 +206,7 @@
                     <div style="margin-left: 20px;position: relative; top: 20 "> <span style="font-size:11px;">Travail-Justice-Solidarite</span></div><br><br>
 
                </td>
-               
+
 
            </tr>
            <tr>
@@ -271,7 +214,7 @@
                 <h1 style="text-align: center; position: relative; left:60">FICHE DE PAIE</h1>
                 <h2 style="text-align: center; position: relative; left:60"> <span style="color: red"> N° 01-506780 </span> </h2>
                 <h2 style="text-align: center; position: relative; left:60">ASSIGNATION</h2>
-                
+
                 <ol>
                     <li>BOKÉ</li>
                 </ol>

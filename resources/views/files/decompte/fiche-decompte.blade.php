@@ -75,7 +75,7 @@
             </tr>
             <tr>
                 <th style="width: 30%; font-size: 11px; text-align:left">DATE NAISSANCE:</th>
-                <td style="font-size: 11px">{{ $date_naiss }}</td>
+                <td style="font-size: 11px">{{ \Carbon\Carbon::parse($date_naiss)->format('d/m/Y') }}</td>
             </tr>
 
         </tbody>

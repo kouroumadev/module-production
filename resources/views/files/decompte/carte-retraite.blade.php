@@ -39,7 +39,7 @@
            <div>
                 {{-- <h3 style="text-align: center; position: relative; left:60">PENSION DE REtdAITE</h3> --}}
                 <h1 style="text-align: center; position: relative; left:0">CARTE DE RETRAITE</h1>
-                <h2 style="text-align: center; position: relative; left:0"> <span style="color: red"> N° 01-506780 </span> </h2>
+                <h2 style="text-align: center; position: relative; left:0"> <span style="color: red"> N° {{ $no_dossier }} </span> </h2>
 
            </div>
 
@@ -62,7 +62,7 @@
                     </tr>
                     <tr>
                         <th style="width: 0%; font-size: 13px; text-align:left">Né(e) le:</th>
-                        <td style=" font-weight:bold;font-size: 13px"> {{$date_naiss}} à {{ $lieu_naiss }}</td>
+                        <td style=" font-weight:bold;font-size: 13px"> {{ \Carbon\Carbon::parse($date_naiss)->format('d/m/Y') }} à {{ $lieu_naiss }}</td>
                     </tr>
                     <tr>
                         <th style="width: 0%; font-size: 13px; text-align:left">DE:</th>
@@ -74,7 +74,7 @@
                     </tr>
                     <tr>
                         <th style="width: 0%; font-size: 13px; text-align:left">N° DE PAIEMENT:</th>
-                        <td style="font-size: 13px; color: red;">01-5-4587</td>
+                        <td style="font-size: 13px; color: red;"></td>
                     </tr>
                     <tr>
                         <th style="width: 0%; font-size: 13px; text-align:left">N° CIN:</th>

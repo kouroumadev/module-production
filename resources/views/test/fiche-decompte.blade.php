@@ -56,7 +56,7 @@
 
     </p>
     <div style="width: 30%;  margin:auto; border: 1px solid black; text-align:center; padding:1px; margin-top:10px;">
-        <h3 style="color: red;">N°{{ $no_dossier }}</h3>
+        <h3 style="color: red;">N° {{ $no_dossier }}</h3>
     </div>
 <div style="display:inline-flex;">
     <table style="margin-top: 20px">

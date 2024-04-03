@@ -250,16 +250,16 @@ class DipressController extends Controller
 
             ];
 
-            // $pdf = PDF::loadView('files.decompte.fiche-decompte', $decompteData);
-            // $path = storage_path('app/public/decompteFiles');
-            // $fileName = $data->id.'-fiche-decompte.pdf';
-            // $pdf->save($path . '/' . $fileName);
+            $pdf = PDF::loadView('files.decompte.fiche-decompte', $decompteData);
+            $path = storage_path('app/public/decompteFiles');
+            $fileName = $data->id.'-fiche-decompte.pdf';
+            $pdf->save($path . '/' . $fileName);
 
-            // //CARTE REATRAITE
-            // $pdf = PDF::loadView('files.decompte.carte-retraite', $decompteData);
-            // $path = storage_path('app/public/decompteFiles');
-            // $fileName = $data->id.'-carte-retraite.pdf';
-            // $pdf->save($path . '/' . $fileName);
+            //CARTE REATRAITE
+            $pdf = PDF::loadView('files.decompte.carte-retraite', $decompteData);
+            $path = storage_path('app/public/decompteFiles');
+            $fileName = $data->id.'-carte-retraite.pdf';
+            $pdf->save($path . '/' . $fileName);
 
             //CARTE PAIE
             $pdf = PDF::loadView('files.decompte.fiche-paie', $decompteData);

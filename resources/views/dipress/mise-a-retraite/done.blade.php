@@ -61,7 +61,7 @@
             {{-- <i class="fa fa-eye fa-2x" aria-hidden="true"></i> --}}
         </a>
         <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg-retraite" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myLargeModalLabel">Carte Retraite</h4>
@@ -88,7 +88,7 @@
             {{-- <i class="fa fa-eye fa-2x" aria-hidden="true"></i> --}}
         </a>
         <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg-paie" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myLargeModalLabel">Fiche Paie</h4>
