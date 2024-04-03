@@ -245,21 +245,21 @@ class DipressController extends Controller
                 'mere' => $data->employee->prenom_mere." ".$data->employee->nom_mere,
                 'c_in' => $data->employee->no_cin,
                 'date_end_job' => $data->miseRetraite->end_job_date,
-                'enfnats' => $data->employee->enfants,
+                'enfants' => $data->employee->enfants,
 
 
             ];
 
-            $pdf = PDF::loadView('files.decompte.fiche-decompte', $decompteData);
-            $path = storage_path('app/public/decompteFiles');
-            $fileName = $data->id.'-fiche-decompte.pdf';
-            $pdf->save($path . '/' . $fileName);
+            // $pdf = PDF::loadView('files.decompte.fiche-decompte', $decompteData);
+            // $path = storage_path('app/public/decompteFiles');
+            // $fileName = $data->id.'-fiche-decompte.pdf';
+            // $pdf->save($path . '/' . $fileName);
 
-            //CARTE REATRAITE
-            $pdf = PDF::loadView('files.decompte.carte-retraite', $decompteData);
-            $path = storage_path('app/public/decompteFiles');
-            $fileName = $data->id.'-carte-retraite.pdf';
-            $pdf->save($path . '/' . $fileName);
+            // //CARTE REATRAITE
+            // $pdf = PDF::loadView('files.decompte.carte-retraite', $decompteData);
+            // $path = storage_path('app/public/decompteFiles');
+            // $fileName = $data->id.'-carte-retraite.pdf';
+            // $pdf->save($path . '/' . $fileName);
 
             //CARTE PAIE
             $pdf = PDF::loadView('files.decompte.fiche-paie', $decompteData);

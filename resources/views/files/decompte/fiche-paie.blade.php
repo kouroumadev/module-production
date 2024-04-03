@@ -125,86 +125,21 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($enfants as $enf)
+
+
                     <tr>
-                        <td>1</td>
-                        <td style="text-align: center">Fatou Camara</td>
-                        <td style="text-align: center"> {{$date}}</td>
-                        <td style="color: red; text-align: center">{{$date}}<</td>
-                        <td> </td>
+                        <td>{{ $loop->index+1 }}</td>
+                        <td style="text-align: center">{{ $enf->prenom_enfant }} {{ $enf->nom_enfant }}</td>
+                        <td style="text-align: center"> {{ \Carbon\Carbon::parse($enf->date_naissance_enfant)->format('d/m/Y')}}</td>
+                        <td style="color: red; text-align: center">ici<</td>
+                        <td>ici</td>
 
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Fatou Camara</td>
-                        <td style="text-align: center">{{$date}}</td>
-                        <td style="color: red;text-align: center">{{$date}}<</td>
-                        <td> </td>
 
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Fatou Camara</td>
-                        <td style="text-align: center"> {{$date}}</td>
-                        <td style="color: red;text-align: center">{{$date}}<</td>
-                        <td> </td>
+                    @endforeach
 
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Fatou Camara</td>
-                        <td style="text-align: center"> {{$date}}</td>
-                        <td style="color: red;text-align: center">{{$date}}<</td>
-                        <td> </td>
 
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Fatou Camara</td>
-                        <td style="text-align: center">{{$date}}</td>
-                        <td style="color: red;text-align: center">{{$date}}<</td>
-                        <td> </td>
-
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Fatou Camara</td>
-                        <td style="text-align: center">  {{$date}}</td>
-                        <td style="color: red;text-align: center">{{$date}}<</td>
-                        <td> </td>
-
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Fatou Camara</td>
-                        <td style="text-align: center">{{$date}}</td>
-                        <td style="color: red;text-align: center">{{$date}}<</td>
-                        <td> </td>
-
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>Fatou Camara</td>
-                        <td style="text-align: center">{{$date}}</td>
-                        <td style="color: red;text-align: center">{{$date}}<</td>
-                        <td> </td>
-
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>Fatou Camara</td>
-                        <td style="text-align: center">{{$date}}</td>
-                        <td style="color: red;text-align: center">{{$date}}<</td>
-                        <td> </td>
-
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>Fatou Camara</td>
-                        <td style="text-align: center">{{$date}}</td>
-                        <td style="color: red;text-align: center">{{$date}}<</td>
-                        <td> </td>
-
-                    </tr>
                 </tbody>
             </table>
            </tr>
