@@ -139,7 +139,7 @@ class AdminController extends Controller
 
         $pdf = PDF::loadView('test.fiche-decompte', $data);
         // $pdf->setPaper('A4', 'landscape');
-        return $pdf->download('fiche-decompte.pdf');
+        return $pdf->stream('fiche-decompte.pdf');
     }
 
     public function FichePaie()
@@ -177,7 +177,7 @@ class AdminController extends Controller
 
         $pdf = PDF::loadView('test.carte-retraite', $data);
         // $pdf->setPaper('A4', 'landscape');
-        return $pdf->download('carte-retraite.pdf');
+        return $pdf->stream('carte-retraite.pdf');
     }
 
 }

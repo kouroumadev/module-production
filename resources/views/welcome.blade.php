@@ -31,7 +31,7 @@
                         <ul>
                             @foreach ($user->unreadNotifications as $notification)
                                 <li>
-                                    <a href="{{route('message.read',$notification->id)}}">
+                                    <a href="{{route('etude.traitement',$notification->id)}}">
                                         <img src="{{ asset('storage/userImg/'.$user->photo) }}" alt="">
                                         <h3>{{$notification->data['from_user_name']}}</h3>
                                         <p>N° Dossier: {{$notification->data['no_dossier']}} du Departement:{{$notification->data['from_dept_name']}}</p>
