@@ -158,7 +158,7 @@ class AdminController extends Controller
 
         $pdf = PDF::loadView('test.fiche-paie', $data);
         $pdf->setPaper('A4', 'landscape');
-        return $pdf->download('fiche-paie.pdf');
+        return $pdf->stream('fiche-paie.pdf');
     }
 
     public function CarteRetraite()
