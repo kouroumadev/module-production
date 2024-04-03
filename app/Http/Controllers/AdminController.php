@@ -157,7 +157,7 @@ class AdminController extends Controller
         ];
 
         $pdf = PDF::loadView('test.fiche-paie', $data);
-        $pdf->setPaper('A4', 'landscape');
+        // $pdf->setPaper('A4', 'landscape');
         return $pdf->stream('fiche-paie.pdf');
     }
 
