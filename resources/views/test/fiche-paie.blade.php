@@ -31,10 +31,7 @@
                     <div style="margin-left: 20px;position: relative; top: 20 "> <span style="font-size:11px;">Travail-Justice-Solidarite</span></div><br><br>
     
                </td>
-               {{-- <td>
-                <img src="{{ public_path('branding.png') }}" width="150" height="70">
-                
-                </td> --}}
+               
                
            </tr>
            <tr>
@@ -42,8 +39,7 @@
                 <h1 style="text-align: center; position: relative; left:60">FICHE DE PAIE</h1>
                 <h2 style="text-align: center; position: relative; left:60"> <span style="color: red"> N° 01-506780 </span> </h2>
                 <h2 style="text-align: center; position: relative; left:60">ASSIGNATION</h2>
-                {{-- <h2 style="text-align: left; position: relative; left:10">1. BOKÉ</h2>
-                <h2 style="text-align: left; position: relative; left:10">2. </h2> --}}
+             
                 <ol>
                     <li>BOKÉ</li>
                 </ol>

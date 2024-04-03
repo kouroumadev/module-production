@@ -19,14 +19,14 @@
 
                 </td>
                <td>
-                  <span style="position: relative; top:20; font-size:12px;"> REPUBLIQUE DE GUINEE</span>
+                  <span style="position: relative; top:20; font-size:14px;"> REPUBLIQUE DE GUINEE</span>
 
                    <div style="width:75%; margin-left:0px;position: relative; top:20">
-                     <table style="width: 100%">
+                     <table style="width: 80%; position: relative; left:5">
                         <tr>
-                            <td style="background-color: red; width:85%; height:2px"></td>
-                            <td style="background-color: yellow; width:75%"></td>
-                            <td style="background-color: green; width:75%"></td>
+                            <td style="background-color: red; width:55%; height:2px"></td>
+                            <td style="background-color: yellow; width:55%"></td>
+                            <td style="background-color: green; width:55%"></td>
                         </tr>
                      </table>
                   </div>
