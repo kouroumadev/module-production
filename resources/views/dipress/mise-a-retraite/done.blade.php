@@ -26,14 +26,15 @@
 
 
 <div class="row justify-content-center mt-2 card-box mb-30 p-2 shadow-lg">
-    <div class="col-md-2 text-center">
+
+    <div class="col-md-2 text-center border mr-1 border-dark border-radius-5">
         <span class="">FICHE DECOMPTE</span>
         <a href="#" class="btn-block" data-toggle="modal" data-target="#bd-example-modal-lg-decompte" type="button">
             <img src="{{ asset('theme/vendors/images/pdf-logo.jpeg') }}" alt="modal">
             {{-- <i class="fa fa-eye fa-2x" aria-hidden="true"></i> --}}
         </a>
         <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg-decompte" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myLargeModalLabel">Fiche Decompte</h4>
@@ -53,7 +54,7 @@
         </div>
     </div>
 
-    <div class="col-md-2 text-center">
+    <div class="col-md-2 text-center border mr-1 border-dark border-radius-5">
         <span class="">CARTE RETRAITE</span>
         <a href="#" class="btn-block" data-toggle="modal" data-target="#bd-example-modal-lg-retraite" type="button">
             <img src="{{ asset('theme/vendors/images/pdf-logo.jpeg') }}" alt="modal">
@@ -80,7 +81,7 @@
         </div>
     </div>
 
-    <div class="col-md-2 text-center">
+    <div class="col-md-2 text-center border border-dark border-radius-5">
         <span class="">FICHE PAIE</span>
         <a href="#" class="btn-block" data-toggle="modal" data-target="#bd-example-modal-lg-paie" type="button">
             <img src="{{ asset('theme/vendors/images/pdf-logo.jpeg') }}" alt="modal">
