@@ -35,13 +35,13 @@
         </a>
         <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg-decompte" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content" style="height:855px;">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myLargeModalLabel">Fiche Decompte</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
-                        <iframe src="{{ asset('storage/decompteFiles/'.$data->id.'-fiche-decompte.pdf') }}" width="100%" height="500">
+                        <iframe src="{{ asset('storage/decompteFiles/'.$data->id.'-fiche-decompte.pdf') }}" width="100%" height="100%">
                             This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('storage/decompteFiles/'.$data->id.'-fiche-decompte.pdf') }}">Download PDF</a>
                         </iframe>
                     </div>
@@ -62,13 +62,13 @@
         </a>
         <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg-retraite" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content" style="height:855px;">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myLargeModalLabel">Carte Retraite</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
-                        <iframe src="{{ asset('storage/decompteFiles/'.$data->id.'-carte-retraite.pdf') }}" width="100%" height="500">
+                        <iframe src="{{ asset('storage/decompteFiles/'.$data->id.'-carte-retraite.pdf') }}" width="100%" height="100%">
                             This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('storage/decompteFiles/'.$data->id.'-carte-retraite') }}">Download PDF</a>
                         </iframe>
                     </div>
@@ -89,13 +89,13 @@
         </a>
         <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg-paie" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content" style="height:855px;">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myLargeModalLabel">Fiche Paie</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
-                        <iframe src="{{ asset('storage/decompteFiles/'.$data->id.'-fiche-paie.pdf') }}" width="100%" height="500">
+                        <iframe src="{{ asset('storage/decompteFiles/'.$data->id.'-fiche-paie.pdf') }}" width="100%" height="100%">
                             This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('storage/decompteFiles/'.$data->id.'-fiche-paie.pdf') }}">Download PDF</a>
                         </iframe>
                     </div>

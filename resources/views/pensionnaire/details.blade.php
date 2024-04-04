@@ -260,13 +260,13 @@
                                                                                 </a>
                                                                                 <div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                                                                     <div class="modal-dialog modal-lg modal-dialog-centered">
-                                                                                        <div class="modal-content">
+                                                                                        <div class="modal-content" style="height:855px;">
                                                                                             <div class="modal-header">
                                                                                                 <h4 class="modal-title" id="myLargeModalLabel">{{ $emp->data['titles'][$key] }}</h4>
                                                                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                                                             </div>
                                                                                             <div class="modal-body">
-                                                                                                <iframe src="{{ asset('storage/docs/'.$emp->data['paths'][$key]) }}" width="100%" height="500">
+                                                                                                <iframe src="{{ asset('storage/docs/'.$emp->data['paths'][$key]) }}" width="100%" height="100%">
                                                                                                     This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('storage/docs/'.$emp->data['paths'][$key]) }}">Download PDF</a>
                                                                                                 </iframe>
                                                                                             </div>
