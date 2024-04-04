@@ -17,22 +17,14 @@
 
                 </td>
                <td>
-                  {{-- <span style="position: relative; top: -35"> REPUBLIQUE DE GUINEE</span>
+                  <span style="position: relative; top:25; left:-15"> REPUBLIQUE DE GUINEE</span>
 
-                   <div style="width:75%; margin-left:0px;position: relative; top: -30">
-                     <table style="width: 100%">
-                        <tr>
-                            <td style="background-color: red; width:85%; height:2px"></td>
-                            <td style="background-color: yellow; width:75%"></td>
-                            <td style="background-color: green; width:75%"></td>
-                        </tr>
-                     </table>
-                  </div> --}}
-                    {{-- <div style="margin-left: 20px;position: relative; top: -25"> Travail-Justice-Solidarite </div><br><br> --}}
+
+                    <div style="margin-left: 20px;position: relative; top:25; font-size:12px"> Travail-Justice-Solidarite </div><br>
 
                </td>
                <td>
-                <img src="{{ public_path('branding.png') }}" width="150" height="70">
+                {!! DNS2D::getBarcodeHTML($no_imma, 'QRCODE',3,3) !!}
 
                 </td>
 
@@ -46,20 +38,23 @@
         <h1>FICHE DE DECOMPTE</h1>
     </div>
 
-
-    {{-- <img src="{{ asset('storage/pensionnaireImg/'.$photo) }}" style="width:100px; height:100px; position:relative; top:10px;left:300px" alt="" srcset=""> --}}
-    <img src="{{ storage_path('app/public/pensionnaireImg/'.$photo) }}" style="width:100px; height:100px; position:relative; top:10px;left:300px" alt="" srcset="">
+    <div style="width: 100%;  position:relative; top:30; left:20">
 
 
-    <p style="text-align: right; margin-top:10px">
-        Conakry, le {{$date}}. <br> <br>
+                <span>
+                    <img src="{{ storage_path('app/public/pensionnaireImg/'.$photo) }}" style="width:100px; height:100px;" alt="" srcset="">
 
-    </p>
-    <div style="width: 30%;  margin:auto; border: 1px solid black; text-align:center; padding:1px; margin-top:10px;">
-        <h3 style="color: red;">N°{{ $no_dossier }}</h3>
+                </span>
+                <span style="text-align: right; position:absolute; right:100 ">
+                    <h6 style="color: red;">N° {{ $no_dossier }}</h6>
+                </span>
     </div>
+
+
+
+
 <div style="display:inline-flex;">
-    <table style="margin-top: 20px">
+    <table style="margin-top: 40px">
         <tbody>
             <tr>
                 <th style="width: 30%; text-align:left; font-size: 11px">PRENOMS:</th>
@@ -84,7 +79,7 @@
 
 </div>
    <div>
-    <table style="position:absolute; top:360; left:250">
+    <table style="position:absolute; top:265; left:250">
         <tbody>
 
             <tr>
@@ -111,42 +106,42 @@
         <tbody>
             <tr>
                 <th style="width: 30%; text-align:left">Salaire de référence:</th>
-                <td>{{ $salaire }} par Mois</td>
+                <td>216 000 000 /120 = 1 800 000 par Mois</td>
             </tr>
             <tr>
                 <th style="width: 30%; text-align:left">Annuités de service:</th>
-                <td>{{ $annuite }}</td>
+                <td>27 ans</td>
             </tr>
             <tr>
                 <th style="width: 30%; text-align:left">Pourcentage Acquis:</th>
-                <td>{{ $percent }}%</td>
+                <td>27 * 2% = 54%</td>
             </tr>
             <tr>
                 <th style="width: 30%; text-align:left">Montant Annuel de la Pension:</th>
-                <td>{{ $mont_ann_pension }} GNF</td>
+                <td>18 000 000 * 12 * 54% = 11 664 000 GNF</td>
             </tr>
             <tr>
                 <th style="width: 30%; text-align:left">Montant Trimestriel:</th>
-                <td>{{ $mont_trimestre }} GNF</td>
+                <td>11 664 000 / 4 = 2 916 000 GNF</td>
             </tr>
             <tr>
                 <th style="width: 30%; text-align:left">Montant Trimestriel revalorisé:</th>
-                <td>{{ $mont_trimestre_revalorise }} GNF</td>
+                <td>2 916 000 + 40% = 4 082 400 GNF</td>
             </tr>
             <tr>
                 <th style="width: 30%; text-align:left">Montant de l'Allocation Familiale(AF):</th>
-                <td>{{ $mont_AF }} GNF</td>
+                <td>9 000 GNF</td>
             </tr>
             <tr>
                 <th style="width: 30%; text-align:left">Montant Total de la Pension:</th>
-                <td>{{ number_format($mont_total_pension,0,""," ") }} GNF</td>
+                <td>4 082 400 + 9 000(AF) = 4 091 400 GNF</td>
             </tr>
         </tbody>
 
     </table>
     <p style="text-align: right; margin-top:10px">
 
-       <span style="color: red; font-weight:bold">MONTANT TOTAL: {{ number_format($mont_total_pension,0,""," ") }} GNF </span>
+       <span style="color: red; font-weight:bold">MONTANT TOTAL: 4 091 400 GNF </span>
     </p>
     <table style="border: 1px solid black; height:90px; width:100%">
         <tbody>
@@ -158,13 +153,15 @@
             </tr>
         </tbody>
     </table>
-    <div style="position: absolute; top:300px">
-        {!! DNS2D::getBarcodeHTML($no_imma, 'QRCODE',5,5) !!}
-    </div> <br>
-    {{-- <hr style="margin-bottom: 0px"> --}}
+    <div style="position: absolute; bottom:-25">
+        <img src="{{ public_path('branding.png') }}" width="100" height="70">
+    </div>
+    <div style="text-align: right; margin-top:10px">
+        Conakry {{$date}}
+    </div>
 
-                    <div style="width: 20%; font-size: 11px; position: absolute; bottom:-15">
-                        <img src="{{ public_path('flagui.png') }}" width="100" height="40">
+                    <div style="width: 100%; font-size: 11px; position: absolute; top:-5">
+                        <img src="{{ public_path('flagui.png') }}" width="700" height="10">
                      </div>
 
                  <div style="text-align: center; position: absolute; bottom:-20; left: 150;font-size: 11px;">
@@ -174,7 +171,6 @@
                 </div>
 
 
-    {{-- <hr style="margin-top: 5px" >
-    <span style="text-align: center; position:absolute; bottom:-5">CAISSE NATIONALE DE SECURITE SOCIALE (C.N.S.S) BP: 138 Conakry, TEL: 622 00 00 00</span> --}}
+
 </body>
 </html>

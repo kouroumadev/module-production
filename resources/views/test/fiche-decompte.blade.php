@@ -7,27 +7,27 @@
     <title>Fiche Decompte</title>
 </head>
 <body style="font-family: 'Poppins',sans-serif">
-    
+
     <table style="width: 100%;margin-bottom:10px">
         <tbody>
            <tr style="margin-top: 0 !important">
-               
+
                <td>
                 <img src="{{ public_path('LOgo-CNSS.png') }}" width="200" height="100">
-                
+
                 </td>
                <td>
                   <span style="position: relative; top:25; left:-15"> REPUBLIQUE DE GUINEE</span>
-    
-                   
+
+
                     <div style="margin-left: 20px;position: relative; top:25; font-size:12px"> Travail-Justice-Solidarite </div><br>
-    
+
                </td>
                <td>
-                {!! DNS2D::getBarcodeHTML("098765432133", 'QRCODE',3,3) !!}
-                
+                {!! DNS2D::getBarcodeHTML($no_imma, 'QRCODE',3,3) !!}
+
                 </td>
-               
+
            </tr>
         </tbody>
     </table>
@@ -37,65 +37,65 @@
     <div style="width: 70%; margin:auto; font-size:10px; text-align:center; padding:1px; margin-top:30px; background-color:rgb(49, 191, 49)">
         <h1>FICHE DE DECOMPTE</h1>
     </div>
-    
+
     <div style="width: 100%;  position:relative; top:30; left:20">
-       
-            
+
+
                 <span>
-                    <img src="{{public_path('b.jpg')}}" style="width:100px; height:100px;" alt="" srcset="">
-    
+                    <img src="{{ storage_path('app/public/pensionnaireImg/'.$photo) }}" style="width:100px; height:100px;" alt="" srcset="">
+
                 </span>
                 <span style="text-align: right; position:absolute; right:100 ">
-                    <h6 style="color: red;">N°01-504587</h6>
+                    <h6 style="color: red;">N° {{ $no_dossier }}</h6>
                 </span>
     </div>
-    
-    
 
-   
+
+
+
 <div style="display:inline-flex;">
     <table style="margin-top: 40px">
         <tbody>
             <tr>
                 <th style="width: 30%; text-align:left; font-size: 11px">PRENOMS:</th>
-                <td style="font-size: 11px">Issiaga BINTOU MANDIAMA</td>
+                <td style="font-size: 11px">{{ $prenom }}</td>
             </tr>
             <tr>
                 <th style="width: 30%; font-size: 11px; text-align:left">NOM:</th>
-                <td style="font-size: 11px">Camara</td>
+                <td style="font-size: 11px">{{ $nom }}</td>
             </tr>
             <tr>
                 <th style="width: 30%; font-size: 11px; text-align:left">N° ASSURE:</th>
-                <td style="color: red; font-weight:bold;font-size: 11px"> 16120000046899</td>
+                <td style="color: red; font-weight:bold;font-size: 11px">{{ $no_assure }}</td>
             </tr>
             <tr>
                 <th style="width: 30%; font-size: 11px; text-align:left">DATE NAISSANCE:</th>
-                <td style="font-size: 11px"> {{$date}}</td>
+                <td style="font-size: 11px">{{ \Carbon\Carbon::parse($date_naiss)->format('d/m/Y') }}</td>
             </tr>
-            
+
         </tbody>
-        
+
     </table>
-    
+
 </div>
    <div>
     <table style="position:absolute; top:265; left:250">
         <tbody>
-            
+
             <tr>
                 <th style="width: 30%; font-size: 11px; text-align:left">AGENCE:</th>
-                <td style="font-size: 11px"> Boké</td>
+                <td style="font-size: 11px">{{ $agence }}</td>
             </tr>
             <tr>
                 <th style="width: 30%; font-size: 11px; text-align:left">ASSIGNATION:</th>
-                <td style="font-size: 11px">Boké</td>
+                <td style="font-size: 11px">{{ DB::table('prefecture')->where('code',$assign)->value('libelle') }}</td>
             </tr>
             <tr>
                 <th style="width: 30%; font-size: 11px; text-align:left">EX EMPLOYÉ:</th>
-                <td style="font-size: 11px; color: red;">CAISSE NATIONALE DE LA SECURITE SOCIALE</td>
+                <td style="font-size: 11px; color: red;">{{ $employer }}</td>
             </tr>
         </tbody>
-        
+
     </table>
    </div>
     <div style=" margin:auto;  text-align:center; padding:1px; margin-top:10px;">
@@ -137,15 +137,15 @@
                 <td>4 082 400 + 9 000(AF) = 4 091 400 GNF</td>
             </tr>
         </tbody>
-        
+
     </table>
     <p style="text-align: right; margin-top:10px">
-        
-       <span style="color: red; font-weight:bold">MONTANT TOTAL: 4 091 400 GNF </span> 
+
+       <span style="color: red; font-weight:bold">MONTANT TOTAL: 4 091 400 GNF </span>
     </p>
     <table style="border: 1px solid black; height:90px; width:100%">
         <tbody>
-            <tr style="border: 1px solid black; width:100%;"> 
+            <tr style="border: 1px solid black; width:100%;">
                 <th style=" width:25%; border-right: 1px solid black;height:130px"> <span style="position: relative; top: -25"> Le Chef de Service </span> </th>
                 <th style=" width:25%; border-right: 1px solid black; text-align:center"> <span style="position: relative; top: -25">  Le Directeur des Prestations Sociale </span> </th>
                 <th style=" width:25%; border-right: 1px solid black; text-align:center"> <span style="position: relative; top: -25">  L'Agent Comptable </span> </th>
@@ -153,24 +153,24 @@
             </tr>
         </tbody>
     </table>
-    <div style="position: absolute; bottom:-25"> 
+    <div style="position: absolute; bottom:-25">
         <img src="{{ public_path('branding.png') }}" width="100" height="70">
     </div>
     <div style="text-align: right; margin-top:10px">
         Conakry {{$date}}
     </div>
-    
+
                     <div style="width: 100%; font-size: 11px; position: absolute; top:-5">
                         <img src="{{ public_path('flagui.png') }}" width="700" height="10">
                      </div>
-                
+
                  <div style="text-align: center; position: absolute; bottom:-20; left: 150;font-size: 11px;">
                     <span style="text-align: center; font-weight:bold">République de Guinée</span> <br>
                     <span style="text-align: center;">Caisse Nationale de sécurité Sociale, Kouléwondy - Kaloum BP 138</span> <br>
                     <span>République de Guinée | www.cnss.gov.gn</span>
-                </div>   
-               
-    
-   
+                </div>
+
+
+
 </body>
 </html>
