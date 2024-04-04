@@ -19,16 +19,8 @@
                <td>
                   <span style="position: relative; top:25; left:-15"> REPUBLIQUE DE GUINEE</span>
     
-                   {{-- <div style="width:75%; margin-left:0px;position: relative; top: 25">
-                     <table style="width: 100%">
-                        <tr>
-                            <td style="background-color: red; width:85%; height:2px"></td>
-                            <td style="background-color: yellow; width:75%"></td>
-                            <td style="background-color: green; width:75%"></td>
-                        </tr>
-                     </table>
-                  </div> --}}
-                    <div style="margin-left: 20px;position: relative; top:25; font-size:12px"> Travail-Justice-Solidarite </div><br><br>
+                   
+                    <div style="margin-left: 20px;position: relative; top:25; font-size:12px"> Travail-Justice-Solidarite </div><br>
     
                </td>
                <td>
