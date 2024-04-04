@@ -53,7 +53,7 @@ class HomeController extends Controller
         // dd($type_pension);
         if ($type_pension == "reversion" || $type_pension == "Pensions Temporaires d'Orphelin" ) {
             $pensionne = DB::connection('metier')->table('pensionne')->where('no_pensionne','=',$no_immat)->get();
-
+            //dd($pensionne);
              // cheching if pensionne number exist  in pensionne table.////
             if ($pensionne->isEmpty()) {
                 Alert::error('', "Ce N° de pension n'existe pas dans la base de données de la CNSS");
@@ -62,7 +62,7 @@ class HomeController extends Controller
                 // cheching if pensionne employe_number exist  in employee table.////
                 $no_immat_pensionne = $pensionne[0]->no_employe;
                 $employe = DB::connection('metier')->table('employe')->where('no_employe','=',$no_immat_pensionne)->get();
-                $emp_app = Employee::where('no_ima_employee', $employe[0]->no_employe)->get();
+                $emp_app = Employee::where('no_ima_employee', $no_immat_pensionne)->get();
 
                 //dd($emp_app);
                 if($emp_app->isEmpty()){

@@ -86,6 +86,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/tracking/{id}', [App\Http\Controllers\TransferController::class, 'Tracking'])->name('transfert.tracking');
     Route::get('/tracking/user/{id}', [App\Http\Controllers\TransferController::class, 'UserTracking'])->name('user.tracking');
 
+    // reclamation
+    Route::get('/avance/pension', [App\Http\Controllers\ReclamationController::class, 'AvancePension'])->name('avance.pension');
+    Route::post('/reclamation-info', [App\Http\Controllers\ReclamationController::class, 'ReclamationInfo'])->name('reclamation.info');
+
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
