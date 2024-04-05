@@ -38,7 +38,7 @@
                                     </a>
                                 </li>
                             @endforeach
-                            
+
                             {{-- <li>
                                 <a href="#">
                                     <img src="{{ asset('theme/vendors/images/photo1.jpg') }}" alt="">
@@ -201,13 +201,14 @@
                         <li><a href="{{ route('dept.index') }}">Departements</a></li>
                         <li><a href="{{ route('doc.index') }}">Documents</a></li>
                         <li><a href="{{ route('prest.index') }}">Prestations</a></li>
+                        <li><a href="{{ route('echeance.index') }}">Echeance</a></li>
                         <li><a href="{{ route('fiche-decompte') }}">fiche-decompte</a></li>
                         <li><a href="{{ route('fiche-paie') }}">fiche-paie</a></li>
                         <li><a href="{{ route('carte-retraite') }}">carte-retraite</a></li>
-                        
+
                     </ul>
                 </li>
-                
+
                 @endif
                 @if (Auth::user()->dept->name == 'SECRETARIAT')
                 <li class="my-menu" onclick="makeActive(this,'13')" id="4">

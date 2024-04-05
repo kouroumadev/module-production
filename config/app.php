@@ -163,7 +163,7 @@ return [
         Milon\Barcode\BarcodeServiceProvider::class,
         /*
          * Application Service Providers...
-         * 
+         *
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
@@ -171,6 +171,7 @@ return [
         App\Providers\EventServiceProvider::class,
         Illuminate\Notifications\NotificationServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -191,6 +192,7 @@ return [
         'Notification' => Illuminate\Support\Facades\Notification::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ])->toArray(),
 
