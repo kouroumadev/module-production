@@ -35,7 +35,7 @@ class ReclamationController extends Controller
                 $emp_metier = DB::connection('metier')->table('employe')->where('no_employe','=',$no_immat)->get();
                 
                 //dd($emp_app);
-                return view('reclamation.reclamation-info',compact('emp_app','emp_metier'));
+                return view('reclamation.reclamation-info',compact('emp_app','emp_metier','pensionne'));
             }
         } catch (QueryException $e) {
             Alert::error('error', $e);
