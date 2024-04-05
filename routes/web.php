@@ -44,7 +44,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('fiche-decompte', [App\Http\Controllers\AdminController::class, 'FicheDecompte'])->name('fiche-decompte');
     Route::get('fiche-paie', [App\Http\Controllers\AdminController::class, 'FichePaie'])->name('fiche-paie');
     Route::get('carte-retraite', [App\Http\Controllers\AdminController::class, 'CarteRetraite'])->name('carte-retraite');
-    
+
 
     //DIPRESS PRESTATIONS
     Route::get('/dipress/pension', [App\Http\Controllers\DipressController::class, 'vieillesse'])->name('dipress.vieillesse');
@@ -89,6 +89,15 @@ Route::middleware('auth:sanctum')->group(function () {
     // reclamation
     Route::get('/avance/pension', [App\Http\Controllers\ReclamationController::class, 'AvancePension'])->name('avance.pension');
     Route::post('/reclamation-info', [App\Http\Controllers\ReclamationController::class, 'ReclamationInfo'])->name('reclamation.info');
+
+    // ECHEANCE
+    Route::get('/echeance/index', [App\Http\Controllers\EcheanceController::class, 'echeanceIndex'])->name('echeance.index');
+    Route::post('/echeance/store', [App\Http\Controllers\EcheanceController::class, 'echeanceStore'])->name('echeance.store');
+    Route::post('/paye/store', [App\Http\Controllers\EcheanceController::class, 'payeStore'])->name('paye.store');
+    Route::get('/paye/index', [App\Http\Controllers\EcheanceController::class, 'payeIndex'])->name('paye.index');
+
+
+
 
 });
 
