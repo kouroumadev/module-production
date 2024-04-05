@@ -146,24 +146,24 @@
     </div>
     <h3 class="text-center"> HISTORIQUE DE PAIEMENT</h3>
     <table class="data-table table stripe hover nowrap dataTable no-footer dtr-inline" id="DataTables_Table_0"
-    role="grid" aria-describedby="DataTables_Table_0_info">
-    <thead class="bg-success">
-        <tr>
-            <th class="table-plus text-white">Echeance</th>
-            <th class="text-white">Annee</th>
-            <th class="text-white">Montant Paye</th>
-            <th class="text-white">Date Paiement</th>
-            
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+        role="grid" aria-describedby="DataTables_Table_0_info">
+        <thead class="bg-success">
+            <tr>
+                <th class="table-plus text-white">Echeance</th>
+                <th class="text-white">Annee</th>
+                <th class="text-white">Montant Paye</th>
+                <th class="text-white">Date Paiement</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
     @endsection
