@@ -124,7 +124,7 @@
                             <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y')  }}</td>
                             <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y') }}</td>
                             <td></td>
-                            <td><span class="badge badge-warning">{{Auth::user()->dept->name}}</span></td>
+                            <td><span class="badge badge-warning">INITIAL...</span></td>
                             {{-- <td><span class="badge badge-warning">Initial...</span></td>  --}}
 
                             @if ($current_date->diffInDays($doc->created_at) < (int)$dead_name)

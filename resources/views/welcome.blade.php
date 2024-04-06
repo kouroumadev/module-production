@@ -3,8 +3,11 @@
 @section('content')
 
 @php
-  $user = \App\Models\User::find(Auth::user()->id);
-  $notif = \Illuminate\Support\Facades\DB::table('notifications')->where('notifiable_id',Auth::user()->id)->where('read_at',null)->count();
+//   $user = \App\Models\User::find(Auth::user()->dept_id);
+  $user_dept_id = Auth::user()->dept_id;
+//   $notif = \Illuminate\Support\Facades\DB::table('notifications')->where('notifiable_id',Auth::user()->id)->where('read_at',null)->count();
+$notif = \App\Models\Transfer::where('to_dept',$user_dept_id)->where('read_at',null)->get();
+$notif_count = \App\Models\Transfer::where('to_dept',$user_dept_id)->where('read_at',null)->count();
   //dd($notif);
 @endphp
 <div class="header" style="background: rgb(4, 147, 16)">
@@ -24,35 +27,22 @@
             <div class="dropdown">
                 <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
                     <i class="icon-copy dw dw-notification text-white"></i>
-                    <span class=" notification-active text-white bg-danger border-radius-20">{{$notif}}</span>
+                    <span class=" notification-active text-white bg-danger border-radius-20">{{$notif_count}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="notification-list mx-h-350 customscroll">
                         <ul>
-                            @foreach ($user->unreadNotifications as $notification)
+                            @foreach ($notif as $notification)
                                 <li>
-                                    <a href="{{route('etude.traitement',$notification->id)}}">
-                                        <img src="{{ asset('storage/userImg/'.$user->photo) }}" alt="">
-                                        <h3>{{$notification->data['from_user_name']}}</h3>
-                                        <p>N° Dossier: {{$notification->data['no_dossier']}} du Departement:{{$notification->data['from_dept_name']}}</p>
+                                    <a href="{{route('pension.details',$notification->doc_id)}}">
+                                        <img src="{{ asset('storage/userImg/'.$notification->users->photo) }}" alt="">
+                                        <h3>{{$notification->users->name}}</h3>
+                                        <p>N° Dossier: {{$notification->doc->no_dossier}} du Departement:{{$notification->from->name}}</p>
                                     </a>
                                 </li>
                             @endforeach
 
-                            {{-- <li>
-                                <a href="#">
-                                    <img src="{{ asset('theme/vendors/images/photo1.jpg') }}" alt="">
-                                    <h3>Lea R. Frith</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="{{ asset('theme/vendors/images/photo2.jpg') }}" alt="">
-                                    <h3>Erik L. Richards</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-                                </a>
-                            </li> --}}
+                            
 
 
                         </ul>
