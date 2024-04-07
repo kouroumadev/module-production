@@ -17,6 +17,8 @@ class Transfer extends Model
         'note',
         'doc_id',
         'user_id',
+        'read_at',
+        'flag_retard',
         'status'
     ];
 

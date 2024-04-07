@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('doc_id')->nullable();
             $table->string('user_id')->nullable();
             $table->string('status')->default('1');
+            $table->string('read_at')->nullable();
+            $table->string('flag_retard')->default('0');
             $table->timestamps();
         });
     }

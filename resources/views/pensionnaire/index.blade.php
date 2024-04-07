@@ -177,7 +177,11 @@
                             <td class=""> <a href="{{route('transfert.tracking',$doc->id)}}">{{ $doc->no_dossier}}</a> </td>
                             <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y')  }}</td>
                             <td> <span class="text-success"><i class="icon-copy ion-arrow-right-a"></i></span> {{$to[0]->name}} {{  \Carbon\Carbon::parse($doc->transfers->created_at)->format('d/m/Y') }}</td>
-                            <td> <span class="text-danger"><i class="icon-copy ion-arrow-left-a"></i></span> {{$from[0]->name}}{{ \Carbon\Carbon::parse($doc->transfers->created_at )->format('d/m/Y') }} </td>
+                            <td> <span class="text-danger"><i class="icon-copy ion-arrow-left-a"></i></span> {{$from[0]->name}} {{ \Carbon\Carbon::parse($doc->transfers->created_at )->format('d/m/Y') }} 
+                             @if ($doc->transfers->flag_retard == 1)
+                                 <span class="text-danger"> retard</span>
+                             @endif
+                            </td>
                             {{-- <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td>  --}}
                             <td><span class="badge badge-primary"> {{$to[0]->name}}  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span></td>
                             @if ($current_date->diffInDays($doc->transfers->created_at) < (int)$dead_name2)

@@ -192,10 +192,22 @@
                                                 </p>
                                                 <p>
                                                     <span class="font-weight-bold text-success"><i class="icon-copy ion-folder"></i> Transmi à: <span class="task-time">{{ $doc->to->name }}</span></span> <br>
-                                                    <span class="font-weight-bold ml-2 text-success"><i class="ion-android-alarm-clock"></i> Date: <span class="task-time">{{ $doc->created_at->format('d M') }} {{ $doc->created_at->format('Y') }} à {{ $doc->created_at->format('H:i:s') }}</span></span>
+                                                    <span class="font-weight-bold ml-2 text-success"><i class="ion-android-alarm-clock"></i> Date: <span class="task-time">{{  \Carbon\Carbon::parse($doc->read_at)->format('d M') }} {{  \Carbon\Carbon::parse($doc->read_at)->format('Y') }} à {{  \Carbon\Carbon::parse($doc->read_at)->format('H:i:s') }}</span></span>
                                                 </p>
                                                 <p>
-                                                    <span class="font-weight-bold text-success"><i class="ion-ios-chatboxes"></i> Observation: <span class="task-time">{{ $doc->note }}</span></span> <br>
+                                                    <span class="font-weight-bold text-success"><i class="ion-ios-chatboxes"></i> Observation: 
+                                                        
+                                                            @if ( $doc->flag_retard == 1)
+                                                                <span class="task-time text-danger">
+                                                                    Transmit en Retard
+                                                                </span>
+                                                            @else
+                                                            <span class="task-time text-success">
+                                                                Transmit à Temps
+                                                            </span>
+                                                            @endif
+                                                       
+                                                    </span> <br>
                                                 </p>
                                                 {{-- <div class="task-time">09:30 am</div> --}}
                                             </li>
