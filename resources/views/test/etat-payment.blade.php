@@ -26,11 +26,12 @@
             left: 0cm;
             right: 0cm;
             height: 2cm;
+            margin-left: 30px;
         }
 
         main {
             position: relative;
-            top: 20px !important;
+            top: 30px !important;
         }
 
         footer {
