@@ -18,24 +18,26 @@ class AdminController extends Controller
 {
 
     //GESTION DES UTILISATEURS
-    public function userIndex() {
+    public function userIndex()
+    {
         $depts = Dept::all();
         $users = User::all();
 
-        return view('user.index', compact('depts','users'));
+        return view('user.index', compact('depts', 'users'));
     }
 
-    public function userStore(Request $request) {
+    public function userStore(Request $request)
+    {
         // dd($request->all());
 
-        if($request->hasFile('user_photo')){
+        if ($request->hasFile('user_photo')) {
             $file = $request->file('user_photo')->getClientOriginalName();
             $filename = pathinfo($file, PATHINFO_FILENAME);
             $extension = pathinfo($file, PATHINFO_EXTENSION);
-            $tem = explode(".",$request->email);
-            $img = $filename."-".time()."-".$tem['0'].".".$extension;
+            $tem = explode(".", $request->email);
+            $img = $filename . "-" . time() . "-" . $tem['0'] . "." . $extension;
 
-            Storage::disk('userImg')->put($img,file_get_contents($request->file('user_photo')));
+            Storage::disk('userImg')->put($img, file_get_contents($request->file('user_photo')));
         }
 
         $user = new User();
@@ -57,32 +59,36 @@ class AdminController extends Controller
 
     // DEPT MANAGEMENT
 
-    public function deptIndex() {
+    public function deptIndex()
+    {
         $depts = Dept::all();
 
         return view('dept.index', compact('depts'));
     }
-    public function deptStore(Request $request) {
+    public function deptStore(Request $request)
+    {
         // dd($request->all());
 
         $dept = new Dept();
         $dept->name = $request->name;
         // $dept->created_by = Auth::user()->id;
         $dept->save();
-        return redirect(route('dept.index'))->with('yes','Enregistrer avec succes');
+        return redirect(route('dept.index'))->with('yes', 'Enregistrer avec succes');
     }
 
     //END DEPT MANAGEMENT
 
 
-    public function docIndex() {
+    public function docIndex()
+    {
         $prestations = Prestation::all();
         $pieces = Piece::all();
 
-        return view('parametrage.file.index', compact('prestations','pieces'));
+        return view('parametrage.file.index', compact('prestations', 'pieces'));
     }
 
-    public function docStore(Request $request) {
+    public function docStore(Request $request)
+    {
         //  dd($request->all());
 
         $piece = new Piece();
@@ -90,37 +96,41 @@ class AdminController extends Controller
         $piece->prestation_id = $request->prestation_id;
         $piece->obligation = $request->obligation;
         $piece->save();
-        return redirect(route('doc.index'))->with('yes','Enregistrer avec succes');
+        return redirect(route('doc.index'))->with('yes', 'Enregistrer avec succes');
     }
 
-    public function PrestIndex() {
+    public function PrestIndex()
+    {
         $prestations = Prestation::all();
 
         return view('parametrage.prestation.index', compact('prestations'));
     }
-    public function PrestStore(Request $request) {
+    public function PrestStore(Request $request)
+    {
         // dd($request->all());
 
         $prest = new Prestation();
         $prest->nom_prestation = $request->nom_prestation;
         // $dept->created_by = Auth::user()->id;
         $prest->save();
-        return redirect(route('prest.index'))->with('yes','Enregistrer avec succes');
+        return redirect(route('prest.index'))->with('yes', 'Enregistrer avec succes');
     }
 
-    public function PieceIndex() {
+    public function PieceIndex()
+    {
         $prestations = Prestation::all();
 
         return view('parametrage.piece.index', compact('prestations'));
     }
-    public function PieceStore(Request $request) {
-         //dd($request->all());
+    public function PieceStore(Request $request)
+    {
+        //dd($request->all());
 
         $prest = new Prestation();
         $prest->nom_prestation = $request->nom_prestation;
         // $dept->created_by = Auth::user()->id;
         $prest->save();
-        return redirect(route('prest.index'))->with('yes','Enregistrer avec succes');
+        return redirect(route('prest.index'))->with('yes', 'Enregistrer avec succes');
     }
 
     public function FicheDecompte()
@@ -129,10 +139,10 @@ class AdminController extends Controller
 
         $data = [
             'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
-            'adresse'=>'Kaloum',
+            'adresse' => 'Kaloum',
             'date_immatriculation' => date('m/d/Y'),
             'no_immatriculation' => '129876543890',
-            'categorie'=>'E+20',
+            'categorie' => 'E+20',
             'date' => date('m/d/Y'),
 
         ];
@@ -148,10 +158,10 @@ class AdminController extends Controller
 
         $data = [
             'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
-            'adresse'=>'Kaloum',
+            'adresse' => 'Kaloum',
             'date_immatriculation' => date('m/d/Y'),
             'no_immatriculation' => '129876543890',
-            'categorie'=>'E+20',
+            'categorie' => 'E+20',
             'date' => date('m/d/Y'),
 
         ];
@@ -167,10 +177,10 @@ class AdminController extends Controller
 
         $data = [
             'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
-            'adresse'=>'Kaloum',
+            'adresse' => 'Kaloum',
             'date_immatriculation' => date('m/d/Y'),
             'no_immatriculation' => '129876543890',
-            'categorie'=>'E+20',
+            'categorie' => 'E+20',
             'date' => date('m/d/Y'),
 
         ];
@@ -180,4 +190,22 @@ class AdminController extends Controller
         return $pdf->stream('carte-retraite.pdf');
     }
 
+    public function EtatPayement()
+    {
+
+
+        $data = [
+            'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
+            'adresse' => 'Kaloum',
+            'date_immatriculation' => date('m/d/Y'),
+            'no_immatriculation' => '129876543890',
+            'categorie' => 'E+20',
+            'date' => date('m/d/Y'),
+
+        ];
+
+        $pdf = PDF::loadView('test.etat-payment', $data);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('etat-payment.pdf');
+    }
 }

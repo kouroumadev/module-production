@@ -44,6 +44,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('fiche-decompte', [App\Http\Controllers\AdminController::class, 'FicheDecompte'])->name('fiche-decompte');
     Route::get('fiche-paie', [App\Http\Controllers\AdminController::class, 'FichePaie'])->name('fiche-paie');
     Route::get('carte-retraite', [App\Http\Controllers\AdminController::class, 'CarteRetraite'])->name('carte-retraite');
+    Route::get('etat-payement', [App\Http\Controllers\AdminController::class, 'EtatPayement'])->name('etat-payement');
 
 
     //DIPRESS PRESTATIONS
@@ -95,10 +96,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/echeance/store', [App\Http\Controllers\EcheanceController::class, 'echeanceStore'])->name('echeance.store');
     Route::post('/paye/store', [App\Http\Controllers\EcheanceController::class, 'payeStore'])->name('paye.store');
     Route::get('/paye/index', [App\Http\Controllers\EcheanceController::class, 'payeIndex'])->name('paye.index');
-
-
-
-
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
@@ -109,4 +106,3 @@ Route::post('/logout', [App\Http\Controllers\AuthController::class, 'Logout'])->
 Route::post('/sign-in', [App\Http\Controllers\AuthController::class, 'SignIn'])->name('user.signin');
 Route::get('/registration', [App\Http\Controllers\AuthController::class, 'Registration'])->name('user.registration');
 Route::post('/sign-up', [App\Http\Controllers\AuthController::class, 'SignUp'])->name('user.signup');
-
