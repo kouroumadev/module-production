@@ -19,6 +19,12 @@
     </div>
 </div>
 
+<div class="row shadow-lg justify-content-end">
+    <div class="col-md-4">
+        <a href="{{ route('paye.pdf',$id) }}" class="btn btn-success">PDF</a>
+        <a href="{{ route('paye.excel',$id) }}" class="btn btn-info">EXCEL</a>
+    </div>
+</div>
 
 <div class="row justify-content-center">
     <div class="col-md-12">
