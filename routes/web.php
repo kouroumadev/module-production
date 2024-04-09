@@ -95,7 +95,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/echeance/index', [App\Http\Controllers\EcheanceController::class, 'echeanceIndex'])->name('echeance.index');
     Route::post('/echeance/store', [App\Http\Controllers\EcheanceController::class, 'echeanceStore'])->name('echeance.store');
     Route::post('/paye/store', [App\Http\Controllers\EcheanceController::class, 'payeStore'])->name('paye.store');
-    Route::get('/paye/index', [App\Http\Controllers\EcheanceController::class, 'payeIndex'])->name('paye.index');
+    Route::get('/paye/index/{id}', [App\Http\Controllers\EcheanceController::class, 'payeIndex'])->name('paye.index');
+    Route::get('/paye/export/excel/{id}', [App\Http\Controllers\EcheanceController::class, 'exportExcel'])->name('paye.excel');
+    Route::get('/paye/export/pdf/{id}', [App\Http\Controllers\EcheanceController::class, 'exportPdf'])->name('paye.pdf');
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
