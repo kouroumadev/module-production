@@ -125,8 +125,26 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $tot_montant_trim = 0;
+                    $tot_montant_mens_reval = 0;
+                    $tot_trim_du = 0;
+                    $tot_montant_arriere = 0;
+                    $tot_montant_a_paye = 0;
+                    $tot_montant_avance = 0;
+                    $tot_pour = 0;
+                @endphp
                 @foreach ($retraites as $ret)
                 <tr>
+                    @php
+                        $tot_montant_trim += (int)$ret->montant_trim;
+                        $tot_montant_mens_reval += (int)$ret->montant_mens_reval;
+                        $tot_trim_du += (int)$ret->trim_du*4;
+                        $tot_montant_arriere += (int)$ret->montant_arriere;
+                        $tot_montant_a_paye += (int)$ret->montant_a_paye;
+                        $tot_montant_avance += (int)$ret->montant_avance;
+                        $tot_pour += (int)$ret->pour;
+                    @endphp
                     <td>{{ $loop->index+1 }} </td>
                     <td>{{ $ret->prenoms }} </td>
                     <td>{{ $ret->nom }} </td>
@@ -135,13 +153,13 @@
                     <td>{{ \Carbon\Carbon::parse($ret->date_de_naiss)->format('d-m-Y') }} </td>
                     <td>{{ \Carbon\Carbon::parse($ret->date_de_jouiss)->format('d-m-Y') }} </td>
                     <td>{{ $ret->aociéte_orig }} </td>
-                    <td>{{ number_format((int)$ret->montant_trim,0,""," ") }} </td>
-                    <td>{{ number_format((int)$ret->montant_mens_reval,0,""," ") }} </td>
-                    <td>{{ number_format((int)$ret->trim_du,0,""," ") }} </td>
-                    <td>{{ number_format((int)$ret->montant_arriere,0,""," ") }} </td>
-                    <td>{{ number_format((int)$ret->montant_a_paye,0,""," ") }} </td>
-                    <td>{{ number_format((int)$ret->montant_avance,0,""," ") }} </td>
-                    <td>{{ number_format((int)$ret->pour,0,""," ") }} </td>
+                    <td>{{ number_format((int)$ret->montant_trim,0,""," ") }} GNF</td>
+                    <td>{{ number_format((int)$ret->montant_mens_reval,0,""," ") }} GNF</td>
+                    <td>{{ number_format((int)$ret->trim_du*4,0,""," ") }} GNF</td>
+                    <td>{{ number_format((int)$ret->montant_arriere,0,""," ") }} GNF</td>
+                    <td>{{ number_format((int)$ret->montant_a_paye,0,""," ") }} GNF</td>
+                    <td>{{ number_format((int)$ret->montant_avance,0,""," ") }} GNF</td>
+                    <td>{{ number_format((int)$ret->pour,0,""," ") }} GNF</td>
                     <td>-</td>
                 </tr>
                 @endforeach
@@ -151,13 +169,13 @@
             </tbody>
             <tfoot>
                 <th colspan="8"> Tautaux</th>
-                <th>616 000 GNF</th>
-                <th>616 000 GNF</th>
-                <th>0</th>
-                <th>0 GNF</th>
-                <th>451 733 GNF</th>
-                <th>0 GNF</th>
-                <th>0</th>
+                <th>{{ number_format($tot_montant_trim,0,""," ") }} GNF</th>
+                <th>{{ number_format($tot_montant_mens_reval,0,""," ") }} GNF</th>
+                <th>{{ number_format($tot_trim_du,0,""," ") }}</th>
+                <th>{{ number_format($tot_montant_arriere,0,""," ") }} GNF</th>
+                <th>{{ number_format($tot_montant_a_paye,0,""," ") }} GNF</th>
+                <th>{{ number_format($tot_montant_avance,0,""," ") }} GNF</th>
+                <th>{{ number_format($tot_pour,0,""," ") }}</th>
                 <th>-</th>
             </tfoot>
         </table>
