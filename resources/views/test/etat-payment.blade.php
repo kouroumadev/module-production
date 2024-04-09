@@ -60,11 +60,12 @@
     </style>
 </head>
 
-<body style="font-family: 'Poppins',sans-serif">
+<body style="font-family: 'Poppins',sans-serif; font-size:11px">
     <header>
         <div style="width: 100%; position: relative; top:10; left:10; font-size: 11px;">
             <img src="{{ public_path('flagui.png') }}" width="1020" height="10">
         </div>
+
         <table style="width: 100%;margin-bottom:10px">
             <tbody>
                 <tr style="margin-top: 0 !important">
@@ -74,10 +75,11 @@
 
                     </td>
                     <td>
-                        <span style=""> REPUBLIQUE DE GUINEE</span>
+                        <div style=" position: absolute; left:350; top:30; font-size:12px"> REPUBLIQUE DE
+                            GUINEE</div>
 
 
-                        <div style="margin-left: 30px; font-size:12px">
+                        <div style="margin-left: 0px; position: absolute; left:340; top:45; font-size:12px">
                             Travail-Justice-Solidarite </div><br>
 
                     </td>
@@ -93,17 +95,20 @@
 
     <main>
 
-        <h2 style="text-align: center"> SERVICE DES PENSION</h2>
+        <h2 style="text-align: center; position:relative; top:-10 "> SERVICE DES PENSION</h2>
 
-        <div style="font-family: cursive; text-align:center">ETAT DE PAYEMENT DES PENSIONS DE RETRAITE <strong>
-                BEYLA</strong></div>
-
-        <div
-            style="width: 70%; margin:auto; font-size:10px; text-align:center; padding:1px; margin-top:30px; margin-bottom:5px; background-color:rgb(49, 191, 49)">
-            <h1>ECHEANCE - AVRIL 2024</h1>
+        <div style=" text-align:center;font-size:12px;position:relative; top:-10">ETAT DE PAYEMENT
+            DES PENSIONS DE RETRAITE
+            <strong>
+                BEYLA
+            </strong>
         </div>
 
-        <table class="detail" style="border-collapse: collapse; font-size: 12px; margin-top:25">
+
+        <h4 style="text-align: center">ECHEANCE - AVRIL 2024</h4>
+
+
+        <table class="detail" style="border-collapse: collapse; font-size: 12px; margin-top:5">
             <thead>
                 <tr>
                     <th>N°</th>
@@ -882,11 +887,11 @@
     </main>
 
     <footer>
-        <div style="position: relative; left:15">
-            <img src="{{ public_path('branding.png') }}" width="100" height="70">
+        <div style="position: relative; left:19; top:5">
+            <img src="{{ public_path('branding.png') }}" width="70" height="40">
 
         </div>
-        <div style="text-align: center;font-size: 12px; position: relative; bottom:40">
+        <div style="text-align: center;font-size: 12px; position: relative; bottom:15">
             <span style="text-align: center; font-weight:bold">République de Guinée</span> <br>
             <span style="text-align: center;">Caisse Nationale de sécurité Sociale, Kouléwondy - Kaloum BP
                 138</span> <br>
