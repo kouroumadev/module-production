@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Models\Dept;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
-    public function SignIn(LoginRequest $request){
+    public function SignIn(LoginRequest $request)
+    {
 
         $credential = $request->validated();
 
@@ -23,16 +24,44 @@ class AuthController extends Controller
         }
 
         return to_route('login')->withErrors([
-            'message'=> 'Incorrect email adresse ou mot de passe',
+            'message' => 'Incorrect email adresse ou mot de passe',
         ])->onlyInput('email');
     }
 
-    public function Registration(){
+    public function firstLogin(Request $request)
+    {
+        $id = $request->id;
+        $user = User::find($id);
+        if (Hash::check($request->password, $user->password)) {
+            // Alert::toast('Le nouveau et l\'encien mot de passe ne doivent pas etre identique', 'error');
+            // dd('identique');
+            return redirect()->back()->withErrors([
+                'message' => "Le nouveau et l'encien mot de passe ne doivent pas etre identique'",
+            ]);
+        } else {
+            $request->validate(
+                [
+                    'password' => ['required', 'confirmed']
+                ],
+            );
+
+            $user->password = Hash::make($request->password);
+            $user->is_first = 0;
+            $user->c_password = $request->password;
+            $user->save();
+            Alert::success('Votre mot de passe a ete change avec Succès', 'success');
+            return redirect('/');
+        }
+        dd($user);
+    }
+    public function Registration()
+    {
         $depts = Dept::all();
         return view('registration', compact('depts'));
     }
 
-    public function SignUp(Request $request){
+    public function SignUp(Request $request)
+    {
 
         // dd($request->all());
 
@@ -50,7 +79,8 @@ class AuthController extends Controller
         return redirect('login');
     }
 
-    public function Logout(){
+    public function Logout()
+    {
         Auth::logout();
         return to_route('login');
     }
