@@ -20,12 +20,11 @@ class HomeController extends Controller
     }
     public function home()
     {
-        $first_log = Auth::user()->is_first;
-        $id = Auth::user()->id;
-        if (Auth::check() && $first_log == 1) {
+        // $first_log = Auth::user()->is_first;
+        // $id = Auth::user()->id;
+        if (Auth::check() ) {
             //dd("fist login");
-            return view('first-login', compact('id'));
-        } elseif (Auth::check() && $first_log == 0) {
+            
             return view('dashboard');
         } else {
             return view('login');
