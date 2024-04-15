@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -11,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('retraites', function (Blueprint $table) {
+        Schema::create('etat_reversions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('echeance_id')->constrained('echeances');
             $table->string('num_retraite')->nullable();
@@ -30,9 +31,10 @@ return new class extends Migration
             $table->string('montant_avance')->nullable();
             $table->string('trim_du')->nullable();
             $table->string('pour')->nullable();
+            $table->string('solde_avance')->nullable();
             $table->string('montant_arriere')->nullable();
-            $table->string('AF')->nullable();
             $table->string('montant_a_paye')->nullable();
+            $table->string('ayant_causse')->nullable();
             $table->string('mappr')->nullable();
             $table->string('status')->default('1');
             $table->string('created_by');
@@ -45,6 +47,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('retraites');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::dropIfExists('etat_reversions');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 };

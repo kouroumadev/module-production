@@ -21,7 +21,7 @@
 
 <div class="row shadow-lg justify-content-end">
     <div class="col-md-4">
-        <a href="{{ route('paye.pdf',$id) }}" class="btn btn-success">PDF</a>
+        <a href="{{ route('paye.pdf',$id) }}" target="_blank" class="btn btn-success">PDF</a>
         <a href="{{ route('paye.excel',$id) }}" class="btn btn-info">EXCEL</a>
     </div>
 </div>
@@ -36,9 +36,10 @@
                         <tr>
                             {{-- <th class="table-plus text-white">#</th> --}}
                             <th class="text-white">Num Retraite</th>
+                            <th class="text-white">Type</th>
                             <th class="text-white">Prénoms</th>
                             <th class="text-white">Nom</th>
-                            <th class="text-white">Date Naiss</th>
+                            {{-- <th class="text-white">Date Naiss</th> --}}
                             <th class="text-white">Date Jouiss</th>
                             <th class="text-white">Assignation</th>
                             {{-- <th class="text-white">Assignation 1</th> --}}
@@ -55,9 +56,10 @@
                             <tr>
                                 {{-- <td>{{ $loop->index+1 }}</td> --}}
                                 <td>{{ $ret->num_retraite }}</td>
+                                <td>{{ strtoupper($ret->echeance->type) }}</td>
                                 <td>{{ $ret->prenoms }}</td>
                                 <td>{{ $ret->nom }}</td>
-                                <td>{{ \Carbon\Carbon::parse($ret->date_de_naiss)->format('d-m-Y') }}</td>
+                                {{-- <td>{{ \Carbon\Carbon::parse($ret->date_de_naiss)->format('d-m-Y') }}</td> --}}
                                 <td>{{ \Carbon\Carbon::parse($ret->date_de_jouiss)->format('d-m-Y') }}</td>
                                 <td>{{ $ret->assignation }}</td>
                                 {{-- <td>{{ $ret->assignation1 }}</td> --}}

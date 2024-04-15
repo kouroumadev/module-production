@@ -95,7 +95,7 @@
 
         <h2 style="text-align: center"> SERVICE DES PENSION</h2>
 
-        <div style="font-family: cursive; text-align:center">ETAT DE PAYEMENT DES PENSIONS DE RETRAITE <strong>
+        <div style="font-family: cursive; text-align:center">ETAT DE PAYEMENT DES PENSIONS DE <span class="text-uppercase">{{ $type }}</span> <strong>
                 BEYLA</strong></div>
 
         <div
@@ -110,9 +110,12 @@
                     <th>Prenom</th>
                     <th>Nom</th>
                     <th>Type</th>
-                    <th>Num Retraite</th>
+                    <th>Num <span class="text-capitalize">{{ $type }}</span></th>
                     <th>Date Naiss</th>
                     <th>Date Jouiss</th>
+                    @if ($type == "reversion")
+                    <th>Ayant Cause</th>
+                    @endif
                     <th>Societe Ori</th>
                     <th>Mnt Trim Reval</th>
                     <th>Mnt Mens Reval</th>
@@ -152,6 +155,9 @@
                     <td>{{ $ret->num_retraite }} </td>
                     <td>{{ \Carbon\Carbon::parse($ret->date_de_naiss)->format('d-m-Y') }} </td>
                     <td>{{ \Carbon\Carbon::parse($ret->date_de_jouiss)->format('d-m-Y') }} </td>
+                    @if ($type == "reversion")
+                    <td>{{ $ret->ayant_causse }}</td>
+                    @endif
                     <td>{{ $ret->aociéte_orig }} </td>
                     <td>{{ number_format((int)$ret->montant_trim,0,""," ") }} GNF</td>
                     <td>{{ number_format((int)$ret->montant_mens_reval,0,""," ") }} GNF</td>

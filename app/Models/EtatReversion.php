@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Retraite extends Model
+class EtatReversion extends Model
 {
     use HasFactory;
 
@@ -19,7 +19,6 @@ class Retraite extends Model
         'date_de_jouiss',
         'titre',
         'montant_trim',
-        'montant_comp',
         'assignation',
         'assignation1',
         'aociéte_orig',
@@ -28,11 +27,18 @@ class Retraite extends Model
         'montant_avance',
         'trim_du',
         'pour',
+        'solde_avance',
         'montant_arriere',
-        'AF',
         'montant_a_paye',
+        'ayant_causse',
         'mappr',
         'status',
         'created_by',
     ];
+
+    protected $table = 'etat_reversions';
+
+    public function echeance() {
+        return $this->belongsTo(Echeance::class, 'echeance_id');
+    }
 }
