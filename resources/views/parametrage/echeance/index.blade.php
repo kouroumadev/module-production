@@ -100,9 +100,17 @@
                                     @endif
                                 </td>
                                 <td>
+                                    @if ($d->status == '1')
                                     <a href="#" class="btn btn-success" data-toggle="modal" data-target="#small-modal-echeance{{ $d->id }}" type="button">
-                                       <i class="fa fa-download" aria-hidden="true"></i>
+                                        {{-- <i class="fa fa-download" aria-hidden="true"></i> --}}
+                                        <i class="fa fa-upload" aria-hidden="true"></i>
                                     </a>
+                                    @else
+                                    <a href="{{ route('paye.index',$d->id ) }}" class="btn btn-success">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    @endif
+
                                     <div class="modal fade" id="small-modal-echeance{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-md modal-dialog-centered">
                                             <div class="modal-content">

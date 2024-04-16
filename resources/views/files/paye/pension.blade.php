@@ -95,7 +95,7 @@
 
         <h2 style="text-align: center"> SERVICE DES PENSION</h2>
 
-        <div style="font-family: cursive; text-align:center">ETAT DE PAYEMENT DES PENSIONS DE <span class="text-uppercase">{{ $type }}</span> <strong>
+        <div style="font-family: cursive; text-align:center">ETAT DE PAYEMENT DES PENSIONS DE <span style="text-transform: uppercase;">{{ $type }}</span> <strong>
                 BEYLA</strong></div>
 
         <div

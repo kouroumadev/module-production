@@ -58,6 +58,9 @@ class EcheanceController extends Controller
         //  }
 
         $echeance_type = Echeance::where('id',$request->echeance_id)->value("type");
+        Echeance::where('id',$request->echeance_id)->update([
+            'status' => '0'
+        ]);
 
         // dd($echeance_type);
 
@@ -73,14 +76,18 @@ class EcheanceController extends Controller
     }
 
     public function payeIndex(int $id) {
-        $echeance_type = Echeance::where('id',$id)->value("type");
+
+        $data1 = Echeance::where('id',$id)->select('type','value')->get();
+        // dd($data1[0]->value);
+        $title = $data1[0]->value;
+        $echeance_type = $data1[0]->type;
 
         if($echeance_type == "retraite")
-            $retraites = EtatRetraite::where('echeance_id', $id)->get();
+            $retraites = EtatRetraite::where('echeance_id', $id)->limit(100)->get();
         else
-            $retraites = EtatReversion::where('echeance_id', $id)->get();
+            $retraites = EtatReversion::where('echeance_id', $id)->limit(100)->get();
         // dd($retraites);
-        return view('parametrage.echeance.paye', compact('retraites', 'id'));
+        return view('parametrage.echeance.paye', compact('retraites', 'id','echeance_type','title'));
 
     }
 
@@ -153,9 +160,9 @@ class EcheanceController extends Controller
     public function exportExcel(int $id)
     {
 
-        $data = Echeance::where('id',$id)->select('type','value');
-        $title = $data->value;
-        $type = $data->type;
+        $data = Echeance::where('id',$id)->select('type','value')->get();
+        $title = $data[0]->value;
+        $type = $data[0]->type;
 
 
         // $title = Echeance::find($id)->value('value');
@@ -263,15 +270,15 @@ class EcheanceController extends Controller
     }
 
     public function exportPdf(int $id) {
-        $data = Echeance::where('id',$id)->select('type','value')->get();
-        dd($data);
-        $title = $data['value'];
-        $type = $data['type'];
+        $data1 = Echeance::where('id',$id)->select('type','value')->get();
+        // dd($data1[0]->value);
+        $title = $data1[0]->value;
+        $type = $data1[0]->type;
 
         if($type == "retraite")
             $retraites = EtatRetraite::where('echeance_id', $id)->limit('200')->get();
         else
-            $retraites = EtatReversion::where('echeance_id', $id)->limit('200')->get();
+            $retraites = EtatReversion::where('echeance_id', $id)->limit('180')->get();
 
 
         $data = [
@@ -280,6 +287,7 @@ class EcheanceController extends Controller
             'retraites' => $retraites,
             'type' => $type,
         ];
+        //  dd($data);
 
         //  $pdf = SnappyPdf::loadView('files.paye.pension', $data);
         // // $pdf->setPaper('A4', 'landscape');
