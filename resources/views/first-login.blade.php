@@ -64,8 +64,7 @@
                                         <div class="input-group mb-0">
 
 
-                                            <input class="btn btn-warning btn-lg btn-block" type="submit"
-                                                value="Connexion">
+                                            <input class="btn btn-warning btn-lg btn-block" type="submit" value="Save">
 
 
                                         </div>

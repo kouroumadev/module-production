@@ -19,8 +19,16 @@ class AuthController extends Controller
 
         if (Auth::attempt($credential)) {
             $request->session()->regenerate();
-
-            return redirect()->intended(route('home'));
+            $first_log = Auth::user()->is_first;
+            $id = Auth::user()->id;
+            //dd($first_log);
+            if ($first_log == 1) {
+                return to_route('charge-first-login');
+            } else {
+                return redirect()->intended(route('home'));
+            }
+            
+           
         }
 
         return to_route('login')->withErrors([
@@ -28,6 +36,11 @@ class AuthController extends Controller
         ])->onlyInput('email');
     }
 
+    public function ChargeFirstLogin(){
+        $id = Auth::user()->id;
+        return view('first-login', compact('id'));
+    }
+    
     public function firstLogin(Request $request)
     {
         $id = $request->id;
@@ -52,7 +65,7 @@ class AuthController extends Controller
             Alert::success('Votre mot de passe a ete change avec Succès', 'success');
             return redirect('/');
         }
-        dd($user);
+        //dd($user);
     }
     public function Registration()
     {
@@ -82,6 +95,6 @@ class AuthController extends Controller
     public function Logout()
     {
         Auth::logout();
-        return to_route('login');
+        return to_route('home');
     }
 }
