@@ -16,4 +16,5 @@ class Echeance extends Model
         'status',
         'created_by',
     ];
+
 }

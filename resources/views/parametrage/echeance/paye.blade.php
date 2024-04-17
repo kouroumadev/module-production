@@ -61,11 +61,11 @@
                                 <td>{{ $ret->prenoms }}</td>
                                 <td>{{ $ret->nom }}</td>
                                 {{-- <td>{{ \Carbon\Carbon::parse($ret->date_de_naiss)->format('d-m-Y') }}</td> --}}
-                                <td>{{ \Carbon\Carbon::parse($ret->date_de_jouiss)->format('d-m-Y') }}</td>
+                                <td>{{ \AppHelper::getDateFormat($ret->date_de_jouiss) }}</td>
                                 <td>{{ $ret->assignation }}</td>
                                 {{-- <td>{{ $ret->assignation1 }}</td> --}}
                                 <td>{{ $ret->aociéte_orig }}</td>
-                                <td>{{ number_format((int)$ret->montant_a_paye,0,""," ") }}</td>
+                                <td>{{ \AppHelper::getMoneyFormat($ret->montant_a_paye) }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -105,54 +105,54 @@
                                                                </div>
                                                                <div>
                                                                     <span class="text-left font-weight-bold font-18">Date de Naissance</span>
-                                                                    <span class="float-right font-16">{{ \Carbon\Carbon::parse($ret->date_de_naiss)->format('d-m-Y') }}</span>
+                                                                    <span class="float-right font-16">{{ \AppHelper::getDateFormat($ret->date_de_naiss) }}</span>
                                                                </div>
                                                                <div>
                                                                     <span class="text-left font-weight-bold font-18">Date de Jouissance</span>
-                                                                    <span class="float-right font-16">{{ \Carbon\Carbon::parse($ret->date_de_jouiss)->format('d-m-Y') }}</span>
+                                                                    <span class="float-right font-16">{{ \AppHelper::getDateFormat($ret->date_de_jouiss) }}</span>
                                                                </div>
                                                                <div>
                                                                     <span class="text-left font-weight-bold font-18">Montant mens reval</span>
-                                                                    <span class="float-right font-16">{{ number_format((int)$ret->montant_mens_reval,0,""," ") }} GNF</span>
+                                                                    <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->montant_mens_reval) }} GNF</span>
                                                                </div>
                                                                <div>
                                                                     <span class="text-left font-weight-bold font-18">Montant avance</span>
-                                                                    <span class="float-right font-16">{{ number_format((int)$ret->montant_avance,0,""," ") }} GNF</span>
+                                                                    <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->montant_avance) }} GNF</span>
                                                                </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div>
                                                                     <span class="text-left font-weight-bold font-18">Trim du</span>
-                                                                    <span class="float-right font-16">{{ number_format((int)$ret->trim_du,0,""," ") }} GNF</span>
+                                                                    <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->trim_du) }} GNF</span>
                                                                </div>
                                                                <div>
                                                                     <span class="text-left font-weight-bold font-18">Pour</span>
-                                                                    <span class="float-right font-16">{{ number_format((int)$ret->pour,0,""," ") }} GNF</span>
+                                                                    <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->pour) }} GNF</span>
                                                                </div>
                                                                @if ($echeance_type == "reversion")
                                                                 <div>
                                                                     <span class="text-left font-weight-bold font-18">Solde Avance</span>
-                                                                    <span class="float-right font-16">{{ number_format((int)$ret->solde_avance,0,""," ") }} GNF</span>
+                                                                    <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->solde_avance) }} GNF</span>
                                                                 </div>
                                                                @endif
 
                                                                <div>
                                                                     <span class="text-left font-weight-bold font-18">Montant arriéré</span>
-                                                                    <span class="float-right font-16">{{ number_format((int)$ret->montant_arriere,0,""," ") }} GNF</span>
+                                                                    <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->montant_arriere) }} GNF</span>
                                                                </div>
                                                                <div>
                                                                     <span class="text-left font-weight-bold font-18">Montant à payer</span>
-                                                                    <span class="float-right font-16">{{ number_format((int)$ret->montant_a_paye,0,""," ") }} GNF</span>
+                                                                    <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->montant_a_paye) }} GNF</span>
                                                                </div>
                                                                @if ($echeance_type == "reversion")
                                                                 <div>
                                                                         <span class="text-left font-weight-bold font-18">Ayant cause</span>
-                                                                        <span class="float-right font-16">{{ number_format((int)$ret->ayant_causse,0,""," ") }} GNF</span>
+                                                                        <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->ayant_causse) }} GNF</span>
                                                                 </div>
                                                                @endif
                                                                <div>
                                                                     <span class="text-left font-weight-bold font-18">Mappr</span>
-                                                                    <span class="float-right font-16">{{ number_format((int)$ret->mappr,0,""," ") }} GNF</span>
+                                                                    <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->mappr) }} GNF</span>
                                                                </div>
                                                             </div>
                                                         </div>

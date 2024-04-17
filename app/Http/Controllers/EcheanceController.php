@@ -24,11 +24,18 @@ class EcheanceController extends Controller
         return view('parametrage.echeance.index', compact('data'));
     }
     public function echeanceStore(Request $request) {
-        //  dd($request->all());
+        // dd($request->all());
 
         // $this->validate($request,[
         //     'value'=>'required|unique:table,echeances,except,id',
         //  ]);
+
+        $val = Echeance::where('value', $request->value)->where('type', $request->type)->get();
+        if(count($val) > 0){
+            Alert::error('Cette Echeance existe déja !!', '');
+            return redirect(route('echeance.index'));
+        }
+
 
         $data = new Echeance();
         $data->type = $request->type;
