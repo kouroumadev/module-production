@@ -19,7 +19,7 @@
     </div>
 </div>
 
-<h5 class="text-center text-success">DECOMPTE VALIDE DE: {{ $data->miseRetraite->no_pensionne }}-{{ $data->employee->prenom_employee }} {{ $data->employee->nom_employee }}</h5>
+<h5 class="text-center text-success">DECOMPTE VALIDÉ DE: {{ $data->miseRetraite->no_pensionne }} {{ $data->employee->prenom_employee }} {{ $data->employee->nom_employee }}</h5>
 <div class="text-center mt-2">
     <img class="img-thumbnail" style="width: 150px; height: 150px;" id="image" src="{{ asset('storage/pensionnaireImg/'.$data->employee->photo) }}" alt="Picture">
 </div>
@@ -391,7 +391,7 @@
             <div class="form-group">
                 <label>Selectionner le departement concerner <span class="text-danger">*</span></label>
                 <select name="to_dept" class="form-control" required>
-                    <option value="">Selectionner</option>
+                    <option value="">-- Aucune selection --</option>
                     @foreach ($depts as $dept)
                         <option value="{{ $dept->id }}">{{ $dept->name }}</option>
                     @endforeach

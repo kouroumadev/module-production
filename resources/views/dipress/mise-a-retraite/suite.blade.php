@@ -163,11 +163,11 @@
            <thead class="bg-success">
                <tr>
                    {{-- <th class="table-plus text-white">#</th> --}}
+                   <th class="text-white text-center">CODE</th>
                    <th class="text-white text-center">ANNEE</th>
                    <th class="text-white text-center">SALAIRE ANNUEL</th>
                    <th class="text-white text-center">NBRE DE MOIS</th>
                    <th class="text-white text-center">SALAIRE MENSUEL</th>
-                   <th class="text-white text-center">CODE</th>
                    <th class="text-white text-center">SSC MENSUEL</th>
 
                    {{-- <th class="datatable-nosort text-white">Action</th> --}}
@@ -246,11 +246,11 @@
                ?>
                <tr>
                    {{-- <td class="">{{ $i }}</td> --}}
+                   <td class="text-center font-weight-bold">{{ $code }}</td>
                    <td class="text-center">{{ $cpt->annee }}</td>
                    <td class="text-center font-weight-bold">{{ number_format((int)$cpt->salaireAnnuel,0,""," ") }}</td>
                    <td class="text-center">{{ $cpt->mois }}</td>
                    <td class="text-center font-weight-bold">{{ number_format((int)$cpt->salairebrut,0,""," ") }}</td>
-                   <td class="text-center font-weight-bold">{{ $code }}</td>
                    <td class="text-center font-weight-bold">{{ number_format($soumis,0,""," ") }}</td>
                </tr>
                {{-- @php
@@ -276,9 +276,9 @@
    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="row card-box mb-30 shadow-lg p-2">
+<div class="row card-box mb-30 shadow-lg p-2">
+    <div class="col-md-4">
+        <div class="row">
             <div class="col-md-6">
                 <span class="font-12">SALAIRE MENSUEL MOYEN :</span> <br>
                 <span class="font-12">SALAIRE MENSUEL MOYEN SOUMIS EN {{ \Carbon\Carbon::parse($data->end_job_date)->format('Y') }} :</span> <br>
@@ -301,8 +301,8 @@
         </div>
 
     </div>
-    <div class="col-md-6">
-        <div class="row card-box mb-30 shadow-lg p-2">
+    <div class="col-md-8">
+        <div class="row">
             <div class="col-md-8">
                 <span class="font-12">MONTANT MENSUEL DE LA PENSION : {{ number_format($total_ssc_final/$total_mois,0,""," ") }} x {{ $annuite }} x 2% + {{ $added_mon }}% = </span> <br>
                 <span class="font-12">MONTANT ANNUEL DE LA PENSION :</span> <br>

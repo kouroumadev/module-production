@@ -154,7 +154,7 @@ class DipressController extends Controller
             $data = MiseRetraite::find($id);
 
             $comptes = DB::connection('metier')->table('gest_employe')
-                        ->where('no_employe','296241250990')
+                        ->where('no_employe',$data->employee->no_ima_employee) #296241250990
                         ->select('annee', 'no_employe', 'salairebrut', DB::raw('count(*) as mois'), DB::raw("SUM(salairebrut) as salaireAnnuel"))
                         // ->select('annee', DB::raw('count(*) as mois'))
                         ->groupBy('annee')

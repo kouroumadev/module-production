@@ -177,7 +177,7 @@
                             <td class=""> <a href="{{route('transfert.tracking',$doc->id)}}">{{ $doc->no_dossier}}</a> </td>
                             <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y')  }}</td>
                             <td> <span class="text-success"><i class="icon-copy ion-arrow-right-a"></i></span> {{$to[0]->name}} {{  \Carbon\Carbon::parse($doc->transfers->created_at)->format('d/m/Y') }}</td>
-                            <td> <span class="text-danger"><i class="icon-copy ion-arrow-left-a"></i></span> {{$from[0]->name}} {{ \Carbon\Carbon::parse($doc->transfers->created_at )->format('d/m/Y') }} 
+                            <td> <span class="text-danger"><i class="icon-copy ion-arrow-left-a"></i></span> {{$from[0]->name}} {{ \Carbon\Carbon::parse($doc->transfers->created_at )->format('d/m/Y') }}
                              @if ($doc->transfers->flag_retard == 1)
                                  <span class="text-danger"> retard</span>
                              @endif
@@ -327,7 +327,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <img src="{{asset('storage/pensionnaireImg/'.$data['emp_app'][0]->photo)}}" class="rounded" alt="No Image" id="img"
-                                                style='height:150px;'> <br>
+                                                style='height:150px; vis'> <br>
                                         </div>
                                     </div>
                                 @else
