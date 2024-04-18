@@ -27,4 +27,14 @@ class AppHelper {
         return DB::table('branche')->where('code', $id)->value('libelle');
     }
 
+    public static function getMontMensPens($total_ssc_final,$total_mois,$annuite,$added_mon) {
+        return self::getMoneyFormat((($total_ssc_final/$total_mois)*$annuite*(2+$added_mon))/100) ;
+    }
+    public static function getPensTrim($total_ssc_final,$total_mois,$annuite,$added_mon) {
+        return self::getMoneyFormat((((($total_ssc_final/$total_mois)*$annuite*(2+$added_mon))/100)*12)/4) ;
+    }
+    public static function getMontAnnuPens($total_ssc_final,$total_mois,$annuite,$added_mon) {
+        return self::getMoneyFormat((((($total_ssc_final/$total_mois)*$annuite*(2+$added_mon))/100)*12)) ;
+    }
+
 }
