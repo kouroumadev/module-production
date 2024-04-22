@@ -24,7 +24,12 @@ class AuthController extends Controller
             //dd($first_log);
             if ($first_log == 1) {
                 return to_route('charge-first-login');
-            } else {
+            } elseif(Auth::user()->status == 0){
+                return to_route('login')->withErrors([
+                    'message' => 'Votre compte à été suspendu. veillez contacté votre hierarchie',
+                ]);
+            }
+            else {
                 return redirect()->intended(route('home'));
             }
             

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -29,7 +29,8 @@ class AdminController extends Controller
     public function userStore(Request $request)
     {
         // dd($request->all());
-
+        $password = Str::password(8,true,true,false,false,false);
+        //dd($password);
         if ($request->hasFile('user_photo')) {
             $file = $request->file('user_photo')->getClientOriginalName();
             $filename = pathinfo($file, PATHINFO_FILENAME);
@@ -44,8 +45,8 @@ class AdminController extends Controller
         $user->dept_id = $request->dept_id;
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->c_password = $request->password;
+        $user->password = Hash::make($password);
+        $user->c_password = $password;
         $user->photo = $img;
 
         $user->save();
@@ -53,6 +54,42 @@ class AdminController extends Controller
         Alert::success('Enregistrer', 'Enregistrer avec success');
 
         return redirect(route('user.index'));
+    }
+
+    public function userReset($id){
+        $password = Str::password(8,true,true,false,false,false);
+        //dd($id);
+        $user = User::find($id);
+        $user->password = Hash::make($password);
+        $user->c_password = $password;
+        $user->is_first = 1;
+        $user->save();
+
+        Alert::success('Reinitialiser', 'Le mot de passe à été réinitialisé');
+
+        return redirect(route('user.index'));
+    }
+
+    public function userSuspended($id){
+        $user = User::find($id);
+
+        if ($user->status == 1) {
+            $user->status = 0;
+            $user->save();
+
+            Alert::success('Suspension', 'Ce compte à été suspendu');
+
+            return redirect(route('user.index'));
+        } else {
+            $user->status = 1;
+            $user->save();
+
+            Alert::success('Activation', 'Ce compte à été Activé');
+
+            return redirect(route('user.index'));
+        }
+        
+        
     }
 
     // END USER MANAGEMENT

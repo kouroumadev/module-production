@@ -33,10 +33,16 @@ Route::middleware('auth:sanctum')->group(function () {
     // UTILISATEUR
     Route::get('/user/index', [App\Http\Controllers\AdminController::class, 'userIndex'])->name('user.index');
     Route::post('/user/store', [App\Http\Controllers\AdminController::class, 'userStore'])->name('user.store');
+    Route::get('/user/reset/{id}', [App\Http\Controllers\AdminController::class, 'userReset'])->name('user.reset');
+    Route::get('/user/suspended/{id}', [App\Http\Controllers\AdminController::class, 'userSuspended'])->name('user.suspended');
+    Route::get('/user/update/{id}', [App\Http\Controllers\AdminController::class, 'userUpdate'])->name('user.update');
+
+
 
     // DOCUMENTS
     Route::get('/doc/index', [App\Http\Controllers\AdminController::class, 'docIndex'])->name('doc.index');
     Route::post('/doc/store', [App\Http\Controllers\AdminController::class, 'docStore'])->name('doc.store');
+    
 
     // PRESTATIONS ADMIN
     Route::get('/prest/index', [App\Http\Controllers\AdminController::class, 'PrestIndex'])->name('prest.index');
@@ -75,6 +81,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // SECRETARIAT
     Route::get('/secretariat/index', [App\Http\Controllers\SecretariatController::class, 'SecretariatIndex'])->name('secretariat.index');
     Route::get('/secretariat/etude/traitement/{id}', [App\Http\Controllers\SecretariatController::class, 'SecretariatTraitement'])->name('secretariat.traitement');
+
+    // AT
+    Route::get('/at/index', [App\Http\Controllers\ATController::class, 'AtIndex'])->name('at.index');
+    Route::get('/at/traitement/{id}', [App\Http\Controllers\ATController::class, 'AtTraitement'])->name('at.traitement');
 
     // DIRGA
     Route::get('/dirga/index', [App\Http\Controllers\DirgaController::class, 'DirgaIndex'])->name('dirga.index');

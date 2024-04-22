@@ -14,7 +14,9 @@
         color: black;
 
     }
-    a[href="#finish"],a[href="#finish"]:hover{
+
+    a[href="#finish"],
+    a[href="#finish"]:hover {
         background-color: transparent !important;
         display: none;
     }
@@ -58,13 +60,16 @@
                 <div class="form-group">
                     <select class="form-control" id="type_pension" name="type_pension" data-style="btn-outline-success"
                         data-size="5" required>
-                        <option selected>Selectionner le type de pension</option>
-                        <option value="Retraite">Retraite</option>
+                        @foreach ($prestations as $pres)
+                            <option value="{{ $pres->nom_prestation }}">{{ $pres->nom_prestation }}</option>
+                        @endforeach
+                        {{-- <option selected>Selectionner le type de pension</option>
+
                         <option value="reversion">Reversion</option>
                         <option value="Invalidite">Invalidite</option>
                         <option value="allocation de vieillesse">allocation de vieillesse</option>
                         <option value="Deces en Activite">Deces en Activite</option>
-                        <option value="Pensions Temporaires d'Orphelin">Pensions Temporaires d'Orphelin</option>
+                        <option value="Pensions Temporaires d'Orphelin">Pensions Temporaires d'Orphelin</option> --}}
 
                     </select>
                 </div>
@@ -111,119 +116,132 @@
                 </thead>
                 <tbody>
                     @foreach ($docs as $key => $doc)
-                    @php
-                        $current_date = \Carbon\Carbon::parse(\Carbon\Carbon::now());
-                        $deadline = \App\Models\Deadline::where('dept_id',Auth::user()->dept_id)->get();
-                        $dead_name = $deadline[0]->name;
-                        //dd($doc->transfers );
-                    @endphp
-                    @if ($doc->transfers == null)
-                        <tr>
-                            <td class=""> <a href="{{route('transfert.tracking',$doc->id)}}">{{ $doc->no_dossier}}</a> </td>
-
-                            <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y')  }}</td>
-                            <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y') }}</td>
-                            <td></td>
-                            <td><span class="badge badge-warning">INITIAL...</span></td>
-                            {{-- <td><span class="badge badge-warning">Initial...</span></td>  --}}
-
-                            @if ($current_date->diffInDays($doc->created_at) < (int)$dead_name)
-                                <td >
-                                    {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style=" text-align:center"></span>
-                                </td>
-                            @elseif ($current_date->diffInDays($doc->created_at) == (int)$dead_name)
-                                <td >
-                                    {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span>
-                                </td>
-                            @elseif ($current_date->diffInDays($doc->created_at) > (int)$dead_name)
-                                <td >
-                                    {{$current_date->diffInDays($doc->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span>
-                                </td>
-                            @endif
-
-                            {{-- @if (Auth::user()->dept->id == $deadline[0]->dept_id) --}}
-                                <td> {{$dead_name}} Jour(s)</td>
-                            {{-- @endif --}}
-
-                            <td>{{ $doc->type_doc }}</td>
-
-
-                            @if (Auth::user()->dept->name == "DQE")
-                                <td>
-                                    <a class="btn btn-success" href="{{ route('pension.details', $doc->id) }}">Traitement <i
-                                            class="fa fa-chevron-right" aria-hidden="true"></i> </a>
-                                </td>
-                            @else
-                                <td>
-                                    <span>En attente</span>
-                                </td>
-                            @endif
-
-                        </tr>
-                    @else
                         @php
-                            $from=\App\Models\Dept::where('id',$doc->transfers->from_dept)->get();
-                            $to=\App\Models\Dept::where('id',$doc->transfers->to_dept)->get();
-                            $deadline2 = \App\Models\Deadline::where('dept_id',$doc->transfers->to_dept)->get();
-                            if(count($deadline2)>0){
-                                $dead_name2 = $deadline2[0]->name;
-                            } else {
-                                $dead_name2 = "";
-                            }
-
+                            $current_date = \Carbon\Carbon::parse(\Carbon\Carbon::now());
+                            $deadline = \App\Models\Deadline::where('dept_id', Auth::user()->dept_id)->get();
+                            $dead_name = $deadline[0]->name;
+                            //dd($doc->transfers );
                         @endphp
+                        @if ($doc->transfers == null)
+                            <tr>
+                                <td class=""> <a
+                                        href="{{ route('transfert.tracking', $doc->id) }}">{{ $doc->no_dossier }}</a> </td>
 
-                        <tr>
-                            <td class=""> <a href="{{route('transfert.tracking',$doc->id)}}">{{ $doc->no_dossier}}</a> </td>
-                            <td>{{  \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y')  }}</td>
-                            <td> <span class="text-success"><i class="icon-copy ion-arrow-right-a"></i></span> {{$to[0]->name}} {{  \Carbon\Carbon::parse($doc->transfers->created_at)->format('d/m/Y') }}</td>
-                            <td> <span class="text-danger"><i class="icon-copy ion-arrow-left-a"></i></span> {{$from[0]->name}} {{ \Carbon\Carbon::parse($doc->transfers->created_at )->format('d/m/Y') }}
-                             @if ($doc->transfers->flag_retard == 1)
-                                 <span class="text-danger"> retard</span>
-                             @endif
-                            </td>
-                            {{-- <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td>  --}}
-                            <td><span class="badge badge-primary"> {{$to[0]->name}}  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span></td>
-                            @if ($current_date->diffInDays($doc->transfers->created_at) < (int)$dead_name2)
-                                <td >
-                                {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style=" text-align:center"></span>
+                                <td>{{ \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y') }}</td>
+                                <td></td>
+                                <td><span class="badge badge-warning">INITIAL...</span></td>
+                                {{-- <td><span class="badge badge-warning">Initial...</span></td>  --}}
+
+                                @if ($current_date->diffInDays($doc->created_at) < (int) $dead_name)
+                                    <td>
+                                        {{ $current_date->diffInDays($doc->created_at) }} <span class="badge "
+                                            style=" text-align:center"></span>
+                                    </td>
+                                @elseif ($current_date->diffInDays($doc->created_at) == (int) $dead_name)
+                                    <td>
+                                        {{ $current_date->diffInDays($doc->created_at) }} <span class="badge "
+                                            style="background-color: rgb(52, 224, 95); text-align:center">à temps</span>
+                                    </td>
+                                @elseif ($current_date->diffInDays($doc->created_at) > (int) $dead_name)
+                                    <td>
+                                        {{ $current_date->diffInDays($doc->created_at) }} <span class="badge "
+                                            style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span
+                                                class="spinner-grow spinner-grow-sm" role="status"
+                                                aria-hidden="true"></span></span>
+                                    </td>
+                                @endif
+
+                                {{-- @if (Auth::user()->dept->id == $deadline[0]->dept_id) --}}
+                                <td> {{ $dead_name }} Jour(s)</td>
+                                {{-- @endif --}}
+
+                                <td>{{ $doc->type_doc }}</td>
+
+
+                                @if (Auth::user()->dept->name == 'DQE')
+                                    <td>
+                                        <a class="btn btn-success"
+                                            href="{{ route('pension.details', $doc->id) }}">Traitement <i
+                                                class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                                    </td>
+                                @else
+                                    <td>
+                                        <span>En attente</span>
+                                    </td>
+                                @endif
+
+                            </tr>
+                        @else
+                            @php
+                                $from = \App\Models\Dept::where('id', $doc->transfers->from_dept)->get();
+                                $to = \App\Models\Dept::where('id', $doc->transfers->to_dept)->get();
+                                $deadline2 = \App\Models\Deadline::where('dept_id', $doc->transfers->to_dept)->get();
+                                if (count($deadline2) > 0) {
+                                    $dead_name2 = $deadline2[0]->name;
+                                } else {
+                                    $dead_name2 = '';
+                                }
+
+                            @endphp
+
+                            <tr>
+                                <td class=""> <a
+                                        href="{{ route('transfert.tracking', $doc->id) }}">{{ $doc->no_dossier }}</a>
                                 </td>
-                            @elseif ($current_date->diffInDays($doc->transfers->created_at) == (int)$dead_name2)
-                                <td >
-                                {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style="background-color: rgb(52, 224, 95); text-align:center">à temps</span>
+                                <td>{{ \Carbon\Carbon::parse($doc->created_at)->format('d/m/Y') }}</td>
+                                <td> <span class="text-success"><i class="icon-copy ion-arrow-right-a"></i></span>
+                                    {{ $to[0]->name }}
+                                    {{ \Carbon\Carbon::parse($doc->transfers->created_at)->format('d/m/Y') }}</td>
+                                <td> <span class="text-danger"><i class="icon-copy ion-arrow-left-a"></i></span>
+                                    {{ $from[0]->name }}
+                                    {{ \Carbon\Carbon::parse($doc->transfers->created_at)->format('d/m/Y') }}
+                                    @if ($doc->transfers->flag_retard == 1)
+                                        <span class="text-danger"> retard</span>
+                                    @endif
                                 </td>
-                            @elseif ($current_date->diffInDays($doc->transfers->created_at) > (int)$dead_name2)
-                                <td >
-                                {{$current_date->diffInDays($doc->transfers->created_at)}} <span class="badge " style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></span>
-                                </td>
-                            @endif
+                                {{-- <td><span class="badge badge-warning">{{$from[0]->name}} -> {{$to[0]->name}}</span></td>  --}}
+                                <td><span class="badge badge-primary"> {{ $to[0]->name }} <span
+                                            class="spinner-grow spinner-grow-sm" role="status"
+                                            aria-hidden="true"></span></span></td>
+                                @if ($current_date->diffInDays($doc->transfers->created_at) < (int) $dead_name2)
+                                    <td>
+                                        {{ $current_date->diffInDays($doc->transfers->created_at) }} <span class="badge "
+                                            style=" text-align:center"></span>
+                                    </td>
+                                @elseif ($current_date->diffInDays($doc->transfers->created_at) == (int) $dead_name2)
+                                    <td>
+                                        {{ $current_date->diffInDays($doc->transfers->created_at) }} <span class="badge "
+                                            style="background-color: rgb(52, 224, 95); text-align:center">à temps</span>
+                                    </td>
+                                @elseif ($current_date->diffInDays($doc->transfers->created_at) > (int) $dead_name2)
+                                    <td>
+                                        {{ $current_date->diffInDays($doc->transfers->created_at) }} <span class="badge "
+                                            style="background-color: rgb(229, 67, 42); text-align:center"> En retard <span
+                                                class="spinner-grow spinner-grow-sm" role="status"
+                                                aria-hidden="true"></span></span>
+                                    </td>
+                                @endif
 
-                            {{-- @if (Auth::user()->dept->id == $deadline[0]->dept_id) --}}
-                                <td> {{$dead_name2}} Jour(s)</td>
-                            {{-- @endif --}}
+                                {{-- @if (Auth::user()->dept->id == $deadline[0]->dept_id) --}}
+                                <td> {{ $dead_name2 }} Jour(s)</td>
+                                {{-- @endif --}}
 
-                            <td>{{ $doc->type_doc }}</td>
+                                <td>{{ $doc->type_doc }}</td>
 
-                            @if (Auth::user()->dept->name == $to[0]->name)
-                                <td>
-                                    <a class="btn btn-success" href="{{ route('pension.details', $doc->id) }}">Traitement <i
-                                            class="fa fa-chevron-right" aria-hidden="true"></i> </a>
-                                </td>
-
-                            @else
-                            <td>
-                                <span>En attente</span>
-                            </td>
+                                @if (Auth::user()->dept->name == $to[0]->name)
+                                    <td>
+                                        <a class="btn btn-success"
+                                            href="{{ route('pension.details', $doc->id) }}">Traitement <i
+                                                class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                                    </td>
+                                @else
+                                    <td>
+                                        <span>En attente</span>
+                                    </td>
+                                @endif
+                            </tr>
                         @endif
-                        </tr>
-
-                    @endif
-
-
-
-
-
-
                     @endforeach
 
                 </tbody>
@@ -242,14 +260,19 @@
                         <form action="{{ route('pension.store') }}" id="pension-store"
                             class="tab-wizard wizard-circle wizard" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <h5>Infos Personnelles</h5>
+                            @if ($type_pension == 'AT MORTEL' || $type_pension == 'AT NON MORTEL')
+                                <h5>Infos Victime</h5>
+                            @else
+                                <h5>Infos Personnelles</h5>
+                            @endif
                             <section>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>No Immatriculation :</label>
                                             <input type="text" class="form-control" name="no_ima_employee"
-                                                value="{{ $data['employe'][0]->no_employe }}" id="no_immat_disp" readonly>
+                                                value="{{ $data['employe'][0]->no_employe }}" id="no_immat_disp"
+                                                readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -292,26 +315,29 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if ($type_pension == 'reversion')
+                                @if ($type_pension == 'REVERSION')
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Telephone:</label>
                                                 <input type="text" class="form-control" name="tel_employee"
-                                                  value="{{ $data['emp_app'][0]->tel_employee}}" readonly  id="telephone_employe" required>
+                                                    value="{{ $data['emp_app'][0]->tel_employee }}" readonly
+                                                    id="telephone_employe" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Adresse:</label>
                                                 <input type="text" class="form-control" name="adresse_employee"
-                                                   value="{{ $data['emp_app'][0]->adresse_employee }}" readonly id="adresse_employe" required>
+                                                    value="{{ $data['emp_app'][0]->adresse_employee }}" readonly
+                                                    id="adresse_employe" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Situation Matrimoniale:</label>
-                                                <input type="text" class="form-control" name="situation_matri_employee"
+                                                <input type="text" class="form-control"
+                                                    name="situation_matri_employee"
                                                     value="{{ $data['employe'][0]->statut }}" id="statut" readonly>
                                             </div>
                                         </div>
@@ -326,8 +352,9 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <img src="{{asset('storage/pensionnaireImg/'.$data['emp_app'][0]->photo)}}" class="rounded" alt="No Image" id="img"
-                                                style='height:150px; vis'> <br>
+                                            <img src="{{ asset('storage/pensionnaireImg/' . $data['emp_app'][0]->photo) }}"
+                                                class="rounded" alt="No Image" id="img" style='height:150px; vis'>
+                                            <br>
                                         </div>
                                     </div>
                                 @else
@@ -349,7 +376,8 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Situation Matrimoniale:</label>
-                                                <input type="text" class="form-control" name="situation_matri_employee"
+                                                <input type="text" class="form-control"
+                                                    name="situation_matri_employee"
                                                     value="{{ $data['employe'][0]->statut }}" id="statut" readonly>
                                             </div>
                                         </div>
@@ -372,6 +400,67 @@
 
 
                             </section>
+                            {{-- if and only type pension is at mortel ou non --}}
+                            @if ($type_pension == 'AT MORTEL' || $type_pension == 'AT NON MORTEL')
+                                <h5>Accident Info</h5>
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>type accident:</label>
+                                                <input type="text" class="form-control" name="type_accident"
+                                                    value="{{ $type_pension }}" id="type_accident_disp" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>date d'accident :</label>
+                                                <input type="text" class="form-control date-picker"
+                                                    name="date_accident" value="" id="date_accident">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>heure Accident :</label>
+                                                <input class="form-control time-picker-default td-input"
+                                                    placeholder="time" type="text" name="heure_accident"
+                                                    value="" id="heure_accident" readonly="">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Agent Materiel:</label>
+                                                <input type="text" class="form-control" name="agent_materiel"
+                                                    value="" id="agent_materiel">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Nature lésions</label>
+                                                <input type="text" class="form-control" name="nature_lesion"
+                                                    value="" id="nature_lesion">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Conséquences</label>
+                                                <select class="custom-select col-12" name="consequence">
+                                                    <option selected="">Choose...</option>
+                                                    <option value="sans arret de travail">sans arret de travail</option>
+                                                    <option value="avec arret de travail">avec arret de travail</option>
+                                                    <option value="deces">décès</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </section>
+                            @endif
                             <!-- Step 2 -->
                             <h5>Infos Employeur</h5>
                             <section>
@@ -420,62 +509,64 @@
                                 @if ($data['employeDetails'] == null)
                                     <h4 style="text-align: center">Pas de Conjoint</h4>
                                 @else
-                                <div class="faq-wrap">
-                                    @foreach ($data['employeDetails'] as $key => $value)
-                                        <div id="accordion">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <div class="btn btn-block text-bold" data-toggle="collapse"
-                                                        data-target="faq{{ $key }}">
-                                                        <span class="text-bold">Conjoint(e) {{ $key + 1 }} -
-                                                            {{ strtoupper($value['conjoint_name']) }}
-                                                            {{ strtoupper($value['conjoint_prenom']) }} </span>
+                                    <div class="faq-wrap">
+                                        @foreach ($data['employeDetails'] as $key => $value)
+                                            <div id="accordion">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="btn btn-block text-bold" data-toggle="collapse"
+                                                            data-target="faq{{ $key }}">
+                                                            <span class="text-bold">Conjoint(e) {{ $key + 1 }} -
+                                                                {{ strtoupper($value['conjoint_name']) }}
+                                                                {{ strtoupper($value['conjoint_prenom']) }} </span>
+                                                        </div>
+                                                    </div>
+                                                    <div id="faq{{ $key }}" class="collapse show"
+                                                        data-parent="accordion">
+                                                        <div class="card-body">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">#</th>
+                                                                        <th scope="col">Nom</th>
+                                                                        <th scope="col">Prenom</th>
+                                                                        <th scope="col">date de Naissance</th>
+                                                                        <th scope="col">Lieu de Naissance</th>
+                                                                        <th scope="col">Ordre de Naissance</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <h5 class="text-center p-3">Liste des enfants</h5>
+                                                                    @foreach ($value['enfants'] as $key => $enfant)
+                                                                        @if ($enfant == null)
+                                                                            <div class="alert alert-secondary"
+                                                                                role="alert">
+                                                                                Pas d'enfants
+                                                                            </div>
+                                                                        @else
+                                                                            <tr>
+                                                                                <th scope="row">{{ $key + 1 }}
+                                                                                </th>
+                                                                                <td>{{ $enfant->nom }}</td>
+                                                                                <td>{{ $enfant->prenoms }}</td>
+                                                                                <td>{{ $enfant->date_naissance }}</td>
+                                                                                <td>{{ $enfant->lieu_naissance }}</td>
+                                                                                <td>{{ $enfant->ordre }}</td>
+
+                                                                            </tr>
+                                                                        @endif
+                                                                    @endforeach
+
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div id="faq{{ $key }}" class="collapse show"
-                                                    data-parent="accordion">
-                                                    <div class="card-body">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th scope="col">#</th>
-                                                                    <th scope="col">Nom</th>
-                                                                    <th scope="col">Prenom</th>
-                                                                    <th scope="col">date de Naissance</th>
-                                                                    <th scope="col">Lieu de Naissance</th>
-                                                                    <th scope="col">Ordre de Naissance</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <h5 class="text-center p-3">Liste des enfants</h5>
-                                                                @foreach ($value['enfants'] as $key => $enfant)
-                                                                    @if ($enfant == null)
-                                                                        <div class="alert alert-secondary" role="alert">
-                                                                            Pas d'enfants
-                                                                        </div>
-                                                                    @else
-                                                                        <tr>
-                                                                            <th scope="row">{{ $key + 1 }}</th>
-                                                                            <td>{{ $enfant->nom }}</td>
-                                                                            <td>{{ $enfant->prenoms }}</td>
-                                                                            <td>{{ $enfant->date_naissance }}</td>
-                                                                            <td>{{ $enfant->lieu_naissance }}</td>
-                                                                            <td>{{ $enfant->ordre }}</td>
 
-                                                                        </tr>
-                                                                    @endif
-                                                                @endforeach
-
-
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
                                             </div>
-
-                                        </div>
-                                    @endforeach
-                                </div>
+                                        @endforeach
+                                    </div>
                                 @endif
 
 
@@ -544,12 +635,7 @@
                                                 placeholder="Entrer email" id="email_deposant" onblur="recapDeposant()">
                                         </div>
                                     </div>
-                                    {{-- <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Telephone</label>
-                                    <input type="text" class="form-control" name="telephone_deposant" placeholder="Entrer le Numero de telephone">
-                                </div>
-                            </div> --}}
+
                                 </div>
                             </section>
                             <!-- Step 5 -->
@@ -616,9 +702,25 @@
                                                         'prestation_id',
                                                         $pension_tempo_orph[0]->id,
                                                     )->get();
+                                                    $at_mortel = \App\Models\Prestation::where(
+                                                        'nom_prestation',
+                                                        'AT MORTEL',
+                                                    )->get();
+                                                    $at_mortel_doc = \App\Models\Piece::where(
+                                                        'prestation_id',
+                                                        $at_mortel[0]->id,
+                                                    )->get();
+                                                    $at_non_mortel = \App\Models\Prestation::where(
+                                                        'nom_prestation',
+                                                        'AT MORTEL',
+                                                    )->get();
+                                                    $at_non_mortel_doc = \App\Models\Piece::where(
+                                                        'prestation_id',
+                                                        $at_non_mortel[0]->id,
+                                                    )->get();
                                                     // dd($retraite_doc);
                                                 @endphp
-                                                @if ($type_pension == 'Retraite')
+                                                @if ($type_pension == 'RETRAITE')
                                                     @foreach ($retraite_doc as $key => $item)
                                                         <tr>
                                                             <th scope="row">{{ $key + 1 }}</th>
@@ -632,21 +734,20 @@
                                                                 value="{{ $item->nom_piece }}">
                                                             <th scope="row">
                                                                 @if ($item->obligation == '1')
-                                                                    <input type="file"
-                                                                    id="file{{ $key }}" name="files[]"
-                                                                    accept="application/pdf"
-                                                                    class="form-control-file form-control height-auto"
-                                                                    data-toggle="modal" data-target="#bd-example-modal-lg"
-                                                                    onchange="myFunction('file{{ $key }}','file{{ $key }}_statut')"
-                                                                    required />
+                                                                    <input type="file" id="file{{ $key }}"
+                                                                        name="files[]" accept="application/pdf"
+                                                                        class="form-control-file form-control height-auto"
+                                                                        data-toggle="modal"
+                                                                        data-target="#bd-example-modal-lg"
+                                                                        onchange="myFunction('file{{ $key }}','file{{ $key }}_statut')"
+                                                                        required />
                                                                 @else
-                                                                    <input type="file"
-                                                                    id="file{{ $key }}" name="files[]"
-                                                                    accept="application/pdf"
-                                                                    class="form-control-file form-control height-auto"
-                                                                    data-toggle="modal" data-target="#bd-example-modal-lg"
-                                                                    onchange="myFunction('file{{ $key }}','file{{ $key }}_statut')"
-                                                                     />
+                                                                    <input type="file" id="file{{ $key }}"
+                                                                        name="files[]" accept="application/pdf"
+                                                                        class="form-control-file form-control height-auto"
+                                                                        data-toggle="modal"
+                                                                        data-target="#bd-example-modal-lg"
+                                                                        onchange="myFunction('file{{ $key }}','file{{ $key }}_statut')" />
                                                                 @endif
 
                                                             </th>
@@ -656,11 +757,8 @@
                                                                         aria-hidden="true"></i> Non Chargé</span></th>
                                                         </tr>
                                                     @endforeach
-
-
-
-                                                @elseif ($type_pension == 'reversion')
-                                                @foreach ($reversion_doc as $key => $item)
+                                                @elseif ($type_pension == 'REVERSION')
+                                                    @foreach ($reversion_doc as $key => $item)
                                                         <tr>
                                                             <th scope="row">{{ $key + 1 }}</th>
                                                             <th scope="row">{{ $item->nom_piece }}
@@ -683,35 +781,9 @@
                                                                         class="icon-copy fa fa-warning"
                                                                         aria-hidden="true"></i> Non Chargé</span></th>
                                                         </tr>
-                                                @endforeach
-
-                                                @elseif ($type_pension == 'Invalidite')
-                                                @foreach ($invalidite_doc as $key => $item)
-                                                <tr>
-                                                    <th scope="row">{{ $key + 1 }}</th>
-                                                    <th scope="row">{{ $item->nom_piece }}
-                                                        @if ($item->obligation == '1')
-                                                            <span class="text-danger">*</span>
-                                                        @endif
-
-                                                    </th>
-                                                    <input type="hidden" name="titles[]"
-                                                        value="{{ $item->nom_piece }}">
-                                                    <th scope="row"><input type="file"
-                                                            id="file{{ $key }}" name="files[]"
-                                                            accept="application/pdf"
-                                                            class="form-control-file form-control height-auto"
-                                                            data-toggle="modal" data-target="#bd-example-modal-lg"
-                                                            onchange="myFunction('file{{ $key }}','file{{ $key }}_statut')"
-                                                            required /></th>
-                                                    <th scope="row" id="file{{ $key }}_statut"><span
-                                                            class="badge badge-danger"><i
-                                                                class="icon-copy fa fa-warning"
-                                                                aria-hidden="true"></i> Non Chargé</span></th>
-                                                </tr>
-                                                @endforeach
-                                                @elseif ($type_pension == 'allocation de vieillesse')
-                                                @foreach ($allocation_de_veillesse_doc as $key => $item)
+                                                    @endforeach
+                                                @elseif ($type_pension == 'INVALIDITE')
+                                                    @foreach ($invalidite_doc as $key => $item)
                                                         <tr>
                                                             <th scope="row">{{ $key + 1 }}</th>
                                                             <th scope="row">{{ $item->nom_piece }}
@@ -734,9 +806,9 @@
                                                                         class="icon-copy fa fa-warning"
                                                                         aria-hidden="true"></i> Non Chargé</span></th>
                                                         </tr>
-                                                @endforeach
-                                                @elseif ($type_pension == 'Deces en Activite')
-                                                @foreach ($deces_en_activite_doc as $key => $item)
+                                                    @endforeach
+                                                @elseif ($type_pension == 'ALLOCATION DE VEILLESSE')
+                                                    @foreach ($allocation_de_veillesse_doc as $key => $item)
                                                         <tr>
                                                             <th scope="row">{{ $key + 1 }}</th>
                                                             <th scope="row">{{ $item->nom_piece }}
@@ -759,9 +831,9 @@
                                                                         class="icon-copy fa fa-warning"
                                                                         aria-hidden="true"></i> Non Chargé</span></th>
                                                         </tr>
-                                                @endforeach
-                                                @elseif ($type_pension == "Pensions Temporaires d'Orphelin")
-                                                @foreach ($pension_tempo_orph_doc as $key => $item)
+                                                    @endforeach
+                                                @elseif ($type_pension == 'DECES EN ACTIVITE')
+                                                    @foreach ($deces_en_activite_doc as $key => $item)
                                                         <tr>
                                                             <th scope="row">{{ $key + 1 }}</th>
                                                             <th scope="row">{{ $item->nom_piece }}
@@ -784,7 +856,58 @@
                                                                         class="icon-copy fa fa-warning"
                                                                         aria-hidden="true"></i> Non Chargé</span></th>
                                                         </tr>
-                                                @endforeach
+                                                    @endforeach
+                                                @elseif ($type_pension == 'PENSION TEMPORAIRES ORPHELIN')
+                                                    @foreach ($pension_tempo_orph_doc as $key => $item)
+                                                        <tr>
+                                                            <th scope="row">{{ $key + 1 }}</th>
+                                                            <th scope="row">{{ $item->nom_piece }}
+                                                                @if ($item->obligation == '1')
+                                                                    <span class="text-danger">*</span>
+                                                                @endif
+
+                                                            </th>
+                                                            <input type="hidden" name="titles[]"
+                                                                value="{{ $item->nom_piece }}">
+                                                            <th scope="row"><input type="file"
+                                                                    id="file{{ $key }}" name="files[]"
+                                                                    accept="application/pdf"
+                                                                    class="form-control-file form-control height-auto"
+                                                                    data-toggle="modal" data-target="#bd-example-modal-lg"
+                                                                    onchange="myFunction('file{{ $key }}','file{{ $key }}_statut')"
+                                                                    required /></th>
+                                                            <th scope="row" id="file{{ $key }}_statut"><span
+                                                                    class="badge badge-danger"><i
+                                                                        class="icon-copy fa fa-warning"
+                                                                        aria-hidden="true"></i> Non Chargé</span></th>
+                                                        </tr>
+                                                    @endforeach
+                                                @elseif ($type_pension == 'AT MORTEL')
+                                                    @foreach ($at_mortel_doc as $key => $item)
+                                                        <tr>
+                                                            <th scope="row">{{ $key + 1 }}</th>
+                                                            <th scope="row">{{ $item->nom_piece }}
+                                                                @if ($item->obligation == '1')
+                                                                    <span class="text-danger">*</span>
+                                                                @endif
+
+                                                            </th>
+                                                            <input type="hidden" name="titles[]"
+                                                                value="{{ $item->nom_piece }}">
+                                                            <th scope="row"><input type="file"
+                                                                    id="file{{ $key }}" name="files[]"
+                                                                    accept="application/pdf"
+                                                                    class="form-control-file form-control height-auto"
+                                                                    data-toggle="modal" data-target="#bd-example-modal-lg"
+                                                                    onchange="myFunction('file{{ $key }}','file{{ $key }}_statut')"
+                                                                    required /></th>
+                                                            <th scope="row" id="file{{ $key }}_statut">
+                                                                <span class="badge badge-danger"><i
+                                                                        class="icon-copy fa fa-warning"
+                                                                        aria-hidden="true"></i> Non Chargé</span>
+                                                            </th>
+                                                        </tr>
+                                                    @endforeach
                                                 @endif
                                             </tbody>
                                         </table>
@@ -879,7 +1002,8 @@
                                                                     <span class="text-bold">Conjoint(e)
                                                                         {{ $key + 1 }} -
                                                                         {{ strtoupper($value['conjoint_name']) }}
-                                                                        {{ strtoupper($value['conjoint_prenom']) }} </span>
+                                                                        {{ strtoupper($value['conjoint_prenom']) }}
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                             <div id="faq{{ $key }}" class="collapse show"
@@ -1090,7 +1214,7 @@
                             <input type="hidden" name="matricule" value="{{ $data['employe'][0]->matricule }}"
                                 id="">
 
-                                <button type="submit" class="btn btn-success">Envoyer</button>
+                            <button type="submit" class="btn btn-success">Envoyer</button>
 
                         </form>
                     </div>
@@ -1159,8 +1283,6 @@
                         '<span class="bg-success p-2 rounded text-white"><i class="icon-copy fa fa-thumbs-up" aria-hidden="true"></i> Chargé</span>';
                 }
             }
-
-
         </script>
 
     @endif
