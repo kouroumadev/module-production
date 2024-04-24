@@ -457,6 +457,31 @@
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Nom Témoin:</label>
+                                                <input type="text" class="form-control" name="nom_temoin"
+                                                    value="" id="nom_temoin_disp" placeholder="nom">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Prenom Témoin:</label>
+                                                <input type="text" class="form-control" placeholder="prenom"
+                                                    name="prenom_temoin" value="" id="prenom_temoin">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Adresse Témoin:</label>
+                                                <input class="form-control" placeholder="adresse" type="text"
+                                                    name="adresse_temoin" value="" id="adresse_temoin"
+                                                    placeholder="adresse">
+
+                                            </div>
+                                        </div>
+                                    </div>
 
 
                                 </section>
@@ -882,7 +907,7 @@
                                                                         aria-hidden="true"></i> Non Chargé</span></th>
                                                         </tr>
                                                     @endforeach
-                                                @elseif ($type_pension == 'AT MORTEL')
+                                                @elseif ($type_pension == 'AT MORTEL' || $type_pension == 'AT NON MORTEL')
                                                     @foreach ($at_mortel_doc as $key => $item)
                                                         <tr>
                                                             <th scope="row">{{ $key + 1 }}</th>
