@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Accident;
 use App\Models\Deposant;
+use App\Models\Dept;
 use App\Models\Doc;
 use App\Models\Employee;
 use App\Models\Employer;
-use App\Models\Dept;
 use App\Models\Enfant;
-use App\Models\user;
 use App\Models\Wife;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,77 +17,75 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PensionController extends Controller
 {
-    public function show(){
+    public function show()
+    {
         $emps = Auth::user()->employees;
+
         // dd($emps);
         return view('pensionnaire.show', compact('emps'));
     }
-    public function details(int $id){
+
+    public function details(int $id)
+    {
         //$emp = Employee::find($id);
         $emp = Doc::find($id);
         $depts = Dept::all();
-         //dd($emp->data['paths'][0]);
-        return view('pensionnaire.details', compact('emp','depts'));
+
+        //dd($emp->data['paths'][0]);
+        return view('pensionnaire.details', compact('emp', 'depts'));
     }
-    public function store(Request $request) {
-        $no_dossier = rand(1,100);
-        // dd($request->all());
-        $emp = Employee::where('no_ima_employee',$request->no_ima_employee)->get();
+
+    public function store(Request $request)
+    {
+        $no_dossier = rand(1, 100);
+        //dd($request->all());
+        $emp = Employee::where('no_ima_employee', $request->no_ima_employee)->get();
         //dd($emp[0]->id);
         $user_id = Auth::user()->id;
         // dd($request->all());
         if ($request->type_pension == 'reversion') {
-        
 
+            if ($request->hasfile('files')) {
+                $noms = [];
+                $titles = [];
+                $data = [];
 
+                foreach ($request->file('files') as $file) {
+                    $name = time().rand(1, 100).'.'.$file->extension();
+                    $file->storeAs('public/docs', $name);
+                    $noms[] = $name;
+                }
 
-        if($request->hasfile('files'))
-         {
-            $noms = [];
-            $titles = [];
-            $data = [];
+                for ($i = 0; $i < count($noms); $i++) {
+                    $titles[] = $request->titles[$i];
+                }
 
-            foreach($request->file('files') as $file)
-            {
-                $name = time().rand(1,100).'.'.$file->extension();
-                $file->storeAs('public/docs', $name);
-                $noms[] = $name;
+                $data['paths'] = $noms;
+                $data['titles'] = $titles;
+
+                $doc = new Doc();
+                $doc->employee_id = $emp[0]->id;
+                $doc->data = $data;
+                $doc->level = '';
+                $doc->no_dossier = $no_dossier;
+                $doc->type_doc = $request->type_pension;
+                $doc->created_by = $user_id;
+                $doc->save();
             }
 
-            for($i=0; $i<count($noms); $i++){
-                $titles[] = $request->titles[$i];
-            }
+            Alert::success(' Document Enregistré', '');
 
-            $data['paths'] = $noms;
-            $data['titles'] = $titles;
+            return redirect(route('pension.index'))->with('yes', 'Enregistrer avec succes');
+        } else {
 
-            $doc = new Doc();
-            $doc->employee_id = $emp[0]->id;
-            $doc->data = $data;
-            $doc->level = '';
-            $doc->no_dossier = $no_dossier;
-            $doc->type_doc = $request->type_pension;
-            $doc->created_by = $user_id;
-            $doc->save();
-         }
-
-
-
-        Alert::success(' Document Enregistré', '');
-        return redirect(route('pension.index'))->with('yes','Enregistrer avec succes');
-        }
-        else
-        {
-
-
-            $no_dossier = rand(1,100);
+            $no_dossier = rand(1, 100);
             $file = $request->file('pensionnaire_photo')->getClientOriginalName();
             $filename = pathinfo($file, PATHINFO_FILENAME);
             $extension = pathinfo($file, PATHINFO_EXTENSION);
 
-            $img = $filename."-".time()."-".$request->no_ima_employee.".".$extension;
+            $img = $filename.'-'.time().'-'.$request->no_ima_employee.'.'.$extension;
 
-            Storage::disk('pensionnaireImg')->put($img,file_get_contents($request->file('pensionnaire_photo')));
+            Storage::disk('pensionnaireImg')->put($img, file_get_contents($request->file('pensionnaire_photo')));
 
             $employer = new Employer();
             $employer->no_employer = $request->no_employer;
@@ -96,7 +94,6 @@ class PensionController extends Controller
             $employer->created_by = $user_id;
             $employer->save();
             $employer_last_id = $employer->id;
-
 
             $employee = new Employee();
             $employee->employer_id = $employer_last_id;
@@ -170,17 +167,28 @@ class PensionController extends Controller
             $employee->save();
             $employee_last_id = $employee->id;
 
+            if ($request->type_pension == 'AT MORTEL' || $request->type_pension == 'AT NON MORTEL') {
+                $accident = new Accident();
+                $accident->employee_id = $employee_last_id;
+                $accident->type_accident = $request->type_accident;
+                $accident->date_accident = $request->date_accident;
+                $accident->heure_accident = $request->heure_accident;
+                $accident->agent_materiel = $request->agent_materiel;
+                $accident->nature_lesion = $request->nature_lesion;
+                $accident->consequence = $request->consequence;
+                $accident->nom_temoin = $request->nom_temoin;
+                $accident->prenom_temoin = $request->prenom_temoin;
+                $accident->adresse_temoin = $request->adresse_temoin;
+                $accident->save();
 
-
-            if($request->hasfile('files'))
-            {
+            }
+            if ($request->hasfile('files')) {
                 $noms = [];
                 $titles = [];
                 $data = [];
 
-                foreach($request->file('files') as $key => $file)
-                {
-                    $name = time().rand(1,100).'.'.$file->extension();
+                foreach ($request->file('files') as $key => $file) {
+                    $name = time().rand(1, 100).'.'.$file->extension();
                     $file->storeAs('public/docs', $name);
                     $noms[] = $name;
                     $titles[] = $request->titles[$key];
@@ -203,7 +211,6 @@ class PensionController extends Controller
                 $doc->save();
             }
 
-
             $deposant = new Deposant();
             $deposant->employee_id = $employee_last_id;
             $deposant->nom_deposant = $request->nom_deposant;
@@ -215,7 +222,7 @@ class PensionController extends Controller
             $deposant->created_by = $user_id;
             $deposant->save();
 
-            foreach(json_decode($request->details) as $data){
+            foreach (json_decode($request->details) as $data) {
                 $wife = new Wife();
                 $wife->employee_id = $employee_last_id;
                 $wife->nom_wife = $data->conjoint_name;
@@ -228,8 +235,8 @@ class PensionController extends Controller
                 $wife->save();
                 $wife_last_id = $wife->id;
 
-                if(count($data->enfants) > 0){
-                    foreach($data->enfants as $enf){
+                if (count($data->enfants) > 0) {
+                    foreach ($data->enfants as $enf) {
                         $child = new Enfant();
                         $child->employee_id = $employee_last_id;
                         $child->wife_id = $wife_last_id;
@@ -247,7 +254,8 @@ class PensionController extends Controller
 
             }
             Alert::success(' Document Enregistré', '');
-            return redirect(route('pension.index'))->with('yes','Enregistrer avec succes');
+
+            return redirect(route('pension.index'))->with('yes', 'Enregistrer avec succes');
         }
 
     }
