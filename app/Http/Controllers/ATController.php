@@ -30,8 +30,8 @@ class ATController extends Controller
 
         $comptes = DB::connection('metier')->table('gest_employe')
             ->where('no_employe', $emp->no_ima_employee)->get();
-        dd($comptes[0]->salairebrut);
+        // dd($comptes[0]->salairebrut);
 
-        return view('at.traitement', compact('emp', 'comptes'));
+        return view('at.traitement', compact('emp', 'comptes', 'accident'));
     }
 }

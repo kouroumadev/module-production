@@ -47,28 +47,15 @@
                     class="float-right font-12">{{ \Carbon\Carbon::parse($emp->date_naissance_employee)->format('d-m-Y') }}</span>
             </div>
             <div>
-                <span class="text-left font-weight-bold font-14">Age actuel</span>
-                <span
-                    class="float-right font-12">{{ \Carbon\Carbon::parse($emp->date_naissance_employee)->diff(\Carbon\Carbon::now())->format('%y ans et %m mois') }}
-                </span>
-            </div>
-            <div>
-                <span class="text-left font-weight-bold font-14">Nationalite</span>
-                <span class="float-right font-12">{{ $emp->nationalite }}</span>
-            </div>
-            <div>
-                <span class="text-left font-weight-bold font-14">Profession</span>
-                <span class="float-right font-12">{{ $emp->profession }}</span>
-            </div>
-            <div>
                 <span class="text-left font-weight-bold font-14">Date de décès</span>
-                <span class="float-right font-12">{{ $accident[0]->date_deces }}</span>
+                <span class="float-right font-12 text-danger">{{ $accident[0]->date_deces }} </span>
             </div>
 
             <div>
                 <span class="text-left font-weight-bold font-14">Employeur(s)</span>
-                <span class="float-right font-12">{{ $emp->employer->raison_sociale }}</span>
+                <span class="float-right font-12 text-danger">{{ $emp->employer->raison_sociale }}</span>
             </div>
+
         </div>
 
         <div class="col-md-6">
@@ -82,37 +69,34 @@
             </div>
             <div>
                 <span class="text-left font-weight-bold font-14">Date Accident</span>
-                <span class="float-right font-12">{{ $accident->date_accident }}</span>
+                <span class="float-right font-12">{{ $accident[0]->date_accident }}</span>
             </div>
             <div>
                 <span class="text-left font-weight-bold font-14">Lieu de naissance</span>
                 <span class="float-right font-12">{{ $emp->lieu_naissance_employee }}</span>
             </div>
-            <div>
-                <span class="text-left font-weight-bold font-14">Pays</span>
-                <span class="float-right font-12">{{ $emp->pays_id }}</span>
-            </div>
+
             <div>
                 <span class="text-left font-weight-bold font-14">Salaire Mensuel</span>
-                <span class="float-right font-12">{{ number_format((int) $decomptes[0]->salairebrut, 0, '', ' ') }}</span>
-            </div>
-            <div>
-                <span class="text-left font-weight-bold font-14">Date immatriculation en cotisation</span>
                 <span
-                    class="float-right font-12">{{ \Carbon\Carbon::parse($emp->date_immatriculation)->format('d-m-Y') }}</span>
+                    class="float-right font-12 text-danger">{{ number_format((int) $comptes[0]->salairebrut, 0, '', ' ') }}
+                    GNF</span>
             </div>
             <div>
-                <span class="text-left font-weight-bold font-14">Date acception dossier</span>
-                <span class="float-right font-12">{{ $emp->created_at->format('d-m-Y') }}</span>
+                <span class="text-left font-weight-bold font-14">Age actuel</span>
+                <span
+                    class="float-right font-12">{{ \Carbon\Carbon::parse($emp->date_naissance_employee)->diff(\Carbon\Carbon::now())->format('%y ans et %m mois') }}
+                </span>
             </div>
             <div>
-                <span class="text-left font-weight-bold font-14">NoDossier depose</span>
-                <span class="float-right font-12"></span>
+                <span class="text-left font-weight-bold font-14">Nationalite</span>
+                <span class="float-right font-12">{{ $emp->nationalite }}</span>
             </div>
             <div>
-                <span class="text-left font-weight-bold font-14">Date de premier depot</span>
-                <span class="float-right font-12">{{ $emp->created_at->format('d-m-Y') }}</span>
+                <span class="text-left font-weight-bold font-14">Profession</span>
+                <span class="float-right font-12">{{ $emp->profession }}</span>
             </div>
+
         </div>
     </div>
 @endsection
