@@ -81,7 +81,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // AT
     Route::get('/at/index', [App\Http\Controllers\ATController::class, 'AtIndex'])->name('at.index');
     Route::get('/at/traitement/{id}', [App\Http\Controllers\ATController::class, 'AtTraitement'])->name('at.traitement');
-    Route::get('/at/traitement/{id}', [App\Http\Controllers\ATController::class, 'AtTraitement'])->name('at.traitement');
+    // Route::get('/at/traitement/{id}', [App\Http\Controllers\ATController::class, 'AtTraitement'])->name('at.traitement');
 
     // DIRGA
     Route::get('/dirga/index', [App\Http\Controllers\DirgaController::class, 'DirgaIndex'])->name('dirga.index');
