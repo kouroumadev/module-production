@@ -97,12 +97,12 @@
                                 <div class="tab height-100-p">
                                     <ul class="nav nav-tabs customtab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#timeline"
+                                            <a class="nav-link active" data-toggle="tab" href="#employeur"
                                                 role="tab">Employeur</a>
                                         </li>
                                         @if ($emp->type_doc == 'AT MORTEL' || $emp->type_doc == 'AT NON MORTEL')
                                             <li class="nav-item">
-                                                <a class="nav-link active" data-toggle="tab" href="#accident"
+                                                <a class="nav-link" data-toggle="tab" href="#accident"
                                                     role="tab">Accident Info</a>
                                             </li>
                                         @endif
@@ -112,21 +112,27 @@
                                                 role="tab">Deposant</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#tasks" role="tab">Conjoints et
+                                            <a class="nav-link" data-toggle="tab" href="#enfants" role="tab">Conjoints
+                                                et
                                                 Enfants</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#setting"
+                                            <a class="nav-link" data-toggle="tab" href="#documents"
                                                 role="tab">Documents</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#end"
-                                                role="tab">Transmission</a>
+                                            @if ($emp->type_doc == 'AT MORTEL' || $emp->type_doc == 'AT NON MORTEL')
+                                                <a class="nav-link" data-toggle="tab" href="#recap"
+                                                    role="tab">Recapulatif</a>
+                                            @else
+                                                <a class="nav-link" data-toggle="tab" href="#end"
+                                                    role="tab">Transmission</a>
+                                            @endif
                                         </li>
                                     </ul>
                                     <div class="tab-content">
                                         <!-- employeur -->
-                                        <div class="tab-pane fade show" id="timeline" role="tabpanel">
+                                        <div class="tab-pane fade show active" id="employeur" role="tabpanel">
                                             <div class="profile-setting">
                                                 <form>
                                                     <ul class="profile-edit-list row">
@@ -185,30 +191,53 @@
                                                                     type="email" readonly>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Adresse</label>
+                                                                <label>Heure:</label>
                                                                 <input class="form-control form-control-lg"
-                                                                    value="{{ $employee[0]->deposants[0]->adresse_deposant }}"
+                                                                    value="{{ $accident[0]->heure_accident }}"
                                                                     type="email" readonly>
                                                             </div>
                                                         </li>
                                                         <li class="weight-500 col-md-6">
                                                             {{-- <h4 class="text-blue h5 mb-20">Edit Social Media links</h4> --}}
                                                             <div class="form-group">
-                                                                <label>Prenom</label>
+                                                                <label>Agent Materiel:</label>
                                                                 <input class="form-control form-control-lg"
-                                                                    value="{{ $employee[0]->deposants[0]->prenom_deposant }}"
+                                                                    value="{{ $accident[0]->agent_materiel }}"
                                                                     type="text" readonly>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>CIN</label>
+                                                                <label>Nature lésions:</label>
                                                                 <input class="form-control form-control-lg"
-                                                                    value="{{ $employee[0]->deposants[0]->cin_deposant }}"
+                                                                    value="{{ $accident[0]->agent_materiel }}"
                                                                     type="text" readonly>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Adresse Email</label>
+                                                                <label>Conséquences:</label>
                                                                 <input class="form-control form-control-lg"
-                                                                    value="{{ $employee[0]->deposants[0]->email_deposant }}"
+                                                                    value="{{ $accident[0]->consequence }}"
+                                                                    type="text" readonly>
+                                                            </div>
+                                                        </li>
+                                                        <hr>
+                                                        {{-- <span class="text-center">Info Témoin</span> --}}
+                                                        <li class="weight-500 col-md-6">
+                                                            {{-- <h4 class="text-blue h5 mb-20">Edit Social Media links</h4> --}}
+                                                            <div class="form-group">
+                                                                <label>Nom Temoin:</label>
+                                                                <input class="form-control form-control-lg"
+                                                                    value="{{ $accident[0]->nom_temoin }}" type="text"
+                                                                    readonly>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Prenom Temoin:</label>
+                                                                <input class="form-control form-control-lg"
+                                                                    value="{{ $accident[0]->prenom_temoin }}"
+                                                                    type="text" readonly>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Adresse Temoin:</label>
+                                                                <input class="form-control form-control-lg"
+                                                                    value="{{ $accident[0]->adresse_temoin }}"
                                                                     type="text" readonly>
                                                             </div>
                                                         </li>
@@ -271,7 +300,7 @@
                                         </div>
                                         <!-- deposant Tab End -->
                                         <!-- wife and childs Tab start -->
-                                        <div class="tab-pane fade" id="tasks" role="tabpanel">
+                                        <div class="tab-pane fade" id="enfants" role="tabpanel">
                                             <div class="pd-20 profile-task-wrap">
                                                 <div class="container pd-0">
                                                     <div class="faq-wrap">
@@ -342,7 +371,7 @@
                                         </div>
                                         <!-- wife and childs Tab End -->
                                         <!-- docs Tab start -->
-                                        <div class="tab-pane fade height-100-p" id="setting" role="tabpanel">
+                                        <div class="tab-pane fade" id="documents" role="tabpanel">
                                             <div class="profile-setting">
                                                 <div class="row p-2">
                                                     <div class="col-md-12">
@@ -407,20 +436,14 @@
                                                                                                             PDF</a>
                                                                                                     </iframe>
                                                                                                 </div>
-                                                                                                {{-- <div class="modal-footer">
-                                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                                                                            </div> --}}
+
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            {{-- <iframe src="{{ asset('storage/docs/'.$emp->docs['0']->data['paths'][$i]) }}" width="50%" height="100%">
-                                                                            This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('storage/docs/'.$emp->docs['0']->data['paths'][$i]) }}">Download PDF</a>
-                                                                        </iframe> --}}
+
                                                                         </th>
-                                                                        {{-- <th scope="row"><i class="fa fa-eye" aria-hidden="true"></i></th> --}}
                                                                     </tr>
                                                                 @endforeach
 
@@ -428,52 +451,145 @@
                                                         </table>
                                                     </div>
                                                 </div>
-                                                {{-- @foreach ($emp->docs as $key => $value)
-                                               {{ print_r($value->data['titles']) }}
-                                            @endforeach --}}
+
                                             </div>
                                         </div>
                                         <!-- docs Tab End -->
                                         <!-- end Tab End -->
-                                        <div class="tab-pane fade" id="end" role="tabpanel">
-                                            <div class="profile-setting p-5">
-                                                <form method="post" action="{{ route('transfert.store') }}">
-                                                    @csrf
-                                                    <div class="form-group">
-                                                        <label>Selectionner le departement concerner</label>
-                                                        <select name="to_dept" class="form-control" required>
-                                                            <option value="">Selectionner</option>
-                                                            @foreach ($depts as $dept)
-                                                                <option value="{{ $dept->id }}">{{ $dept->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Observation</label>
-                                                        <textarea name="note" class="form-control" required></textarea>
-                                                        <input type="hidden" name="employee_id"
-                                                            value="{{ $emp->employee->id }}">
-                                                        <input type="hidden" name="type"
-                                                            value="{{ $emp->type_doc }}">
-                                                        <input type="hidden" name="doc_id"
-                                                            value="{{ $emp->id }}">
-                                                        @if (Auth::user()->dept->name == 'DQE')
-                                                            <input type="hidden" name="route" value="pension.index">
-                                                        @elseif (Auth::user()->dept->name == 'SECRETARIAT')
-                                                            <input type="hidden" name="route"
-                                                                value="secretariat.index">
-                                                        @elseif (Auth::user()->dept->name == 'DIPRES')
-                                                            <input type="hidden" name="route" value="etude.index">
-                                                        @elseif (Auth::user()->dept->name == 'DIRGA')
-                                                            <input type="hidden" name="route" value="dirga.index">
-                                                        @endif
+                                        @if ($emp->type_doc == 'AT MORTEL' || $emp->type_doc == 'AT NON MORTEL')
+                                            <div class="tab-pane fade" id="recap" role="tabpanel">
+                                                <div class="pd-20 profile-task-wrap">
 
+                                                    <div class="profile-task-list pb-30">
+                                                        <ul id="moi">
+
+                                                            <li>
+                                                                <div class="custom-control custom-checkbox mb-5">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        id="task-1">
+                                                                    <label class="custom-control-label"
+                                                                        for="task-1"></label>
+                                                                </div>
+                                                                Employeur
+                                                                <div class="task-assign">J'atesste que les informations sur
+                                                                    l'employeur sont correctes
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="custom-control custom-checkbox mb-5">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        id="task-2">
+                                                                    <label class="custom-control-label"
+                                                                        for="task-2"></label>
+                                                                </div>
+                                                                Deposant
+                                                                <div class="task-assign">J'atesste que les informations sur
+                                                                    le deposant sont correctes
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="custom-control custom-checkbox mb-5">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        id="task-3">
+                                                                    <label class="custom-control-label"
+                                                                        for="task-3"></label>
+                                                                </div>
+                                                                Grappe Familiale
+                                                                <div class="task-assign">J'atesste que les informations sur
+                                                                    la grappe familiale sont correctes
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="custom-control custom-checkbox mb-5">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        id="task-4">
+                                                                    <label class="custom-control-label"
+                                                                        for="task-4"></label>
+                                                                </div>
+                                                                Document
+                                                                <div class="task-assign">J'atesste que les informations
+                                                                    liees aux documents sont correctes
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="custom-control custom-checkbox mb-5">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        id="task-5">
+                                                                    <label class="custom-control-label"
+                                                                        for="task-5"></label>
+                                                                </div>
+                                                                Accident info
+                                                                <div class="task-assign">J'atesste que les informations sur
+                                                                    l'accident sont correctes
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 mb-30">
+                                                            <div class="pd-20 card-box shadow-lg">
+                                                                <div class="progress" style="height: 30px;">
+                                                                    <div class="progress-bar bg-info" id="prog"
+                                                                        role="progressbar" style="width: 0%"
+                                                                        aria-valuenow="25" aria-valuemin="0"
+                                                                        aria-valuemax="100" myVal=0>0</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="all_btns" class="row justify-content-center">
+                                                            <div class="col-md-6 justify-content-center">
+
+
+                                                                <a href="{{ route('at.traitement', $emp->employee_id) }}"
+                                                                    class="btn btn-success">Etude et Traitement</a>
+
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <button type="submit" class="btn btn-success">Transferer</button>
-                                                </form>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @else
+                                            <div class="tab-pane fade" id="end" role="tabpanel">
+                                                <div class="profile-setting p-5">
+                                                    <form method="post" action="{{ route('transfert.store') }}">
+                                                        @csrf
+                                                        <div class="form-group">
+                                                            <label>Selectionner le departement concerner</label>
+                                                            <select name="to_dept" class="form-control" required>
+                                                                <option value="">Selectionner</option>
+                                                                @foreach ($depts as $dept)
+                                                                    <option value="{{ $dept->id }}">
+                                                                        {{ $dept->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Observation</label>
+                                                            <textarea name="note" class="form-control" required></textarea>
+                                                            <input type="hidden" name="employee_id"
+                                                                value="{{ $emp->employee->id }}">
+                                                            <input type="hidden" name="type"
+                                                                value="{{ $emp->type_doc }}">
+                                                            <input type="hidden" name="doc_id"
+                                                                value="{{ $emp->id }}">
+                                                            @if (Auth::user()->dept->name == 'DQE')
+                                                                <input type="hidden" name="route"
+                                                                    value="pension.index">
+                                                            @elseif (Auth::user()->dept->name == 'SECRETARIAT')
+                                                                <input type="hidden" name="route"
+                                                                    value="secretariat.index">
+                                                            @elseif (Auth::user()->dept->name == 'DIPRES')
+                                                                <input type="hidden" name="route" value="etude.index">
+                                                            @elseif (Auth::user()->dept->name == 'DIRGA')
+                                                                <input type="hidden" name="route" value="dirga.index">
+                                                            @endif
+
+                                                        </div>
+                                                        <button type="submit" class="btn btn-success">Transferer</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endif
+
                                         <!-- end Tab End -->
                                     </div>
                                 </div>
@@ -484,4 +600,39 @@
             </div>
         </div>
     </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#all_btns").hide();
+        });
+
+        $('#moi input:checkbox').on('change', function() {
+
+            if ($(this).is(':checked')) {
+                var val = parseInt($('#prog').attr('myVal'), 10) + 20;
+                $("#prog").attr("myVal", val);
+                // console.log(val);
+                $('#prog').css('width', val + '%');
+                $('#prog').html(val + '%');
+
+                if (val == 100) {
+                    $("#all_btns").show();
+                }
+
+            }
+            if (!$(this).is(':checked')) {
+
+                var val = parseInt($('#prog').attr('myVal'), 10) - 20;
+                $("#prog").attr("myVal", val);
+                // console.log(val);
+                $('#prog').css('width', val + '%');
+                $('#prog').html(val + '%');
+                $("#all_btns").hide();
+            }
+
+
+        });
+    </script>
 @endsection

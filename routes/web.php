@@ -37,12 +37,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/suspended/{id}', [App\Http\Controllers\AdminController::class, 'userSuspended'])->name('user.suspended');
     Route::get('/user/update/{id}', [App\Http\Controllers\AdminController::class, 'userUpdate'])->name('user.update');
 
-
-
     // DOCUMENTS
     Route::get('/doc/index', [App\Http\Controllers\AdminController::class, 'docIndex'])->name('doc.index');
     Route::post('/doc/store', [App\Http\Controllers\AdminController::class, 'docStore'])->name('doc.store');
-
 
     // PRESTATIONS ADMIN
     Route::get('/prest/index', [App\Http\Controllers\AdminController::class, 'PrestIndex'])->name('prest.index');
@@ -53,7 +50,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('fiche-paie', [App\Http\Controllers\AdminController::class, 'FichePaie'])->name('fiche-paie');
     Route::get('carte-retraite', [App\Http\Controllers\AdminController::class, 'CarteRetraite'])->name('carte-retraite');
     Route::get('etat-payement', [App\Http\Controllers\AdminController::class, 'EtatPayement'])->name('etat-payement');
-
 
     //DIPRESS PRESTATIONS
     Route::get('/dipress/pension', [App\Http\Controllers\DipressController::class, 'vieillesse'])->name('dipress.vieillesse');
@@ -85,6 +81,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // AT
     Route::get('/at/index', [App\Http\Controllers\ATController::class, 'AtIndex'])->name('at.index');
     Route::get('/at/traitement/{id}', [App\Http\Controllers\ATController::class, 'AtTraitement'])->name('at.traitement');
+    // Route::get('/at/traitement/{id}', [App\Http\Controllers\ATController::class, 'AtTraitement'])->name('at.traitement');
 
     // DIRGA
     Route::get('/dirga/index', [App\Http\Controllers\DirgaController::class, 'DirgaIndex'])->name('dirga.index');
@@ -93,7 +90,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // TRANFERT
     Route::post('/dipress/store', [App\Http\Controllers\TransferController::class, 'store'])->name('transfert.store');
     Route::get('/message/read/{id}', [App\Http\Controllers\TransferController::class, 'ReadMessage'])->name('message.read');
-
 
     // TRACKING
     Route::get('/tracking/{id}', [App\Http\Controllers\TransferController::class, 'Tracking'])->name('transfert.tracking');
@@ -121,7 +117,6 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('/login', [App\Http\Controllers\HomeController::class, 'login'])->name('login');
 Route::post('/logout', [App\Http\Controllers\AuthController::class, 'Logout'])->name('user.logout');
-
 
 Route::post('/sign-in', [App\Http\Controllers\AuthController::class, 'SignIn'])->name('user.signin');
 Route::get('/registration', [App\Http\Controllers\AuthController::class, 'Registration'])->name('user.registration');

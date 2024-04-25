@@ -179,6 +179,7 @@ class PensionController extends Controller
                 $accident->nom_temoin = $request->nom_temoin;
                 $accident->prenom_temoin = $request->prenom_temoin;
                 $accident->adresse_temoin = $request->adresse_temoin;
+                $accident->date_deces = $request->date_deces;
                 $accident->save();
 
             }

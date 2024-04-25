@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('nom_temoin');
             $table->string('prenom_temoin');
             $table->string('adresse_temoin');
+            $table->string('date_deces');
             $table->timestamps();
         });
     }
