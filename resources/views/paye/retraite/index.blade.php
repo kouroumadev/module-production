@@ -19,8 +19,6 @@
                 <div class="row">
                     <div class="col-md-6">
                         <button class="btn btn-success" data-toggle="modal" data-target="#modal-paye-add">Nouveau <i class="fa fa-plus" aria-hidden="true"></i></button>
-
-
                     </div>
                     <div class="col-md-6">
                         <button class="btn btn-warning">Importer <i class="fa fa-upload" aria-hidden="true"></i></button>
@@ -258,15 +256,15 @@
                 <label class="weight-600">État</label>
 
                 <div class="custom-control custom-radio ">
-                    <input checked type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                    <input checked type="radio" id="customRadio4" value="all" name="radio_etat" class="custom-control-input">
                     <label class="custom-control-label" for="customRadio4">Tous</label>
                 </div>
                 <div class="custom-control custom-radio ">
-                    <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
+                    <input type="radio" id="customRadio5" value="old" name="radio_etat" class="custom-control-input">
                     <label class="custom-control-label" for="customRadio5">Ancienne C</label>
                 </div>
                 <div class="custom-control custom-radio ">
-                    <input type="radio" id="customRadio6" name="customRadio" class="custom-control-input">
+                    <input type="radio" id="customRadio6" value="new" name="radio_etat" class="custom-control-input">
                     <label class="custom-control-label" for="customRadio6">Nouvelle C</label>
                 </div>
             </div>
@@ -296,44 +294,52 @@
     </form>
 
 
-    @isset($echeances)
-    <div class="pb-20">
+    @isset($echeances1)
+    <div class="pb-20 mb-3">
         <div class="pd-20">
             <h4 class="text-blue h4">Liste des pensionnaires</h4>
         </div>
-        <table class="data-table table stripe hover nowrap dataTable no-footer dtr-inline" id="DataTables_Table_0"
+        <table class="data-table table-sm stripe hover nowrap dataTable no-footer dtr-inline" id="DataTables_Table_0"
             role="grid" aria-describedby="DataTables_Table_0_info">
             <thead class="bg-success">
                 <tr>
                    {{-- <th class="table-plus text-white">#</th> --}}
-                   <th class="text-white">Num Retraite</th>
-                   <th class="text-white">Type</th>
-                   <th class="text-white">Prénoms</th>
-                   <th class="text-white">Nom</th>
-                   {{-- <th class="text-white">Date Naiss</th> --}}
-                   <th class="text-white">Date Jouiss</th>
-                   <th class="text-white">Assignation</th>
-                   {{-- <th class="text-white">Assignation 1</th> --}}
-                   <th class="text-white">Société Orig</th>
-                   <th class="text-white">Montant Paye</th>
-                   <th class="datatable-nosort text-white">Action</th>
+                   <th class="text-white font-12">Num Retraite</th>
+                   <th class="text-white font-12">Type</th>
+                   <th class="text-white font-12">Prénoms</th>
+                   <th class="text-white font-12">Nom</th>
+                   <th class="text-white font-12">Date Naiss</th>
+                   <th class="text-white font-12">Date Jouiss</th>
+                   <th class="text-white font-12">Titre</th>
+                   <th class="text-white font-12">Mont Trim</th>
+                   <th class="text-white font-12">Mont Av</th>
+                   <th class="text-white font-12">Mont Comp</th>
+                   <th class="text-white font-12">Assignation</th>
+                   <th class="text-white font-12">Assignation 1</th>
+                   <th class="text-white font-12">Société Orig</th>
+                   <th class="text-white font-12">Montant Paye</th>
+                   <th class="datatable-nosort text-white font-12">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="paye-body">
                 @foreach ($echeances->retraites as $ret)
                 <tr>
                     {{-- <td>{{ $loop->index+1 }}</td> --}}
-                    <td>{{ $ret->num_retraite }}</td>
-                    <td>{{ strtoupper($ret->echeance->type) }}</td>
-                    <td>{{ $ret->prenoms }}</td>
-                    <td>{{ $ret->nom }}</td>
-                    {{-- <td>{{ \Carbon\Carbon::parse($ret->date_de_naiss)->format('d-m-Y') }}</td> --}}
-                    <td>{{ \AppHelper::getDateFormat($ret->date_de_jouiss) }}</td>
-                    <td>{{ $ret->assignation }}</td>
-                    {{-- <td>{{ $ret->assignation1 }}</td> --}}
-                    <td>{{ $ret->aociéte_orig }}</td>
-                    <td>{{ \AppHelper::getMoneyFormat($ret->montant_a_paye) }}</td>
-                    <td>
+                    <td class="font-12">{{ $ret->num_retraite }}</td>
+                    <td class="font-12">{{ $ret->type }}</td>
+                    <td class="font-12">{{ $ret->prenoms }}</td>
+                    <td class="font-12">{{ $ret->nom }}</td>
+                    <td class="font-12">{{ \Carbon\Carbon::parse($ret->date_de_naiss)->format('d-m-Y') }}</td>
+                    <td class="font-12">{{ \AppHelper::getDateFormat($ret->date_de_jouiss) }}</td>
+                    <td class="font-12">{{ $ret->titre }}</td>
+                    <td class="font-12 text-right">{{ \AppHelper::getMoneyFormat($ret->montant_trim) }} GNF</td>
+                    <td class="font-12 text-right">{{ \AppHelper::getMoneyFormat($ret->montant_avance) }} GNF</td>
+                    <td class="font-12 text-right">{{ \AppHelper::getMoneyFormat($ret->montant_comp) }} GNF</td>
+                    <td class="font-12">{{ $ret->assignation }}</td>
+                    <td class="font-12">{{ $ret->assignation1 }}</td>
+                    <td class="font-12">{{ $ret->aociéte_orig }}</td>
+                    <td class="font-12 text-right">{{ \AppHelper::getMoneyFormat($ret->montant_a_paye) }} GNF</td>
+                    <td class="text-right">
                         <div class="dropdown">
                             <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                                 <i class="dw dw-more"></i>
@@ -430,11 +436,93 @@
     </div>
     @endisset
 
+    @isset($echeances)
+    <div class="pb-20 mb-3">
+        <div class="pd-20">
+            <h4 class="text-blue h4">Liste des pensionnaires</h4>
+        </div>
+        <table>
+            <thead class="bg-success">
+                <tr>
+                   {{-- <th class="table-plus text-white">#</th> --}}
+                   <th class="text-white font-12">Num Retraite</th>
+                   <th class="text-white font-12">Type</th>
+                   <th class="text-white font-12">Prénoms</th>
+                   <th class="text-white font-12">Nom</th>
+                   <th class="text-white font-12">Date Naiss</th>
+                   <th class="text-white font-12">Date Jouiss</th>
+                   <th class="text-white font-12">Titre</th>
+                   <th class="text-white font-12">Mont Trim</th>
+                   <th class="text-white font-12">Mont Av</th>
+                   <th class="text-white font-12">Mont Comp</th>
+                   <th class="text-white font-12">Assignation</th>
+                   <th class="text-white font-12">Assignation 1</th>
+                   <th class="text-white font-12">Société Orig</th>
+                   <th class="text-white font-12">Montant Paye</th>
+                   <th class="datatable-nosort text-white font-12">Action</th>
+                </tr>
+            </thead>
+            <tbody id="paye-body1">
+                @foreach ($echeances as $ret)
+
+                @endforeach
+            </tbody>
+        </table>
+        <!-- Pagination Links -->
+        <div class="pagination">
+            {{ $echeances->links() }}
+        </div>
+
+    </div>
+    @endisset
+
+
+
 
 
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('input[type=radio][name=radio_etat]').change(function() {
+            var selectedType = $(this).val();
+            $.ajax({
+                url: '/paye/retraite/index/filter-etat',
+                data: { type: selectedType },
+                success: function(data) {
+                    var tbody = $('#paye-body1');
+                    tbody.empty(); // Clear the table body
+                     console.log('Valllueee', data);
+                     $.each(data, function(index, item) {
+                        // console.log('val', item.assignation1);
+                        tbody.append(
+                            '<tr><td class="font-12">' + item.num_retraite +
+                            '</td><td class="font-12">' + item.type +
+                            '</td><td class="font-12">' + item.prenoms +
+                            '</td><td class="font-12">' + item.nom +
+                            '</td><td class="font-12">' + '' +
+                            '</td><td class="font-12">' + '' +
+                            '</td><td class="font-12">' + item.titre +
+                            '</td><td class="font-12">' + '' +
+                            '</td><td class="font-12">' + '' +
+                            '</td><td class="font-12">' + '' +
+                            '</td><td class="font-12">' + item.assignation +
+                            '</td><td class="font-12">' + item.assignation1 +
+                            '</td><td class="font-12">' + item.aociéte_orig +
+                            '</td><td class="font-12">' + '' +
+                            '</td><td class="font-12">' + '' +
+                            '</td></tr>'
+                        );
+                     });
+                }
+            });
+        });
+    });
+</script>
+
+
 <script>
     $(document).ready(function() {
         $('#ass_1').change(function() {
@@ -444,12 +532,11 @@
                 subCategoryDropdown.empty();
                 // subCategoryDropdown.append("<option selected=''>--Aucune selection--</option>");
                 $.each(data, function(index, element) {
-                        subCategoryDropdown.append("<option value='" + element.assignation1 + "'>" + element.assignation1 + "</option>");
+                    subCategoryDropdown.append("<option value='" + element.assignation1 + "'>" + element.assignation1 + "</option>");
                 });
             });
         });
     });
-
 </script>
 
 @endsection
