@@ -119,6 +119,10 @@
                         @include('dipress.left-menu')
                     @endif
 
+                    @if (Auth::user()->dept->name == 'ADMIN' || Auth::user()->dept->name == 'PAYE')
+                        @include('paye.left-menu')
+                    @endif
+
                     @if (Auth::user()->dept->name == 'ADMIN' || Auth::user()->dept->name == 'DQE')
                         <li class="my-menu" onclick="makeActive(this,'3')" id="3">
                             <a href="{{ route('reclamation.index') }}" class="dropdown-toggle no-arrow">

@@ -1059,7 +1059,7 @@ table.dataTable thead .sorting_desc:before,
 table.dataTable thead .sorting_desc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:before {
   font-family: "dropways";
-  font-size: 14px;
+  font-size: 12px;
 }
 table.dataTable thead .sorting:before,
 table.dataTable thead .sorting_asc:before,

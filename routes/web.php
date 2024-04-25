@@ -106,6 +106,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/paye/index/{id}', [App\Http\Controllers\EcheanceController::class, 'payeIndex'])->name('paye.index');
     Route::get('/paye/export/excel/{id}', [App\Http\Controllers\EcheanceController::class, 'exportExcel'])->name('paye.excel');
     Route::get('/paye/export/pdf/{id}', [App\Http\Controllers\EcheanceController::class, 'exportPdf'])->name('paye.pdf');
+
+    //PAYE
+    Route::get('/paye/retraite/index', [App\Http\Controllers\PayeController::class, 'retraiteIndex'])->name('payeRetraite.index');
+    Route::get('/paye/retraite/index/get-ass', [App\Http\Controllers\PayeController::class, 'getAss']);
+    Route::get('/paye/retraite/index/filter-etat', [App\Http\Controllers\PayeController::class, 'filterEtat']);
+
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');

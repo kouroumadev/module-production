@@ -17,4 +17,8 @@ class Echeance extends Model
         'created_by',
     ];
 
+    public function retraites() {
+        return $this->hasMany(EtatRetraite::class, 'echeance_id');
+    }
+
 }

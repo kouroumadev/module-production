@@ -1551,7 +1551,7 @@ pre code {
   color: #212529; }
 
 .table td, .table th {
-  padding: .75rem;
+  padding: .18rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6; }
 
@@ -1563,7 +1563,7 @@ pre code {
   border-top: 2px solid #dee2e6; }
 
 .table-sm td, .table-sm th {
-  padding: .3rem; }
+  padding: .2rem; }
 
 .table-bordered {
   border: 1px solid #dee2e6; }
