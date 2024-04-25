@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,12 +21,14 @@ class Accident extends Model
         'nom_temoin',
         'prenom_temoin',
         'adresse_temoin',
+        'date_deces',
 
     ];
 
     protected $table = 'accidents';
 
-    public function employee() {
+    public function employee()
+    {
         return $this->belongsTo(Employee::class, 'employee_id');
     }
 }

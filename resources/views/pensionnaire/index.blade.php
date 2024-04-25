@@ -428,6 +428,13 @@
 
                                             </div>
                                         </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>date décès :</label>
+                                                <input type="text" class="form-control date-picker" name="date_deces"
+                                                    value="" id="date_deces">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
