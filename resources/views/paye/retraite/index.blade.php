@@ -441,7 +441,7 @@
         <div class="pd-20">
             <h4 class="text-blue h4">Liste des pensionnaires</h4>
         </div>
-        <table>
+        <table id="example">
             <thead class="bg-success">
                 <tr>
                    {{-- <th class="table-plus text-white">#</th> --}}
@@ -463,20 +463,33 @@
                 </tr>
             </thead>
             <tbody id="paye-body1">
-                @foreach ($echeances as $ret)
 
-                @endforeach
             </tbody>
         </table>
         <!-- Pagination Links -->
-        <div class="pagination">
-            {{ $echeances->links() }}
-        </div>
-
     </div>
+
     @endisset
 
 
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+<!-- Include DataTables JS -->
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable({
+            searching: true,
+            paging: true,
+            pageLength: 10 // Number of rows to show per page
+        });
+    });
+</script>
 
 
 

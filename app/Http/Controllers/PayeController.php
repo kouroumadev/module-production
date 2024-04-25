@@ -15,7 +15,7 @@ class PayeController extends Controller
         // $assignations = $data->distinct()->get(['assignation']);
 
         // $echeances = Echeance::where('type','retraite')->first()->retraites->paginate(10);
-        $echeances = EtatRetraite::paginate(10);
+        $echeances = EtatRetraite::all();
         // $assignation = $data->distinct()->get(['assignation']);
 
         //   dd($echeances);
