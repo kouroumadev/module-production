@@ -13,6 +13,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 // use Knp\Snappy\Pdf;
 
@@ -24,13 +25,9 @@ class EcheanceController extends Controller
         return view('parametrage.echeance.index', compact('data'));
     }
     public function echeanceStore(Request $request) {
-        // dd($request->all());
 
-        // $this->validate($request,[
-        //     'value'=>'required|unique:table,echeances,except,id',
-        //  ]);
 
-        $val = Echeance::where('value', $request->value)->where('type', $request->type)->get();
+        $val = Echeance::where('value', $request->value)->get();
         if(count($val) > 0){
             Alert::error('Cette Echeance existe déja !!', '');
             return redirect(route('echeance.index'));
@@ -38,7 +35,6 @@ class EcheanceController extends Controller
 
 
         $data = new Echeance();
-        $data->type = $request->type;
         $data->value = $request->value;
         $data->created_by = Auth::user()->id;
         $data->save();

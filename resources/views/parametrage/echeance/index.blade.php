@@ -21,7 +21,7 @@
 
 <hr>
 <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-6">
         {{-- <form method="post" action="{{ route('echeance.store') }}" class="form-inline">
             @csrf
             <div class="form-group mb-2">
@@ -36,15 +36,8 @@
         <form method="post" action="{{ route('echeance.store') }}">
             @csrf
             <div class="form-row">
-              <div class="col-md-5 form-group">
-                <label for="inputEmail4">Selectionner le type d'echeance<span class="text-danger">*</span></label>
-                <select name="type" class="form-control" id="" required>
-                    <option value="">--Aucune selection---</option>
-                    <option value="retraite">Retraite</option>
-                    <option value="reversion">Reversion</option>
-                </select>
-              </div>
-              <div class="col-md-5 form-group">
+
+              <div class="col-md-10 form-group">
                 <label for="inputEmail4">Selectionner le Mois et l'Année<span class="text-danger">*</span></label>
                 <input class="form-control month-picker" name="value" placeholder="MM/YYYY" type="text" required>
             </div>
@@ -70,14 +63,12 @@
         @endif
         <div class="card-box mb-30 shadow-lg p-3">
             <div class="pb-20">
-                <h4 class="text-blue h4">Liste des Echeances</h4>
+                <h4 class="text-blue h4">Liste des Échéances</h4>
                 <table class="data-table table stripe hover nowrap dataTable no-footer dtr-inline" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                     <thead class="bg-success">
                         <tr>
                             <th class="table-plus text-white">#</th>
-                            <th class="text-white">Type</th>
-                            <th class="text-white">Mois</th>
-                            <th class="text-white">Année</th>
+                            <th class="text-white">Échéance</th>
                             <th class="text-white">Status</th>
                             <th class="text-white">Ajouté par</th>
                             <th class="text-white">À la date du</th>
@@ -86,14 +77,9 @@
                     </thead>
                     <tbody>
                         @foreach ($data as $d)
-                            @php
-                                $value = explode(" ", $d->value);
-                            @endphp
                             <tr>
                                 <td>{{ $loop->index+1 }}</td>
-                                <td>{{ strtoupper($d->type) }}</td>
-                                <td>{{ $value[0] }}</td>
-                                <td>{{ $value[1] }}</td>
+                                <td>{{ $d->value }}</td>
                                 <td>
                                     @if ($d->status == '1')
                                         <span class="badge badge-warning">En cours...</span>

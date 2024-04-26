@@ -250,8 +250,21 @@
     </div>
 
 
-    <form action="" method="post" class="">
+    <form action="{{ route('payeRetraite.filter') }}" method="get" class="">
+        @csrf
         <div class="row justify-content-center shadow-lg p-2">
+            <div class="col-md-2">
+                <label class="weight-600">Type</label>
+
+                <div class="custom-control custom-radio ">
+                    <input checked type="radio" id="customRadio4type" value="01" name="radio_type" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio4type">01-</label>
+                </div>
+                <div class="custom-control custom-radio ">
+                    <input type="radio" id="customRadio5type" value="pi" name="radio_type" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio5type">PI</label>
+                </div>
+            </div>
             <div class="col-md-2">
                 <label class="weight-600">État</label>
 
@@ -271,7 +284,7 @@
             <div class="col-md-3">
                 <label class="col-sm-12 weight-600 col-md-12 col-form-label">Assignations</label>
                 <div class="col-sm-12 col-md-10">
-                    <select id="ass_1" required class="form-control form-control-sm">
+                    <select id="ass_1" name="assignation" required class="form-control form-control-sm">
                         <option selected="">--Aucune selection--</option>
                         @foreach ($assignations as $ass)
                         <option value="{{ $ass->assignation }}">{{ $ass->assignation }}</option>
@@ -282,25 +295,24 @@
             <div class="col-md-3">
                 <label class="col-sm-12 weight-600 col-md-12 col-form-label">Assignations 1</label>
                 <div class="col-sm-12 col-md-10">
-                    <select id="ass_2" class="form-control form-control-sm">
+                    <select id="ass_2" name="assignation1" class="form-control form-control-sm">
                         <option selected="">--Aucune selection--</option>
                     </select>
                 </div>
             </div>
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-success" style="margin-top: 36px;">Générer le paiement</button>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-success" style="margin-top: 36px;">Filtrer</button>
             </div>
         </div>
     </form>
 
 
-    @isset($echeances1)
+    @isset($echeances)
     <div class="pb-20 mb-3">
         <div class="pd-20">
             <h4 class="text-blue h4">Liste des pensionnaires</h4>
         </div>
-        <table class="data-table table-sm stripe hover nowrap dataTable no-footer dtr-inline" id="DataTables_Table_0"
-            role="grid" aria-describedby="DataTables_Table_0_info">
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead class="bg-success">
                 <tr>
                    {{-- <th class="table-plus text-white">#</th> --}}
@@ -321,24 +333,24 @@
                    <th class="datatable-nosort text-white font-12">Action</th>
                 </tr>
             </thead>
-            <tbody id="paye-body">
-                @foreach ($echeances->retraites as $ret)
+            <tbody>
+                @foreach ($echeances as $ret)
                 <tr>
                     {{-- <td>{{ $loop->index+1 }}</td> --}}
                     <td class="font-12">{{ $ret->num_retraite }}</td>
                     <td class="font-12">{{ $ret->type }}</td>
                     <td class="font-12">{{ $ret->prenoms }}</td>
                     <td class="font-12">{{ $ret->nom }}</td>
-                    <td class="font-12">{{ \Carbon\Carbon::parse($ret->date_de_naiss)->format('d-m-Y') }}</td>
-                    <td class="font-12">{{ \AppHelper::getDateFormat($ret->date_de_jouiss) }}</td>
+                    <td class="font-12 text-nowrap">{{ \Carbon\Carbon::parse($ret->date_de_naiss)->format('d-m-Y') }}</td>
+                    <td class="font-12 text-nowrap">{{ \AppHelper::getDateFormat($ret->date_de_jouiss) }}</td>
                     <td class="font-12">{{ $ret->titre }}</td>
-                    <td class="font-12 text-right">{{ \AppHelper::getMoneyFormat($ret->montant_trim) }} GNF</td>
-                    <td class="font-12 text-right">{{ \AppHelper::getMoneyFormat($ret->montant_avance) }} GNF</td>
-                    <td class="font-12 text-right">{{ \AppHelper::getMoneyFormat($ret->montant_comp) }} GNF</td>
+                    <td class="font-12 text-right text-nowrap">{{ \AppHelper::getMoneyFormat($ret->montant_trim) }} GNF</td>
+                    <td class="font-12 text-right text-nowrap">{{ \AppHelper::getMoneyFormat($ret->montant_avance) }} GNF</td>
+                    <td class="font-12 text-right text-nowrap">{{ \AppHelper::getMoneyFormat($ret->montant_comp) }} GNF</td>
                     <td class="font-12">{{ $ret->assignation }}</td>
                     <td class="font-12">{{ $ret->assignation1 }}</td>
                     <td class="font-12">{{ $ret->aociéte_orig }}</td>
-                    <td class="font-12 text-right">{{ \AppHelper::getMoneyFormat($ret->montant_a_paye) }} GNF</td>
+                    <td class="font-12 text-right text-nowrap">{{ \AppHelper::getMoneyFormat($ret->montant_a_paye) }} GNF</td>
                     <td class="text-right">
                         <div class="dropdown">
                             <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -433,71 +445,87 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
-    @endisset
-
-    @isset($echeances)
-    <div class="pb-20 mb-3">
-        <div class="pd-20">
-            <h4 class="text-blue h4">Liste des pensionnaires</h4>
-        </div>
-        <table id="example">
-            <thead class="bg-success">
-                <tr>
-                   {{-- <th class="table-plus text-white">#</th> --}}
-                   <th class="text-white font-12">Num Retraite</th>
-                   <th class="text-white font-12">Type</th>
-                   <th class="text-white font-12">Prénoms</th>
-                   <th class="text-white font-12">Nom</th>
-                   <th class="text-white font-12">Date Naiss</th>
-                   <th class="text-white font-12">Date Jouiss</th>
-                   <th class="text-white font-12">Titre</th>
-                   <th class="text-white font-12">Mont Trim</th>
-                   <th class="text-white font-12">Mont Av</th>
-                   <th class="text-white font-12">Mont Comp</th>
-                   <th class="text-white font-12">Assignation</th>
-                   <th class="text-white font-12">Assignation 1</th>
-                   <th class="text-white font-12">Société Orig</th>
-                   <th class="text-white font-12">Montant Paye</th>
-                   <th class="datatable-nosort text-white font-12">Action</th>
-                </tr>
-            </thead>
-            <tbody id="paye-body1">
-
-            </tbody>
-        </table>
         <!-- Pagination Links -->
     </div>
-
     @endisset
+
+
 
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Include DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.5/css/dataTables.bootstrap4.min.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.bootstrap4.min.css">
 
 <!-- Include DataTables JS -->
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.5/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/3.0.2/js/responsive.bootstrap4.min.js"></script>
+
 
 <script>
     $(document).ready(function() {
-        $('#example').DataTable({
-            searching: true,
-            paging: true,
-            pageLength: 10 // Number of rows to show per page
-        });
+        new DataTable('#example');
+
     });
+
+
+
+        // $.ajax({
+        //     url: '/paye/retraite/index/getAll',
+        //     type: 'GET',
+        //     dataType: 'json',
+        //     success: function(data) {
+        //         console.log('baby', data);
+
+        //         var table = $('#example').DataTable({
+        //             searching: true,
+        //             paging: true,
+        //             pageLength: 10,
+        //         });
+
+
+        //         data.forEach(function(item) {
+
+        //             table.row.add([
+        //                 item.num_retraite ,
+        //                 item.type,
+        //                 item.prenoms,
+        //                 item.nom,
+        //                 item.date_de_naiss,
+        //                 '',
+        //                 item.titre,
+        //                 '',
+        //                 '',
+        //                 '',
+        //                 item.assignation,
+        //                 item.assignation1,
+        //                 item.aociéte_orig,
+        //                 '',
+        //                 '',
+        //             ]).draw();
+        //         });
+        //     },
+        //     error: function(error) {
+
+        //         console.log(error);
+        //     }
+        // });
+
+
+
 </script>
-
-
 
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<script>
+{{-- <script>
     $(document).ready(function() {
         $('input[type=radio][name=radio_etat]').change(function() {
             var selectedType = $(this).val();
@@ -533,7 +561,7 @@
             });
         });
     });
-</script>
+</script> --}}
 
 
 <script>
