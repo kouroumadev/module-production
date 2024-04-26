@@ -11,8 +11,8 @@ class Echeance extends Model
 
     protected $fillable = [
         'id',
-        'type',
-        'value',
+        'mois',
+        'annee',
         'status',
         'created_by',
     ];

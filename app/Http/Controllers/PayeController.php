@@ -23,6 +23,17 @@ class PayeController extends Controller
     }
 
     // app/Http/Controllers/ProductController.php
+    public function retraiteFilter(Request $request)
+    {
+        dd($request->all());
+
+    }
+    public function getAll()
+    {
+        $data = Echeance::where('type','retraite')->first()->retraites;
+        // $subCategories = Category::where('parent_id', $input)->get(['id', 'name']);
+        return response()->json($data);
+    }
     public function getAss(Request $request)
     {
         $value = $request->get('option');
@@ -43,9 +54,6 @@ class PayeController extends Controller
         } else {
             $data = Echeance::where('type','retraite')->first()->retraites->where('assignation','KALOUM');
         }
-
-
-
         // $subCategories = Category::where('parent_id', $input)->get(['id', 'name']);
         return response()->json($data);
     }

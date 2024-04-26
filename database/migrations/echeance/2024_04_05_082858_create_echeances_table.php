@@ -14,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('echeances', function (Blueprint $table) {
             $table->id();
-            $table->string("type");
-            $table->string("value")->unique();
+            $table->string("mois");
+            $table->string("annee");
             $table->string("status")->default("1");
             $table->string("created_by");
             $table->timestamps();

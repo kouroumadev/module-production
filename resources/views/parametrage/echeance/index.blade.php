@@ -21,32 +21,21 @@
 
 <hr>
 <div class="row justify-content-center">
-    <div class="col-md-8">
-        {{-- <form method="post" action="{{ route('echeance.store') }}" class="form-inline">
-            @csrf
-            <div class="form-group mb-2">
-              <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Mois et Année">
-            </div>
-            <div class="form-group mx-sm-3 mb-2">
-              <input class="form-control month-picker" name="value" placeholder="Selectionner" type="text" required>
-            </div>
-            <button type="submit" class="btn btn-success mb-2">Valider</button>
-        </form> --}}
+    <div class="col-md-6">
 
         <form method="post" action="{{ route('echeance.store') }}">
             @csrf
             <div class="form-row">
-              <div class="col-md-5 form-group">
-                <label for="inputEmail4">Selectionner le type d'echeance<span class="text-danger">*</span></label>
-                <select name="type" class="form-control" id="" required>
-                    <option value="">--Aucune selection---</option>
-                    <option value="retraite">Retraite</option>
-                    <option value="reversion">Reversion</option>
+
+              <div class="col-md-10 form-group">
+                <label for="inputEmail4">Selectionner le Mois<span class="text-danger">*</span></label>
+                <select required name="mois" class="custom-select col-12">
+                    <option value="">--Aucune selection--</option>
+                    @foreach ($mois as $m)
+                    <option value="{{ $m->value }}">{{ $m->value }}</option>
+                    @endforeach
+
                 </select>
-              </div>
-              <div class="col-md-5 form-group">
-                <label for="inputEmail4">Selectionner le Mois et l'Année<span class="text-danger">*</span></label>
-                <input class="form-control month-picker" name="value" placeholder="MM/YYYY" type="text" required>
             </div>
               <div class="col-md-2">
                 <button type="submit" class="btn btn-success" style="margin-top: 33px;">Valider</button>
@@ -70,14 +59,12 @@
         @endif
         <div class="card-box mb-30 shadow-lg p-3">
             <div class="pb-20">
-                <h4 class="text-blue h4">Liste des Echeances</h4>
+                <h4 class="text-blue h4">Liste des Échéances</h4>
                 <table class="data-table table stripe hover nowrap dataTable no-footer dtr-inline" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                     <thead class="bg-success">
                         <tr>
                             <th class="table-plus text-white">#</th>
-                            <th class="text-white">Type</th>
-                            <th class="text-white">Mois</th>
-                            <th class="text-white">Année</th>
+                            <th class="text-white">Échéance</th>
                             <th class="text-white">Status</th>
                             <th class="text-white">Ajouté par</th>
                             <th class="text-white">À la date du</th>
@@ -86,14 +73,9 @@
                     </thead>
                     <tbody>
                         @foreach ($data as $d)
-                            @php
-                                $value = explode(" ", $d->value);
-                            @endphp
                             <tr>
                                 <td>{{ $loop->index+1 }}</td>
-                                <td>{{ strtoupper($d->type) }}</td>
-                                <td>{{ $value[0] }}</td>
-                                <td>{{ $value[1] }}</td>
+                                <td>{{ $d->mois }} {{ $d->annee }}</td>
                                 <td>
                                     @if ($d->status == '1')
                                         <span class="badge badge-warning">En cours...</span>
