@@ -14,6 +14,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use DB;
+use Illuminate\Support\Carbon as SupportCarbon;
 
 // use Knp\Snappy\Pdf;
 
@@ -22,12 +24,16 @@ class EcheanceController extends Controller
 {
     public function echeanceIndex() {
         $data = Echeance::all();
-        return view('parametrage.echeance.index', compact('data'));
+        $mois = DB::table('mois')->get();
+
+        return view('parametrage.echeance.index', compact('data', 'mois'));
     }
     public function echeanceStore(Request $request) {
 
-
-        $val = Echeance::where('value', $request->value)->get();
+        // dd($request->all());
+        $year = date('Y');
+        // dd($year);
+        $val = Echeance::where('mois', $request->mois)->where('annee', $year)->get();
         if(count($val) > 0){
             Alert::error('Cette Echeance existe déja !!', '');
             return redirect(route('echeance.index'));
@@ -35,7 +41,8 @@ class EcheanceController extends Controller
 
 
         $data = new Echeance();
-        $data->value = $request->value;
+        $data->mois = $request->mois;
+        $data->annee = $year;
         $data->created_by = Auth::user()->id;
         $data->save();
 

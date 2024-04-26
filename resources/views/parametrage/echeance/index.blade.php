@@ -22,24 +22,20 @@
 <hr>
 <div class="row justify-content-center">
     <div class="col-md-6">
-        {{-- <form method="post" action="{{ route('echeance.store') }}" class="form-inline">
-            @csrf
-            <div class="form-group mb-2">
-              <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Mois et Année">
-            </div>
-            <div class="form-group mx-sm-3 mb-2">
-              <input class="form-control month-picker" name="value" placeholder="Selectionner" type="text" required>
-            </div>
-            <button type="submit" class="btn btn-success mb-2">Valider</button>
-        </form> --}}
 
         <form method="post" action="{{ route('echeance.store') }}">
             @csrf
             <div class="form-row">
 
               <div class="col-md-10 form-group">
-                <label for="inputEmail4">Selectionner le Mois et l'Année<span class="text-danger">*</span></label>
-                <input class="form-control month-picker" name="value" placeholder="MM/YYYY" type="text" required>
+                <label for="inputEmail4">Selectionner le Mois<span class="text-danger">*</span></label>
+                <select required name="mois" class="custom-select col-12">
+                    <option value="">--Aucune selection--</option>
+                    @foreach ($mois as $m)
+                    <option value="{{ $m->value }}">{{ $m->value }}</option>
+                    @endforeach
+
+                </select>
             </div>
               <div class="col-md-2">
                 <button type="submit" class="btn btn-success" style="margin-top: 33px;">Valider</button>
@@ -79,7 +75,7 @@
                         @foreach ($data as $d)
                             <tr>
                                 <td>{{ $loop->index+1 }}</td>
-                                <td>{{ $d->value }}</td>
+                                <td>{{ $d->mois }} {{ $d->annee }}</td>
                                 <td>
                                     @if ($d->status == '1')
                                         <span class="badge badge-warning">En cours...</span>
