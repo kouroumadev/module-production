@@ -78,10 +78,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/secretariat/index', [App\Http\Controllers\SecretariatController::class, 'SecretariatIndex'])->name('secretariat.index');
     Route::get('/secretariat/etude/traitement/{id}', [App\Http\Controllers\SecretariatController::class, 'SecretariatTraitement'])->name('secretariat.traitement');
 
-    // AT
-    Route::get('/at/index', [App\Http\Controllers\ATController::class, 'AtIndex'])->name('at.index');
-    Route::get('/at/traitement/{id}', [App\Http\Controllers\ATController::class, 'AtTraitement'])->name('at.traitement');
-    // Route::get('/at/traitement/{id}', [App\Http\Controllers\ATController::class, 'AtTraitement'])->name('at.traitement');
+    // RISQUE PROFESSIONNELS
+    Route::prefix('risque')->group(function () {
+
+        Route::get('/index', [App\Http\Controllers\ATController::class, 'RisqueIndex'])->name('risque.index');
+        // AT
+        Route::get('/at/index', [App\Http\Controllers\ATController::class, 'AtIndex'])->name('at.index');
+        Route::get('/at/traitement/{id}', [App\Http\Controllers\ATController::class, 'AtTraitement'])->name('at.traitement');
+    });
 
     // DIRGA
     Route::get('/dirga/index', [App\Http\Controllers\DirgaController::class, 'DirgaIndex'])->name('dirga.index');
@@ -114,6 +118,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/paye/retraite/index/getAll', [App\Http\Controllers\PayeController::class, 'getAll']);
     Route::get('/paye/retraite/index/filter-etat', [App\Http\Controllers\PayeController::class, 'filterEtat']);
 
+    route::fallback(function () {
+        return view('404');
+    });
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
