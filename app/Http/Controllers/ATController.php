@@ -4,13 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Accident;
 use App\Models\Deadline;
+use App\Models\Doc;
 use App\Models\Employee;
+use App\Models\Prestation;
 use App\Models\Transfer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ATController extends Controller
 {
+    public function RisqueIndex()
+    {
+        //$emps = Auth::user()->employees;
+        $docs = Doc::whereIn('type_doc', ['AT MORTEL', 'AT NON MORTEL'])->get();
+        $prestations = Prestation::whereIn('nom_prestation', ['AT MORTEL', 'AT NON MORTEL'])->get();
+
+        return view('risque.index', compact('docs', 'prestations'));
+    }
+
     public function AtIndex()
     {
         $dep_id = Auth::user()->dept_id;
