@@ -1,5 +1,5 @@
 <li class="my-menu" onclick="makeActive(this,'11155')" id="11155">
-    <a href="{{ route('payeRetraite.index') }}" class="dropdown-toggle no-arrow">
+    <a href="{{ route('paye.index') }}" class="dropdown-toggle no-arrow">
         <span class="micon dw dw-edit2"></span><span class="mtext">RETRAITE</span>
     </a>
 </li>

@@ -10,16 +10,24 @@ use Illuminate\Support\Facades\DB;
 
 class PayeController extends Controller
 {
-    public function retraiteIndex() {
+    public function index() {
+        $data = Echeance::all();
+        $mois = DB::table('mois')->get();
+
+        return view('paye.index', compact('data', 'mois'));
+    }
+    public function retraiteIndex(int $id) {
+        // dd($request->all());
+
         $assignations = DB::table('pay_assignation')->distinct()->get(['assignation']);
         // $assignations = $data->distinct()->get(['assignation']);
 
         // $echeances = Echeance::where('type','retraite')->first()->retraites->paginate(10);
-        $echeances = EtatRetraite::all();
+        $echeance = Echeance::find($id)->first();
         // $assignation = $data->distinct()->get(['assignation']);
 
-        //   dd($echeances);
-        return view('paye.retraite.index', compact('assignations','echeances'));
+        //    dd($echeance);
+        return view('paye.retraite.index', compact('assignations','echeance'));
     }
 
     // app/Http/Controllers/ProductController.php
@@ -36,6 +44,7 @@ class PayeController extends Controller
     }
     public function getAss(Request $request)
     {
+        // dd($request->all());
         $value = $request->get('option');
         $data = DB::table('pay_assignation')->where('assignation', $value)->select('assignation1')->get();
 

@@ -11,7 +11,7 @@
                 <nav aria-label="breadcrumb" role="navigation">
                     <ol class="breadcrumb">
                         {{-- <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">retraite</a></li> --}}
-                        <li class="breadcrumb-item active" aria-current="page"> ECHEANCE - MAI 2024</li>
+                        <li class="breadcrumb-item active" aria-current="page"> ECHEANCE - {{ $echeance->mois }} {{ $echeance->annee }}</li>
                     </ol>
                 </nav>
             </div>
@@ -301,13 +301,13 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <button type="submit" class="btn btn-success" style="margin-top: 36px;">Filtrer</button>
+                <button type="submit" class="btn btn-success" style="margin-top: 36px;">Appliquer le filtre <i class="fa fa-search" aria-hidden="true"></i></button>
             </div>
         </div>
     </form>
 
 
-    @isset($echeances)
+    @if ($echeance->rertaites != null)
     <div class="pb-20 mb-3">
         <div class="pd-20">
             <h4 class="text-blue h4">Liste des pensionnaires</h4>
@@ -315,26 +315,26 @@
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead class="bg-success">
                 <tr>
-                   {{-- <th class="table-plus text-white">#</th> --}}
-                   <th class="text-white font-12">Num Retraite</th>
-                   <th class="text-white font-12">Type</th>
-                   <th class="text-white font-12">Prénoms</th>
-                   <th class="text-white font-12">Nom</th>
-                   <th class="text-white font-12">Date Naiss</th>
-                   <th class="text-white font-12">Date Jouiss</th>
-                   <th class="text-white font-12">Titre</th>
-                   <th class="text-white font-12">Mont Trim</th>
-                   <th class="text-white font-12">Mont Av</th>
-                   <th class="text-white font-12">Mont Comp</th>
-                   <th class="text-white font-12">Assignation</th>
-                   <th class="text-white font-12">Assignation 1</th>
-                   <th class="text-white font-12">Société Orig</th>
-                   <th class="text-white font-12">Montant Paye</th>
-                   <th class="datatable-nosort text-white font-12">Action</th>
+                {{-- <th class="table-plus text-white">#</th> --}}
+                <th class="text-white font-12">Num Retraite</th>
+                <th class="text-white font-12">Type</th>
+                <th class="text-white font-12">Prénoms</th>
+                <th class="text-white font-12">Nom</th>
+                <th class="text-white font-12">Date Naiss</th>
+                <th class="text-white font-12">Date Jouiss</th>
+                <th class="text-white font-12">Titre</th>
+                <th class="text-white font-12">Mont Trim</th>
+                <th class="text-white font-12">Mont Av</th>
+                <th class="text-white font-12">Mont Comp</th>
+                <th class="text-white font-12">Assignation</th>
+                <th class="text-white font-12">Assignation 1</th>
+                <th class="text-white font-12">Société Orig</th>
+                <th class="text-white font-12">Montant Paye</th>
+                <th class="datatable-nosort text-white font-12">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($echeances as $ret)
+                @foreach ($echeances->rertaites as $ret)
                 <tr>
                     {{-- <td>{{ $loop->index+1 }}</td> --}}
                     <td class="font-12">{{ $ret->num_retraite }}</td>
@@ -375,60 +375,60 @@
                                                     <div>
                                                         <span class="text-left font-weight-bold font-18">Num retraite</span>
                                                         <span class="float-right font-16">{{ $ret->num_retraite }}</span>
-                                                   </div>
-                                                   <div>
+                                                </div>
+                                                <div>
                                                         <span class="text-left font-weight-bold font-18">Prenoms</span>
                                                         <span class="float-right font-16">{{ $ret->prenoms }}</span>
-                                                   </div>
-                                                   <div>
+                                                </div>
+                                                <div>
                                                         <span class="text-left font-weight-bold font-18">Nom</span>
                                                         <span class="float-right font-16">{{ $ret->nom }}</span>
-                                                   </div>
-                                                   <div>
+                                                </div>
+                                                <div>
                                                         <span class="text-left font-weight-bold font-18">Titre</span>
                                                         <span class="float-right font-16">{{ $ret->titre }}</span>
-                                                   </div>
-                                                   <div>
+                                                </div>
+                                                <div>
                                                         <span class="text-left font-weight-bold font-18">Date de Naissance</span>
                                                         <span class="float-right font-16">{{ \AppHelper::getDateFormat($ret->date_de_naiss) }}</span>
-                                                   </div>
-                                                   <div>
+                                                </div>
+                                                <div>
                                                         <span class="text-left font-weight-bold font-18">Date de Jouissance</span>
                                                         <span class="float-right font-16">{{ \AppHelper::getDateFormat($ret->date_de_jouiss) }}</span>
-                                                   </div>
-                                                   <div>
+                                                </div>
+                                                <div>
                                                         <span class="text-left font-weight-bold font-18">Montant mens reval</span>
                                                         <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->montant_mens_reval) }} GNF</span>
-                                                   </div>
-                                                   <div>
+                                                </div>
+                                                <div>
                                                         <span class="text-left font-weight-bold font-18">Montant avance</span>
                                                         <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->montant_avance) }} GNF</span>
-                                                   </div>
+                                                </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div>
                                                         <span class="text-left font-weight-bold font-18">Trim du</span>
                                                         <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->trim_du) }} GNF</span>
-                                                   </div>
-                                                   <div>
+                                                </div>
+                                                <div>
                                                         <span class="text-left font-weight-bold font-18">Pour</span>
                                                         <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->pour) }} GNF</span>
-                                                   </div>
+                                                </div>
 
 
-                                                   <div>
+                                                <div>
                                                         <span class="text-left font-weight-bold font-18">Montant arriéré</span>
                                                         <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->montant_arriere) }} GNF</span>
-                                                   </div>
-                                                   <div>
+                                                </div>
+                                                <div>
                                                         <span class="text-left font-weight-bold font-18">Montant à payer</span>
                                                         <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->montant_a_paye) }} GNF</span>
-                                                   </div>
+                                                </div>
 
-                                                   <div>
+                                                <div>
                                                         <span class="text-left font-weight-bold font-18">Mappr</span>
                                                         <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->mappr) }} GNF</span>
-                                                   </div>
+                                                </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -447,7 +447,7 @@
         </table>
         <!-- Pagination Links -->
     </div>
-    @endisset
+    @endif
 
 
 
@@ -568,9 +568,10 @@
     $(document).ready(function() {
         $('#ass_1').change(function() {
             var selectedCategory = $(this).val();
-            $.getJSON("{{ url('/paye/retraite/index/get-ass') }}", { option: selectedCategory }, function(data) {
+            $.getJSON("{{ url('/paye/retraite/get-ass') }}", { option: selectedCategory }, function(data) {
                 var subCategoryDropdown = $('#ass_2');
                 subCategoryDropdown.empty();
+                console.log('dattta ', data);
                 // subCategoryDropdown.append("<option selected=''>--Aucune selection--</option>");
                 $.each(data, function(index, element) {
                     subCategoryDropdown.append("<option value='" + element.assignation1 + "'>" + element.assignation1 + "</option>");

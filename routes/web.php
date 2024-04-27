@@ -108,9 +108,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/paye/export/pdf/{id}', [App\Http\Controllers\EcheanceController::class, 'exportPdf'])->name('paye.pdf');
 
     //PAYE
-    Route::get('/paye/retraite/index', [App\Http\Controllers\PayeController::class, 'retraiteIndex'])->name('payeRetraite.index');
+    Route::get('/paye/index', [App\Http\Controllers\PayeController::class, 'index'])->name('paye.index');
+    Route::get('/paye/retraite/index/{id}', [App\Http\Controllers\PayeController::class, 'retraiteIndex'])->name('payeRetraite.index');
     Route::get('/paye/retraite/index/filter', [App\Http\Controllers\PayeController::class, 'retraiteFilter'])->name('payeRetraite.filter');
-    Route::get('/paye/retraite/index/get-ass', [App\Http\Controllers\PayeController::class, 'getAss']);
+    Route::get('/paye/retraite/get-ass', [App\Http\Controllers\PayeController::class, 'getAss']);
     Route::get('/paye/retraite/index/getAll', [App\Http\Controllers\PayeController::class, 'getAll']);
     Route::get('/paye/retraite/index/filter-etat', [App\Http\Controllers\PayeController::class, 'filterEtat']);
 
