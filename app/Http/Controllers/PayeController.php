@@ -6,15 +6,30 @@ use App\Models\Echeance;
 use App\Models\EtatRetraite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\AppHelper;
 
 
 class PayeController extends Controller
 {
     public function index() {
         $data = Echeance::all();
+        // foreach ($data as $user) {
+        //     $user->example = '<a href="/user/' . $user->id . '"> Traitement <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>';
+        // }
         $mois = DB::table('mois')->get();
 
         return view('paye.index', compact('data', 'mois'));
+    }
+
+    public function test()
+    {
+        $data = Echeance::all();
+        foreach ($data as $user) {
+            $user->example = '<a href="/user/' . $user->id . '"> Traitement <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>';
+            $user->created_at = AppHelper::getDateFormat($user->created_at);
+            $user->created_by = AppHelper::getUserName($user->created_by);
+        }
+        return response()->json($data);
     }
     public function retraiteIndex(int $id) {
         // dd($request->all());
@@ -23,10 +38,15 @@ class PayeController extends Controller
         // $assignations = $data->distinct()->get(['assignation']);
 
         // $echeances = Echeance::where('type','retraite')->first()->retraites->paginate(10);
-        $echeance = Echeance::find($id)->first();
+         $echeance = Echeance::find($id)->first();
+        // $echeance = Echeance::all();
+        // foreach ($echeance as $user) {
+        //     $user->example = '<a href="/user/' . AppHelper::getDateFormat($user->created_at) . '">' . $user->mois . '</a>';
+        // }
+
         // $assignation = $data->distinct()->get(['assignation']);
 
-        //    dd($echeance);
+        //  dd($echeance);
         return view('paye.retraite.index', compact('assignations','echeance'));
     }
 

@@ -22,3 +22,4 @@ class Echeance extends Model
     }
 
 }
+

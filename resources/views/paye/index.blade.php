@@ -20,8 +20,9 @@
 </div>
 
 
+
 <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-10">
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -59,6 +60,7 @@
                                 </td>
                                 <td>{{ \AppHelper::getUserName($d->created_by) }}</td>
                                 <td>{{ \AppHelper::getDateFormat($d->created_at) }}</td>
+                                {{-- <td>{!! $d->example !!}</td> --}}
                                 {{-- <td>{{ DB::table('users')->where('id', $d->created_by)->value('name') }}</td> --}}
                                 <td>
                                     <a class="btn btn-success" href="{{ route('payeRetraite.index', $d->id) }}">
@@ -76,8 +78,55 @@
 
 
 
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+{{-- <script>
+    $(document).ready(function() {
+        // new DataTable('#examplell');
+
+     $.ajax({
+         url: '/paye/test',
+         type: 'GET',
+         dataType: 'json',
+         success: function(data) {
+             console.log('baby', data);
+
+             var table = $('#examplell').DataTable({
+                 searching: true,
+                 paging: true,
+                 pageLength: 10,
+             });
+
+
+             data.forEach(function(item) {
+
+                 table.row.add([
+                     item.id ,
+                     item.mois,
+                     item.status,
+                     item.created_by,
+                     item.created_at.split("T")[0],
+                     item.example,
+                     ' '
+
+                 ]).draw();
+             });
+         },
+         error: function(error) {
+
+             console.log(error);
+         }
+     });
+
+
+    });
+
+</script> --}}
 <script>
+
+
     function sendForm(id){
         $("#send_echeance_retraite"+id).submit();
     }

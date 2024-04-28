@@ -469,10 +469,10 @@
 
 
 <script>
-    $(document).ready(function() {
-        new DataTable('#example');
+    // $(document).ready(function() {
+    //     new DataTable('#example');
 
-    });
+    // });
 
 
 
