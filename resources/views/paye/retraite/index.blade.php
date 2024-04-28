@@ -250,7 +250,7 @@
     </div>
 
 
-    <form action="{{ route('payeRetraite.filter') }}" method="get" class="">
+    <form action="" method="get" class="">
         @csrf
         <div class="row justify-content-center shadow-lg p-2">
             <div class="col-md-2">
@@ -285,7 +285,7 @@
                 <label class="col-sm-12 weight-600 col-md-12 col-form-label">Assignations</label>
                 <div class="col-sm-12 col-md-10">
                     <select id="ass_1" name="assignation" required class="form-control form-control-sm">
-                        <option selected="">--Aucune selection--</option>
+                        <option selected value="0">--Aucune selection--</option>
                         @foreach ($assignations as $ass)
                         <option value="{{ $ass->assignation }}">{{ $ass->assignation }}</option>
                         @endforeach
@@ -296,7 +296,7 @@
                 <label class="col-sm-12 weight-600 col-md-12 col-form-label">Assignations 1</label>
                 <div class="col-sm-12 col-md-10">
                     <select id="ass_2" name="assignation1" class="form-control form-control-sm">
-                        <option selected="">--Aucune selection--</option>
+                        <option selected value="0">--Aucune selection--</option>
                     </select>
                 </div>
             </div>
@@ -566,6 +566,48 @@
 
 <script>
     $(document).ready(function() {
+
+        $('input[type=radio][name=radio_type]').change(function() {
+            loadDatatable();
+        });
+        $('input[type=radio][name=radio_etat]').change(function() {
+            loadDatatable();
+        });
+
+        $('#ass_1').change(function() {
+            loadDatatable();
+        });
+
+        $('#ass_2').change(function() {
+            loadDatatable();
+        });
+
+        //LOAD DATATABLE
+        function loadDatatable() {
+            var typeRadio = $('input[name="radio_type"]:checked').val();
+            var etatRadio = $('input[name="radio_etat"]:checked').val();
+            var assignation = $('#ass_1').val();
+            var assignation1 = $('#ass_2').val();
+
+            $.ajax({
+                url: '/paye/retraite/filter',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    typeRadio: typeRadio,
+                    etatRadio: etatRadio,
+                    assignation: assignation,
+                    assignation1: assignation1,
+                 },
+                success: function(data) {
+                   console.log('valueeee:', data);
+                }
+            });
+
+
+        }
+
+        //GET ASSIGNATION1
         $('#ass_1').change(function() {
             var selectedCategory = $(this).val();
             $.getJSON("{{ url('/paye/retraite/get-ass') }}", { option: selectedCategory }, function(data) {
