@@ -116,7 +116,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/paye/retraite/index/{id}', [App\Http\Controllers\PayeController::class, 'retraiteIndex'])->name('payeRetraite.index');
     Route::get('/paye/retraite/filter', [App\Http\Controllers\PayeController::class, 'retraiteFilter']);
     Route::get('/paye/retraite/get-ass', [App\Http\Controllers\PayeController::class, 'getAss']);
-    Route::get('/paye/retraite/index/getAll', [App\Http\Controllers\PayeController::class, 'getAll']);
+    Route::get('/paye/retraite/excel/{id}', [App\Http\Controllers\PayeController::class, 'retraiteExcel'])->name('payeRetraite.excel');
+    Route::post('/paye/retraite/preview', [App\Http\Controllers\PayeController::class, 'retraitePreview'])->name('payeRetraite.preview');
+    Route::post('/paye/retraite/storeAll', [App\Http\Controllers\PayeController::class, 'retraiteStoreAll'])->name('payeRetraite.store');
     Route::get('/paye/retraite/index/filter-etat', [App\Http\Controllers\PayeController::class, 'filterEtat']);
 
     route::fallback(function () {

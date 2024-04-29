@@ -21,7 +21,7 @@
                         <button class="btn btn-success" data-toggle="modal" data-target="#modal-paye-add">Nouveau <i class="fa fa-plus" aria-hidden="true"></i></button>
                     </div>
                     <div class="col-md-6">
-                        <button class="btn btn-warning">Importer <i class="fa fa-upload" aria-hidden="true"></i></button>
+                        <a href="{{ route('payeRetraite.excel',$echeance->id) }}" class="btn btn-warning">Importer <i class="fa fa-upload" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -270,6 +270,7 @@
 
                 <div class="custom-control custom-radio ">
                     <input checked type="radio" id="customRadio4" value="all" name="radio_etat" class="custom-control-input">
+                    <input type="hidden" id="echeance_id" name="echeance_id" value="{{ $echeance->id }}">
                     <label class="custom-control-label" for="customRadio4">Tous</label>
                 </div>
                 <div class="custom-control custom-radio ">
@@ -307,147 +308,57 @@
     </form>
 
 
-    @if ($echeance->rertaites != null)
+
+
+    {{-- @if ($echeance->rertaites != null) --}}
     <div class="pb-20 mb-3">
         <div class="pd-20">
             <h4 class="text-blue h4">Liste des pensionnaires</h4>
         </div>
-        <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <table id="exampleRetraiteFinale" class="table table-striped table-bordered" style="width:100%">
             <thead class="bg-success">
                 <tr>
                 {{-- <th class="table-plus text-white">#</th> --}}
                 <th class="text-white font-12">Num Retraite</th>
-                <th class="text-white font-12">Type</th>
                 <th class="text-white font-12">Prénoms</th>
                 <th class="text-white font-12">Nom</th>
                 <th class="text-white font-12">Date Naiss</th>
                 <th class="text-white font-12">Date Jouiss</th>
                 <th class="text-white font-12">Titre</th>
-                <th class="text-white font-12">Mont Trim</th>
-                <th class="text-white font-12">Mont Av</th>
+                <th class="text-white font-12">Montant Trim</th>
                 <th class="text-white font-12">Mont Comp</th>
                 <th class="text-white font-12">Assignation</th>
                 <th class="text-white font-12">Assignation 1</th>
                 <th class="text-white font-12">Société Orig</th>
-                <th class="text-white font-12">Montant Paye</th>
+                <th class="text-white font-12">Décédé</th>
+                <th class="text-white font-12">Type</th>
+                <th class="text-white font-12">Mont trim reval</th>
+                <th class="text-white font-12">Mont mens reval</th>
+                <th class="text-white font-12">Montant Avance</th>
+                <th class="text-white font-12">Trim du</th>
+                <th class="text-white font-12">Pour</th>
+                <th class="text-white font-12">Rest a remb</th>
+                <th class="text-white font-12">Mont arriéré</th>
+                <th class="text-white font-12">AF</th>
+                <th class="text-white font-12">Montant à payer</th>
+                <th class="text-white font-12">Observation</th>
+                <th class="text-white font-12">Echeance pre vrmnt</th>
+                <th class="text-white font-12">Agence</th>
+                <th class="text-white font-12">Pre ech remb</th>
+                <th class="text-white font-12">Der ech remb</th>
+                <th class="text-white font-12">As avance</th>
+                <th class="text-white font-12">Est reclamation</th>
+                <th class="text-white font-12">Téléphone</th>
                 <th class="datatable-nosort text-white font-12">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($echeances->rertaites as $ret)
-                <tr>
-                    {{-- <td>{{ $loop->index+1 }}</td> --}}
-                    <td class="font-12">{{ $ret->num_retraite }}</td>
-                    <td class="font-12">{{ $ret->type }}</td>
-                    <td class="font-12">{{ $ret->prenoms }}</td>
-                    <td class="font-12">{{ $ret->nom }}</td>
-                    <td class="font-12 text-nowrap">{{ \Carbon\Carbon::parse($ret->date_de_naiss)->format('d-m-Y') }}</td>
-                    <td class="font-12 text-nowrap">{{ \AppHelper::getDateFormat($ret->date_de_jouiss) }}</td>
-                    <td class="font-12">{{ $ret->titre }}</td>
-                    <td class="font-12 text-right text-nowrap">{{ \AppHelper::getMoneyFormat($ret->montant_trim) }} GNF</td>
-                    <td class="font-12 text-right text-nowrap">{{ \AppHelper::getMoneyFormat($ret->montant_avance) }} GNF</td>
-                    <td class="font-12 text-right text-nowrap">{{ \AppHelper::getMoneyFormat($ret->montant_comp) }} GNF</td>
-                    <td class="font-12">{{ $ret->assignation }}</td>
-                    <td class="font-12">{{ $ret->assignation1 }}</td>
-                    <td class="font-12">{{ $ret->aociéte_orig }}</td>
-                    <td class="font-12 text-right text-nowrap">{{ \AppHelper::getMoneyFormat($ret->montant_a_paye) }} GNF</td>
-                    <td class="text-right">
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" data-toggle="modal" data-target="#modal-paye-moi-test{{ $ret->id }}" type="button" href="#"><i class="dw dw-eye"></i> Détails</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                            </div>
-                            <div class="modal fade bs-example-modal-lg" id="modal-paye-moi-test{{ $ret->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-xl modal-dialog-centered">
-                                    <div class="modal-content" style="height:500px;">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myLargeModalLabel">Echeance</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h3 class="text-center text-white bg-success">Détails sur l'echeance date ici</h3>
-                                            <div class="row p-5">
-                                                <div class="col-md-6">
-                                                    <div>
-                                                        <span class="text-left font-weight-bold font-18">Num retraite</span>
-                                                        <span class="float-right font-16">{{ $ret->num_retraite }}</span>
-                                                </div>
-                                                <div>
-                                                        <span class="text-left font-weight-bold font-18">Prenoms</span>
-                                                        <span class="float-right font-16">{{ $ret->prenoms }}</span>
-                                                </div>
-                                                <div>
-                                                        <span class="text-left font-weight-bold font-18">Nom</span>
-                                                        <span class="float-right font-16">{{ $ret->nom }}</span>
-                                                </div>
-                                                <div>
-                                                        <span class="text-left font-weight-bold font-18">Titre</span>
-                                                        <span class="float-right font-16">{{ $ret->titre }}</span>
-                                                </div>
-                                                <div>
-                                                        <span class="text-left font-weight-bold font-18">Date de Naissance</span>
-                                                        <span class="float-right font-16">{{ \AppHelper::getDateFormat($ret->date_de_naiss) }}</span>
-                                                </div>
-                                                <div>
-                                                        <span class="text-left font-weight-bold font-18">Date de Jouissance</span>
-                                                        <span class="float-right font-16">{{ \AppHelper::getDateFormat($ret->date_de_jouiss) }}</span>
-                                                </div>
-                                                <div>
-                                                        <span class="text-left font-weight-bold font-18">Montant mens reval</span>
-                                                        <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->montant_mens_reval) }} GNF</span>
-                                                </div>
-                                                <div>
-                                                        <span class="text-left font-weight-bold font-18">Montant avance</span>
-                                                        <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->montant_avance) }} GNF</span>
-                                                </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div>
-                                                        <span class="text-left font-weight-bold font-18">Trim du</span>
-                                                        <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->trim_du) }} GNF</span>
-                                                </div>
-                                                <div>
-                                                        <span class="text-left font-weight-bold font-18">Pour</span>
-                                                        <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->pour) }} GNF</span>
-                                                </div>
 
-
-                                                <div>
-                                                        <span class="text-left font-weight-bold font-18">Montant arriéré</span>
-                                                        <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->montant_arriere) }} GNF</span>
-                                                </div>
-                                                <div>
-                                                        <span class="text-left font-weight-bold font-18">Montant à payer</span>
-                                                        <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->montant_a_paye) }} GNF</span>
-                                                </div>
-
-                                                <div>
-                                                        <span class="text-left font-weight-bold font-18">Mappr</span>
-                                                        <span class="float-right font-16">{{ \AppHelper::getMoneyFormat($ret->mappr) }} GNF</span>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </td>
-
-
-                </tr>
-                @endforeach
             </tbody>
         </table>
         <!-- Pagination Links -->
     </div>
-    @endif
+    {{-- @endif --}}
 
 
 
@@ -567,6 +478,107 @@
 <script>
     $(document).ready(function() {
 
+        var echeance_id = $('#echeance_id').val();
+
+        $.ajax({
+                url: '/paye/retraite/filter',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    echeance_id: echeance_id
+                 },
+                success: function(data) {
+                   console.log('valueeee:', data);
+                   var table = $('#exampleRetraiteFinale').DataTable({
+                        searching: true,
+                        paging: true,
+                        pageLength: 10,
+                    });
+                    data.forEach(function(item) {
+
+                    table.row.add([
+                        item.num_pension,
+                        item.prenom,
+                        item.nom,
+                        item.date_naiss,
+                        item.date_jouis,
+                        item.titre,
+                        item.montant_trim,
+                        item.montant_comp,
+                        item.assignation,
+                        item.assignation1,
+                        item.societe_orig,
+                        item.est_decede,
+                        item.type,
+                        item.montant_trim_reval,
+                        ' ',
+                        item.montant_avance,
+                        item.trim_du,
+                        item.remb_pour_nb_periode,
+                        ' ',
+                        item.montant_arriere,
+                        item.af,
+                        item.montant_a_payer,
+                        item.observation,
+                        ' ',
+                        item.agence,
+                        item.pre_ech_remb,
+                        item.taux_remb,
+                        item.as_avance,
+                        item.est_reclation,
+                        item.telephone,
+                        ' '
+
+
+
+
+
+
+
+
+
+
+
+
+                        // item.montant_comp_plus,
+                        // item.echeance_pre_vrmt,
+                        // item.rip,
+                        // item.banque,
+                        // item.est_nc,
+                        // item.nb_periode_avance,
+                        // item.der_ech_remb,
+                        // item.solde_avance,
+                        // item.mappr,
+                        // item.reste_remb,
+                        // item.trim_remb,
+                        // item.IDPROCURATION,
+                        // item.date_motif,
+                        // item.date_dcd,
+                        // item.date_declaration_dcd,
+                        // item.est_suspendu,
+                        // item.code_bank,
+                        // item.code_agence,
+                        // item.cle_rib,
+                    ]).draw();
+                    });
+
+                    // item.created_at.split("T")[0],
+
+
+
+                }
+        });
+
+
+
+
+
+
+
+
+
+
+
         $('input[type=radio][name=radio_type]').change(function() {
             loadDatatable();
         });
@@ -588,6 +600,7 @@
             var etatRadio = $('input[name="radio_etat"]:checked').val();
             var assignation = $('#ass_1').val();
             var assignation1 = $('#ass_2').val();
+            var echeance_id = $('#echeance_id').val();
 
             $.ajax({
                 url: '/paye/retraite/filter',
@@ -598,6 +611,7 @@
                     etatRadio: etatRadio,
                     assignation: assignation,
                     assignation1: assignation1,
+                    echeance_id: echeance_id,
                  },
                 success: function(data) {
                    console.log('valueeee:', data);

@@ -12,7 +12,7 @@ class EtatRetraite extends Model
     protected $fillable = [
         'id',
         'echeance_id',
-        'num_retraite',
+        'num_pension',
         'nom',
         'prenom',
         'type',
