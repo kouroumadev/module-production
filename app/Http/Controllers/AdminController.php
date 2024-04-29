@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Deadline;
 use App\Models\Dept;
-use App\Models\User;
-use App\Models\Prestation;
 use App\Models\Piece;
+use App\Models\Prestation;
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
-use RealRashid\SweetAlert\Facades\Alert;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminController extends Controller
 {
-
     //GESTION DES UTILISATEURS
     public function userIndex()
     {
@@ -29,14 +29,14 @@ class AdminController extends Controller
     public function userStore(Request $request)
     {
         // dd($request->all());
-        $password = Str::password(8,true,true,false,false,false);
+        $password = Str::password(8, true, true, false, false, false);
         //dd($password);
         if ($request->hasFile('user_photo')) {
             $file = $request->file('user_photo')->getClientOriginalName();
             $filename = pathinfo($file, PATHINFO_FILENAME);
             $extension = pathinfo($file, PATHINFO_EXTENSION);
-            $tem = explode(".", $request->email);
-            $img = $filename . "-" . time() . "-" . $tem['0'] . "." . $extension;
+            $tem = explode('.', $request->email);
+            $img = $filename.'-'.time().'-'.$tem['0'].'.'.$extension;
 
             Storage::disk('userImg')->put($img, file_get_contents($request->file('user_photo')));
         }
@@ -56,8 +56,9 @@ class AdminController extends Controller
         return redirect(route('user.index'));
     }
 
-    public function userReset($id){
-        $password = Str::password(8,true,true,false,false,false);
+    public function userReset($id)
+    {
+        $password = Str::password(8, true, true, false, false, false);
         //dd($id);
         $user = User::find($id);
         $user->password = Hash::make($password);
@@ -70,7 +71,8 @@ class AdminController extends Controller
         return redirect(route('user.index'));
     }
 
-    public function userSuspended($id){
+    public function userSuspended($id)
+    {
         $user = User::find($id);
 
         if ($user->status == 1) {
@@ -88,8 +90,7 @@ class AdminController extends Controller
 
             return redirect(route('user.index'));
         }
-        
-        
+
     }
 
     // END USER MANAGEMENT
@@ -102,6 +103,7 @@ class AdminController extends Controller
 
         return view('dept.index', compact('depts'));
     }
+
     public function deptStore(Request $request)
     {
         // dd($request->all());
@@ -110,11 +112,37 @@ class AdminController extends Controller
         $dept->name = $request->name;
         // $dept->created_by = Auth::user()->id;
         $dept->save();
+
         return redirect(route('dept.index'))->with('yes', 'Enregistrer avec succes');
     }
 
     //END DEPT MANAGEMENT
 
+    public function DeadlineIndex()
+    {
+        $depts = Dept::all();
+        $deadlines = Deadline::all();
+
+        return view('deadline.index', compact('depts', 'deadlines'));
+    }
+
+    public function DeadlineStore(Request $request)
+    {
+        $exist = Deadline::where('dept_id', $request->dept_id)->get();
+        //dd(count($exist));
+        // $request->all();
+        if (count($exist) == 1) {
+            return redirect(route('deadline.index'))->with('no', 'La Direction existe deja');
+        } else {
+            $deadline = new Deadline();
+            $deadline->dept_id = $request->dept_id;
+            $deadline->name = $request->name;
+            $deadline->save();
+
+            return redirect(route('deadline.index'))->with('yes', 'Enregistrer avec succes');
+        }
+
+    }
 
     public function docIndex()
     {
@@ -133,6 +161,7 @@ class AdminController extends Controller
         $piece->prestation_id = $request->prestation_id;
         $piece->obligation = $request->obligation;
         $piece->save();
+
         return redirect(route('doc.index'))->with('yes', 'Enregistrer avec succes');
     }
 
@@ -142,6 +171,7 @@ class AdminController extends Controller
 
         return view('parametrage.prestation.index', compact('prestations'));
     }
+
     public function PrestStore(Request $request)
     {
         // dd($request->all());
@@ -150,6 +180,7 @@ class AdminController extends Controller
         $prest->nom_prestation = $request->nom_prestation;
         // $dept->created_by = Auth::user()->id;
         $prest->save();
+
         return redirect(route('prest.index'))->with('yes', 'Enregistrer avec succes');
     }
 
@@ -159,6 +190,7 @@ class AdminController extends Controller
 
         return view('parametrage.piece.index', compact('prestations'));
     }
+
     public function PieceStore(Request $request)
     {
         //dd($request->all());
@@ -167,12 +199,12 @@ class AdminController extends Controller
         $prest->nom_prestation = $request->nom_prestation;
         // $dept->created_by = Auth::user()->id;
         $prest->save();
+
         return redirect(route('prest.index'))->with('yes', 'Enregistrer avec succes');
     }
 
     public function FicheDecompte()
     {
-
 
         $data = [
             'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
@@ -185,13 +217,13 @@ class AdminController extends Controller
         ];
 
         $pdf = PDF::loadView('test.fiche-decompte', $data);
+
         // $pdf->setPaper('A4', 'landscape');
         return $pdf->stream('fiche-decompte.pdf');
     }
 
     public function FichePaie()
     {
-
 
         $data = [
             'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
@@ -204,13 +236,13 @@ class AdminController extends Controller
         ];
 
         $pdf = PDF::loadView('test.fiche-paie', $data);
+
         // $pdf->setPaper('A4', 'landscape');
         return $pdf->stream('fiche-paie.pdf');
     }
 
     public function CarteRetraite()
     {
-
 
         $data = [
             'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
@@ -223,13 +255,13 @@ class AdminController extends Controller
         ];
 
         $pdf = PDF::loadView('test.carte-retraite', $data);
+
         // $pdf->setPaper('A4', 'landscape');
         return $pdf->stream('carte-retraite.pdf');
     }
 
     public function EtatPayement()
     {
-
 
         $data = [
             'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
@@ -243,6 +275,7 @@ class AdminController extends Controller
 
         $pdf = PDF::loadView('test.etat-payment', $data);
         $pdf->setPaper('A4', 'landscape');
+
         return $pdf->stream('etat-payment.pdf');
     }
 }

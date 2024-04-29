@@ -26,6 +26,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/pension/show', [App\Http\Controllers\PensionController::class, 'show'])->name('pension.show');
     Route::get('/pension/details/{id}', [App\Http\Controllers\PensionController::class, 'details'])->name('pension.details');
 
+    // /////////// ADMIN /////////////
+
     // DEPARTEMENT
     Route::get('/dept/index', [App\Http\Controllers\AdminController::class, 'deptIndex'])->name('dept.index');
     Route::post('/dept/store', [App\Http\Controllers\AdminController::class, 'deptStore'])->name('dept.store');
@@ -36,6 +38,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/reset/{id}', [App\Http\Controllers\AdminController::class, 'userReset'])->name('user.reset');
     Route::get('/user/suspended/{id}', [App\Http\Controllers\AdminController::class, 'userSuspended'])->name('user.suspended');
     Route::get('/user/update/{id}', [App\Http\Controllers\AdminController::class, 'userUpdate'])->name('user.update');
+
+    // DEADLINE
+    Route::get('/deadline/index', [App\Http\Controllers\AdminController::class, 'DeadlineIndex'])->name('deadline.index');
+    Route::post('/deadline/store', [App\Http\Controllers\AdminController::class, 'DeadlineStore'])->name('deadline.store');
 
     // DOCUMENTS
     Route::get('/doc/index', [App\Http\Controllers\AdminController::class, 'docIndex'])->name('doc.index');
@@ -118,6 +124,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/paye/retraite/get-ass', [App\Http\Controllers\PayeController::class, 'getAss']);
     Route::get('/paye/retraite/index/getAll', [App\Http\Controllers\PayeController::class, 'getAll']);
     Route::get('/paye/retraite/index/filter-etat', [App\Http\Controllers\PayeController::class, 'filterEtat']);
+
+    //// MISSION /////////////
+    Route::get('/mission/index', [App\Http\Controllers\MissionController::class, 'index'])->name('mission.index');
+    Route::post('/mission-assure-info', [App\Http\Controllers\MissionController::class, 'MissionAssureInfo'])->name('mission.assure.info');
 
     route::fallback(function () {
         return view('404');

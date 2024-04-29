@@ -99,70 +99,23 @@
             <div class="sidebar-menu">
                 <ul id="accordion-menu">
 
-
-
-                    <li onclick="makeActive(this,'1')" class="my-menu my-active" id="1">
-                        <a href="{{ route('dashboard') }}" class="dropdown-toggle no-arrow">
-                            <span class="micon dw dw-home"></span><span class="mtext">ACCEUIL</span>
-                        </a>
-                    </li>
-
-                    @if (Auth::user()->dept->name == 'ADMIN' || Auth::user()->dept->name == 'DQE')
-                        <li onclick="makeActive(this,'2')" class="my-menu" id="2">
-                            <a href="{{ route('prestation.index') }}" class="dropdown-toggle no-arrow">
-                                <span class="micon dw dw-home"></span><span class="mtext">PRESTATIONS</span>
-                            </a>
-                        </li>
+                    @if (Auth::user()->dept->name == 'DQE')
+                        @include('dqe.left-menu')
                     @endif
 
-                    @if (Auth::user()->dept->name == 'ADMIN' || Auth::user()->dept->name == 'DIPRES')
+                    @if (Auth::user()->dept->name == 'DIPRES')
                         @include('dipress.left-menu')
                     @endif
 
-                    @if (Auth::user()->dept->name == 'ADMIN' || Auth::user()->dept->name == 'PAYE')
+                    @if (Auth::user()->dept->name == 'PAYE')
                         @include('paye.left-menu')
                     @endif
-
-                    @if (Auth::user()->dept->name == 'ADMIN' || Auth::user()->dept->name == 'DQE')
-                        <li class="my-menu" onclick="makeActive(this,'3')" id="3">
-                            <a href="{{ route('reclamation.index') }}" class="dropdown-toggle no-arrow">
-                                <span class="micon dw dw-edit2"></span><span class="mtext">RECLAMATION</span>
-                            </a>
-                        </li>
-                        <li class="my-menu" onclick="makeActive(this,'7')" id="7">
-                            <a href="{{ route('pension.show') }}" class="dropdown-toggle no-arrow">
-                                <span class="micon dw dw-diagram"></span><span class="mtext">DEMAT</span>
-                            </a>
-                        </li>
-                        <li class="my-menu" onclick="makeActive(this,'4')" id="4">
-                            <a href="{{ route('demande.index') }}" class="dropdown-toggle no-arrow">
-                                <span class="micon dw dw-edit2"></span><span class="mtext">DEMANDE</span>
-                            </a>
-                        </li>
-
-                        <li class="my-menu" onclick="makeActive(this,'6')" id="6">
-                            <a href="#" class="dropdown-toggle no-arrow">
-                                <span class="micon dw dw-edit2"></span><span class="mtext">PROCURATION</span>
-                            </a>
-                        </li>
-
-                        <li class="my-menu" onclick="makeActive(this,'9')" id="9">
-                            <a href="#" class="dropdown-toggle no-arrow">
-                                <span class="micon dw dw-edit2"></span><span class="mtext">ASSISTANCE</span>
-                            </a>
-                        </li>
-
-                        <li class="my-menu" onclick="makeActive(this,'10')" id="10">
-                            <a href="#" class="dropdown-toggle no-arrow">
-                                <span class="micon dw dw-library"></span><span class="mtext">DOSSIERS DOUTEUX</span>
-                            </a>
-                        </li>
-
-                        <li class="my-menu" onclick="makeActive(this,'11')" id="11">
-                            <div class="dropdown-divider"></div>
-                        </li>
-                    @endif
                     @if (Auth::user()->dept->name == 'ADMIN')
+                        @include('admin.left-menu')
+                    @endif
+
+
+                    {{-- @if (Auth::user()->dept->name == 'ADMIN')
                         <li>
                             <div class="sidebar-small-cap">ESPACE ADMIN</div>
                         </li>
@@ -182,7 +135,7 @@
 
                             </ul>
                         </li>
-                    @endif
+                    @endif --}}
                     @if (Auth::user()->dept->name == 'SECRETARIAT')
                         <li class="my-menu" onclick="makeActive(this,'13')" id="4">
                             <a href="{{ route('secretariat.index') }}" class="dropdown-toggle no-arrow">
