@@ -43,6 +43,7 @@ class EtatRetraite extends Model
         'trim_du',
         'est_reclation',
         'montant_trim_reval',
+        'montant_mens_reval',
         'mappr',
         'af',
         'observation',

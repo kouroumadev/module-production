@@ -46,6 +46,7 @@ return new class extends Migration
             $table->string('trim_du')->default(0);
             $table->string('est_reclation')->default('0');
             $table->string('montant_trim_reval')->default(0);
+            $table->string('montant_mens_reval')->default(0);
             $table->string('mappr')->default(0);
             $table->string('af')->default(0);
             $table->string('observation')->nullable();

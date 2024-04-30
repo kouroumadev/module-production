@@ -26,6 +26,14 @@ class AppHelper {
     public static function getBrancheName($id) {
         return DB::table('branche')->where('code', $id)->value('libelle');
     }
+    public static function getPercentage($value, $percentage) {
+        // Convert the percentage to a decimal
+        $percentageInDecimal = (int)$percentage / 100;
+
+        // Calculate 40% of the number
+        $result = $percentageInDecimal * (int)$value;
+        return $result;
+    }
 
     public static function getMontMensPens($total_ssc_final,$total_mois,$annuite,$added_mon) {
         return self::getMoneyFormat((($total_ssc_final/$total_mois)*$annuite*(2+$added_mon))/100) ;

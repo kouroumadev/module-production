@@ -59,16 +59,49 @@ class PayeController extends Controller
     public function retraiteFilter(Request $request)
     {
         // dd($request->all());
-        $data = Echeance::find($request->echeance_id)->first()->retraites();
+        $data = Echeance::find($request->echeance_id)->first()->retraites;
         // dd($data);
 
-        if($request->has('typeRadio')){
-            dd('pas bon');
-
-        } else {
-            $rep = $data->where('type','01-')->get();
-            return response()->json($rep);
+        foreach($data as $d) {
+            $d->created_at = AppHelper::getDateFormat($d->created_at);
+            $d->updated_at = AppHelper::getDateFormat($d->created_at);
+            $d->montant_a_payer = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_a_payer) .' GNF</span>';
+            $d->montant_arriere = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_arriere) .' GNF</span>';
+            $d->montant_avance = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_avance) .' GNF</span>';
+            $d->montant_comp = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_comp) .' GNF</span>';
+            $d->montant_comp_plus = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_comp_plus) .' GNF</span>';
+            $d->montant_trim = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_trim) .' GNF</span>';
+            $d->montant_trim_reval = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_trim_reval) .' GNF</span>';
+            $d->montant_mens_reval = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_mens_reval) .' GNF</span>';
+            $d->action = '
+                <a href="#" class="btn btn-success rounded"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            ';
         }
+        //  dd($data);
+        if(!$request->has('typeRadio')){
+            $data = $data->where('type','01-');
+        } else {
+            $ass = $request->assignation;
+            $data = $data->where('type',$request->typeRadio)
+                             ->when($ass, function ($query) {
+                                 return $query->whereRaw('TRIM(assignation) = ?', ' KALOUM ');
+                             });
+                            dd($data);
+
+                        //  ->where('assignation',$request->assignation);
+                        //  ->where('type',$request->typeRadio);
+        }
+
+        // if($request->has('typeRadio') && $request->typeRadio != '0'){
+        //     $data = $data->where('type',$request->typeRadio);
+
+        // }
+        // if($request->has('assignation') && $request->assignation != '0'){
+        //     $data = $data->where('assignation',$request->assignation);
+        // }
+
+
+        return response()->json($data);
 
     }
     public function getAll()
@@ -89,7 +122,7 @@ class PayeController extends Controller
 
         $data = Excel::toArray(new EtatRetraiteImport($request->echeance_id), $file);
 
-        // dd($data[0][0]);
+        // dd($data[0]);
 
         return view('paye.retraite.create', compact('echeance','data'));
     }
@@ -133,7 +166,8 @@ class PayeController extends Controller
             $retraite->montant_arriere = $d['montant_arr'];
             $retraite->trim_du = $d['trim_du'];
             // $retraite->est_reclation = $d['oooo'];
-            $retraite->montant_trim_reval = $d['montant_mensuel_reval'];
+            $retraite->montant_trim_reval = AppHelper::getPercentage($d['montant_trimest'],40);
+            $retraite->montant_mens_reval = $d['montant_mensuel_reval'];
             // $retraite->mappr = $d['oooo'];
             $retraite->af = $d['montant_des_allocat'];
             $retraite->observation = $d['observation'];

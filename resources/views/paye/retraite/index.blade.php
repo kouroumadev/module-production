@@ -257,11 +257,11 @@
                 <label class="weight-600">Type</label>
 
                 <div class="custom-control custom-radio ">
-                    <input checked type="radio" id="customRadio4type" value="01" name="radio_type" class="custom-control-input">
+                    <input checked type="radio" id="customRadio4type" value="01-" name="radio_type" class="custom-control-input">
                     <label class="custom-control-label" for="customRadio4type">01-</label>
                 </div>
                 <div class="custom-control custom-radio ">
-                    <input type="radio" id="customRadio5type" value="pi" name="radio_type" class="custom-control-input">
+                    <input type="radio" id="customRadio5type" value="PI" name="radio_type" class="custom-control-input">
                     <label class="custom-control-label" for="customRadio5type">PI</label>
                 </div>
             </div>
@@ -286,7 +286,7 @@
                 <label class="col-sm-12 weight-600 col-md-12 col-form-label">Assignations</label>
                 <div class="col-sm-12 col-md-10">
                     <select id="ass_1" name="assignation" required class="form-control form-control-sm">
-                        <option selected value="0">--Aucune selection--</option>
+                        <option selected value="">--Aucune selection--</option>
                         @foreach ($assignations as $ass)
                         <option value="{{ $ass->assignation }}">{{ $ass->assignation }}</option>
                         @endforeach
@@ -297,7 +297,7 @@
                 <label class="col-sm-12 weight-600 col-md-12 col-form-label">Assignations 1</label>
                 <div class="col-sm-12 col-md-10">
                     <select id="ass_2" name="assignation1" class="form-control form-control-sm">
-                        <option selected value="0">--Aucune selection--</option>
+                        <option selected value="">--Aucune selection--</option>
                     </select>
                 </div>
             </div>
@@ -319,7 +319,7 @@
             <thead class="bg-success">
                 <tr>
                 {{-- <th class="table-plus text-white">#</th> --}}
-                <th class="text-white font-12">Num Retraite</th>
+                <th class="text-white font-12">Num Pension</th>
                 <th class="text-white font-12">Prénoms</th>
                 <th class="text-white font-12">Nom</th>
                 <th class="text-white font-12">Date Naiss</th>
@@ -349,10 +349,22 @@
                 <th class="text-white font-12">As avance</th>
                 <th class="text-white font-12">Est reclamation</th>
                 <th class="text-white font-12">Téléphone</th>
+                <th class="text-white font-12">Trim remb</th>
+                <th class="text-white font-12">Solde avance</th>
+                <th class="text-white font-12">NC</th>
+                <th class="text-white font-12">Code bank</th>
+                <th class="text-white font-12">Code agence</th>
+                <th class="text-white font-12">Numéro de cmpt</th>
+                <th class="text-white font-12">Clé rib</th>
+                <th class="text-white font-12">Mappr</th>
+                <th class="text-white font-12">Suspendu</th>
+                <th class="text-white font-12">Ajouté le </th>
+                <th class="text-white font-12">Modifié le </th>
                 <th class="datatable-nosort text-white font-12">Action</th>
                 </tr>
             </thead>
             <tbody>
+
 
             </tbody>
         </table>
@@ -480,6 +492,8 @@
 
         var echeance_id = $('#echeance_id').val();
 
+        var table = $('#exampleRetraiteFinale').DataTable();
+
         $.ajax({
                 url: '/paye/retraite/filter',
                 type: 'GET',
@@ -489,11 +503,12 @@
                  },
                 success: function(data) {
                    console.log('valueeee:', data);
-                   var table = $('#exampleRetraiteFinale').DataTable({
-                        searching: true,
-                        paging: true,
-                        pageLength: 10,
-                    });
+                   console.log(jQuery.type(data));
+                //    var table = $('#exampleRetraiteFinale').DataTable({
+                //         searching: true,
+                //         paging: true,
+                //         pageLength: 10,
+                //     });
                     data.forEach(function(item) {
 
                     table.row.add([
@@ -511,54 +526,47 @@
                         item.est_decede,
                         item.type,
                         item.montant_trim_reval,
-                        ' ',
+                        item.montant_mens_reval,
                         item.montant_avance,
                         item.trim_du,
                         item.remb_pour_nb_periode,
-                        ' ',
+                        item.reste_remb,
                         item.montant_arriere,
                         item.af,
                         item.montant_a_payer,
                         item.observation,
-                        ' ',
+                        item.echeance_pre_vrmt,
                         item.agence,
                         item.pre_ech_remb,
-                        item.taux_remb,
+                        item.der_ech_remb,
                         item.as_avance,
                         item.est_reclation,
                         item.telephone,
-                        ' '
+                        item.trim_remb,
+                        item.solde_avance,
+                        item.est_nc,
+                        item.code_bank,
+                        item.code_agence,
+                        item.rip,
+                        item.cle_rib,
+                        item.mappr,
+                        item.est_suspendu,
+                        item.created_at.split("T")[0],
+                        item.updated_at.split("T")[0],
+                        item.action,
 
 
 
+                        //  item.montant_comp_plus,
+                        //  item.banque,
+                        //  item.nb_periode_avance,
+                        //  item.taux_remb,
 
+                        //  item.IDPROCURATION,
+                        //  item.date_motif,
+                        //  item.date_dcd,
+                        //  item.date_declaration_dcd,
 
-
-
-
-
-
-
-
-                        // item.montant_comp_plus,
-                        // item.echeance_pre_vrmt,
-                        // item.rip,
-                        // item.banque,
-                        // item.est_nc,
-                        // item.nb_periode_avance,
-                        // item.der_ech_remb,
-                        // item.solde_avance,
-                        // item.mappr,
-                        // item.reste_remb,
-                        // item.trim_remb,
-                        // item.IDPROCURATION,
-                        // item.date_motif,
-                        // item.date_dcd,
-                        // item.date_declaration_dcd,
-                        // item.est_suspendu,
-                        // item.code_bank,
-                        // item.code_agence,
-                        // item.cle_rib,
                     ]).draw();
                     });
 
@@ -568,15 +576,6 @@
 
                 }
         });
-
-
-
-
-
-
-
-
-
 
 
         $('input[type=radio][name=radio_type]').change(function() {
@@ -614,8 +613,115 @@
                     echeance_id: echeance_id,
                  },
                 success: function(data) {
-                   console.log('valueeee:', data);
-                }
+                    table.clear().draw();
+                     console.log(jQuery.type(data));
+                    // data = JSON.stringify(data);
+                    // data = JSON.parse(data);
+                    // data = Object.entries(data);
+                    console.log('moiiiiii:', data);
+                    // if (Array.isArray(data)) {
+                    //     console.log('OUI');
+                    // } else {
+                    //     console.log('NON');
+                    // }
+                    // console.log('moiiiiii:', data);
+
+                $.each(data, function(key, item) {
+                    table.row.add([
+                       item.num_pension,
+                       item.prenom,
+                       item.nom,
+                       item.date_naiss,
+                       item.date_jouis,
+                       item.titre,
+                       item.montant_trim,
+                       item.montant_comp,
+                       item.assignation,
+                       item.assignation1,
+                       item.societe_orig,
+                       item.est_decede,
+                       item.type,
+                       item.montant_trim_reval,
+                       item.montant_mens_reval,
+                       item.montant_avance,
+                       item.trim_du,
+                       item.remb_pour_nb_periode,
+                       item.reste_remb,
+                       item.montant_arriere,
+                       item.af,
+                       item.montant_a_payer,
+                       item.observation,
+                       item.echeance_pre_vrmt,
+                       item.agence,
+                       item.pre_ech_remb,
+                       item.der_ech_remb,
+                       item.as_avance,
+                       item.est_reclation,
+                       item.telephone,
+                       item.trim_remb,
+                       item.solde_avance,
+                       item.est_nc,
+                       item.code_bank,
+                       item.code_agence,
+                       item.rip,
+                       item.cle_rib,
+                       item.mappr,
+                       item.est_suspendu,
+                       item.created_at,
+                       item.updated_at,
+                       item.action,
+
+                    ]).draw();
+                });
+
+                // data.forEach(function(item) {
+                //    table.row.add([
+                //        item.num_pension,
+                //        item.prenom,
+                //        item.nom,
+                //        item.date_naiss,
+                //        item.date_jouis,
+                //        item.titre,
+                //        item.montant_trim,
+                //        item.montant_comp,
+                //        item.assignation,
+                //        item.assignation1,
+                //        item.societe_orig,
+                //        item.est_decede,
+                //        item.type,
+                //        item.montant_trim_reval,
+                //        item.montant_mens_reval,
+                //        item.montant_avance,
+                //        item.trim_du,
+                //        item.remb_pour_nb_periode,
+                //        item.reste_remb,
+                //        item.montant_arriere,
+                //        item.af,
+                //        item.montant_a_payer,
+                //        item.observation,
+                //        item.echeance_pre_vrmt,
+                //        item.agence,
+                //        item.pre_ech_remb,
+                //        item.der_ech_remb,
+                //        item.as_avance,
+                //        item.est_reclation,
+                //        item.telephone,
+                //        item.trim_remb,
+                //        item.solde_avance,
+                //        item.est_nc,
+                //        item.code_bank,
+                //        item.code_agence,
+                //        item.rip,
+                //        item.cle_rib,
+                //        item.mappr,
+                //        item.est_suspendu,
+                //        item.created_at,
+                //        item.updated_at,
+                //        item.action,
+
+                //     ]).draw();
+                // });
+            }
             });
 
 

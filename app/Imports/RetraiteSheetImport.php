@@ -22,6 +22,10 @@ class RetraiteSheetImport implements ToModel, WithHeadingRow, ToArray
 
     public function array(array $rows)
     {
+        // foreach($rows as $row){
+        //     $row->
+        // }
+        dd( $rows);
         return $rows;
     }
      /**

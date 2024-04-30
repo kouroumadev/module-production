@@ -86,7 +86,8 @@
                 <th class="text-white font-12">Mont Trim</th>
                 <th class="text-white font-12">Trim du</th>
                 <th class="text-white font-12">Mont Arriéré</th>
-                <th class="text-white font-12">Mont Trim Reval</th>
+                {{-- <th class="text-white font-12">Mont Trim Reval</th> --}}
+                <th class="text-white font-12">Mont Mens Reval</th>
                 <th class="text-white font-12">Montant Paye</th>
                 <th class="text-white font-12">AF</th>
                 <th class="text-white font-12">Mont Comp</th>
@@ -112,6 +113,7 @@
                         <td class="font-12">{{ $d['montant_trimest'] }} GNF</td>
                         <td class="font-12">{{ $d['trim_du'] }}</td>
                         <td class="font-12">{{ $d['montant_arr'] }}</td>
+                        {{-- <td class="font-12">{{ $d['montant_trim_reval'] }}</td> --}}
                         <td class="font-12">{{ $d['montant_mensuel_reval'] }}</td>
                         <td class="font-12">{{ $d['montant_a_payer'] }}</td>
                         <td class="font-12">{{ $d['montant_des_allocat'] }}</td>
