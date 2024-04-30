@@ -250,62 +250,59 @@
     </div>
 
 
-    <form action="" method="get" class="">
-        @csrf
-        <div class="row justify-content-center shadow-lg p-2">
-            <div class="col-md-2">
-                <label class="weight-600">Type</label>
 
-                <div class="custom-control custom-radio ">
-                    <input checked type="radio" id="customRadio4type" value="01-" name="radio_type" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadio4type">01-</label>
-                </div>
-                <div class="custom-control custom-radio ">
-                    <input type="radio" id="customRadio5type" value="PI" name="radio_type" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadio5type">PI</label>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <label class="weight-600">État</label>
+    <div class="row justify-content-center shadow-lg p-2">
+        <div class="col-md-2">
+            <label class="weight-600">Type</label>
 
-                <div class="custom-control custom-radio ">
-                    <input checked type="radio" id="customRadio4" value="all" name="radio_etat" class="custom-control-input">
-                    <input type="hidden" id="echeance_id" name="echeance_id" value="{{ $echeance->id }}">
-                    <label class="custom-control-label" for="customRadio4">Tous</label>
-                </div>
-                <div class="custom-control custom-radio ">
-                    <input type="radio" id="customRadio5" value="old" name="radio_etat" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadio5">Ancienne C</label>
-                </div>
-                <div class="custom-control custom-radio ">
-                    <input type="radio" id="customRadio6" value="new" name="radio_etat" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadio6">Nouvelle C</label>
-                </div>
+            <div class="custom-control custom-radio ">
+                <input checked type="radio" id="customRadio4type" value="01-" name="radio_type" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio4type">01-</label>
             </div>
-            <div class="col-md-3">
-                <label class="col-sm-12 weight-600 col-md-12 col-form-label">Assignations</label>
-                <div class="col-sm-12 col-md-10">
-                    <select id="ass_1" name="assignation" required class="form-control form-control-sm">
-                        <option selected value="">--Aucune selection--</option>
-                        @foreach ($assignations as $ass)
-                        <option value="{{ $ass->assignation }}">{{ $ass->assignation }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <label class="col-sm-12 weight-600 col-md-12 col-form-label">Assignations 1</label>
-                <div class="col-sm-12 col-md-10">
-                    <select id="ass_2" name="assignation1" class="form-control form-control-sm">
-                        <option selected value="">--Aucune selection--</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-success" style="margin-top: 36px;">Appliquer le filtre <i class="fa fa-search" aria-hidden="true"></i></button>
+            <div class="custom-control custom-radio ">
+                <input type="radio" id="customRadio5type" value="PI" name="radio_type" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio5type">PI</label>
             </div>
         </div>
-    </form>
+        <div class="col-md-2">
+            <label class="weight-600">État</label>
+
+            <div class="custom-control custom-radio ">
+                <input checked type="radio" id="customRadio4" value="all" name="radio_etat" class="custom-control-input">
+                <input type="hidden" id="echeance_id" name="echeance_id" value="{{ $echeance->id }}">
+                <label class="custom-control-label" for="customRadio4">Tous</label>
+            </div>
+            <div class="custom-control custom-radio ">
+                <input type="radio" id="customRadio5" value="old" name="radio_etat" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio5">Ancienne C</label>
+            </div>
+            <div class="custom-control custom-radio ">
+                <input type="radio" id="customRadio6" value="new" name="radio_etat" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio6">Nouvelle C</label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label class="col-sm-12 weight-600 col-md-12 col-form-label">Assignations</label>
+            <div class="col-sm-12 col-md-10">
+                <select id="ass_1" name="assignation" required class="form-control form-control-sm">
+                    <option selected value="">--Aucune selection--</option>
+                    @foreach ($assignations as $ass)
+                    <option value="{{ $ass->assignation }}">{{ $ass->assignation }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label class="col-sm-12 weight-600 col-md-12 col-form-label">Assignations 1</label>
+            <div class="col-sm-12 col-md-10">
+                <select id="ass_2" name="assignation1" class="form-control form-control-sm">
+                    <option selected value="">--Aucune selection--</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+
 
 
 
@@ -320,6 +317,7 @@
                 <tr>
                 {{-- <th class="table-plus text-white">#</th> --}}
                 <th class="text-white font-12">Num Pension</th>
+                <th class="text-white font-12">Type</th>
                 <th class="text-white font-12">Prénoms</th>
                 <th class="text-white font-12">Nom</th>
                 <th class="text-white font-12">Date Naiss</th>
@@ -331,7 +329,6 @@
                 <th class="text-white font-12">Assignation 1</th>
                 <th class="text-white font-12">Société Orig</th>
                 <th class="text-white font-12">Décédé</th>
-                <th class="text-white font-12">Type</th>
                 <th class="text-white font-12">Mont trim reval</th>
                 <th class="text-white font-12">Mont mens reval</th>
                 <th class="text-white font-12">Montant Avance</th>
@@ -509,10 +506,11 @@
                 //         paging: true,
                 //         pageLength: 10,
                 //     });
-                    data.forEach(function(item) {
+                $.each(data, function(key, item) {
 
                     table.row.add([
                         item.num_pension,
+                        item.type,
                         item.prenom,
                         item.nom,
                         item.date_naiss,
@@ -524,7 +522,6 @@
                         item.assignation1,
                         item.societe_orig,
                         item.est_decede,
-                        item.type,
                         item.montant_trim_reval,
                         item.montant_mens_reval,
                         item.montant_avance,
@@ -629,6 +626,7 @@
                 $.each(data, function(key, item) {
                     table.row.add([
                        item.num_pension,
+                       item.type,
                        item.prenom,
                        item.nom,
                        item.date_naiss,
@@ -640,7 +638,6 @@
                        item.assignation1,
                        item.societe_orig,
                        item.est_decede,
-                       item.type,
                        item.montant_trim_reval,
                        item.montant_mens_reval,
                        item.montant_avance,
@@ -734,7 +731,7 @@
                 var subCategoryDropdown = $('#ass_2');
                 subCategoryDropdown.empty();
                 console.log('dattta ', data);
-                // subCategoryDropdown.append("<option selected=''>--Aucune selection--</option>");
+                subCategoryDropdown.append("<option selected value=''>--Aucune selection--</option>");
                 $.each(data, function(index, element) {
                     subCategoryDropdown.append("<option value='" + element.assignation1 + "'>" + element.assignation1 + "</option>");
                 });

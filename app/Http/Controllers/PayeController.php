@@ -80,26 +80,20 @@ class PayeController extends Controller
         //  dd($data);
         if(!$request->has('typeRadio')){
             $data = $data->where('type','01-');
+            // dd($data);
         } else {
             $ass = $request->assignation;
+            $ass1 = $request->assignation1;
+
             $data = $data->where('type',$request->typeRadio)
-                             ->when($ass, function ($query) {
-                                 return $query->whereRaw('TRIM(assignation) = ?', ' KALOUM ');
-                             });
-                            dd($data);
+                        ->when($ass, function ($query,  $ass) {
+                            return $query->where('assignation',  $ass);
+                        })
+                        ->when($ass1, function ($query,  $ass1) {
+                            return $query->where('assignation1',  $ass1);
+                        });
 
-                        //  ->where('assignation',$request->assignation);
-                        //  ->where('type',$request->typeRadio);
         }
-
-        // if($request->has('typeRadio') && $request->typeRadio != '0'){
-        //     $data = $data->where('type',$request->typeRadio);
-
-        // }
-        // if($request->has('assignation') && $request->assignation != '0'){
-        //     $data = $data->where('assignation',$request->assignation);
-        // }
-
 
         return response()->json($data);
 
@@ -136,49 +130,49 @@ class PayeController extends Controller
             $retraite = new EtatRetraite();
 
             $retraite->echeance_id = $request->echeance_id;
-            $retraite->num_pension =$d['n_de_pension'];
-            $retraite->nom = $d['noms'];
-            $retraite->prenom = $d['prenoms'];
-            $retraite->type = $d['type'];
-            $retraite->date_naiss = $d['date_de_naiss'];
-            $retraite->date_jouis = $d['date_de_jouissanc'];
-            $retraite->telephone = $d['numero_de_telephone'];
-            $retraite->titre = $d['titre'];
-            $retraite->montant_trim = $d['montant_trimest'];
-            $retraite->montant_comp = $d['pension_complemen_taire'];
-            // $retraite->montant_comp_plus = $d['oooo'];
-            // $retraite->est_decede = $d['oooo'];
-            $retraite->assignation = $d['assign'];
-            $retraite->assignation1 = $d['assignat_1'];
-            // $retraite->rip = $d['oooo'];
-            // $retraite->banque = $d['oooo'];
-            $retraite->societe_orig = $d['societes_dorigine'];
-            // $retraite->est_nc = $d['oooo'];
-            // $retraite->echeance_pre_vrmt = $d['oooo'];
-            // $retraite->as_avance = $d['oooo'];
-            // $retraite->montant_avance = $d['oooo'];
-            // $retraite->nb_periode_avance = $d['oooo'];
-            // $retraite->remb_pour_nb_periode = $d['oooo'];
-            // $retraite->pre_ech_remb = $d['oooo'];
-            // $retraite->der_ech_remb = $d['oooo'];
-            // $retraite->taux_remb = $d['oooo'];
-            // $retraite->solde_avance = $d['oooo'];
-            $retraite->montant_arriere = $d['montant_arr'];
-            $retraite->trim_du = $d['trim_du'];
-            // $retraite->est_reclation = $d['oooo'];
-            $retraite->montant_trim_reval = AppHelper::getPercentage($d['montant_trimest'],40);
-            $retraite->montant_mens_reval = $d['montant_mensuel_reval'];
-            // $retraite->mappr = $d['oooo'];
-            $retraite->af = $d['montant_des_allocat'];
-            $retraite->observation = $d['observation'];
-            $retraite->montant_a_payer = $d['montant_a_payer'];
-            // $retraite->reste_remb = $d['oooo'];
-            // $retraite->trim_remb = $d['oooo'];
-            // $retraite->IDPROCURATION = $d['oooo'];
-            $retraite->agence = $d['agence'];
-            // $retraite->date_motif = $d['oooo'];
-            // $retraite->date_dcd = $d['oooo'];
-            // $retraite->date_declaration_dcd = $d['oooo'];
+            $retraite->num_pension = trim($d['n_de_pension']);
+            $retraite->nom = trim($d['noms']);
+            $retraite->prenom = trim($d['prenoms']);
+            $retraite->type = trim($d['type']);
+            $retraite->date_naiss = trim($d['date_de_naiss']);
+            $retraite->date_jouis = trim($d['date_de_jouissanc']);
+            $retraite->telephone = trim($d['numero_de_telephone']);
+            $retraite->titre = trim($d['titre']);
+            $retraite->montant_trim = trim($d['montant_trimest']);
+            $retraite->montant_comp = trim($d['pension_complemen_taire']);
+            // $retraite->montant_comp_plus = trim($d['oooo']);
+            // $retraite->est_decede = trim($d['oooo']);
+            $retraite->assignation = trim($d['assign']);
+            $retraite->assignation1 = trim($d['assignat_1']);
+            // $retraite->rip = trim($d['oooo']);
+            // $retraite->banque = trim($d['oooo']);
+            $retraite->societe_orig = trim($d['societes_dorigine']);
+            // $retraite->est_nc = trim($d['oooo']);
+            // $retraite->echeance_pre_vrmt = trim($d['oooo']);
+            // $retraite->as_avance = trim($d['oooo']);
+            // $retraite->montant_avance = trim($d['oooo']);
+            // $retraite->nb_periode_avance = trim($d['oooo']);
+            // $retraite->remb_pour_nb_periode = trim($d['oooo']);
+            // $retraite->pre_ech_remb = trim($d['oooo']);
+            // $retraite->der_ech_remb = trim($d['oooo']);
+            // $retraite->taux_remb = trim($d['oooo']);
+            // $retraite->solde_avance = trim($d['oooo']);
+            $retraite->montant_arriere = trim($d['montant_arr']);
+            $retraite->trim_du = trim($d['trim_du']);
+            // $retraite->est_reclation = trim($d['oooo']);
+            $retraite->montant_trim_reval = AppHelper::getPercentage(trim($d['montant_trimest']),40);
+            $retraite->montant_mens_reval = trim($d['montant_mensuel_reval']);
+            // $retraite->mappr = trim($d['oooo']);
+            $retraite->af = trim($d['montant_des_allocat']);
+            $retraite->observation = trim($d['observation']);
+            $retraite->montant_a_payer = trim($d['montant_a_payer']);
+            // $retraite->reste_remb = trim($d['oooo']);
+            // $retraite->trim_remb = trim($d['oooo']);
+            // $retraite->IDPROCURATION = trim($d['oooo']);
+            $retraite->agence = trim($d['agence']);
+            // $retraite->date_motif = trim($d['oooo'];
+            // $retraite->date_dcd = trim($d['oooo'];
+            // $retraite->date_declaration_dcd = trim($d['oooo'];
             // $retraite->est_suspendu = $d['oooo'];
             // $retraite->code_bank = $d['oooo'];
             // $retraite->code_agence = $d['oooo'];
