@@ -120,6 +120,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //PAYE
     Route::get('/paye/index', [App\Http\Controllers\PayeController::class, 'index'])->name('paye.index');
     Route::get('/paye/retraite/index/{id}', [App\Http\Controllers\PayeController::class, 'retraiteIndex'])->name('payeRetraite.index');
+    Route::get('/paye/retraite/edit/{id}', [App\Http\Controllers\PayeController::class, 'retraiteEdit'])->name('payeRetraite.edit');
     Route::get('/paye/retraite/filter', [App\Http\Controllers\PayeController::class, 'retraiteFilter']);
     Route::get('/paye/retraite/get-ass', [App\Http\Controllers\PayeController::class, 'getAss']);
     Route::get('/paye/retraite/excel/{id}', [App\Http\Controllers\PayeController::class, 'retraiteExcel'])->name('payeRetraite.excel');

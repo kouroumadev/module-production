@@ -11,6 +11,7 @@ use App\Imports\EtatRetraiteImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use Carbon\Carbon;
 
 
 class PayeController extends Controller
@@ -54,17 +55,37 @@ class PayeController extends Controller
         // dd($data);
         return view('paye.retraite.index', compact('assignations','echeance','data'));
     }
+    public function retraiteEdit(int $id) {
+        // dd($id);
+
+        $assignations = DB::table('pay_assignation')->distinct()->get(['assignation']);
+        // $assignations = $data->distinct()->get(['assignation']);
+
+        // $echeances = Echeance::where('type','retraite')->first()->retraites->paginate(10);
+
+         $retraite = EtatRetraite::find($id)->first();
+         $echeance =  $retraite->echeance;
+
+        // dd($retraite);
+        return view('paye.retraite.edit', compact('assignations','echeance','retraite'));
+    }
 
     // app/Http/Controllers/ProductController.php
     public function retraiteFilter(Request $request)
     {
-        // dd($request->all());
+        // dd(date('Y-m-01 00:00:00'));
+
+
+        // dd($firstDayOfMonth);
+
+
         $data = Echeance::find($request->echeance_id)->first()->retraites;
         // dd($data);
 
         foreach($data as $d) {
-            $d->created_at = AppHelper::getDateFormat($d->created_at);
-            $d->updated_at = AppHelper::getDateFormat($d->created_at);
+            // $d->created_at = AppHelper::getDateFormat($d->created_at);
+            $d->url = route('payeRetraite.edit', $d->id);
+            $d->updated_at = AppHelper::getDateFormat($d->updated_at);
             $d->montant_a_payer = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_a_payer) .' GNF</span>';
             $d->montant_arriere = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_arriere) .' GNF</span>';
             $d->montant_avance = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_avance) .' GNF</span>';
@@ -73,19 +94,29 @@ class PayeController extends Controller
             $d->montant_trim = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_trim) .' GNF</span>';
             $d->montant_trim_reval = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_trim_reval) .' GNF</span>';
             $d->montant_mens_reval = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_mens_reval) .' GNF</span>';
-            $d->action = '
-                <a href="#" class="btn btn-success rounded"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-            ';
+
         }
-        //  dd($data);
+        //    dd($data);
         if(!$request->has('typeRadio')){
             $data = $data->where('type','01-');
             // dd($data);
         } else {
             $ass = $request->assignation;
             $ass1 = $request->assignation1;
+            $etat = $request->etatRadio;
+            $firstDayOfMonth = date('Y-m-01 00:00:00');
 
             $data = $data->where('type',$request->typeRadio)
+                        ->when($etat && $etat == 'all', function ($query) {
+                            return $query;
+                        })
+                        ->when($etat && $etat == 'old', function ($query) use ($firstDayOfMonth) {
+                                // dd($query->where('created_at', '>', $firstDayOfMonth)); #2024-05-01 00:00:00
+                            return $query->where('created_at', '<',  $firstDayOfMonth);
+                        })
+                        ->when($etat && $etat == 'new', function ($query) use ($firstDayOfMonth) {
+                            return $query->where('created_at', '>=',  $firstDayOfMonth);
+                        })
                         ->when($ass, function ($query,  $ass) {
                             return $query->where('assignation',  $ass);
                         })

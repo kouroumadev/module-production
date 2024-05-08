@@ -550,7 +550,8 @@
                         item.est_suspendu,
                         item.created_at.split("T")[0],
                         item.updated_at.split("T")[0],
-                        item.action,
+                        "<a href='"+item.url+"' class='btn btn-success rounded'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
+                        // item.action,
 
 
 
@@ -664,8 +665,8 @@
                        item.cle_rib,
                        item.mappr,
                        item.est_suspendu,
-                       item.created_at,
-                       item.updated_at,
+                       item.created_at.split("T")[0],
+                       item.updated_at.split("T")[0],
                        item.action,
 
                     ]).draw();
