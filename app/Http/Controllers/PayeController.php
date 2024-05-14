@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Echeance;
 use App\Models\EtatRetraite;
+use App\Models\EtatSuspendu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\AppHelper;
 use App\Imports\EtatRetraiteImport;
+use App\Models\EtatDeces;
 use Maatwebsite\Excel\Facades\Excel;
 use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -63,11 +65,47 @@ class PayeController extends Controller
 
         // $echeances = Echeance::where('type','retraite')->first()->retraites->paginate(10);
 
-         $retraite = EtatRetraite::find($id)->first();
+         $retraite = EtatRetraite::find($id);
          $echeance =  $retraite->echeance;
 
         // dd($retraite);
+
+
         return view('paye.retraite.edit', compact('assignations','echeance','retraite'));
+    }
+    public function retraiteSuspension(int $id) {
+
+         $retraite = EtatRetraite::find($id);
+         $echeance_id = $retraite->echeance->id;
+
+         $susp = new EtatSuspendu();
+         $susp->etat_retraite_id = $retraite->id;
+         $susp->created_by = Auth::user()->id;
+         $susp->save();
+
+         $retraite->update([
+            'est_suspendu' => '1'
+         ]);
+
+         Alert::success('Employer suspendu avec succès!', '');
+         return redirect(route('payeRetraite.index',$echeance_id ))->with('yes','Enregistrer avec succes');
+    }
+    public function retraiteDeces(int $id) {
+
+         $retraite = EtatRetraite::find($id);
+         $echeance_id = $retraite->echeance->id;
+
+         $deces = new EtatDeces();
+         $deces->etat_retraite_id = $retraite->id;
+         $deces->created_by = Auth::user()->id;
+         $deces->save();
+
+         $retraite->update([
+            'est_decede' => '1'
+         ]);
+
+         Alert::success('Décès confirmé avec succès!', '');
+         return redirect(route('payeRetraite.index',$echeance_id ))->with('yes','Enregistrer avec succes');
     }
 
     // app/Http/Controllers/ProductController.php
@@ -83,9 +121,20 @@ class PayeController extends Controller
         // dd($data);
 
         foreach($data as $d) {
+            if($d->est_suspendu == "1")
+                $d->est_suspendu = "OUI";
+            else
+                $d->est_suspendu = "NON";
+
+            if($d->est_decede == "1")
+                $d->est_decede = "OUI";
+            else
+                $d->est_decede = "NON";
+
+
             // $d->created_at = AppHelper::getDateFormat($d->created_at);
             $d->url = route('payeRetraite.edit', $d->id);
-            $d->updated_at = AppHelper::getDateFormat($d->updated_at);
+            // $d->updated_at = AppHelper::getDateFormat($d->updated_at);
             $d->montant_a_payer = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_a_payer) .' GNF</span>';
             $d->montant_arriere = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_arriere) .' GNF</span>';
             $d->montant_avance = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_avance) .' GNF</span>';
@@ -137,13 +186,15 @@ class PayeController extends Controller
     }
     public function retraiteExcel(int $id)
     {
-        $echeance = Echeance::find($id)->first();
+        // $echeance = Echeance::find($id)->first();
+        $echeance = Echeance::find($id);
        return view('paye.retraite.create', compact('echeance'));
     }
     public function retraitePreview(Request $request)
     {
         $file = $request->file('file');
-        $echeance = Echeance::find($request->echeance_id)->first();
+        // $echeance = Echeance::find($request->echeance_id)->first();
+        $echeance = Echeance::find($request->echeance_id);
 
         $data = Excel::toArray(new EtatRetraiteImport($request->echeance_id), $file);
 
@@ -229,19 +280,6 @@ class PayeController extends Controller
         return response()->json($data);
     }
 
-    public function filterEtat(Request $request)
-    {
-        $type = $request->input('type');
-        if($type == "all") {
-            $data = Echeance::where('type','retraite')->first()->retraites;
-        } elseif($type == "old") {
-            // $data = Echeance::where('type','retraite')->first()->retraites->where('assignation','VIREMENT');
-            $data = EtatRetraite::paginate(10);
-        } else {
-            $data = Echeance::where('type','retraite')->first()->retraites->where('assignation','KALOUM');
-        }
-        // $subCategories = Category::where('parent_id', $input)->get(['id', 'name']);
-        return response()->json($data);
-    }
+
 
 }

@@ -68,4 +68,8 @@ class EtatRetraite extends Model
     public function echeance() {
         return $this->belongsTo(Echeance::class, 'echeance_id');
     }
+
+    public function suspendus() {
+        return $this->hasMany(EtatSuspendu::class, 'etat_retraite_id','id');
+    }
 }

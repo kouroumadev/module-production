@@ -127,6 +127,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/paye/retraite/preview', [App\Http\Controllers\PayeController::class, 'retraitePreview'])->name('payeRetraite.preview');
     Route::post('/paye/retraite/storeAll', [App\Http\Controllers\PayeController::class, 'retraiteStoreAll'])->name('payeRetraite.store');
     Route::get('/paye/retraite/index/filter-etat', [App\Http\Controllers\PayeController::class, 'filterEtat']);
+    Route::get('/paye/retraite/suspension/{id}', [App\Http\Controllers\PayeController::class, 'retraiteSuspension'])->name('payeRetraite.suspension');
+    Route::get('/paye/retraite/deces/{id}', [App\Http\Controllers\PayeController::class, 'retraiteDeces'])->name('payeRetraite.deces');
+
 
     //// MISSION /////////////
     Route::get('/mission/index', [App\Http\Controllers\MissionController::class, 'index'])->name('mission.index');
