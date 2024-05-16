@@ -129,6 +129,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/paye/retraite/index/filter-etat', [App\Http\Controllers\PayeController::class, 'filterEtat']);
     Route::get('/paye/retraite/suspension/{id}', [App\Http\Controllers\PayeController::class, 'retraiteSuspension'])->name('payeRetraite.suspension');
     Route::get('/paye/retraite/deces/{id}', [App\Http\Controllers\PayeController::class, 'retraiteDeces'])->name('payeRetraite.deces');
+    Route::get('/paye/retraite/etat-payement', [App\Http\Controllers\PayeController::class, 'etatPayementPdf'])->name('payeRetraite.etatPayement');
+
 
 
     //// MISSION /////////////

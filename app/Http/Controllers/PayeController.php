@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class PayeController extends Controller
@@ -107,6 +108,16 @@ class PayeController extends Controller
          Alert::success('Décès confirmé avec succès!', '');
          return redirect(route('payeRetraite.index',$echeance_id ))->with('yes','Enregistrer avec succes');
     }
+    public function etatPayementPdf() {
+
+        $pdf = PDF::loadView('paye.retraite.pdf.etat-payement');
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('fetat-Payement.pdf');
+
+        // return view('paye.retraite.pdf.etat-payement');
+    }
+
+
 
     // app/Http/Controllers/ProductController.php
     public function retraiteFilter(Request $request)

@@ -24,7 +24,7 @@
                         <a href="{{ route('payeRetraite.excel',$echeance->id) }}" class="btn btn-warning btn-block">Importer <i class="fa fa-upload" aria-hidden="true"></i></a>
                     </div>
                     <div class="col-md-4">
-                        <a href="{{ route('payeRetraite.excel',$echeance->id) }}" class="btn btn-danger btn-block">Fiche de paye <i class="fa fa-download" aria-hidden="true"></i></a>
+                        <a href="{{ route('payeRetraite.etatPayement') }}" class="btn btn-danger btn-block">Fiche de paye <i class="fa fa-download" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
