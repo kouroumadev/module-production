@@ -21,25 +21,33 @@
 
 <hr>
 <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-10">
 
         <form method="post" action="{{ route('echeance.store') }}">
             @csrf
             <div class="form-row">
+                <div class="col-md-5 form-group">
+                    <label for="inputEmail4">Selectionner l'année<span class="text-danger">*</span></label>
+                    <select required name="years" class="custom-select col-12">
+                        <option value="">--Aucune selection--</option>
+                        @foreach ($years as $y)
+                        <option value="{{ $y }}">{{ $y }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-5 form-group">
+                    <label for="inputEmail4">Selectionner le Mois<span class="text-danger">*</span></label>
+                    <select required name="mois" class="custom-select col-12">
+                        <option value="">--Aucune selection--</option>
+                        @foreach ($mois as $m)
+                        <option value="{{ $m->value }}">{{ $m->value }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-              <div class="col-md-10 form-group">
-                <label for="inputEmail4">Selectionner le Mois<span class="text-danger">*</span></label>
-                <select required name="mois" class="custom-select col-12">
-                    <option value="">--Aucune selection--</option>
-                    @foreach ($mois as $m)
-                    <option value="{{ $m->value }}">{{ $m->value }}</option>
-                    @endforeach
-
-                </select>
-            </div>
-              <div class="col-md-2">
-                <button type="submit" class="btn btn-success" style="margin-top: 33px;">Valider</button>
-              </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-success" style="margin-top: 33px;">Valider</button>
+                </div>
             </div>
         </form>
     </div>

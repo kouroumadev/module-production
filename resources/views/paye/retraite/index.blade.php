@@ -4,7 +4,7 @@
 
     <div class="page-header shadow-lg">
         <div class="row">
-            <div class="col-md-9 col-sm-12">
+            <div class="col-md-6 col-sm-12">
                 <div class="title">
                     <h4>RETRAITE</h4>
                 </div>
@@ -15,13 +15,16 @@
                     </ol>
                 </nav>
             </div>
-            <div class="col-md-3 col-sm-12 text-right">
+            <div class="col-md-6 col-sm-12 text-right">
                 <div class="row">
-                    <div class="col-md-6">
-                        <button class="btn btn-success" data-toggle="modal" data-target="#modal-paye-add">Nouveau <i class="fa fa-plus" aria-hidden="true"></i></button>
+                    <div class="col-md-4">
+                        <button class="btn btn-success btn-block" data-toggle="modal" data-target="#modal-paye-add">Nouveau <i class="fa fa-plus" aria-hidden="true"></i></button>
                     </div>
-                    <div class="col-md-6">
-                        <a href="{{ route('payeRetraite.excel',$echeance->id) }}" class="btn btn-warning">Importer <i class="fa fa-upload" aria-hidden="true"></i></a>
+                    <div class="col-md-4">
+                        <a href="{{ route('payeRetraite.excel',$echeance->id) }}" class="btn btn-warning btn-block">Importer <i class="fa fa-upload" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{{ route('payeRetraite.excel',$echeance->id) }}" class="btn btn-danger btn-block">Fiche de paye <i class="fa fa-download" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>

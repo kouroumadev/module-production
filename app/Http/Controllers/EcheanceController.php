@@ -25,13 +25,17 @@ class EcheanceController extends Controller
     public function echeanceIndex() {
         $data = Echeance::all();
         $mois = DB::table('mois')->get();
+        $currentYear = Carbon::now()->format('Y');
+        $nextYear = Carbon::now()->addYears(1)->format('Y');
+        $years = [$currentYear, $nextYear];
+        // dd($years);
 
-        return view('parametrage.echeance.index', compact('data', 'mois'));
+        return view('parametrage.echeance.index', compact('data', 'mois','years'));
     }
     public function echeanceStore(Request $request) {
 
         // dd($request->all());
-        $year = date('Y');
+        $year = $request->years;
         // dd($year);
         $val = Echeance::where('mois', $request->mois)->where('annee', $year)->get();
         if(count($val) > 0){
