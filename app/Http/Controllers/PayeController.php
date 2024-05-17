@@ -114,7 +114,7 @@ class PayeController extends Controller
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream('fetat-Payement.pdf');
 
-        // return view('paye.retraite.pdf.etat-payement');
+
     }
 
 
