@@ -10,7 +10,7 @@
      @page {
             margin: 20px;
         }
-       /* @page {
+        /* @page {
             padding-left: 0;
             padding-right: 0;
             margin-top: 2px;
@@ -22,7 +22,7 @@
         } */
 
         footer {
-           margin-top: 100px;
+           /* margin-top: 100px; */
             position: fixed;
             bottom: 0cm;
             left: 0cm;
@@ -106,6 +106,132 @@
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Jean Adrian</td>
+                    <td>KOUNDOUNO</td>
+                    <td>01</td>
+                    <td>15292</td>
+                    <td>12/05/1980</td>
+                    <td>12/05/1980</td>
+                    <td>SOTELGUI caisse nation de securite sociale</td>
+                    <td>616 000 GNF</td>
+                    <td>451 733 GNF</td>
+                    <td>0</td>
+                    <td>0 GNF</td>
+                    <td>451 733 GNF</td>
+                    <td>0 GNF</td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Jean Adrian</td>
+                    <td>KOUNDOUNO</td>
+                    <td>01</td>
+                    <td>15292</td>
+                    <td>12/05/1980</td>
+                    <td>12/05/1980</td>
+                    <td>SOTELGUI caisse nation de securite sociale</td>
+                    <td>616 000 GNF</td>
+                    <td>451 733 GNF</td>
+                    <td>0</td>
+                    <td>0 GNF</td>
+                    <td>451 733 GNF</td>
+                    <td>0 GNF</td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Jean Adrian</td>
+                    <td>KOUNDOUNO</td>
+                    <td>01</td>
+                    <td>15292</td>
+                    <td>12/05/1980</td>
+                    <td>12/05/1980</td>
+                    <td>SOTELGUI caisse nation de securite sociale</td>
+                    <td>616 000 GNF</td>
+                    <td>451 733 GNF</td>
+                    <td>0</td>
+                    <td>0 GNF</td>
+                    <td>451 733 GNF</td>
+                    <td>0 GNF</td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Jean Adrian</td>
+                    <td>KOUNDOUNO</td>
+                    <td>01</td>
+                    <td>15292</td>
+                    <td>12/05/1980</td>
+                    <td>12/05/1980</td>
+                    <td>SOTELGUI caisse nation de securite sociale</td>
+                    <td>616 000 GNF</td>
+                    <td>451 733 GNF</td>
+                    <td>0</td>
+                    <td>0 GNF</td>
+                    <td>451 733 GNF</td>
+                    <td>0 GNF</td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Jean Adrian</td>
+                    <td>KOUNDOUNO</td>
+                    <td>01</td>
+                    <td>15292</td>
+                    <td>12/05/1980</td>
+                    <td>12/05/1980</td>
+                    <td>SOTELGUI caisse nation de securite sociale</td>
+                    <td>616 000 GNF</td>
+                    <td>451 733 GNF</td>
+                    <td>0</td>
+                    <td>0 GNF</td>
+                    <td>451 733 GNF</td>
+                    <td>0 GNF</td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Jean Adrian</td>
+                    <td>KOUNDOUNO</td>
+                    <td>01</td>
+                    <td>15292</td>
+                    <td>12/05/1980</td>
+                    <td>12/05/1980</td>
+                    <td>SOTELGUI caisse nation de securite sociale</td>
+                    <td>616 000 GNF</td>
+                    <td>451 733 GNF</td>
+                    <td>0</td>
+                    <td>0 GNF</td>
+                    <td>451 733 GNF</td>
+                    <td>0 GNF</td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Jean Adrian</td>
+                    <td>KOUNDOUNO</td>
+                    <td>01</td>
+                    <td>15292</td>
+                    <td>12/05/1980</td>
+                    <td>12/05/1980</td>
+                    <td>SOTELGUI caisse nation de securite sociale</td>
+                    <td>616 000 GNF</td>
+                    <td>451 733 GNF</td>
+                    <td>0</td>
+                    <td>0 GNF</td>
+                    <td>451 733 GNF</td>
+                    <td>0 GNF</td>
+                    <td>0</td>
+                    <td>-</td>
+                </tr>
                 <tr>
                     <td>1</td>
                     <td>Jean Adrian</td>

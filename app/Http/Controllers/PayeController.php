@@ -15,6 +15,7 @@ use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use SpellNumber\SpellNumber;
 
 
 class PayeController extends Controller
@@ -109,8 +110,10 @@ class PayeController extends Controller
          return redirect(route('payeRetraite.index',$echeance_id ))->with('yes','Enregistrer avec succes');
     }
     public function etatPayementPdf() {
+        $pdf = app('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
 
-        $pdf = PDF::loadView('paye.retraite.pdf.etat-payement');
+        $pdf->loadView('paye.retraite.pdf.test-pdf');
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream('fetat-Payement.pdf');
 
