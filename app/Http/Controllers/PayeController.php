@@ -15,8 +15,7 @@ use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
-use SpellNumber\SpellNumber;
-
+use NumberFormatter;
 
 class PayeController extends Controller
 {
@@ -110,10 +109,44 @@ class PayeController extends Controller
          return redirect(route('payeRetraite.index',$echeance_id ))->with('yes','Enregistrer avec succes');
     }
     public function etatPayementPdf() {
-        $pdf = app('dompdf.wrapper');
-        $pdf->getDomPDF()->set_option("enable_php", true);
+        $digit = new NumberFormatter("fr", NumberFormatter::SPELLOUT);
+        $retraites = EtatRetraite::all();
+        $tot_montant_trim_reval = 0;
+        $tot_montant_mens_reval = 0;
+        $tot_montant_arriere = 0;
+        $tot_montant_a_payer = 0;
+        $tot_montant_avance = 0;
+        $tot_pour = 0;
+        foreach($retraites as $r){
+            $tot_montant_trim_reval += (int)$r->montant_trim_reval;
+            $tot_montant_mens_reval += (int)$r->montant_mens_reval;
+            $tot_montant_arriere += (int)$r->montant_arriere;
+            $tot_montant_a_payer += (int)$r->montant_a_payer;
+            $tot_montant_avance += (int)$r->montant_avance;
+            $tot_pour += (int)$r->remb_pour_nb_periode;
+        }
+        // dd($tot_montant_trim_reval);
+        $data = [
+            'data' => $retraites->toArray(),
+            'tot_montant_trim_reval' => AppHelper::getMoneyFormat($tot_montant_trim_reval),
+            'tot_montant_mens_reval' => AppHelper::getMoneyFormat($tot_montant_mens_reval),
+            'tot_montant_arriere' => AppHelper::getMoneyFormat($tot_montant_arriere),
+            'tot_montant_a_payer' => AppHelper::getMoneyFormat($tot_montant_a_payer),
+            'tot_montant_avance' => AppHelper::getMoneyFormat($tot_montant_avance),
+            'tot_pour' => AppHelper::getMoneyFormat($tot_pour),
+            'money' => $digit->format($tot_montant_a_payer),
+            'date' => date('m/d/Y'),
 
-        $pdf->loadView('paye.retraite.pdf.test-pdf');
+        ];
+
+        // dd($data);
+        //
+        // dd($digit->format(13892738));
+
+        // $pdf = app('dompdf.wrapper');
+        // $pdf->getDomPDF()->set_option("enable_php", true);
+
+        $pdf = PDF::loadView('paye.retraite.pdf.test-pdf',$data);
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream('fetat-Payement.pdf');
 
@@ -256,7 +289,7 @@ class PayeController extends Controller
             $retraite->montant_arriere = trim($d['montant_arr']);
             $retraite->trim_du = trim($d['trim_du']);
             // $retraite->est_reclation = trim($d['oooo']);
-            $retraite->montant_trim_reval = AppHelper::getPercentage(trim($d['montant_trimest']),40);
+            $retraite->montant_trim_reval = (int)$d['montant_trimest']+AppHelper::getPercentage(trim($d['montant_trimest']),40);
             $retraite->montant_mens_reval = trim($d['montant_mensuel_reval']);
             // $retraite->mappr = trim($d['oooo']);
             $retraite->af = trim($d['montant_des_allocat']);
