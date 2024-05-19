@@ -92,7 +92,7 @@ class PayeController extends Controller
          return redirect(route('payeRetraite.index',$echeance_id ))->with('yes','Enregistrer avec succes');
     }
     public function retraiteDeces(Request $request) {
-        dd( $request->all());
+        dd($request->all());
 
          $retraite = EtatRetraite::find($request->retraite_id);
          $echeance_id = $retraite->echeance->id;

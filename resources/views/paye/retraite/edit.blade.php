@@ -258,25 +258,27 @@
                         <div class="modal fade" id="modal_deces" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
-                                    <form action="{{ route('payeRetraite.deces') }}" method="post">
-                                        @csrf
+
                                         <div class="modal-header bg-success">
                                             <h4 class="modal-title text-white" id="myLargeModalLabel">Declaration de décès</h4>
                                             <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">×</button>
                                         </div>
                                         <div class="modal-body">
-                                            <div class="form-group row">
-                                                <label class="col-sm-12 col-md-4 col-form-label">Date du décès </label>
-                                                <div class="col-sm-12 col-md-8">
-                                                    <input type="hidden" name="retraite_id" value="{{ $retraite->id }}">
-                                                    <input required name="date_deces" class="form-control date-picker" placeholder="Selectionner" type="text">
+                                            <form id="deces_form" action="{{ route('payeRetraite.deces') }}" method="post">
+                                                @csrf
+                                                <div class="form-group row">
+                                                    <label class="col-sm-12 col-md-4 col-form-label">Date du décès </label>
+                                                    <div class="col-sm-12 col-md-8">
+                                                        <input type="hidden" name="retraite_id" value="{{ $retraite->id }}">
+                                                        <input required name="date_deces" class="form-control date-picker" placeholder="Selectionner" type="text">
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-success">Valider</button>
-                                        </div>
-                                    </form>
+
+                                    <div class="modal-footer">
+                                        <button id="btn_deces_send" onclick="sendFormDeces()" type="button" class="btn btn-success" data-dismiss="modal">Valider</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -288,9 +290,16 @@
    </div>
 
 
-   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-   <script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        function sendFormDeces(){
+            // console.log('hellllo');
+            $("#deces_form").submit();
+        }
+    </script>
+
+    <script>
      $(document).ready(function() {
 
         $('#modal_suspendre_btn').on('click', function() {
