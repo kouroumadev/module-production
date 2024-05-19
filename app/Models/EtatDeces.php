@@ -11,6 +11,7 @@ class EtatDeces extends Model
 
     protected $fillable = [
         'id',
+        'date_deces',
         'etat_retraite_id',
         'created_by',
     ];

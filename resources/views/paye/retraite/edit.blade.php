@@ -257,20 +257,26 @@
                         <button type="button" id="modal_deces_btn" class="btn btn-block btn-danger">Décès  <i class="fa fa-heartbeat" aria-hidden="true"></i></button>
                         <div class="modal fade" id="modal_deces" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content bg-success text-white">
-                                    <div class="modal-body text-center font-18">
-                                        <h4 class=" text-white padding-top-30 mb-30 weight-500">Confirmez-vous le de décès cet employer ?</h4>
-                                        <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
-                                            <div class="col-6">
-                                                <button type="button" class="btn btn-secondary btn-light border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
-                                                NON
-                                            </div>
-                                            <div class="col-6">
-                                                <a href="{{ route('payeRetraite.deces',$retraite->id) }}" class="btn btn-primary btn-light border-radius-100 btn-block confirmation-btn" ><i class="fa fa-check"></i></a>
-                                                OUI
+                                <div class="modal-content">
+                                    <form action="{{ route('payeRetraite.deces') }}" method="post">
+                                        @csrf
+                                        <div class="modal-header bg-success">
+                                            <h4 class="modal-title text-white" id="myLargeModalLabel">Declaration de décès</h4>
+                                            <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">×</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group row">
+                                                <label class="col-sm-12 col-md-4 col-form-label">Date du décès </label>
+                                                <div class="col-sm-12 col-md-8">
+                                                    <input type="hidden" name="retraite_id" value="{{ $retraite->id }}">
+                                                    <input required name="date_deces" class="form-control date-picker" placeholder="Selectionner" type="text">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success">Valider</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('etat_deces', function (Blueprint $table) {
             $table->id();
             $table->foreignId('etat_retraite_id')->constrained('etat_retraites');
+            $table->string('date_deces');
             $table->string('created_by');
             $table->timestamps();
         });

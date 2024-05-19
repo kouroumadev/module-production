@@ -91,13 +91,15 @@ class PayeController extends Controller
          Alert::success('Employer suspendu avec succès!', '');
          return redirect(route('payeRetraite.index',$echeance_id ))->with('yes','Enregistrer avec succes');
     }
-    public function retraiteDeces(int $id) {
+    public function retraiteDeces(Request $request) {
+        dd( $request->all());
 
-         $retraite = EtatRetraite::find($id);
+         $retraite = EtatRetraite::find($request->retraite_id);
          $echeance_id = $retraite->echeance->id;
 
          $deces = new EtatDeces();
          $deces->etat_retraite_id = $retraite->id;
+         $deces->date_deces = $request->date_deces;
          $deces->created_by = Auth::user()->id;
          $deces->save();
 
@@ -106,7 +108,9 @@ class PayeController extends Controller
          ]);
 
          Alert::success('Décès confirmé avec succès!', '');
-         return redirect(route('payeRetraite.index',$echeance_id ))->with('yes','Enregistrer avec succes');
+         return redirect(route('paye.deces'));
+
+        //  return redirect(route('payeRetraite.index',$echeance_id ))->with('yes','Enregistrer avec succes');
     }
     public function etatPayementPdf() {
         $digit = new NumberFormatter("fr", NumberFormatter::SPELLOUT);
@@ -325,6 +329,18 @@ class PayeController extends Controller
 
         // $subCategories = Category::where('parent_id', $input)->get(['id', 'name']);
         return response()->json($data);
+    }
+    public function decesIndex()
+    {
+        $deces = EtatDeces::all();
+        dd($deces);
+        return view('paye.deces.index', compact('deces'));
+
+    }
+    public function suspensionIndex()
+    {
+        $suspendus = EtatSuspendu::all();
+        return view('paye.deces.index', compact('suspendus'));
     }
 
 

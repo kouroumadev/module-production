@@ -13,6 +13,16 @@
         <span class="micon dw dw-edit2"></span><span class="mtext">ALLOC DE VIEILLESSE</span>
     </a>
 </li>
+<li class="my-menu" onclick="makeActive(this,'111555555')" id="111555555">
+    <a href="{{ route('paye.deces') }}" class="dropdown-toggle no-arrow">
+        <span class="micon dw dw-edit2"></span><span class="mtext">DÉCÈS</span>
+    </a>
+</li>
+<li class="my-menu" onclick="makeActive(this,'11155555555')" id="11155555555">
+    <a href="{{ route('paye.suspension') }}" class="dropdown-toggle no-arrow">
+        <span class="micon dw dw-edit2"></span><span class="mtext">SUSPENSION</span>
+    </a>
+</li>
 
 {{-- <li class="my-menu" onclick="makeActive(this,'17')" id="17">
     <a href="#" class="dropdown-toggle">
