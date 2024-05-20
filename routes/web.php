@@ -126,9 +126,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/paye/retraite/excel/{id}', [App\Http\Controllers\PayeController::class, 'retraiteExcel'])->name('payeRetraite.excel');
     Route::post('/paye/retraite/preview', [App\Http\Controllers\PayeController::class, 'retraitePreview'])->name('payeRetraite.preview');
     Route::post('/paye/retraite/storeAll', [App\Http\Controllers\PayeController::class, 'retraiteStoreAll'])->name('payeRetraite.store');
+    Route::post('/paye/retraite/update', [App\Http\Controllers\PayeController::class, 'retraiteUpdate'])->name('payeRetraite.update');
     Route::get('/paye/retraite/index/filter-etat', [App\Http\Controllers\PayeController::class, 'filterEtat']);
     Route::get('/paye/retraite/suspension/{id}', [App\Http\Controllers\PayeController::class, 'retraiteSuspension'])->name('payeRetraite.suspension');
-    Route::post('/paye/retraite/deces', [App\Http\Controllers\PayeController::class, 'retraiteDeces'])->name('payeRetraite.deces');
+    Route::post('/paye/deces/store', [App\Http\Controllers\PayeController::class, 'retraiteDeces'])->name('payeDeces.store');
+    Route::get('/paye/deces/update/{id}', [App\Http\Controllers\PayeController::class, 'retraiteDecesUpdate'])->name('payeDeces.update');
+    Route::get('/paye/suspension/update/{id}', [App\Http\Controllers\PayeController::class, 'retraiteSuspensionUpdate'])->name('payeSuspension.update');
     Route::get('/paye/retraite/etat-payement', [App\Http\Controllers\PayeController::class, 'etatPayementPdf'])->name('payeRetraite.etatPayement');
     Route::get('/paye/deces/', [App\Http\Controllers\PayeController::class, 'decesIndex'])->name('paye.deces');
     Route::get('/paye/suspension/', [App\Http\Controllers\PayeController::class, 'suspensionIndex'])->name('paye.suspension');

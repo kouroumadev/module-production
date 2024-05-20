@@ -23,12 +23,14 @@
 
    <div class="row shadow-lg p-2">
         <div class="col-md-12">
-            <form action="" method="get">
+            <form action="{{ route('payeRetraite.update') }}" method="post">
+                @csrf
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-4 col-form-label">Num pension</label>
                             <div class="col-sm-12 col-md-8">
+                                <input type="hidden" name="retraite_id" value="{{ $retraite->id }}">
                                 <input name="num_pension" value="{{ $retraite->num_pension }}" class="form-control" type="text">
                             </div>
                         </div>
@@ -104,7 +106,7 @@
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-4 col-form-label">Assignation</label>
                             <div class="col-sm-12 col-md-8">
-                                <select id="ass_11" required class="custom-select col-12">
+                                <select name="assignation" id="ass_11" required class="custom-select col-12">
                                     <option selected value="{{ $retraite->assignation }}">{{ $retraite->assignation }}</option>
                                     @foreach ($assignations as $ass)
                                     <option value="{{ $ass->assignation }}">{{ $ass->assignation }}</option>
@@ -115,8 +117,8 @@
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-4 col-form-label">Assignation 1</label>
                             <div class="col-sm-12 col-md-8">
-                                <select id="ass_22" class="custom-select col-12">
-                                    <option selected value="{{ $retraite->assignation1 }}">--Aucune selection--</option>
+                                <select name="assignation1" id="ass_22" class="custom-select col-12">
+                                    <option selected value="{{ $retraite->assignation1 }}">{{ $retraite->assignation1 }}</option>
                                 </select>
                             </div>
                         </div>
@@ -135,25 +137,25 @@
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-4 col-form-label">Montant comp</label>
                             <div class="col-sm-12 col-md-8">
-                                <input class="form-control" name="montant_comp" value="{{ \App\Helpers\AppHelper::getMoneyFormat($retraite->montant_comp) }}" type="text">
+                                <input class="form-control" name="montant_comp" value="{{ $retraite->montant_comp }}" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-4 col-form-label">Montant comp plus</label>
                             <div class="col-sm-12 col-md-8">
-                                <input class="form-control" name="montant_comp_plus" value="{{ \App\Helpers\AppHelper::getMoneyFormat($retraite->montant_comp_plus) }}" type="text">
+                                <input class="form-control" name="montant_comp_plus" value="{{ $retraite->montant_comp_plus }}" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-4 col-form-label">Montant mens reval</label>
                             <div class="col-sm-12 col-md-8">
-                                <input class="form-control" name="montant_mens_reval" value="{{ \App\Helpers\AppHelper::getMoneyFormat($retraite->montant_mens_reval) }}" type="text">
+                                <input class="form-control" name="montant_mens_reval" value="{{ $retraite->montant_mens_reval }}" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-4 col-form-label">Montant à payer</label>
                             <div class="col-sm-12 col-md-8">
-                                <input class="form-control" name="montant_a_payer" value="{{ \App\Helpers\AppHelper::getMoneyFormat($retraite->montant_a_payer) }}" type="text">
+                                <input class="form-control" name="montant_a_payer" value="{{ $retraite->montant_a_payer }}" type="text">
                             </div>
                         </div>
                     </div>
@@ -165,26 +167,26 @@
                                 @php
                                     $firstDayOfMonth = date('Y-m-01 00:00:00');
                                 @endphp
-                                <input @if($retraite->created_at >= $firstDayOfMonth) checked @endif type="checkbox" class="custom-control-input" id="customCheck1-1">
+                                <input disabled name="est_nc" @if($retraite->created_at >= $firstDayOfMonth) checked @endif type="checkbox" class="custom-control-input" id="customCheck1-1">
                                 <label class="custom-control-label" for="customCheck1-1">NC</label>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-4 col-form-label">Trim du</label>
                             <div class="col-sm-12 col-md-8">
-                                <input class="form-control" name="trim_du" value="{{ \App\Helpers\AppHelper::getMoneyFormat($retraite->trim_du) }}" type="text">
+                                <input class="form-control" name="trim_du" value="{{ $retraite->trim_du }}" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-4 col-form-label">Mont arriéré</label>
                             <div class="col-sm-12 col-md-8">
-                                <input class="form-control" name="montant_arriere" value="{{ \App\Helpers\AppHelper::getMoneyFormat($retraite->montant_arriere) }}" type="text">
+                                <input class="form-control" name="montant_arriere" value="{{ $retraite->montant_arriere }}" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-4 col-form-label">Mont tot à payer</label>
                             <div class="col-sm-12 col-md-8">
-                                <input class="form-control" name="montant_a_payer" value="{{ \App\Helpers\AppHelper::getMoneyFormat($retraite->montant_a_payer) }}" type="text">
+                                <input class="form-control" name="montant_a_payer" value="{{ $retraite->montant_a_payer }}" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -197,28 +199,28 @@
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-4 col-form-label">Type</label>
                             <div class="col-sm-12 col-md-4 custom-control custom-radio mt-2">
-                                <input @if($retraite->type == "01-") checked @endif type="radio" id="customRadio44" name="customRadio1" class="custom-control-input">
+                                <input @if($retraite->type == "01-") checked @endif type="radio" value="01-" id="customRadio44" name="type" class="custom-control-input">
                                 <label class="custom-control-label" for="customRadio44">01-</label>
                             </div>
                             <div class="col-sm-12 col-md-4 custom-control custom-control custom-radio mt-2">
-                                <input @if($retraite->type == "PI") checked @endif type="radio" id="customRadio55" name="customRadio1" class="custom-control-input">
+                                <input @if($retraite->type == "PI") checked @endif type="radio" id="customRadio55" value="PI" name="type" class="custom-control-input">
                                 <label class="custom-control-label" for="customRadio55">PI-</label>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-4 col-form-label">Titre</label>
                             <div class="col-sm-12 col-md-4 custom-control custom-radio mt-2">
-                                <input @if($retraite->titre == "Mr") checked @endif type="radio" id="customRadio444" name="customRadio" class="custom-control-input">
+                                <input @if($retraite->titre == "Mr") checked @endif type="radio" id="customRadio444" value="Mr" name="titre" class="custom-control-input">
                                 <label class="custom-control-label" for="customRadio444">Mr</label>
                             </div>
                             <div class="col-sm-12 col-md-4 custom-control custom-control custom-radio mt-2">
-                                <input @if($retraite->titre == "Mme") checked @endif type="radio" id="customRadio555" name="customRadio" class="custom-control-input">
+                                <input @if($retraite->titre == "Mme") checked @endif type="radio" id="customRadio555" value="Mme" name="titre" class="custom-control-input">
                                 <label class="custom-control-label" for="customRadio555">Mme</label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Observation</label>
-                            <textarea class="form-control">{{ $retraite->observation }}</textarea>
+                            <textarea name="observation" class="form-control">{{ $retraite->observation }}</textarea>
                         </div>
 
                     </div>
@@ -232,7 +234,7 @@
                         <button type="submit" class="btn btn-block btn-success">Valider la modification <i class="fa fa-check" aria-hidden="true"></i></button>
                     </div>
                     <div class="col-md-3">
-                        <button type="button" id="modal_suspendre_btn" class="btn btn-block btn-danger">Suspendre <i class="fa fa-lock" aria-hidden="true"></i></button>
+                        <button @if($retraite->est_suspendu == "1") disabled @endif type="button" id="modal_suspendre_btn" class="btn btn-block btn-danger">Suspendre <i class="fa fa-lock" aria-hidden="true"></i></button>
                         <div class="modal fade" id="modal_suspendre" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content bg-success text-white">
@@ -254,34 +256,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <button type="button" id="modal_deces_btn" class="btn btn-block btn-danger">Décès  <i class="fa fa-heartbeat" aria-hidden="true"></i></button>
-                        <div class="modal fade" id="modal_deces" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-
-                                        <div class="modal-header bg-success">
-                                            <h4 class="modal-title text-white" id="myLargeModalLabel">Declaration de décès</h4>
-                                            <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">×</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="deces_form" action="{{ route('payeRetraite.deces') }}" method="post">
-                                                @csrf
-                                                <div class="form-group row">
-                                                    <label class="col-sm-12 col-md-4 col-form-label">Date du décès </label>
-                                                    <div class="col-sm-12 col-md-8">
-                                                        <input type="hidden" name="retraite_id" value="{{ $retraite->id }}">
-                                                        <input required name="date_deces" class="form-control date-picker" placeholder="Selectionner" type="text">
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                    <div class="modal-footer">
-                                        <button id="btn_deces_send" onclick="sendFormDeces()" type="button" class="btn btn-success" data-dismiss="modal">Valider</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <button type="button" @if($retraite->est_decede == "1") disabled @endif id="modal_deces_btn" class="btn btn-block btn-danger">Décès  <i class="fa fa-heartbeat" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <hr>
@@ -289,18 +264,52 @@
         </div>
    </div>
 
+    <div class="modal fade" id="modal_deces" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                    <div class="modal-header bg-success">
+                        <h4 class="modal-title text-white" id="myLargeModalLabel">Declaration de décès</h4>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="send_deces_form" action="{{ route('payeDeces.store') }}" method="post">
+                            @csrf
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label">Date du décès </label>
+                                <div class="col-sm-12 col-md-8">
+                                    <input type="hidden" name="retraite_id" value="{{ $retraite->id }}">
+                                    <input required name="date_deces" class="form-control" placeholder="Selectionner" type="date">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                <div class="modal-footer">
+                    <button id="send_deces" onclick="sendFormDeces()" type="button" class="btn btn-success" data-dismiss="modal">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function sendFormDeces(){
-            // console.log('hellllo');
-            $("#deces_form").submit();
+        function sendFormDeces() {
+            console.log('hellllo');
+            $("#send_deces_form").submit();
+            // $("#send_retraite_form").submit();
         }
     </script>
 
+    {{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> --}}
+
     <script>
      $(document).ready(function() {
+
+
 
         $('#modal_suspendre_btn').on('click', function() {
             $('#modal_suspendre').modal('show');

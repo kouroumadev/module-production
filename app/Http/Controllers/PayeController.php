@@ -69,7 +69,7 @@ class PayeController extends Controller
          $retraite = EtatRetraite::find($id);
          $echeance =  $retraite->echeance;
 
-        // dd($retraite);
+        // dd($retraite->suspendus);
 
 
         return view('paye.retraite.edit', compact('assignations','echeance','retraite'));
@@ -77,7 +77,6 @@ class PayeController extends Controller
     public function retraiteSuspension(int $id) {
 
          $retraite = EtatRetraite::find($id);
-         $echeance_id = $retraite->echeance->id;
 
          $susp = new EtatSuspendu();
          $susp->etat_retraite_id = $retraite->id;
@@ -89,14 +88,11 @@ class PayeController extends Controller
          ]);
 
          Alert::success('Employer suspendu avec succès!', '');
-         return redirect(route('payeRetraite.index',$echeance_id ))->with('yes','Enregistrer avec succes');
+         return redirect(route('paye.suspension'))->with('yes','Enregistrer avec succes');
     }
     public function retraiteDeces(Request $request) {
-        dd($request->all());
 
          $retraite = EtatRetraite::find($request->retraite_id);
-         $echeance_id = $retraite->echeance->id;
-
          $deces = new EtatDeces();
          $deces->etat_retraite_id = $retraite->id;
          $deces->date_deces = $request->date_deces;
@@ -110,7 +106,40 @@ class PayeController extends Controller
          Alert::success('Décès confirmé avec succès!', '');
          return redirect(route('paye.deces'));
 
-        //  return redirect(route('payeRetraite.index',$echeance_id ))->with('yes','Enregistrer avec succes');
+    }
+    public function retraiteDecesUpdate(int $id) {
+
+         $deces = EtatDeces::find($id);
+
+         $echeance_id = $deces->retraite->echeance->id;
+        //  dd($echeance_id);
+
+         $deces->retraite->update([
+            'est_decede' => '0'
+         ]);
+
+         $deces->delete();
+
+         Alert::success('Décès annulé avec succès!', '');
+         return redirect(route('payeRetraite.index', $echeance_id));
+
+    }
+    public function retraiteSuspensionUpdate(int $id) {
+
+         $suspendu = EtatSuspendu::find($id);
+
+         $echeance_id = $suspendu->retraite->echeance->id;
+        //  dd($echeance_id);
+
+         $suspendu->retraite->update([
+            'est_suspendu' => '0'
+         ]);
+
+         $suspendu->delete();
+
+         Alert::success('Suspension annulé avec succès!', '');
+         return redirect(route('payeRetraite.index', $echeance_id));
+
     }
     public function etatPayementPdf() {
         $digit = new NumberFormatter("fr", NumberFormatter::SPELLOUT);
@@ -183,7 +212,7 @@ class PayeController extends Controller
                 $d->est_decede = "NON";
 
 
-            // $d->created_at = AppHelper::getDateFormat($d->created_at);
+            // $d->date_jouis = AppHelper::getDateFormat($d->date_jouis);
             $d->url = route('payeRetraite.edit', $d->id);
             // $d->updated_at = AppHelper::getDateFormat($d->updated_at);
             $d->montant_a_payer = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_a_payer) .' GNF</span>';
@@ -249,7 +278,6 @@ class PayeController extends Controller
 
         $data = Excel::toArray(new EtatRetraiteImport($request->echeance_id), $file);
 
-        // dd($data[0]);
 
         return view('paye.retraite.create', compact('echeance','data'));
     }
@@ -260,6 +288,7 @@ class PayeController extends Controller
         // dd($data[0]);
 
         foreach($data[0] as $d) {
+            // dd(Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($d['date_de_jouissanc'])));
             $retraite = new EtatRetraite();
 
             $retraite->echeance_id = $request->echeance_id;
@@ -268,7 +297,8 @@ class PayeController extends Controller
             $retraite->prenom = trim($d['prenoms']);
             $retraite->type = trim($d['type']);
             $retraite->date_naiss = trim($d['date_de_naiss']);
-            $retraite->date_jouis = trim($d['date_de_jouissanc']);
+            // $retraite->date_jouis = trim($d['date_de_jouissanc']);
+            $retraite->date_jouis = trim(Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($d['date_de_jouissanc'])));
             $retraite->telephone = trim($d['numero_de_telephone']);
             $retraite->titre = trim($d['titre']);
             $retraite->montant_trim = trim($d['montant_trimest']);
@@ -321,6 +351,51 @@ class PayeController extends Controller
 
 
     }
+    public function retraiteUpdate(Request $request)
+    {
+        $retraite = EtatRetraite::find($request->retraite_id);
+        $echeance_id = $retraite->echeance->id;
+
+        if($request->has('est_nc'))
+            $nc = '1';
+        else
+            $nc = '0';
+        // dd($request->all());
+
+        $retraite->update([
+            'num_pension' => $request->num_pension,
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'type' => $request->type,
+            'date_naiss' => $request->date_naiss,
+            'date_jouis' => $request->date_jouis,
+            'telephone' => $request->telephone,
+            'titre' => $request->titre,
+            'montant_trim' => $request->montant_trim,
+            'montant_comp' => $request->montant_comp,
+            'assignation' => $request->assignation,
+            'assignation1' => $request->assignation1,
+            'societe_orig' => $request->societe_orig,
+            'montant_arriere' => $request->montant_arriere,
+            'trim_du' => $request->trim_du,
+            'af' => $request->af,
+            'observation' => $request->observation,
+            'montant_a_payer' => $request->montant_a_payer,
+            'agence' => $request->agence,
+            'montant_mens_reval' => $request->montant_mens_reval,
+            'echeance_pre_vrmt' => $request->echeance_pre_vrmt,
+            'code_bank' => $request->code_bank,
+            'code_agence' => $request->code_agence,
+            'cle_rib' => $request->cle_rib,
+            // 'est_nc' => $nc,
+
+        ]);
+
+        Alert::success('Employer modifié avec succès!', '');
+        return redirect(route('payeRetraite.index',$echeance_id ))->with('yes','Enregistrer avec succes');
+
+
+    }
     public function getAss(Request $request)
     {
         // dd($request->all());
@@ -333,14 +408,14 @@ class PayeController extends Controller
     public function decesIndex()
     {
         $deces = EtatDeces::all();
-        dd($deces);
+        // dd($deces);
         return view('paye.deces.index', compact('deces'));
 
     }
     public function suspensionIndex()
     {
         $suspendus = EtatSuspendu::all();
-        return view('paye.deces.index', compact('suspendus'));
+        return view('paye.suspension.index', compact('suspendus'));
     }
 
 
