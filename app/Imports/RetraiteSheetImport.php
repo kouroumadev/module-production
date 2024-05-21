@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToArray;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 
 class RetraiteSheetImport implements ToModel, WithHeadingRow, ToArray
 {
@@ -28,6 +29,7 @@ class RetraiteSheetImport implements ToModel, WithHeadingRow, ToArray
         dd( $rows);
         return $rows;
     }
+
      /**
     * @param array $row
     *
@@ -37,7 +39,7 @@ class RetraiteSheetImport implements ToModel, WithHeadingRow, ToArray
     {
         return new EtatRetraite([
             'echeance_id'  => $this->data,
-            'num_retraite'  => $row['num_retraite'],
+            'num_pension'  => $row['num_pension'],
             'prenoms'  => $row['prenoms'],
             'nom'  => $row['nom'],
             'date_de_naiss'  => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['date_de_naiss'])),

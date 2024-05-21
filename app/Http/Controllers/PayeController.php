@@ -273,10 +273,21 @@ class PayeController extends Controller
     public function retraitePreview(Request $request)
     {
         $file = $request->file('file');
+        if(!is_file($file))
+        {
+            Alert::error('Type de fichier incorrect!', '');
+            return redirect()->back();
+        }
+
+        // dd($file);
         // $echeance = Echeance::find($request->echeance_id)->first();
-        $echeance = Echeance::find($request->echeance_id);
+        $echeance = Echeance::find($request->echeance_id); #10718
+
 
         $data = Excel::toArray(new EtatRetraiteImport($request->echeance_id), $file);
+        // $final = array_slice($data[0], 0, 10);
+
+        //  dd($final);
 
 
         return view('paye.retraite.create', compact('echeance','data'));
