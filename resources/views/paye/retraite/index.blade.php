@@ -253,58 +253,59 @@
     </div>
 
 
+    <form action="" method="get">
+        <div class="row justify-content-center shadow-lg p-2">
+            <div class="col-md-2">
+                <label class="weight-600">Type</label>
 
-    <div class="row justify-content-center shadow-lg p-2">
-        <div class="col-md-2">
-            <label class="weight-600">Type</label>
+                <div class="custom-control custom-radio ">
+                    <input checked type="radio" id="customRadio4type" value="01-" name="radio_type" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio4type">01-</label>
+                </div>
+                <div class="custom-control custom-radio ">
+                    <input type="radio" id="customRadio5type" value="PI-" name="radio_type" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio5type">PI</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label class="weight-600">État</label>
 
-            <div class="custom-control custom-radio ">
-                <input checked type="radio" id="customRadio4type" value="01-" name="radio_type" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio4type">01-</label>
+                <div class="custom-control custom-radio ">
+                    <input checked type="radio" id="customRadio4" value="all" name="radio_etat" class="custom-control-input">
+                    <input type="hidden" id="echeance_id" name="echeance_id" value="{{ $echeance->id }}">
+                    <label class="custom-control-label" for="customRadio4">Tous</label>
+                </div>
+                <div class="custom-control custom-radio ">
+                    <input type="radio" id="customRadio5" value="old" name="radio_etat" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio5">Ancienne C</label>
+                </div>
+                <div class="custom-control custom-radio ">
+                    <input type="radio" id="customRadio6" value="new" name="radio_etat" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio6">Nouvelle C</label>
+                </div>
             </div>
-            <div class="custom-control custom-radio ">
-                <input type="radio" id="customRadio5type" value="PI" name="radio_type" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio5type">PI</label>
+            <div class="col-md-3">
+                <label class="col-sm-12 weight-600 col-md-12 col-form-label">Assignations</label>
+                <div class="col-sm-12 col-md-10">
+                    <select id="ass_1" name="assignation" required class="form-control form-control-sm">
+                        <option selected value="">--Aucune selection--</option>
+                        @foreach ($assignations as $ass)
+                        <option value="{{ $ass->assignation }}">{{ $ass->assignation }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="col-md-2">
-            <label class="weight-600">État</label>
+            <div class="col-md-3">
+                <label class="col-sm-12 weight-600 col-md-12 col-form-label">Assignations 1</label>
+                <div class="col-sm-12 col-md-10">
+                    <select id="ass_2" name="assignation1" class="form-control form-control-sm">
+                        <option selected value="">--Aucune selection--</option>
+                    </select>
+                </div>
+            </div>
 
-            <div class="custom-control custom-radio ">
-                <input checked type="radio" id="customRadio4" value="all" name="radio_etat" class="custom-control-input">
-                <input type="hidden" id="echeance_id" name="echeance_id" value="{{ $echeance->id }}">
-                <label class="custom-control-label" for="customRadio4">Tous</label>
-            </div>
-            <div class="custom-control custom-radio ">
-                <input type="radio" id="customRadio5" value="old" name="radio_etat" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio5">Ancienne C</label>
-            </div>
-            <div class="custom-control custom-radio ">
-                <input type="radio" id="customRadio6" value="new" name="radio_etat" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio6">Nouvelle C</label>
-            </div>
         </div>
-        <div class="col-md-3">
-            <label class="col-sm-12 weight-600 col-md-12 col-form-label">Assignations</label>
-            <div class="col-sm-12 col-md-10">
-                <select id="ass_1" name="assignation" required class="form-control form-control-sm">
-                    <option selected value="">--Aucune selection--</option>
-                    @foreach ($assignations as $ass)
-                    <option value="{{ $ass->assignation }}">{{ $ass->assignation }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <label class="col-sm-12 weight-600 col-md-12 col-form-label">Assignations 1</label>
-            <div class="col-sm-12 col-md-10">
-                <select id="ass_2" name="assignation1" class="form-control form-control-sm">
-                    <option selected value="">--Aucune selection--</option>
-                </select>
-            </div>
-        </div>
-
-    </div>
+    </form>
 
 
 
@@ -372,7 +373,9 @@
     </div>
     {{-- @endif --}}
 
-
+    <div id="loading-spinner" class="loading-spinner">
+        <img src="{{ asset('theme/gif/Spinner-2.gif') }}" alt="Loading...">
+    </div>
 
 
 
@@ -487,6 +490,7 @@
 </script> --}}
 
 
+
 <script>
     $(document).ready(function() {
 
@@ -501,75 +505,78 @@
                 data: {
                     echeance_id: echeance_id
                  },
+                 beforeSend: function() {
+                    $('#loading-spinner').show(); // Show the loading spinner
+                },
                 success: function(data) {
-                   console.log('valueeee:', data);
-                   console.log(jQuery.type(data));
-                //    var table = $('#exampleRetraiteFinale').DataTable({
-                //         searching: true,
-                //         paging: true,
-                //         pageLength: 10,
-                //     });
-                $.each(data, function(key, item) {
-
-                    table.row.add([
-                        item.num_pension,
-                        item.type,
-                        item.prenom,
-                        item.nom,
-                        item.date_naiss,
-                        item.date_jouis,
-                        item.titre,
-                        item.montant_trim,
-                        item.montant_comp,
-                        item.assignation,
-                        item.assignation1,
-                        item.societe_orig,
-                        item.est_decede,
-                        item.montant_trim_reval,
-                        item.montant_mens_reval,
-                        item.montant_avance,
-                        item.trim_du,
-                        item.remb_pour_nb_periode,
-                        item.reste_remb,
-                        item.montant_arriere,
-                        item.af,
-                        item.montant_a_payer,
-                        item.observation,
-                        item.echeance_pre_vrmt,
-                        item.agence,
-                        item.pre_ech_remb,
-                        item.der_ech_remb,
-                        item.as_avance,
-                        item.est_reclation,
-                        item.telephone,
-                        item.trim_remb,
-                        item.solde_avance,
-                        item.est_nc,
-                        item.code_bank,
-                        item.code_agence,
-                        item.rip,
-                        item.cle_rib,
-                        item.mappr,
-                        item.est_suspendu,
-                        item.created_at.split("T")[0],
-                        item.updated_at.split("T")[0],
-                        "<a href='"+item.url+"' class='btn btn-success rounded'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
-                        // item.action,
-
+                    console.log('valueeee:', data);
+                    console.log(jQuery.type(data));
+                    //    var table = $('#exampleRetraiteFinale').DataTable({
+                    //         searching: true,
+                    //         paging: true,
+                    //         pageLength: 10,
+                    //     });
+                    $.each(data, function(key, item) {
+                        table.row.add([
+                            item.num_pension,
+                            item.type,
+                            item.prenom,
+                            item.nom,
+                            item.date_naiss,
+                            item.date_jouis,
+                            item.titre,
+                            item.montant_trim,
+                            item.montant_comp,
+                            item.assignation,
+                            item.assignation1,
+                            item.societe_orig,
+                            item.est_decede,
+                            item.montant_trim_reval,
+                            item.montant_mens_reval,
+                            item.montant_avance,
+                            item.trim_du,
+                            item.remb_pour_nb_periode,
+                            item.reste_remb,
+                            item.montant_arriere,
+                            item.af,
+                            item.montant_a_payer,
+                            item.observation,
+                            item.echeance_pre_vrmt,
+                            item.agence,
+                            item.pre_ech_remb,
+                            item.der_ech_remb,
+                            item.as_avance,
+                            item.est_reclation,
+                            item.telephone,
+                            item.trim_remb,
+                            item.solde_avance,
+                            item.est_nc,
+                            item.code_bank,
+                            item.code_agence,
+                            item.rip,
+                            item.cle_rib,
+                            item.mappr,
+                            item.est_suspendu,
+                            item.created_at.split("T")[0],
+                            item.updated_at.split("T")[0],
+                            "<a href='"+item.url+"' class='btn btn-success rounded'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
+                            // item.action,
 
 
-                        //  item.montant_comp_plus,
-                        //  item.banque,
-                        //  item.nb_periode_avance,
-                        //  item.taux_remb,
 
-                        //  item.IDPROCURATION,
-                        //  item.date_motif,
-                        //  item.date_dcd,
-                        //  item.date_declaration_dcd,
+                            //  item.montant_comp_plus,
+                            //  item.banque,
+                            //  item.nb_periode_avance,
+                            //  item.taux_remb,
 
-                    ]).draw();
+                            //  item.IDPROCURATION,
+                            //  item.date_motif,
+                            //  item.date_dcd,
+                            //  item.date_declaration_dcd,
+
+                        ]).draw();
                     });
+                    $('#loading-spinner').hide();
 
                     // item.created_at.split("T")[0],
 
@@ -613,13 +620,16 @@
                     assignation1: assignation1,
                     echeance_id: echeance_id,
                  },
+                 beforeSend: function() {
+                    $('#loading-spinner').show(); // Show the loading spinner
+                },
                 success: function(data) {
                     table.clear().draw();
                      console.log(jQuery.type(data));
                     // data = JSON.stringify(data);
                     // data = JSON.parse(data);
                     // data = Object.entries(data);
-                    console.log('moiiiiii:', data);
+                    // console.log('moiiiiii:', data);
                     // if (Array.isArray(data)) {
                     //     console.log('OUI');
                     // } else {
@@ -627,53 +637,55 @@
                     // }
                     // console.log('moiiiiii:', data);
 
-                $.each(data, function(key, item) {
-                    table.row.add([
-                       item.num_pension,
-                       item.type,
-                       item.prenom,
-                       item.nom,
-                       item.date_naiss,
-                       item.date_jouis,
-                       item.titre,
-                       item.montant_trim,
-                       item.montant_comp,
-                       item.assignation,
-                       item.assignation1,
-                       item.societe_orig,
-                       item.est_decede,
-                       item.montant_trim_reval,
-                       item.montant_mens_reval,
-                       item.montant_avance,
-                       item.trim_du,
-                       item.remb_pour_nb_periode,
-                       item.reste_remb,
-                       item.montant_arriere,
-                       item.af,
-                       item.montant_a_payer,
-                       item.observation,
-                       item.echeance_pre_vrmt,
-                       item.agence,
-                       item.pre_ech_remb,
-                       item.der_ech_remb,
-                       item.as_avance,
-                       item.est_reclation,
-                       item.telephone,
-                       item.trim_remb,
-                       item.solde_avance,
-                       item.est_nc,
-                       item.code_bank,
-                       item.code_agence,
-                       item.rip,
-                       item.cle_rib,
-                       item.mappr,
-                       item.est_suspendu,
-                       item.created_at.split("T")[0],
-                       item.updated_at.split("T")[0],
-                       "<a href='"+item.url+"' class='btn btn-success rounded'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
+                    $.each(data, function(key, item) {
+                        table.row.add([
+                        item.num_pension,
+                        item.type,
+                        item.prenom,
+                        item.nom,
+                        item.date_naiss,
+                        item.date_jouis,
+                        item.titre,
+                        item.montant_trim,
+                        item.montant_comp,
+                        item.assignation,
+                        item.assignation1,
+                        item.societe_orig,
+                        item.est_decede,
+                        item.montant_trim_reval,
+                        item.montant_mens_reval,
+                        item.montant_avance,
+                        item.trim_du,
+                        item.remb_pour_nb_periode,
+                        item.reste_remb,
+                        item.montant_arriere,
+                        item.af,
+                        item.montant_a_payer,
+                        item.observation,
+                        item.echeance_pre_vrmt,
+                        item.agence,
+                        item.pre_ech_remb,
+                        item.der_ech_remb,
+                        item.as_avance,
+                        item.est_reclation,
+                        item.telephone,
+                        item.trim_remb,
+                        item.solde_avance,
+                        item.est_nc,
+                        item.code_bank,
+                        item.code_agence,
+                        item.rip,
+                        item.cle_rib,
+                        item.mappr,
+                        item.est_suspendu,
+                        item.created_at.split("T")[0],
+                        item.updated_at.split("T")[0],
+                        "<a href='"+item.url+"' class='btn btn-success rounded'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
 
-                    ]).draw();
-                });
+                        ]).draw();
+                    });
+
+                    $('#loading-spinner').hide();
 
                 // data.forEach(function(item) {
                 //    table.row.add([

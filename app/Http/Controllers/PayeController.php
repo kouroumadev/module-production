@@ -285,9 +285,10 @@ class PayeController extends Controller
 
 
         $data = Excel::toArray(new EtatRetraiteImport($request->echeance_id), $file);
-        // $final = array_slice($data[0], 0, 10);
+        $final = array_slice($data[0], 0, 1000);
 
-        //  dd($final);
+        // dd($final);
+        $data = $final;
 
 
         return view('paye.retraite.create', compact('echeance','data'));
@@ -296,9 +297,9 @@ class PayeController extends Controller
     {
         $data = unserialize($request->data);
         // dd($request->all());
-        // dd($data[0]);
+        // dd($data);
 
-        foreach($data[0] as $d) {
+        foreach($data as $d) {
             // dd(Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($d['date_de_jouissanc'])));
             $retraite = new EtatRetraite();
 
@@ -307,7 +308,8 @@ class PayeController extends Controller
             $retraite->nom = trim($d['noms']);
             $retraite->prenom = trim($d['prenoms']);
             $retraite->type = trim($d['type']);
-            $retraite->date_naiss = trim($d['date_de_naiss']);
+            // $retraite->date_naiss = trim($d['date_de_naiss']);
+            $retraite->date_naiss = trim(Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($d['date_de_naiss'])));
             // $retraite->date_jouis = trim($d['date_de_jouissanc']);
             $retraite->date_jouis = trim(Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($d['date_de_jouissanc'])));
             $retraite->telephone = trim($d['numero_de_telephone']);

@@ -100,13 +100,13 @@
             </thead>
             @isset($data)
                 <tbody>
-                    @foreach ($data[0] as $d)
+                    @foreach ($data as $d)
                     <tr>
                         <td class="font-12">{{ $d['n_de_pension'] }}</td>
                         <td class="font-12">{{ $d['titre'] }}</td>
                         <td class="font-12">{{ $d['prenoms'] }}</td>
                         <td class="font-10">{{ $d['noms'] }}</td>
-                        <td class="font-12">{{ $d['date_de_naiss'] }}</td>
+                        <td class="font-12">{{ \AppHelper::getDateFormat(Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($d['date_de_naiss']))) }}</td>
                         <td class="font-12">{{ \AppHelper::getDateFormat(Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($d['date_de_jouissanc']))) }}</td>
                         <td class="font-12">{{ $d['type'] }}</td>
                         <td class="font-12">{{ $d['societes_dorigine'] }}</td>
