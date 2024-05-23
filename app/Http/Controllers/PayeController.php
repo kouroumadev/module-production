@@ -61,18 +61,26 @@ class PayeController extends Controller
     public function retraiteEdit(int $id) {
         // dd($id);
 
-        $assignations = DB::table('pay_assignation')->distinct()->get(['assignation']);
-        // $assignations = $data->distinct()->get(['assignation']);
+        if(Auth::user()->dept->name == 'PRODUCTION') {
 
-        // $echeances = Echeance::where('type','retraite')->first()->retraites->paginate(10);
+            $assignations = DB::table('pay_assignation')->distinct()->get(['assignation']);
+            // $assignations = $data->distinct()->get(['assignation']);
 
-         $retraite = EtatRetraite::find($id);
-         $echeance =  $retraite->echeance;
+            // $echeances = Echeance::where('type','retraite')->first()->retraites->paginate(10);
 
-        // dd($retraite->suspendus);
+            $retraite = EtatRetraite::find($id);
+            $echeance =  $retraite->echeance;
+
+            // dd($retraite->suspendus);
 
 
-        return view('paye.retraite.edit', compact('assignations','echeance','retraite'));
+            return view('paye.retraite.edit', compact('assignations','echeance','retraite'));
+
+        } else {
+            Alert::error('Accès interdit !!!', '');
+            return redirect()->back();
+        }
+
     }
     public function retraiteSuspension(int $id) {
 
@@ -143,7 +151,10 @@ class PayeController extends Controller
     }
     public function etatPayementPdf() {
         $digit = new NumberFormatter("fr", NumberFormatter::SPELLOUT);
-        $retraites = EtatRetraite::all();
+        // $retraites = EtatRetraite::all();
+        $echeance = Echeance::where('status','1')->first();
+        $retraites = $echeance->retraites;
+        // dd($retraites);
         $tot_montant_trim_reval = 0;
         $tot_montant_mens_reval = 0;
         $tot_montant_arriere = 0;
@@ -197,7 +208,9 @@ class PayeController extends Controller
         // dd($firstDayOfMonth);
 
 
-        $data = Echeance::find($request->echeance_id)->first()->retraites;
+        // $data = Echeance::find($request->echeance_id)->first()->retraites;
+        // $data = Echeance::where('status','1')->first()->retraites;
+        $data = EtatRetraite::all();
         // dd($data);
 
         foreach($data as $d) {

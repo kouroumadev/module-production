@@ -73,9 +73,9 @@
                         <tr>
                             <th class="table-plus text-white">#</th>
                             <th class="text-white">Échéance</th>
-                            <th class="text-white">Status</th>
                             <th class="text-white">Ajouté par</th>
                             <th class="text-white">À la date du</th>
+                            <th class="text-white">Status</th>
                             <th class="datatable-nosort text-white">Action</th>
                         </tr>
                     </thead>
@@ -84,20 +84,26 @@
                             <tr>
                                 <td>{{ $loop->index+1 }}</td>
                                 <td>{{ $d->mois }} {{ $d->annee }}</td>
+                                <td>{{ \AppHelper::getUserName($d->created_by) }}</td>
+                                <td>{{ \AppHelper::getDateFormat($d->created_at) }}</td>
                                 <td>
                                     @if ($d->status == '1')
                                         <span class="badge badge-warning">En cours...</span>
                                     @else
-                                        <span class="badge badge-secondary">Traité</span>
+                                        <span class="badge badge-secondary">Cloturé</span>
                                     @endif
                                 </td>
-                                <td>{{ \AppHelper::getUserName($d->created_by) }}</td>
-                                <td>{{ \AppHelper::getDateFormat($d->created_at) }}</td>
-                                {{-- <td>{{ DB::table('users')->where('id', $d->created_by)->value('name') }}</td> --}}
-                                <td>
+                                <td class="text-center">
+                                    @if ($d->status == '1')
+                                    <a href="{{ route('echeance.close', $d->id) }}" class="btn btn-warning">Cloturer</a>
+                                    @else
+                                    <span class="badge badge-secondary p-2"><i class="icon-copy fa fa-lock fa-2x" aria-hidden="true"></i></span>
+                                    @endif
+                                </td>
+                                {{-- <td>
                                     @if ($d->status == '1')
                                     <a href="#" class="btn btn-success" data-toggle="modal" data-target="#small-modal-echeance{{ $d->id }}" type="button">
-                                        {{-- <i class="fa fa-download" aria-hidden="true"></i> --}}
+                                        {{-- <i class="fa fa-download" aria-hidden="true"></i>
                                         <i class="fa fa-upload" aria-hidden="true"></i>
                                     </a>
                                     @else
@@ -128,7 +134,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>

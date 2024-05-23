@@ -96,8 +96,5 @@
         <span class="micon dw dw-edit2"></span><span class="mtext">BIOMETRIE</span>
     </a>
 </li>
-<li class="my-menu" onclick="makeActive(this,'115')" id="115">
-    <a href="#" class="dropdown-toggle no-arrow">
-        <span class="micon dw dw-edit2"></span><span class="mtext">ANCIENNE CONCESSION</span>
-    </a>
-</li>
+
+

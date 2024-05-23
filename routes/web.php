@@ -80,6 +80,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/dipress/mise-a-retraite/decompte/done/{id}', [App\Http\Controllers\DipressController::class, 'miseRetraiteDecompteDone'])->name('miseRetaite.decompte.done');
     Route::get('/dipress/mise-a-retraite/details/{id}/{year}', [App\Http\Controllers\DipressController::class, 'miseRetraiteDecompteDetails'])->name('miseRetaite.details');
 
+    Route::get('/dipress/nc/create/', [App\Http\Controllers\DipressController::class, 'ncCreate'])->name('dipress.nc.create');
+    Route::post('/dipress/nc/store/', [App\Http\Controllers\DipressController::class, 'ncStore'])->name('dipress.nc.store');
+    Route::get('/dipress/ac/index/', [App\Http\Controllers\DipressController::class, 'acIndex'])->name('dipress.ac.index');
+
+
+
     // SECRETARIAT
     Route::get('/secretariat/index', [App\Http\Controllers\SecretariatController::class, 'SecretariatIndex'])->name('secretariat.index');
     Route::get('/secretariat/etude/traitement/{id}', [App\Http\Controllers\SecretariatController::class, 'SecretariatTraitement'])->name('secretariat.traitement');
@@ -112,6 +118,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // ECHEANCE
     Route::get('/echeance/index', [App\Http\Controllers\EcheanceController::class, 'echeanceIndex'])->name('echeance.index');
     Route::post('/echeance/store', [App\Http\Controllers\EcheanceController::class, 'echeanceStore'])->name('echeance.store');
+    Route::get('/echeance/close/{id}', [App\Http\Controllers\EcheanceController::class, 'echeanceClose'])->name('echeance.close');
     Route::post('/paye/store', [App\Http\Controllers\EcheanceController::class, 'payeStore'])->name('paye.store');
     Route::get('/paye/index/{id}', [App\Http\Controllers\EcheanceController::class, 'payeIndex'])->name('paye.index');
     Route::get('/paye/export/excel/{id}', [App\Http\Controllers\EcheanceController::class, 'exportExcel'])->name('paye.excel');

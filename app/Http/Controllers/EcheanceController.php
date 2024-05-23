@@ -23,7 +23,8 @@ use Illuminate\Support\Carbon as SupportCarbon;
 class EcheanceController extends Controller
 {
     public function echeanceIndex() {
-        $data = Echeance::all();
+        // $data = Echeance::all();
+        $data = Echeance::orderBy('created_at', 'desc')->get();
         $mois = DB::table('mois')->get();
         $currentYear = Carbon::now()->format('Y');
         $nextYear = Carbon::now()->addYears(1)->format('Y');
@@ -43,6 +44,12 @@ class EcheanceController extends Controller
             return redirect(route('echeance.index'));
         }
 
+        $val = Echeance::where('status', '1')->get();
+        if(count($val) > 0){
+            Alert::error("Veuillez cloturer l'Echeance en cours avant la creation d'une autre !!", '');
+            return redirect(route('echeance.index'));
+        }
+
 
         $data = new Echeance();
         $data->mois = $request->mois;
@@ -51,6 +58,20 @@ class EcheanceController extends Controller
         $data->save();
 
         Alert::success('Echeance ajouté avec succès !', '');
+        return redirect(route('echeance.index'));
+
+    }
+
+    public function echeanceClose(int $id){
+        $data = Echeance::find($id);
+
+        $data->update([
+            'status' => '0'
+        ]);
+
+        // dd($data);
+
+        Alert::success('Echeance cloturé avec succès !', '');
         return redirect(route('echeance.index'));
 
     }
