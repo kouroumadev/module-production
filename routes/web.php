@@ -84,6 +84,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/dipress/nc/store/', [App\Http\Controllers\DipressController::class, 'ncStore'])->name('dipress.nc.store');
     Route::get('/dipress/ac/index/', [App\Http\Controllers\DipressController::class, 'acIndex'])->name('dipress.ac.index');
 
+    // PRODUCTION
+    Route::get('/prod/nc/create/', [App\Http\Controllers\ProductionController::class, 'ncCreate'])->name('prod.nc.create');
+    Route::post('/prod/nc/store/', [App\Http\Controllers\ProductionController::class, 'ncStore'])->name('prod.nc.store');
+    Route::get('/prod/ac/index/', [App\Http\Controllers\ProductionController::class, 'acIndex'])->name('prod.ac.index');
 
 
     // SECRETARIAT
