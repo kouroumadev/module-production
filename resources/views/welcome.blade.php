@@ -11,7 +11,12 @@
     @endphp
     <div class="header" style="background: rgb(4, 147, 16)">
         <div class="header-left">
+            @if (Auth::user()->dept->name == 'AGENCE')
+            <h5 class="text-white">Agence: {{ Auth::user()->name }}</h5>
+            @else
             <h5 class="text-white">Departement: {{ Auth::user()->dept->name }}</h5>
+            @endif
+
 
         </div>
         <div class="header-right">
@@ -115,6 +120,13 @@
                     @endif
                     @if (Auth::user()->dept->name == 'DIPRES' || Auth::user()->dept->name == 'PRODUCTION')
                         @include('production.left-menu')
+                    @endif
+                    @if (Auth::user()->dept->name == 'AGENCE')
+                    <li class="my-menu" onclick="makeActive(this,'15898978')" id="49887787">
+                        <a href="{{ route('at.index') }}" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-edit2"></span><span class="mtext">TO DO</span>
+                        </a>
+                    </li>
                     @endif
 
 

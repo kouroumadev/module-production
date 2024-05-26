@@ -145,9 +145,9 @@
                 <th class="text-white font-12">Suspendu</th>
                 <th class="text-white font-12">Ajouté le </th>
                 <th class="text-white font-12">Modifié le </th>
-                {{-- @if (Auth::user()->dept->name == 'PRODUCTION') --}}
+                 @if (Auth::user()->dept->name == 'PRODUCTION')
                 <th class="datatable-nosort text-white font-12">Action</th>
-                {{-- @endif --}}
+                 @endif
                 </tr>
             </thead>
             <tbody>

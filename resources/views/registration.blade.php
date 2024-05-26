@@ -41,6 +41,14 @@
                                 </select>
                             </div>
                             <div class="input-group custom">
+                                <select name="agence" id="" class="form-control form-control-lg" required>
+                                    <option value="">-- Selectionner l'agence --</option>
+                                    @foreach ($assignations as $ass)
+                                    <option value="{{ $ass->assignation }}">{{ $ass->assignation }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="input-group custom">
                                 <input type="text" class="form-control form-control-lg" name="name" placeholder="Nom complet">
                                 <div class="input-group-append custom">
                                     <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
@@ -107,6 +115,13 @@
     </div>
 
 </div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+     $(document).ready(function() {
+        console.log('heeee');
+     });
+</script>
 
 
 

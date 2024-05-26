@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -32,8 +33,8 @@ class AuthController extends Controller
             else {
                 return redirect()->intended(route('home'));
             }
-            
-           
+
+
         }
 
         return to_route('login')->withErrors([
@@ -45,7 +46,7 @@ class AuthController extends Controller
         $id = Auth::user()->id;
         return view('first-login', compact('id'));
     }
-    
+
     public function firstLogin(Request $request)
     {
         $id = $request->id;
@@ -75,22 +76,33 @@ class AuthController extends Controller
     public function Registration()
     {
         $depts = Dept::all();
-        return view('registration', compact('depts'));
+        $assignations = DB::table('pay_assignation')->distinct()->get(['assignation']);
+        return view('registration', compact('depts','assignations'));
     }
 
     public function SignUp(Request $request)
     {
-
         // dd($request->all());
+        $is_first = '1';
+        $name = $request->name;
+
+        $dept = Dept::findOrFail($request->dept_id);
+        if($dept->name == 'AGENCE'){
+            $is_first = '0';
+            $name = $request->agence;
+        }
+
+
 
         $user = User::create([
             'dept_id' => $request->dept_id,
-            'name' => $request->name,
+            'name' => $name,
             'email' => $request->email,
             // 'type_user' => $request->type_user,
             'password' => Hash::make($request->password),
             'c_password' => $request->password,
             'photo' => '',
+            'is_first' => $is_first,
         ]);
 
         Alert::success('Enregistrer', 'Enregistrer avec success');

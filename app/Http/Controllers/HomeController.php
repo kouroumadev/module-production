@@ -25,7 +25,8 @@ class HomeController extends Controller
         if (Auth::check() && Auth::user()->status == 1) {
             //dd("fist login");
 
-            return view('dashboard');
+            // return view('dashboard');
+            return view('welcome');
         } else {
             return view('login');
         }
