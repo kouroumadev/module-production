@@ -123,8 +123,8 @@
                     @endif
                     @if (Auth::user()->dept->name == 'AGENCE')
                     <li class="my-menu" onclick="makeActive(this,'15898978')" id="49887787">
-                        <a href="{{ route('at.index') }}" class="dropdown-toggle no-arrow">
-                            <span class="micon dw dw-edit2"></span><span class="mtext">TO DO</span>
+                        <a href="{{ route('agence.pension.retraite') }}" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-edit2"></span><span class="mtext">PENSION DE RETRAITE</span>
                         </a>
                     </li>
                     @endif

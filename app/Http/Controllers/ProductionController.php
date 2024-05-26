@@ -77,34 +77,122 @@ class ProductionController extends Controller
         return redirect(route('prod.ac.index'));
 
 
-}
-
-public function ncCreate() {
-
-    $echeance = Echeance::where('status','1')->get();
-    // dd($echeance->count());
-    if($echeance->count() == 0){
-        Alert::error("Echeance non disponible, veuillez contactez le DEPARTEMENT INFORMATIQUE !!", '');
-        return redirect()->back();
     }
-     $assignations = DB::table('pay_assignation')->distinct()->get(['assignation']);
-     $agences = DB::table('agences')->get();
 
-     return view('production.nc', compact('echeance','assignations','agences'));
+    public function ncCreate() {
 
-}
+        $echeance = Echeance::where('status','1')->get();
+        // dd($echeance->count());
+        if($echeance->count() == 0){
+            Alert::error("Echeance non disponible, veuillez contactez le DEPARTEMENT INFORMATIQUE !!", '');
+            return redirect()->back();
+        }
+        $assignations = DB::table('pay_assignation')->distinct()->get(['assignation']);
+        $agences = DB::table('agences')->get();
 
-public function acIndex() {
-    $echeance = Echeance::where('status','1')->get();
-    if($echeance->count() == 0){
-        Alert::error("Echeance non disponible, veuillez contactez le DEPARTEMENT INFORMATIQUE !!", '');
-        return redirect()->back();
+        return view('production.nc', compact('echeance','assignations','agences'));
+
     }
-    $data = EtatRetraite::all();
 
-    // dd($data);
-    $assignations = DB::table('pay_assignation')->distinct()->get(['assignation']);
-    // return view('dipress.production.index', compact('data','echeance','assignations'));
-    return view('production.index', compact('data','echeance','assignations'));
-}
+    public function acIndex() {
+        $echeance = Echeance::where('status','1')->get();
+        if($echeance->count() == 0){
+            Alert::error("Echeance non disponible, veuillez contactez le DEPARTEMENT INFORMATIQUE !!", '');
+            return redirect()->back();
+        }
+        $data = EtatRetraite::all();
+
+        // dd($data);
+        $assignations = DB::table('pay_assignation')->distinct()->get(['assignation']);
+        // return view('dipress.production.index', compact('data','echeance','assignations'));
+        return view('production.index', compact('data','echeance','assignations'));
+    }
+
+    public function agencePensionIndex() {
+        $echeance = Echeance::where('status','1')->get();
+        if($echeance->count() == 0){
+            Alert::error("Echeance non disponible, veuillez contactez le DEPARTEMENT INFORMATIQUE !!", '');
+            return redirect()->back();
+        }
+
+        $agence = Auth::user()->name;
+
+        // $data = EtatRetraite::where('type','01-')
+        //                     ->where('assignation',$agence)->get();
+
+        $assignations = DB::table('pay_assignation')->where('assignation',$agence)->get(['assignation1']);
+
+
+        // dd($assignations);
+        // $assignations = DB::table('pay_assignation')->distinct()->get(['assignation']);
+        // return view('dipress.production.index', compact('data','echeance','assignations'));
+        return view('agence.pension-retraite', compact('echeance','assignations'));
+    }
+    public function agenceRetraiteFilter(Request $request)
+    {
+        // dd(date('Y-m-01 00:00:00'));
+
+
+        // dd($firstDayOfMonth);
+
+
+        // $data = Echeance::find($request->echeance_id)->first()->retraites;
+        // $data = Echeance::where('status','1')->first()->retraites;
+        // $data = EtatRetraite::all();
+        $agence = Auth::user()->name;
+
+        $data = EtatRetraite::where('type','01-')
+                            ->where('assignation',$agence)->get();
+        // dd($data);
+
+        foreach($data as $d) {
+            if($d->est_suspendu == "1")
+                $d->est_suspendu = "OUI";
+            else
+                $d->est_suspendu = "NON";
+
+            if($d->est_decede == "1")
+                $d->est_decede = "OUI";
+            else
+                $d->est_decede = "NON";
+
+
+            // $d->date_jouis = AppHelper::getDateFormat($d->date_jouis);
+            $d->url = route('payeRetraite.edit', $d->id);
+            // $d->updated_at = AppHelper::getDateFormat($d->updated_at);
+            $d->montant_a_payer = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_a_payer) .' GNF</span>';
+            $d->montant_arriere = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_arriere) .' GNF</span>';
+            $d->montant_avance = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_avance) .' GNF</span>';
+            $d->montant_comp = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_comp) .' GNF</span>';
+            $d->montant_comp_plus = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_comp_plus) .' GNF</span>';
+            $d->montant_trim = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_trim) .' GNF</span>';
+            $d->montant_trim_reval = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_trim_reval) .' GNF</span>';
+            $d->montant_mens_reval = '<span class="text-nowrap">'. AppHelper::getMoneyFormat($d->montant_mens_reval) .' GNF</span>';
+
+        }
+        //    dd($data);
+
+        $ass1 = $request->assignation1;
+        $etat = $request->etatRadio;
+        $firstDayOfMonth = date('Y-m-01 00:00:00');
+
+        $data = $data->when($etat && $etat == 'all', function ($query) {
+                        return $query;
+                    })
+                    ->when($etat && $etat == 'old', function ($query) use ($firstDayOfMonth) {
+                            // dd($query->where('created_at', '>', $firstDayOfMonth)); #2024-05-01 00:00:00
+                        return $query->where('created_at', '<',  $firstDayOfMonth);
+                    })
+                    ->when($etat && $etat == 'new', function ($query) use ($firstDayOfMonth) {
+                        return $query->where('created_at', '>=',  $firstDayOfMonth);
+                    })
+                    ->when($ass1, function ($query,  $ass1) {
+                        return $query->where('assignation1',  $ass1);
+                    });
+
+
+
+        return response()->json($data);
+
+    }
 }
