@@ -131,6 +131,10 @@
                         <a href="{{ route('agence.pension.retraite','PI') }}" class="dropdown-toggle no-arrow">
                             <span class="micon dw dw-edit2"></span><span class="mtext">PENSION D'INVALIDITE</span>
                         </a>
+                    </li><li class="my-menu" onclick="makeActive(this,'158989789898')" id="4988778778">
+                        <a href="#" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-edit2"></span><span class="mtext">REVERSION</span>
+                        </a>
                     </li>
                     @endif
 
