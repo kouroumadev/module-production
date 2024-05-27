@@ -10,6 +10,7 @@ use App\Helpers\AppHelper;
 use App\Models\Echeance;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use NumberFormatter;
 
 class ProductionController extends Controller
 {
@@ -108,8 +109,9 @@ class ProductionController extends Controller
         return view('production.index', compact('data','echeance','assignations'));
     }
 
-    public function agencePensionIndex() {
+    public function agencePensionIndex(string $id) {
         $echeance = Echeance::where('status','1')->get();
+        $type = $id;
         if($echeance->count() == 0){
             Alert::error("Echeance non disponible, veuillez contactez le DEPARTEMENT INFORMATIQUE !!", '');
             return redirect()->back();
@@ -126,24 +128,16 @@ class ProductionController extends Controller
         // dd($assignations);
         // $assignations = DB::table('pay_assignation')->distinct()->get(['assignation']);
         // return view('dipress.production.index', compact('data','echeance','assignations'));
-        return view('agence.pension-retraite', compact('echeance','assignations'));
+        return view('agence.pension-retraite', compact('echeance','assignations','type'));
     }
     public function agenceRetraiteFilter(Request $request)
     {
-        // dd(date('Y-m-01 00:00:00'));
 
-
-        // dd($firstDayOfMonth);
-
-
-        // $data = Echeance::find($request->echeance_id)->first()->retraites;
-        // $data = Echeance::where('status','1')->first()->retraites;
-        // $data = EtatRetraite::all();
         $agence = Auth::user()->name;
 
-        $data = EtatRetraite::where('type','01-')
+        $data = EtatRetraite::where('type', 'like', '%'.$request->type.'%')
                             ->where('assignation',$agence)->get();
-        // dd($data);
+
 
         foreach($data as $d) {
             if($d->est_suspendu == "1")
@@ -193,6 +187,64 @@ class ProductionController extends Controller
 
 
         return response()->json($data);
+
+    }
+
+    public function retraitePdf(Request $request) {
+        // dd($request->all());
+
+        $digit = new NumberFormatter("fr", NumberFormatter::SPELLOUT);
+        $agence = Auth::user()->name;
+        $retraites = EtatRetraite::where('type', 'like', '%'.$request->type.'%')
+                            ->where('assignation1',$request->assignation)
+                            ->where('assignation',$agence)->get();
+
+        // dd($data);
+
+        // $retraites = EtatRetraite::all();
+        $echeance = Echeance::where('status','1')->first();
+        // dd($retraites);
+        $tot_montant_trim_reval = 0;
+        $tot_montant_mens_reval = 0;
+        $tot_montant_arriere = 0;
+        $tot_montant_a_payer = 0;
+        $tot_montant_avance = 0;
+        $tot_pour = 0;
+        foreach($retraites as $r){
+            $tot_montant_trim_reval += (int)$r->montant_trim_reval;
+            $tot_montant_mens_reval += (int)$r->montant_mens_reval;
+            $tot_montant_arriere += (int)$r->montant_arriere;
+            $tot_montant_a_payer += (int)$r->montant_a_payer;
+            $tot_montant_avance += (int)$r->montant_avance;
+            $tot_pour += (int)$r->remb_pour_nb_periode;
+        }
+        // dd($tot_montant_trim_reval);
+        $data = [
+            'data' => $retraites->toArray(),
+            'tot_montant_trim_reval' => AppHelper::getMoneyFormat($tot_montant_trim_reval),
+            'tot_montant_mens_reval' => AppHelper::getMoneyFormat($tot_montant_mens_reval),
+            'tot_montant_arriere' => AppHelper::getMoneyFormat($tot_montant_arriere),
+            'tot_montant_a_payer' => AppHelper::getMoneyFormat($tot_montant_a_payer),
+            'tot_montant_avance' => AppHelper::getMoneyFormat($tot_montant_avance),
+            'tot_pour' => AppHelper::getMoneyFormat($tot_pour),
+            'money' => $digit->format($tot_montant_a_payer),
+            'date' => date('m/d/Y'),
+            'ville' => $request->assignation,
+            'type' => $request->type,
+
+        ];
+
+        // dd($data);
+        //
+        // dd($digit->format(13892738));
+
+        // $pdf = app('dompdf.wrapper');
+        // $pdf->getDomPDF()->set_option("enable_php", true);
+
+        $pdf = PDF::loadView('agence.pdf.retraite-pdf',$data);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('fetat-Payement.pdf');
+
 
     }
 }

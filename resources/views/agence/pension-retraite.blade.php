@@ -11,7 +11,7 @@
                 <nav aria-label="breadcrumb" role="navigation">
                     <ol class="breadcrumb">
                         {{-- <li class="breadcrumb-item"><a href="{{ route('prestation.index') }}">retraite</a></li> --}}
-                        <li class="breadcrumb-item active" aria-current="page"> ECHEANCE - {{ $echeance[0]->mois }} {{ $echeance[0]->annee }}</li>
+                        <li class="breadcrumb-item active" aria-current="page"> ECHEANCE - {{ $echeance[0]->mois }} {{ $echeance[0]->annee }} | TYPE: {{ $type }}</li>
                     </ol>
                 </nav>
             </div>
@@ -29,7 +29,7 @@
 
                     @if (Auth::user()->dept->name == 'PRODUCTION')
                         <div class="col-md-4">
-                            <a href="{{ route('payeRetraite.etatPayement') }}" class="btn btn-danger btn-block">Fiche de paye <i class="fa fa-download" aria-hidden="true"></i></a>
+                            <a href="{{ route('payeRetraite.etatPayement') }}" class="btn btn-danger btn-block" target="_blank">Fiche de paye <i class="fa fa-download" aria-hidden="true"></i></a>
                         </div>
                     @endif
                 </div>
@@ -37,24 +37,26 @@
         </div>
     </div>
 
-    <form action="" method="get">
+    <form action="{{ route('agence.retraite.pdf') }}" method="post">
+        @csrf
         <div class="row justify-content-center shadow-lg p-2">
 
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label class="weight-600">État</label>
 
                 <div class="custom-control custom-radio ">
                     <input checked type="radio" id="customRadio4" value="all" name="radio_etat" class="custom-control-input">
                     <input type="hidden" id="echeance_id" name="echeance_id" value="{{ $echeance[0]->id }}">
-                    <label class="custom-control-label" for="customRadio4">Tous</label>
+                    <input type="hidden" id="type" name="type" value="{{ $type }}">
+                    <label class="custom-control-label" for="customRadio4">Toutes les Concessions</label>
                 </div>
                 <div class="custom-control custom-radio ">
                     <input type="radio" id="customRadio5" value="old" name="radio_etat" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadio5">Ancienne C</label>
+                    <label class="custom-control-label" for="customRadio5">Ancienne(s) Concession(s)</label>
                 </div>
                 <div class="custom-control custom-radio ">
                     <input type="radio" id="customRadio6" value="new" name="radio_etat" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadio6">Nouvelle C</label>
+                    <label class="custom-control-label" for="customRadio6">Nouvelle(s) Concession(s)</label>
                 </div>
             </div>
             <div class="col-md-3">
@@ -66,7 +68,11 @@
                         <option value="{{ $ass->assignation1 }}">{{ $ass->assignation1 }}</option>
                         @endforeach
                     </select>
+                    <input type="hidden" name="type" value="{{ $type }}">
                 </div>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-danger " type="submit" target="_blank">Télécharger fiche de paye <i class="fa fa-download" aria-hidden="true"></i></button>
             </div>
 
 
@@ -172,6 +178,7 @@
     $(document).ready(function() {
 
         var echeance_id = $('#echeance_id').val();
+        var type = $('#type').val();
 
         var table = $('#exampleRetraiteFinale').DataTable();
 
@@ -180,7 +187,8 @@
                 type: 'GET',
                 dataType: 'json',
                 data: {
-                    echeance_id: echeance_id
+                    echeance_id: echeance_id,
+                    type: type
                  },
                  beforeSend: function() {
                     $('#loading-spinner').show(); // Show the loading spinner
@@ -277,6 +285,7 @@
             var etatRadio = $('input[name="radio_etat"]:checked').val();
             var assignation1 = $('#ass_2').val();
             var echeance_id = $('#echeance_id').val();
+            var type = $('#type').val();
 
             $.ajax({
                 url: '/agence/retraite/filter',
@@ -286,6 +295,7 @@
                     etatRadio: etatRadio,
                     assignation1: assignation1,
                     echeance_id: echeance_id,
+                    type: type,
                  },
                  beforeSend: function() {
                     $('#loading-spinner').show(); // Show the loading spinner

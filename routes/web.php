@@ -88,8 +88,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/prod/nc/create/', [App\Http\Controllers\ProductionController::class, 'ncCreate'])->name('prod.nc.create');
     Route::post('/prod/nc/store/', [App\Http\Controllers\ProductionController::class, 'ncStore'])->name('prod.nc.store');
     Route::get('/prod/ac/index/', [App\Http\Controllers\ProductionController::class, 'acIndex'])->name('prod.ac.index');
-    Route::get('/agence/retraite/index', [App\Http\Controllers\ProductionController::class, 'agencePensionIndex'])->name('agence.pension.retraite');
+    Route::get('/agence/retraite/index/{id}', [App\Http\Controllers\ProductionController::class, 'agencePensionIndex'])->name('agence.pension.retraite');
     Route::get('/agence/retraite/filter', [App\Http\Controllers\ProductionController::class, 'agenceRetraiteFilter']);
+    Route::post('/agence/retraite/pdf', [App\Http\Controllers\ProductionController::class, 'retraitePdf'])->name('agence.retraite.pdf');
+
 
 
 
