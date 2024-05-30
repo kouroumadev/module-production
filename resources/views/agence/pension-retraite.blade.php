@@ -133,9 +133,7 @@
                 <th class="text-white font-12">Suspendu</th>
                 <th class="text-white font-12">Ajouté le </th>
                 <th class="text-white font-12">Modifié le </th>
-                 @if (Auth::user()->dept->name == 'PRODUCTION')
                 <th class="datatable-nosort text-white font-12">Action</th>
-                 @endif
                 </tr>
             </thead>
             <tbody>
@@ -244,7 +242,8 @@
                             item.est_suspendu,
                             item.created_at.split("T")[0],
                             item.updated_at.split("T")[0],
-                            "<a href='"+item.url+"' class='btn btn-success rounded'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
+                            "<a href='#' class='btn-block' data-toggle='modal' data-target='#modal-lg-prod-"+item.id+"' type='button'>Details</a>"
+                            // "<a href='"+item.url+"' class='btn btn-success rounded'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
                             // item.action,
 
 
@@ -357,7 +356,7 @@
                         item.est_suspendu,
                         item.created_at.split("T")[0],
                         item.updated_at.split("T")[0],
-                        "<a href='"+item.url+"' class='btn btn-success rounded'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
+                        "<a href='#' class='btn-block' data-toggle='modal' data-target='#modal-lg-prod-"+item.id+"' type='button'>Details</a>"
 
                         ]).draw();
                     });
