@@ -60,7 +60,7 @@ class TransferController extends Controller
             //dd($to_dept_name);
 
             Alert::success('Tranfert reçu', 'Le document à été transfré au departement '.$to_dept_name);
-            $user_notified->each->notify(new TransfertDoc($to_dept_name, $from_dept_name, $from_mail, $from_user_name, $no_dossier));
+            // $user_notified->each->notify(new TransfertDoc($to_dept_name, $from_dept_name, $from_mail, $from_user_name, $no_dossier));
 
             return redirect(route($request->route));
         } else {
@@ -104,7 +104,7 @@ class TransferController extends Controller
                     $this_trans->flag_retard = $retard_flag;
                     $this_trans->save();
                     Alert::success('Tranfert reçu', 'Le document à été transfré au departement '.$to_dept_name);
-                    $user_notified->each->notify(new TransfertDoc($to_dept_name, $from_dept_name, $from_mail, $from_user_name, $no_dossier));
+                    // $user_notified->each->notify(new TransfertDoc($to_dept_name, $from_dept_name, $from_mail, $from_user_name, $no_dossier));
 
                     return redirect(route($request->route));
                 } else {
@@ -139,7 +139,7 @@ class TransferController extends Controller
                         $last_trans->save();
 
                         Alert::success('Tranfert reçu', 'Le document à été transfré au departement '.$to_dept_name);
-                        $user_notified->each->notify(new TransfertDoc($to_dept_name, $from_dept_name, $from_mail, $from_user_name, $no_dossier));
+                        // $user_notified->each->notify(new TransfertDoc($to_dept_name, $from_dept_name, $from_mail, $from_user_name, $no_dossier));
 
                         return redirect(route($request->route));
                     } else {
@@ -168,7 +168,7 @@ class TransferController extends Controller
 
                         Alert::success('Tranfert reçu', 'Le document à été transfré au departement '.$to_dept_name);
 
-                        $user_notified->each->notify(new TransfertDoc($to_dept_name, $from_dept_name, $from_mail, $from_user_name, $no_dossier));
+                        // $user_notified->each->notify(new TransfertDoc($to_dept_name, $from_dept_name, $from_mail, $from_user_name, $no_dossier));
 
                         return redirect(route($request->route));
                     }
