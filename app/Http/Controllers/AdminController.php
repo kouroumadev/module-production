@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Deadline;
 use App\Models\Dept;
-use App\Models\Piece;
-use App\Models\Prestation;
+
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -36,9 +35,13 @@ class AdminController extends Controller
             $filename = pathinfo($file, PATHINFO_FILENAME);
             $extension = pathinfo($file, PATHINFO_EXTENSION);
             $tem = explode('.', $request->email);
-            $img = $filename.'-'.time().'-'.$tem['0'].'.'.$extension;
+            $img =
+                $filename . '-' . time() . '-' . $tem['0'] . '.' . $extension;
 
-            Storage::disk('userImg')->put($img, file_get_contents($request->file('user_photo')));
+            Storage::disk('userImg')->put(
+                $img,
+                file_get_contents($request->file('user_photo'))
+            );
         }
 
         $user = new User();
@@ -90,7 +93,6 @@ class AdminController extends Controller
 
             return redirect(route('user.index'));
         }
-
     }
 
     // END USER MANAGEMENT
@@ -113,99 +115,16 @@ class AdminController extends Controller
         // $dept->created_by = Auth::user()->id;
         $dept->save();
 
-        return redirect(route('dept.index'))->with('yes', 'Enregistrer avec succes');
+        return redirect(route('dept.index'))->with(
+            'yes',
+            'Enregistrer avec succes'
+        );
     }
 
     //END DEPT MANAGEMENT
 
-    public function DeadlineIndex()
-    {
-        $depts = Dept::all();
-        $deadlines = Deadline::all();
-
-        return view('deadline.index', compact('depts', 'deadlines'));
-    }
-
-    public function DeadlineStore(Request $request)
-    {
-        $exist = Deadline::where('dept_id', $request->dept_id)->get();
-        //dd(count($exist));
-        // $request->all();
-        if (count($exist) == 1) {
-            return redirect(route('deadline.index'))->with('no', 'La Direction existe deja');
-        } else {
-            $deadline = new Deadline();
-            $deadline->dept_id = $request->dept_id;
-            $deadline->name = $request->name;
-            $deadline->save();
-
-            return redirect(route('deadline.index'))->with('yes', 'Enregistrer avec succes');
-        }
-
-    }
-
-    public function docIndex()
-    {
-        $prestations = Prestation::all();
-        $pieces = Piece::all();
-
-        return view('parametrage.file.index', compact('prestations', 'pieces'));
-    }
-
-    public function docStore(Request $request)
-    {
-        //  dd($request->all());
-
-        $piece = new Piece();
-        $piece->nom_piece = $request->nom_piece;
-        $piece->prestation_id = $request->prestation_id;
-        $piece->obligation = $request->obligation;
-        $piece->save();
-
-        return redirect(route('doc.index'))->with('yes', 'Enregistrer avec succes');
-    }
-
-    public function PrestIndex()
-    {
-        $prestations = Prestation::all();
-
-        return view('parametrage.prestation.index', compact('prestations'));
-    }
-
-    public function PrestStore(Request $request)
-    {
-        // dd($request->all());
-
-        $prest = new Prestation();
-        $prest->nom_prestation = $request->nom_prestation;
-        // $dept->created_by = Auth::user()->id;
-        $prest->save();
-
-        return redirect(route('prest.index'))->with('yes', 'Enregistrer avec succes');
-    }
-
-    public function PieceIndex()
-    {
-        $prestations = Prestation::all();
-
-        return view('parametrage.piece.index', compact('prestations'));
-    }
-
-    public function PieceStore(Request $request)
-    {
-        //dd($request->all());
-
-        $prest = new Prestation();
-        $prest->nom_prestation = $request->nom_prestation;
-        // $dept->created_by = Auth::user()->id;
-        $prest->save();
-
-        return redirect(route('prest.index'))->with('yes', 'Enregistrer avec succes');
-    }
-
     public function FicheDecompte()
     {
-
         $data = [
             'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
             'adresse' => 'Kaloum',
@@ -213,7 +132,6 @@ class AdminController extends Controller
             'no_immatriculation' => '129876543890',
             'categorie' => 'E+20',
             'date' => date('m/d/Y'),
-
         ];
 
         $pdf = PDF::loadView('test.fiche-decompte', $data);
@@ -224,7 +142,6 @@ class AdminController extends Controller
 
     public function FichePaie()
     {
-
         $data = [
             'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
             'adresse' => 'Kaloum',
@@ -232,7 +149,6 @@ class AdminController extends Controller
             'no_immatriculation' => '129876543890',
             'categorie' => 'E+20',
             'date' => date('m/d/Y'),
-
         ];
 
         $pdf = PDF::loadView('test.fiche-paie', $data);
@@ -243,7 +159,6 @@ class AdminController extends Controller
 
     public function CarteRetraite()
     {
-
         $data = [
             'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
             'adresse' => 'Kaloum',
@@ -251,7 +166,6 @@ class AdminController extends Controller
             'no_immatriculation' => '129876543890',
             'categorie' => 'E+20',
             'date' => date('m/d/Y'),
-
         ];
 
         $pdf = PDF::loadView('test.carte-retraite', $data);
@@ -262,7 +176,6 @@ class AdminController extends Controller
 
     public function EtatPayement()
     {
-
         $data = [
             'raison_sociale' => 'Welcome to Funda of Web IT - fundaofwebit.com',
             'adresse' => 'Kaloum',
@@ -270,7 +183,6 @@ class AdminController extends Controller
             'no_immatriculation' => '129876543890',
             'categorie' => 'E+20',
             'date' => date('m/d/Y'),
-
         ];
 
         $pdf = PDF::loadView('test.etat-payment', $data);

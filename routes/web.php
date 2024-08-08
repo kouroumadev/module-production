@@ -46,18 +46,6 @@ Route::middleware('auth:sanctum')->group(function () {
         App\Http\Controllers\HomeController::class,
         'PensionnaireInfo',
     ])->name('pensionnaire.info');
-    Route::post('/pension/store', [
-        App\Http\Controllers\PensionController::class,
-        'store',
-    ])->name('pension.store');
-    Route::get('/pension/show', [
-        App\Http\Controllers\PensionController::class,
-        'show',
-    ])->name('pension.show');
-    Route::get('/pension/details/{id}', [
-        App\Http\Controllers\PensionController::class,
-        'details',
-    ])->name('pension.details');
 
     // /////////// ADMIN /////////////
 
@@ -141,90 +129,6 @@ Route::middleware('auth:sanctum')->group(function () {
         'EtatPayement',
     ])->name('etat-payement');
 
-    //DIPRESS PRESTATIONS
-    Route::get('/dipress/pension', [
-        App\Http\Controllers\DipressController::class,
-        'vieillesse',
-    ])->name('dipress.vieillesse');
-    Route::get('/dipress/maladie', [
-        App\Http\Controllers\DipressController::class,
-        'maladie',
-    ])->name('dipress.maladie');
-    Route::get('/dipress/risque', [
-        App\Http\Controllers\DipressController::class,
-        'risque',
-    ])->name('dipress.risque');
-    Route::get('/dipress/prestation-familiale', [
-        App\Http\Controllers\DipressController::class,
-        'prestation',
-    ])->name('dipress.prestation');
-
-    //DIPESS/CONTENT
-    Route::get('dipress/pension/content', [
-        App\Http\Controllers\DipressController::class,
-        'pensionContent',
-    ])->name('dipress.pension.content');
-    Route::get('/dipress/pension/cotisation-info/{id}', [
-        App\Http\Controllers\DipressController::class,
-        'PensionneCotisationInfo',
-    ])->name('pensionne.cotisation.info');
-
-    // DIPRESS
-    Route::get('/dipress/etude/index', [
-        App\Http\Controllers\DipressController::class,
-        'etudeIndex',
-    ])->name('etude.index');
-    Route::get('/dipress/etude/traitement/{id}', [
-        App\Http\Controllers\DipressController::class,
-        'etudeTraitement',
-    ])->name('etude.traitement');
-
-    Route::get('/dipress/mise-a-retraite/create/{id}', [
-        App\Http\Controllers\DipressController::class,
-        'miseRetraiteCreate',
-    ])->name('miseRetaite.create');
-    Route::post('/dipress/mise-a-retraite/store', [
-        App\Http\Controllers\DipressController::class,
-        'miseRetraiteStore',
-    ])->name('miseRetaite.store');
-    Route::get('/dipress/mise-a-retraite/index', [
-        App\Http\Controllers\DipressController::class,
-        'miseRetraiteIndex',
-    ])->name('miseRetaite.index');
-    Route::get('/dipress/mise-a-retraite/decompte/{id}', [
-        App\Http\Controllers\DipressController::class,
-        'miseRetraiteDecompte',
-    ])->name('miseRetaite.decompte');
-    Route::get('/dipress/mise-a-retraite/decompte/suite/{id}', [
-        App\Http\Controllers\DipressController::class,
-        'miseRetraiteDecompteSuite',
-    ])->name('miseRetaite.decompte.suite');
-    Route::post('/dipress/mise-a-retraite/decompte/store', [
-        App\Http\Controllers\DipressController::class,
-        'miseRetraiteDecompteStore',
-    ])->name('miseRetaite.decompte.store');
-    Route::get('/dipress/mise-a-retraite/decompte/done/{id}', [
-        App\Http\Controllers\DipressController::class,
-        'miseRetraiteDecompteDone',
-    ])->name('miseRetaite.decompte.done');
-    Route::get('/dipress/mise-a-retraite/details/{id}/{year}', [
-        App\Http\Controllers\DipressController::class,
-        'miseRetraiteDecompteDetails',
-    ])->name('miseRetaite.details');
-
-    Route::get('/dipress/nc/create/', [
-        App\Http\Controllers\DipressController::class,
-        'ncCreate',
-    ])->name('dipress.nc.create');
-    Route::post('/dipress/nc/store/', [
-        App\Http\Controllers\DipressController::class,
-        'ncStore',
-    ])->name('dipress.nc.store');
-    Route::get('/dipress/ac/index/', [
-        App\Http\Controllers\DipressController::class,
-        'acIndex',
-    ])->name('dipress.ac.index');
-
     // PRODUCTION
     Route::get('/prod/nc/create/', [
         App\Http\Controllers\ProductionController::class,
@@ -252,71 +156,10 @@ Route::middleware('auth:sanctum')->group(function () {
     ])->name('agence.retraite.pdf');
 
     // SECRETARIAT
-    Route::get('/secretariat/index', [
-        App\Http\Controllers\SecretariatController::class,
-        'SecretariatIndex',
-    ])->name('secretariat.index');
-    Route::get('/secretariat/etude/traitement/{id}', [
-        App\Http\Controllers\SecretariatController::class,
-        'SecretariatTraitement',
-    ])->name('secretariat.traitement');
-
-    // RISQUE PROFESSIONNELS
-    Route::prefix('risque')->group(function () {
-        Route::get('/index', [
-            App\Http\Controllers\ATController::class,
-            'RisqueIndex',
-        ])->name('risque.index');
-        // AT
-        Route::get('/at/index', [
-            App\Http\Controllers\ATController::class,
-            'AtIndex',
-        ])->name('at.index');
-        Route::get('/at/traitement/{id}', [
-            App\Http\Controllers\ATController::class,
-            'AtTraitement',
-        ])->name('at.traitement');
-    });
 
     // DIRGA
-    Route::get('/dirga/index', [
-        App\Http\Controllers\DirgaController::class,
-        'DirgaIndex',
-    ])->name('dirga.index');
-    Route::get('/dirga/etude/traitement/{id}', [
-        App\Http\Controllers\DirgaController::class,
-        'DirgaTraitement',
-    ])->name('dirga.traitement');
-
-    // TRANFERT
-    Route::post('/dipress/store', [
-        App\Http\Controllers\TransferController::class,
-        'store',
-    ])->name('transfert.store');
-    Route::get('/message/read/{id}', [
-        App\Http\Controllers\TransferController::class,
-        'ReadMessage',
-    ])->name('message.read');
-
-    // TRACKING
-    Route::get('/tracking/{id}', [
-        App\Http\Controllers\TransferController::class,
-        'Tracking',
-    ])->name('transfert.tracking');
-    Route::get('/tracking/user/{id}', [
-        App\Http\Controllers\TransferController::class,
-        'UserTracking',
-    ])->name('user.tracking');
 
     // reclamation
-    Route::get('/avance/pension', [
-        App\Http\Controllers\ReclamationController::class,
-        'AvancePension',
-    ])->name('avance.pension');
-    Route::post('/reclamation-info', [
-        App\Http\Controllers\ReclamationController::class,
-        'ReclamationInfo',
-    ])->name('reclamation.info');
 
     // ECHEANCE
     Route::get('/echeance/index', [
@@ -419,14 +262,6 @@ Route::middleware('auth:sanctum')->group(function () {
     ])->name('paye.suspension');
 
     //// MISSION /////////////
-    Route::get('/mission/index', [
-        App\Http\Controllers\MissionController::class,
-        'index',
-    ])->name('mission.index');
-    Route::post('/mission-assure-info', [
-        App\Http\Controllers\MissionController::class,
-        'MissionAssureInfo',
-    ])->name('mission.assure.info');
 
     route::fallback(function () {
         return view('404');

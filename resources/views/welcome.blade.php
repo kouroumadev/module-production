@@ -5,8 +5,8 @@
         //   $user = \App\Models\User::find(Auth::user()->dept_id);
         $user_dept_id = Auth::user()->dept_id;
         //   $notif = \Illuminate\Support\Facades\DB::table('notifications')->where('notifiable_id',Auth::user()->id)->where('read_at',null)->count();
-        $notif = \App\Models\Transfer::where('to_dept', $user_dept_id)->where('read_at', null)->get();
-        $notif_count = \App\Models\Transfer::where('to_dept', $user_dept_id)->where('read_at', null)->count();
+        // $notif = \App\Models\Transfer::where('to_dept', $user_dept_id)->where('read_at', null)->get();
+        // $notif_count = \App\Models\Transfer::where('to_dept', $user_dept_id)->where('read_at', null)->count();
         //dd($notif);
     @endphp
     <div class="header" style="background: rgb(4, 147, 16)">
@@ -29,14 +29,14 @@
         </div> --}}
             <div class="user-notification">
                 <div class="dropdown">
-                    <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+                    {{-- <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
                         <i class="icon-copy dw dw-notification text-white"></i>
-                        <span class=" notification-active text-white bg-danger border-radius-20">{{ $notif_count }}</span>
-                    </a>
+                        <span class=" notification-active text-white bg-danger border-radius-20">22</span>
+                    </a> --}}
                     <div class="dropdown-menu dropdown-menu-right">
                         <div class="notification-list mx-h-350 customscroll">
                             <ul>
-                                @foreach ($notif as $notification)
+                                {{-- @foreach ($notif as $notification)
                                     <li>
                                         <a href="{{ route('pension.details', $notification->doc_id) }}">
                                             <img src="{{ asset('storage/userImg/' . $notification->users->photo) }}"
@@ -46,7 +46,7 @@
                                                 Departement:{{ $notification->from->name }}</p>
                                         </a>
                                     </li>
-                                @endforeach
+                                @endforeach --}}
 
 
 
@@ -104,13 +104,7 @@
             <div class="sidebar-menu">
                 <ul id="accordion-menu">
 
-                    @if (Auth::user()->dept->name == 'DQE')
-                        @include('dqe.left-menu')
-                    @endif
 
-                    @if (Auth::user()->dept->name == 'DIPRES')
-                        @include('dipress.left-menu')
-                    @endif
 
                     @if (Auth::user()->dept->name == 'PAYE')
                         @include('paye.left-menu')
@@ -118,9 +112,7 @@
                     @if (Auth::user()->dept->name == 'ADMIN')
                         @include('admin.left-menu')
                     @endif
-                    @if (Auth::user()->dept->name == 'DIPRES' || Auth::user()->dept->name == 'PRODUCTION')
-                        @include('production.left-menu')
-                    @endif
+
                     @if (Auth::user()->dept->name == 'AGENCE')
                     <li class="my-menu" onclick="makeActive(this,'15898978')" id="49887787">
                         <a href="{{ route('agence.pension.retraite','01-') }}" class="dropdown-toggle no-arrow">
@@ -162,42 +154,8 @@
                             </ul>
                         </li>
                     @endif --}}
-                    @if (Auth::user()->dept->name == 'SECRETARIAT')
-                        <li class="my-menu" onclick="makeActive(this,'13')" id="4">
-                            <a href="{{ route('secretariat.index') }}" class="dropdown-toggle no-arrow">
-                                <span class="micon dw dw-edit2"></span><span class="mtext">DOSSIER</span>
-                            </a>
-                        </li>
-                    @endif
-                    @if (Auth::user()->dept->name == 'DIRGA')
-                        <li class="my-menu" onclick="makeActive(this,'14')" id="4">
-                            <a href="{{ route('dirga.index') }}" class="dropdown-toggle no-arrow">
-                                <span class="micon dw dw-edit2"></span><span class="mtext">DOSSIER</span>
-                            </a>
-                        </li>
-                    @endif
-                    @if (Auth::user()->dept->name == 'AT')
-                        <li class="my-menu" onclick="makeActive(this,'15')" id="4">
-                            <a href="{{ route('at.index') }}" class="dropdown-toggle no-arrow">
-                                <span class="micon dw dw-edit2"></span><span class="mtext">DOSSIER</span>
-                            </a>
-                        </li>
-                        <li class="my-menu" onclick="makeActive(this,'16')" id="4">
-                            <a href="{{ route('at.index') }}" class="dropdown-toggle no-arrow">
-                                <span class="micon dw dw-edit2"></span><span class="mtext">IJ et Frais</span>
-                            </a>
-                        </li>
-                        <li class="my-menu" onclick="makeActive(this,'17')" id="4">
-                            <a href="{{ route('at.index') }}" class="dropdown-toggle no-arrow">
-                                <span class="micon dw dw-edit2"></span><span class="mtext">AT Mortel</span>
-                            </a>
-                        </li>
-                        <li class="my-menu" onclick="makeActive(this,'18')" id="4">
-                            <a href="{{ route('at.index') }}" class="dropdown-toggle no-arrow">
-                                <span class="micon dw dw-edit2"></span><span class="mtext">AT Non Mortel</span>
-                            </a>
-                        </li>
-                    @endif
+
+
                 </ul>
             </div>
         </div>
