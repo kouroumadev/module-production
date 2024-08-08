@@ -36,6 +36,11 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <div class="notification-list mx-h-350 customscroll">
                             <ul>
+                                <li>
+                                    <img src="{{ asset('storage/userImg/' . Auth::user()->photo) }}"  alt="">
+                                </li>
+
+
                                 {{-- @foreach ($notif as $notification)
                                     <li>
                                         <a href="{{ route('pension.details', $notification->doc_id) }}">

@@ -204,6 +204,12 @@ Route::middleware('auth:sanctum')->group(function () {
         App\Http\Controllers\PayeController::class,
         'retraiteEdit',
     ])->name('payeRetraite.edit');
+
+    Route::get('/paye/retraite/view/{id}', [
+        App\Http\Controllers\PayeController::class,
+        'retraiteView',
+    ])->name('payeRetraite.view');
+
     Route::get('/paye/retraite/filter', [
         App\Http\Controllers\PayeController::class,
         'retraiteFilter',

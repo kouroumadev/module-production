@@ -247,6 +247,7 @@ class PayeController extends Controller
 
             // $d->date_jouis = AppHelper::getDateFormat($d->date_jouis);
             $d->url = route('payeRetraite.edit', $d->id);
+            $d->view = route('payeRetraite.view', $d->id);
             // $d->updated_at = AppHelper::getDateFormat($d->updated_at);
             $d->montant_a_payer =
                 '<span class="text-nowrap">' .
@@ -316,6 +317,13 @@ class PayeController extends Controller
         }
 
         return response()->json($data);
+    }
+
+    public function retraiteView(int $id)
+    {
+        $data = EtatRetraite::find($id);
+        return view('paye.retraite.view', compact('data'));
+        // dd($data);
     }
     public function getAll()
     {
