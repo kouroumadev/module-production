@@ -149,53 +149,69 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-4 col-form-label">Montant comp</label>
                         <div class="col-sm-12 col-md-8">
-                            <input class="form-control" type="text" value="{{ $data->montant_comp }}" readonly>
+                            <input class="form-control" type="text" value="{{ \AppHelper::getMoneyFormat($data->montant_comp) }}" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-4 col-form-label">Montant comp plus</label>
                         <div class="col-sm-12 col-md-8">
-                            <input class="form-control" type="text" value="{{ $data->montant_trim }}" readonly>
+                            <input class="form-control" type="text" value="{{ \AppHelper::getMoneyFormat($data->montant_trim) }}" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-4 col-form-label">Montant mens reval</label>
                         <div class="col-sm-12 col-md-8">
-                            <input class="form-control" type="text" value="{{ $data->montant_mens_reval }}" readonly>
+                            <input class="form-control" type="text" value="{{ \AppHelper::getMoneyFormat($data->montant_mens_reval) }}" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-4 col-form-label">Montant à payer</label>
                         <div class="col-sm-12 col-md-8">
-                            <input class="form-control" type="text" value="{{ $data->montant_a_payer }}" readonly>
+                            <input class="form-control" type="text" value="{{ \AppHelper::getMoneyFormat($data->montant_a_payer) }}" readonly>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
 
-                    <div class="col-md-6 col-sm-12">
-                        {{-- <label class="weight-600">NC</label> --}}
+                    {{-- <div class="col-md-6 col-sm-12">
+                        {{-- <label class="weight-600">NC</label>
                         <div class="custom-control custom-checkbox mb-5">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1-1">
-                            <label class="custom-control-label" for="customCheck1-1">NC</label>
+                            <input type="checkbox" checked class="custom-control-input" id="customCheck1-1" disabled="">
+                            <label class="custom-control-label" for="customCheck1-1">Nouvelle Concession</label>
+                        </div>
+                    </div> --}}
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-4 col-form-label">Nouvelle Concession</label>
+                        <div class="col-sm-12 col-md-4 custom-control custom-checkbox mt-2">
+                            <input type="checkbox" @if ($data->est_nc === 'oui') checked @endif class="custom-control-input" id="customCheck1-1" disabled="">
+
+                            {{-- <input type="radio" id="customRadio444" name="customRadio" class="custom-control-input"> --}}
+                            <label class="custom-control-label" for="customRadio444">OUI</label>
+                        </div>
+                        <div class="col-sm-12 col-md-4 custom-control custom-control custom-checkbox mt-2">
+                            <input type="checkbox" @if ($data->est_nc === 'non') checked @endif class="custom-control-input" id="customCheck1-1" disabled="">
+
+                            {{-- <input type="radio" id="customRadio555" name="customRadio" class="custom-control-input"> --}}
+                            <label class="custom-control-label" for="customRadio555">NON</label>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-4 col-form-label">Mens du</label>
                         <div class="col-sm-12 col-md-8">
-                            <input class="form-control" type="text" value="{{ $data->montant_a_payer }}" readonly>
+                            <input class="form-control" type="text" value="{{ \AppHelper::getMoneyFormat($data->montant_a_payer) }}" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-4 col-form-label">Mont arriéré</label>
                         <div class="col-sm-12 col-md-8">
-                            <input class="form-control" type="text" value="{{ $data->montant_arriere }}" readonly>
+                            <input class="form-control" type="text" value="{{ \AppHelper::getMoneyFormat($data->montant_arriere) }}" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-4 col-form-label">Mont tot à payer</label>
                         <div class="col-sm-12 col-md-8">
-                            <input class="form-control" type="text" value="{{ $data->montant_a_payer }}" readonly>
+                            <input class="form-control" type="text" value="{{ \AppHelper::getMoneyFormat($data->montant_a_payer) }}" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -207,23 +223,30 @@
 
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-4 col-form-label">Type</label>
-                        <div class="col-sm-12 col-md-4 custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio44" name="customRadio1" class="custom-control-input">
+                        <div class="col-sm-12 col-md-4 custom-control custom-checkbox mt-2">
+                            {{-- <input type="radio" id="customRadio44" name="customRadio1" class="custom-control-input" > --}}
+                            <input type="checkbox" @if ($data->type === '01-') checked @endif  class="custom-control-input" id="customCheck1-1" disabled="">
+
                             <label class="custom-control-label" for="customRadio44">01-</label>
                         </div>
-                        <div class="col-sm-12 col-md-4 custom-control custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio55" name="customRadio1" class="custom-control-input">
+                        <div class="col-sm-12 col-md-4 custom-control custom-control custom-checkbox mt-2">
+                            <input type="checkbox" @if ($data->type === 'PI-') checked @endif class="custom-control-input" id="customCheck1-1" disabled="">
+                            {{-- <input type="radio" id="customRadio55" name="customRadio1" class="custom-control-input"> --}}
                             <label class="custom-control-label" for="customRadio55">PI-</label>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-4 col-form-label">Titre</label>
-                        <div class="col-sm-12 col-md-4 custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio444" name="customRadio" class="custom-control-input">
+                        <div class="col-sm-12 col-md-4 custom-control custom-checkbox mt-2">
+                            <input type="checkbox" @if ($data->titre === 'Mr') checked @endif class="custom-control-input" id="customCheck1-1" disabled="">
+
+                            {{-- <input type="radio" id="customRadio444" name="customRadio" class="custom-control-input"> --}}
                             <label class="custom-control-label" for="customRadio444">Mr</label>
                         </div>
-                        <div class="col-sm-12 col-md-4 custom-control custom-control custom-radio mt-2">
-                            <input type="radio" id="customRadio555" name="customRadio" class="custom-control-input">
+                        <div class="col-sm-12 col-md-4 custom-control custom-control custom-checkbox mt-2">
+                            <input type="checkbox" @if ($data->titre === 'Mme') checked @endif class="custom-control-input" id="customCheck1-1" disabled="">
+
+                            {{-- <input type="radio" id="customRadio555" name="customRadio" class="custom-control-input"> --}}
                             <label class="custom-control-label" for="customRadio555">Mme</label>
                         </div>
                     </div>
