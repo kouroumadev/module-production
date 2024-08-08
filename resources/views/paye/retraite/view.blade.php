@@ -53,13 +53,13 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-4 col-form-label">Date de naiss</label>
                         <div class="col-sm-12 col-md-8">
-                            <input class="form-control" type="text" value="{{ $data->date_naiss }}" readonly>
+                            <input class="form-control" type="text" value="{{ \AppHelper::getDateFormat($data->date_naiss) }}" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-4 col-form-label">Date de jouiss</label>
                         <div class="col-sm-12 col-md-8">
-                            <input class="form-control" type="text" value="{{ $data->date_jouis }}" readonly>
+                            <input class="form-control" type="text" value="{{ \AppHelper::getDateFormat($data->date_jouis) }}" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -137,7 +137,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-4 col-form-label">Montant trim</label>
                         <div class="col-sm-12 col-md-8">
-                            <input class="form-control" type="text" value="{{ $data->montant_trim }}" readonly>
+                            <input class="form-control" type="text" value="{{ \AppHelper::getMoneyFormat($data->montant_trim) }}" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
