@@ -20,6 +20,8 @@
     </div>
 </div>
 
+
+
 <div class="row shadow-lg justify-content-end">
     <div class="col-md-4">
         <a href="{{ route('paye.pdf',$id) }}" target="_blank" class="btn btn-success">PDF</a>
